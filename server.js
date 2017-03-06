@@ -59,7 +59,7 @@ router.get("/species/records/:taxID", function (req, res) {
               else: false
             }
           }, 
-               "_id" : 1, "taxID": 1, "acceptedNameUsage" : 1, "species": 1, "speciesOriginal": 1, "locality" : 1, "lat" : 1, "lon" : 1, "alt" : 1, "basisOfRecord" : 1, "catalogNumber" : 1, "collector" : 1, "institution" : 1, "url" : 1, "dd" : 1, "mm" : 1, "yyyy" : 1, "suggestedStateProvince" : 1, "suggestedCounty" : 1, "source": 1}}
+               "_id" : 1, "taxID": 1, "acceptedNameUsage" : 1, "species": 1, "speciesOriginal": 1, "locality" : 1, "lat" : 1, "lon" : 1, "alt" : 1, "basisOfRecord" : 1, "catalogNumber" : 1, "collector" : 1, "institution" : 1, "url" : 1, "dd" : 1, "mm" : 1, "yyyy" : 1, "suggestedStateProvince" : 1, "suggestedCounty" : 1, "environmentalOutlier": 1", source": 1}}
           ], 
        function (err, docs) {
             var data = docs.map(function (obj) {
