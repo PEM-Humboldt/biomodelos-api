@@ -1,0 +1,12 @@
+{
+  "name": "BioModelos mongoDB API",
+  "main": "server.js",
+  "dependencies": {
+    "assert": "*",
+    "body-parser": "1.15.1",
+    "express": "4.0.0",
+    "geojson": "*",
+    "mongoose": "4.0.7",
+    "swagger-tools": "^0.10.1"
+  }
+}
