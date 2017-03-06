@@ -59,11 +59,11 @@ router.get("/species/records/:taxID", function (req, res) {
               else: false
             }
           }, 
-               "_id" : 1, "taxID": 1, "acceptedNameUsage" : 1, "species": 1, "speciesOriginal": 1, "locality" : 1, "lat" : 1, "lon" : 1, "alt" : 1, "basisOfRecord" : 1, "catalogNumber" : 1, "collector" : 1, "institution" : 1, "url" : 1, "dd" : 1, "mm" : 1, "yyyy" : 1, "suggestedStateProvince" : 1, "suggestedCounty" : 1, "source": 1}}
+               "_id" : 1, "taxID": 1, "acceptedNameUsage" : 1, "species": 1, "speciesOriginal": 1, "locality" : 1, "lat" : 1, "lon" : 1, "alt" : 1, "basisOfRecord" : 1, "catalogNumber" : 1, "collector" : 1, "institution" : 1, "url" : 1, "dd" : 1, "mm" : 1, "yyyy" : 1, "suggestedStateProvince" : 1, "suggestedCounty" : 1, "environmentalOutlier": 1", source": 1}}
           ], 
        function (err, docs) {
             var data = docs.map(function (obj) {
-                return {_id : obj._id, "taxID": obj.taxID, acceptedNameUsage: obj.acceptedNameUsage, species: obj.species, speciesOriginal: obj.speciesOriginal, locality: obj.locality, lat: obj.lat, lon: obj.lon, alt: obj.alt, basisOfRecord: obj.basisOfRecord, catalogNumber : obj.catalogNumber, collector : obj.collector, institution : obj.institution, url : obj.url, dd : obj.dd, mm : obj.mm, yyyy : obj.yyyy, suggestedStateProvince : obj.suggestedStateProvince, suggestedCounty : obj.suggestedCounty, source: obj.source, reported: obj.reported, updated: obj.updated}
+                return {_id : obj._id, "taxID": obj.taxID, acceptedNameUsage: obj.acceptedNameUsage, species: obj.species, speciesOriginal: obj.speciesOriginal, locality: obj.locality, lat: obj.lat, lon: obj.lon, alt: obj.alt, basisOfRecord: obj.basisOfRecord, catalogNumber : obj.catalogNumber, collector : obj.collector, institution : obj.institution, url : obj.url, dd : obj.dd, mm : obj.mm, yyyy : obj.yyyy, suggestedStateProvince : obj.suggestedStateProvince, suggestedCounty : obj.suggestedCounty, environmentalOutlier: obj.environmentalOutlier, source: obj.source, reported: obj.reported, updated: obj.updated}
                })
            res.send(GeoJSON.parse(docs, {Point: ["lat", "lon"]}));
            res.json({message: "Records from acceptedNameUsage, with use=true & visualizationPrivileges = 0"});
