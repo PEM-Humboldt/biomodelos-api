@@ -63,7 +63,7 @@ router.get("/species/records/:taxID", function (req, res) {
           ], 
        function (err, docs) {
             var data = docs.map(function (obj) {
-                return {_id : obj._id, "taxID": obj.taxID, acceptedNameUsage: obj.acceptedNameUsage, species: obj.species, speciesOriginal: obj.speciesOriginal, locality: obj.locality, lat: obj.lat, lon: obj.lon, alt: obj.alt, basisOfRecord: obj.basisOfRecord, catalogNumber : obj.catalogNumber, collector : obj.collector, institution : obj.institution, url : obj.url, dd : obj.dd, mm : obj.mm, yyyy : obj.yyyy, suggestedStateProvince : obj.suggestedStateProvince, suggestedCounty : obj.suggestedCounty, source: obj.source, reported: obj.reported, updated: obj.updated}
+                return {_id : obj._id, "taxID": obj.taxID, acceptedNameUsage: obj.acceptedNameUsage, species: obj.species, speciesOriginal: obj.speciesOriginal, locality: obj.locality, lat: obj.lat, lon: obj.lon, alt: obj.alt, basisOfRecord: obj.basisOfRecord, catalogNumber : obj.catalogNumber, collector : obj.collector, institution : obj.institution, url : obj.url, dd : obj.dd, mm : obj.mm, yyyy : obj.yyyy, suggestedStateProvince : obj.suggestedStateProvince, suggestedCounty : obj.suggestedCounty, environmentalOutlier: obj.environmentalOutlier, source: obj.source, reported: obj.reported, updated: obj.updated}
                })
            res.send(GeoJSON.parse(docs, {Point: ["lat", "lon"]}));
            res.json({message: "Records from acceptedNameUsage, with use=true & visualizationPrivileges = 0"});
