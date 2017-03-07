@@ -5,7 +5,7 @@ var bodyParser = require("body-parser");//req&res using JSON
 var mongoose = require("mongoose");//MongoDB driver
 var GeoJSON = require("geojson");//JSON -> GeoJSON
 var newDate = new Date();
-mongoose.connect("mongodb://YOUR_ADDRESS:YOUR_PORT/YOUR_DATABASE");//database address 
+mongoose.connect("mongodb://localhost:27017/records");//database address 
 
 //Schema for all the collections
 var Record = require("./models/record.js");//general schemaModel for records.records collection
