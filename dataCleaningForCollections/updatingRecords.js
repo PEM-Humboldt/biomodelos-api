@@ -18,8 +18,7 @@ db.records.aggregate([
 });
 
 //unsetting useless/deprecated fields
-db.records.updateMany({}, {$unset: { "ID":"", "bigSizeRecord":"", "bmClass":"", "cites":"", "consecutivoID":"", "endemic":"", "hasTaxDoubt":"", "invasive":"", "iucn":"", "otherID":"", "privateDataset":"", "recSizeBytes":"", 
-"scriptID":"", "tmpGeo":"", "tmpTax":"", "withLat":"", "withLon":""}});
+db.records.updateMany({}, {$unset: { "ID":"", "bigSizeRecord":"", "bmClass":"", "cites":"", "consecutivoID":"", "endemic":"", "hasTaxDoubt":"", "invasive":"", "iucn":"", "otherID":"", "privateDataset":"", "recSizeBytes":"", "scriptID":"", "tmpGeo":"", "tmpTax":"", "withLat":"", "withLon":""}});
 
 //setting new field with its default value
 db.records.updateMany({}, {$set: {interpretedElevation:null}});
@@ -37,18 +36,18 @@ db.records.updateMany({"$or": [{"locality": {"$exists": false}}, {"locality": {"
 db.records.updateMany({"$or": [{"alt": {"$exists": false}},{"alt": {"$in": ["","[\"NA\"]", "NA", -9999]}}]}, {"$set": {"alt": null}});
 db.records.updateMany({"$or": [{"demAltitude": {"$exists": false}}, {"demAltitude": {"$gt": 8000}},{"demAltitude": {"$in": ["","[\"NA\"]", "NA"]}}]}, {"$set": {"demAltitude": null}});
 db.records.updateMany({"$or": [{"interpretedElevation": {"$exists": false}}, {"interpretedElevation": {"$gt": 8000}}, {"interpretedElevation": {"$in": ["","[\"NA\"]", "NA", -9999]}}]}, {"$set": {"interpretedElevation": null}});
-db.records.updateMany({"$or": [{"cellID": {"$exists": false}},{"cellID": {"$in": ["","[\"NA\"]", "NA", -9999]}}]}, {"$set": {"cellID": null}});
-db.records.updateMany({"$or": [{"basisOfRecord": {"$exists": false}},{"basisOfRecord": {"$in": ["","[\"NA\"]", "NA", -9999]}}]}, {"$set": {"basisOfRecord": null}});
-db.records.updateMany({"$or": [{"catalogNumber": {"$exists": false}},{"catalogNumber": {"$in": ["","[\"NA\"]", "NA", -9999]}}]}, {"$set": {"catalogNumber": null}});
-db.records.updateMany({"$or": [{"colection": {"$exists": false}},{"colection": {"$in": ["","[\"NA\"]", "NA"]}}]}, {"$set": {"colection": null}});
-db.records.updateMany({"$or": [{"collector": {"$exists": false}},{"collector": {"$in": ["","[\"NA\"]", "NA"]}}]}, {"$set": {"collector": null}});
+db.records.updateMany({"$or": [{"cellID": {"$exists": false}}, {"cellID": {"$in": ["","[\"NA\"]", "NA", -9999]}}]}, {"$set": {"cellID": null}});
+db.records.updateMany({"$or": [{"basisOfRecord": {"$exists": false}}, {"basisOfRecord": {"$in": ["","[\"NA\"]", "NA", -9999]}}]}, {"$set": {"basisOfRecord": null}});
+db.records.updateMany({"$or": [{"catalogNumber": {"$exists": false}}, {"catalogNumber": {"$in": ["","[\"NA\"]", "NA", -9999]}}]}, {"$set": {"catalogNumber": null}});
+db.records.updateMany({"$or": [{"colection": {"$exists": false}}, {"colection": {"$in": ["","[\"NA\"]", "NA"]}}]}, {"$set": {"colection": null}});
+db.records.updateMany({"$or": [{"collector": {"$exists": false}}, {"collector": {"$in": ["","[\"NA\"]", "NA"]}}]}, {"$set": {"collector": null}});
 db.records.updateMany({"$or": [{"institution": {"$exists": false}}, {"institution": {"$in": ["","[\"NA\"]"]}}]}, {"$set": {"institution": null}});
 db.records.updateMany({"$or": [{"url": {"$exists": false}}, {"url": {"$in": ["","[\"NA\"]", "NA"]}}]}, {"$set": {"url": null}});
 db.records.updateMany({"$or": [{"earliestDateCollected": {"$exists": false}}, {"earliestDateCollected": {"$in": ["","[\"NA\"]", "NA", -9999]}}]}, {"$set": {"earliestDateCollected": null}});
 db.records.updateMany({"$or": [{"latestDateCollected": {"$exists": false}}, {"latestDateCollected": {"$in": ["","[\"NA\"]", "NA", -9999]}}]}, {"$set": {"latestDateCollected": null}});
 db.records.updateMany({"$or": [{"dd": {"$exists": false}},{"dd": {"$in": ["","[\"NA\"]", "NA", -9999]}}]}, {"$set": {"dd": null}});
 db.records.updateMany({"$or": [{"mm": {"$exists": false}},{"mm": {"$in": ["","[\"NA\"]", "NA", -9999]}}]}, {"$set": {"mm": null}});
-db.records.updateMany({"$or": [{"yyyy": {"$exists": false}}, {"yyyy": {"$gt": 2016}}, {"yyyy": {"$in": ["","[\"NA\"]", "NA", -9999]}}]}, {"$set": {"yyyy": null}});
+db.records.updateMany({"$or": [{"yyyy": {"$exists": false}}, {"yyyy": {"$in": ["","[\"NA\"]", "NA", -9999]}}]}, {"$set": {"yyyy": null}});
 db.records.updateMany({"$or": [{"correctCountry": {"$exists": false}},{"correctCountry": {"$in": ["","[\"NA\"]", "NA"]}}]}, {"$set": {"correctCountry": null}});
 db.records.updateMany({"correctCountry": {"$in": [1, "1"]}},{"$set": {"correctCountry":true}});
 db.records.updateMany({"correctCountry": {"$in": [0, "0"]}},{"$set": {"correctCountry":false}});
@@ -69,7 +68,7 @@ db.records.updateMany({"$or": [{"suggestedCounty": {"$exists": false}}, {"sugges
 db.records.updateMany({"$or": [{"suggestedMunicipality": {"$exists": false}}, {"suggestedMunicipality": {"$in": ["","[\"NA\"]", "NA"]}}]}, {"$set": {"suggestedMunicipality": null}});
 db.records.updateMany({"$or": [{"suggestedStateProvince": {"$exists": false}}, {"suggestedStateProvince": {"$in": ["","[\"NA\"]", "NA"]}}]}, {"$set": {"suggestedStateProvince": null}});
 db.records.updateMany({"$or": [{"sourceLayer": {"$exists": false}}, {"sourceLayer": {"$in": ["","[\"NA\"]", "NA"]}}]}, {"$set": {"sourceLayer": null}});
-db.records.updateMany({"$or": [{"coordUncertaintyM": {"$exists": false}}, {"coordUncertaintyM": {"$gt": 8000}}, {"coordUncertaintyM": {"$in": ["","[\"NA\"]", "NA", -9999]}}]}, {"$set": {"coordUncertaintyM": null}});
+db.records.updateMany({"$or": [{"coordUncertaintyM": {"$exists": false}}, {"coordUncertaintyM": {"$in": ["","[\"NA\"]", "NA", -9999]}}]}, {"$set": {"coordUncertaintyM": null}});
 db.records.updateMany({"$or": [{"lowUncertainty": {"$exists": false}}, {"lowUncertainty": {"$in": ["","[\"NA\"]", "NA"]}}]}, {"$set": {"lowUncertainty": null}});
 db.records.updateMany({"lowUncertainty": {"$in": [1, "1"]}},{"$set": {"lowUncertainty":true}});
 db.records.updateMany({"lowUncertainty": {"$in": [0, "0"]}},{"$set": {"lowUncertainty":false}});

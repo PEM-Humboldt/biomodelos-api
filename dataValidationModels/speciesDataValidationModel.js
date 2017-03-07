@@ -36,7 +36,6 @@ db.runCommand({collMod: "species",
                          ]},
                    {validName: {"$type": "bool", "$exists": true}},
                    {speciesInCountry: {"$type": "bool", "$exists": true}},
-                   {sppInCol: {"$type": "bool", "$exists": true}},
-                   {$or: [{totalModels: {"$type": "number"}}, {totalModels: {"$type": "null"}}]}
+                   {sppInCol: {"$type": "bool", "$exists": true}}
                    ]
              }, validationLevel: "strict", validationAction: "error"} )

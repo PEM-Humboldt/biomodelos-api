@@ -33,7 +33,7 @@ db.models.updateMany({"$or": [{"thresholdValue": {"$exists": false}}, {"threshol
 db.models.updateMany({"$or": [{"modelAuthors": {"$exists": false}}, {"modelAuthors": {"$in": ["","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"modelAuthors": null}});
 db.models.updateMany({"$or": [{"dd": {"$exists": false}},{"dd": {"$in": ["","[\"NA\"]", "NA", -9999]}}]}, {"$set": {"dd": null}});
 db.models.updateMany({"$or": [{"mm": {"$exists": false}},{"mm": {"$in": ["","[\"NA\"]", "NA", -9999]}}]}, {"$set": {"mm": null}});
-db.models.updateMany({"$or": [{"yyyy": {"$exists": false}}, {"yyyy": {"$gt": 2016}}, {"yyyy": {"$in": ["","[\"NA\"]", "NA", -9999]}}]}, {"$set": {"yyyy": null}});
+db.models.updateMany({"$or": [{"yyyy": {"$exists": false}}, {"yyyy": {"$gte": 2016}}, {"yyyy": {"$in": ["","[\"NA\"]", "NA", -9999]}}]}, {"$set": {"yyyy": null}});
 db.models.updateMany({"$or": [{"statCoverLC2": {"$exists": false}}, {"statCoverLC2": {"$in": ["","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"statCoverLC2": null}});
 db.models.updateMany({"$or": [{"statCoverLC3": {"$exists": false}}, {"statCoverLC3": {"$in": ["","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"statCoverLC3": null}});
 db.models.updateMany({"$or": [{"statCoverLC4": {"$exists": false}}, {"statCoverLC4": {"$in": ["","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"statCoverLC4": null}});

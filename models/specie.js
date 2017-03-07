@@ -26,8 +26,7 @@ var SpecieSchema = new mongoose.Schema({
     taxonomicStatus: {type: String, default: null},
     validName: {type: Boolean, default: true},
     speciesInCountry: {type: Boolean, default: null},
-    sppInCol: {type: Boolean, default: true},
-    totalModels: {type: Number}
+    sppInCol: {type: Boolean, default: true}
 }, {collection: "species"});
 
 module.exports = mongoose.model("Specie", SpecieSchema, "species");
