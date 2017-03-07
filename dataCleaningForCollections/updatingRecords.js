@@ -93,9 +93,9 @@ db.records.updateMany({"dbDuplicate": {"$in": [0, "0"]}},{"$set": {"dbDuplicate"
 db.records.updateMany({"$or": [{"spatialDuplicated": {"$exists": false}}, {"spatialDuplicated": {"$in": ["","[\"NA\"]", "NA"]}}]}, {"$set": {"spatialDuplicated": null}});
 db.records.updateMany({"spatialDuplicated": {"$in": [1, "1"]}},{"$set": {"spatialDuplicated":true}});
 db.records.updateMany({"spatialDuplicated": {"$in": [0, "0"]}},{"$set": {"spatialDuplicated":false}});
-db.records.updateMany({"$or": [{"reported": {"$exists": false}}, {"reported": {"$in": ["[]","[\"NA\"]", "[NA]"]}}]}, {"$set": {"reported": []}});
-db.records.updateMany({"$or": [{"updated": {"$exists": false}}, {"updated": {"$in": ["[]","[\"NA\"]", "[NA]"]}}]}, {"$set": {"updated": []}});
-db.records.updateMany({"$or": [{"created": {"$exists": false}}, {"created": {"$in": ["[]","[\"NA\"]", "[NA]"]}}]}, {"$set": {"created": []}});
+db.records.updateMany({"$or": [{"reported": {"$exists": false}}, {"reported": {"$in": ["[]","[\"NA\"]", "[NA]"]}}]}, {"$set": {"reported": null}});
+db.records.updateMany({"$or": [{"updated": {"$exists": false}}, {"updated": {"$in": ["[]","[\"NA\"]", "[NA]"]}}]}, {"$set": {"updated": null}});
+db.records.updateMany({"$or": [{"created": {"$exists": false}}, {"created": {"$in": ["[]","[\"NA\"]", "[NA]"]}}]}, {"$set": {"created": null}});
 db.records.updateMany({"$or": [{"downloadDate": {"$exists": false}}, {"downloadDate": {"$in": ["","[\"NA\"]", "NA", -9999]}}]}, {"$set": {"downloadDate": null}});
 db.records.updateMany({"$or": [{"resourceFolder": {"$exists": false}}, {"resourceFolder": {"$in": ["","[\"NA\"]", "NA"]}}]}, {"$set": {"resourceFolder": null}});
 db.records.updateMany({"$or": [{"resourceIncorporationDate": {"$exists": false}}, {"resourceIncorporationDate": {"$in": ["","[\"NA\"]", "NA"]}}]}, {"$set": {"resourceIncorporationDate": null}});

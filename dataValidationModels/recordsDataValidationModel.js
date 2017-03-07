@@ -56,16 +56,27 @@ db.runCommand({collMod: "records",
                           ]},
                      {"$or": [
                           {earliestDateCollected: {"$type": "string"}},
+                          {earliestDateCollected: {"$type": "number"}},
                           {earliestDateCollected: {"$type": "null"}},
                           ]},
                      {"$or": [
                           {latestDateCollected: {"$type": "string"}},
+                          {latestDateCollected: {"$type": "number"}},
                           {latestDateCollected: {"$type": "null"}},
                           ]},
-                     {dd: {"$type": "number", "$gte": 1, "$lte": 31}},
-                     {mm: {"$type": "number", "$gte": 1, "$lte": 12}},
-                     {yyyy: {"$type": "number", "$gte": 1800, "$lte": 2100}},
                      {"$or": [
+                          {dd: {"$type": "number", "$gte": 1, "$lte": 31}},
+                          {dd: {"$type": "null"}},
+                          ]},
+                     {"$or": [
+                          {mm: {"$type": "number", "$gte": 1, "$lte": 12}},
+                          {mm: {"$type": "null"}},
+                          ]},
+                     {"$or": [
+                          {yyyy: {"$type": "number", "$gte": 1800, "$lte": 2100}},
+                          {yyyy: {"$type": "null"}},
+                          ]},
+                      {"$or": [
                           {correctCountry: {"$type": "bool"}},
                           {correctCountry: {"$type": "null"}},
                           ]},
@@ -185,13 +196,16 @@ db.runCommand({collMod: "records",
                           {override: {"$type": "bool"}},
                           {override: {"$type": "null"}},
                           ]},
-                     {privateData: {"$type": "number", "$in": [0, 1, 2]}},
+                     {"$or": [
+                          {privateData: {"$type": "number", "$in": [0, 1, 2]}},
+                          {privateData: {"$type": "null"}},
+                          ]},
                      {"$or": [
                           {use: {"$type": "bool"}},
                           {use: {"$type": "null"}},
                           ]},
                      {visualizationPrivileges: {"$type": "number", "$in": [0, 1, 2]}}
-                  ]
+                   ]
              },
          validationLevel: "strict",
          validationAction: "error"
