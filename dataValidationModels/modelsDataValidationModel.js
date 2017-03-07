@@ -134,6 +134,7 @@ db.runCommand({collMod: "models", validator: { $and:
                     {$or: [{statFutureForest30c: {"$type": "number"}}, {statFutureForest30c: {"$type": "null"}}]},
                     {$or: [{statFutureForest30d: {"$type": "number"}}, {statFutureForest30d: {"$type": "null"}}]},
                     {$or: [{statFutureForest30h: {"$type": "number"}}, {statFutureForest30h: {"$type": "null"}}]},
+                    {$or: [{statRangeSize: {"$type": "number"}}, {statRangeSize: {"$type": "null"}}]},
                     {$or: [{statModelEOO: {"$type": "number"}}, {statModelEOO: {"$type": "null"}}]},
                     {$or: [{statRecsEOO: {"$type": "number"}}, {statRecsEOO: {"$type": "null"}}]},
                     {$or: [{statRepPA: {"$type": "number"}}, {statRepPA: {"$type": "null"}}]},
