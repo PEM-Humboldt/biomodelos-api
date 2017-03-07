@@ -89,6 +89,7 @@ var ModelSchema = new mongoose.Schema({
     statFutureForest30c: {type: Number},
     statFutureForest30d: {type: Number},
     statFutureForest30h: {type: Number},
+    statRangeSize: {type: Number},
     statModelEOO: {type: Number},
     statRecsEOO: {type: Number},
     statRepPA: {type: Number},

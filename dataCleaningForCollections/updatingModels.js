@@ -96,6 +96,7 @@ db.models.updateMany({"$or": [{"statForestLoss90": {"$exists": false}}, {"statFo
 db.models.updateMany({"$or": [{"statFutureForest30c": {"$exists": false}}, {"statFutureForest30c": {"$in": ["","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"statFutureForest30c": null}});
 db.models.updateMany({"$or": [{"statFutureForest30d": {"$exists": false}}, {"statFutureForest30d": {"$in": ["","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"statFutureForest30d": null}});
 db.models.updateMany({"$or": [{"statFutureForest30h": {"$exists": false}}, {"statFutureForest30h": {"$in": ["","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"statFutureForest30h": null}});
+db.models.updateMany({"$or": [{"statRangeSize": {"$exists": false}}, {"statRangeSize": {"$in": ["","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"statRecsEOO": null}});
 db.models.updateMany({"$or": [{"statModelEOO": {"$exists": false}}, {"statModelEOO": {"$in": ["","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"statModelEOO": null}});
 db.models.updateMany({"$or": [{"statRecsEOO": {"$exists": false}}, {"statRecsEOO": {"$in": ["","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"statRecsEOO": null}});
 db.models.updateMany({"$or": [{"statRepPA": {"$exists": false}}, {"statRepPA": {"$in": ["","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"statRepPA": null}});
