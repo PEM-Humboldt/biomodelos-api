@@ -1,0 +1,563 @@
+//inserting a taxID in A_COLLECTION
+var seq = 1;
+db.getCollection('A_COLLECTION').find().forEach( function(myDoc)
+ { db.getCollection('A_COLLECTION').update(myDoc, {$set:{taxID: seq}}); seq=seq+1; });
+
+//This aggregation 
+db.ORIGIN_COLLECTION.aggregate([
+{$lookup:{from:'DESTINY_COLLECTION', localField:"species", foreignField:"species", as:"dataFromSpecies"}},
+{$unwind: "$dataFromSpecies"},
+{$project: {"species":1,"acceptedNameUsage":1"source":1,"occurrenceID":1,"speciesOriginal":1,"continent":1,"country":1,
+    "adm1":1,"adm2":1,"locality":1,"lat":1,"lon":1,"coordUncertaintyM":1,"alt":1,"institution":1,"collection":1,"catalogNumber":1,
+    "basisOfRecord":1,"collector":1,"earliestDateCollected":1,"downloadDate":1,"resourceName":1,"resourceFolder":1,
+    "resourceIncorporationDate":1,"privateData":1,"withLat":1,"withLon":1,"correctCountry":1,"suggestedCountry":1,"correctStateProvince":1,
+    "suggestedStateProvince":1,"correctCounty":1,"suggestedCounty":1,"sourceLayer":1,"recSizeBytes":1,"bigSizeRecord":1,"dbDuplicate":1,
+    "lowUncertainty":1,"hasTaxDoubt":1,"hasLocality":1,"inUrbanArea":1,"cellID":1,"spatialDuplicated":1,"override":1,
+    "visualizationPrivileges":1,"contributedRecord":1,"demAltitude":1,"privateDataset":1,"tmpTax":1,"tmpGeo":1,"use":1,"yyyy":1,"mm":1,
+    "dd":1,"taxID":"$dataFromSpecies.taxID"}}])
+
+//
+db.getCollection('records').updateMany({}, {$set: {"catalogNumber":"noCatalogNumber"} })
+db.records.updateMany({'yyyy': {$exists : false}}, {$set: {'yyyy': 0}})
+db.records.updateMany({'mm': {$exists : false}}, {$set: {'mm': 0}})
+db.records.updateMany({'dd': {$exists : false}}, {$set: {'dd': 0}})
+
+db.GBIF.count({country:/^co/i})
+
+db.records.aggregate([{$lookup:{from:"species", localField:"taxID", foreignField:"taxID", as:"dataFromSpecies"}}])
+
+db.getCollection('species').find({}, {taxID: 1}).sort({taxID: -1}).limit(1)
+db.getCollection('species').aggregate([{$sort: {taxID: -1}}, {$limit: 1}])
+db.getCollection('records').aggregate([{$match:{"scriptID" : 14150292}}, {$lookup:{from: "species", localField: "taxID", foreignField: "taxID", as: "salida"}}])
+
+db.getCollection('records').aggregate([{$match:{"scriptID" : 14150292}}, 
+{$lookup:{from: "species", localField: "taxID", foreignField: "taxID", as: "salida"}},
+{$project: {taxID: 1, salida: 1}}])
+
+db.species.find().forEach( function(myDoc) { print( "species: " + myDoc.species ); } );
+
+db.records.aggregate([{$lookup:{from:"species", localField:"taxID", foreignField:"taxID", as:"dataFromSpecies"}}, 
+{$project: {"kingdom": "$dataFromSpecies.kingdom"}}])
+
+
+conexionRecordsPrueba$aggregate('[ {"$match": {"taxID": 10}}, 
+{"$lookup": {"$from": "species", "$localField": "taxID", "$foreignField": "taxID", "$as": "dataFromSpecies"}}, 
+{"$unwind": "$dataFromSpecies"},
+{"$project": {"species": 1}} ]')
+
+
+db.recordsprueba.aggregate([
+//{$match: {taxID: 10}},
+{$lookup:{from:"speciesprueba", localField:"taxID", foreignField:"taxID", as:"dataFromSpecies"}},
+{$unwind: "$dataFromSpecies"},
+{$project: {"species":1,"acceptedNameUsage":1,"taxID":1,"source":1,"occurrenceID":1,"speciesOriginal":1,"continent":1,"country":1,
+    "adm1":1,"adm2":1,"locality":1,"lat":1,"lon":1,"coordUncertaintyM":1,"alt":1,"institution":1,"collection":1,"catalogNumber":1,
+    "basisOfRecord":1,"collector":1,"earliestDateCollected":1,"downloadDate":1,"resourceName":1,"resourceFolder":1,
+    "resourceIncorporationDate":1,"privateData":1,"withLat":1,"withLon":1,"correctCountry":1,"suggestedCountry":1,"correctStateProvince":1,
+    "suggestedStateProvince":1,"correctCounty":1,"suggestedCounty":1,"sourceLayer":1,"recSizeBytes":1,"bigSizeRecord":1,"dbDuplicate":1,
+    "lowUncertainty":1,"hasTaxDoubt":1,"hasLocality":1,"inUrbanArea":1,"cellID":1,"spatialDuplicated":1,"override":1,
+    "visualizationPrivileges":1,"contributedRecord":1,"demAltitude":1,"privateDataset":1,"tmpTax":1,"tmpGeo":1,"use":1,"yyyy":1,"mm":1,
+    "dd":1,"originalGenus":"$dataFromSpecies.originalGenus","originalSpecificEpithet":"$dataFromSpecies.originalSpecificEpithet",
+    "taxonomicStatus":"$dataFromSpecies.taxonomicStatus","originalScientificNameID":"$dataFromSpecies.originalScientificNameID",
+    "scientificNameID":"$dataFromSpecies.scientificNameID","acceptedNameUsage":"$dataFromSpecies.acceptedNameUsage",
+    "scientificNameAuthorship":"$dataFromSpecies.scientificNameAuthorship","kingdom":"$dataFromSpecies.kingdom",
+    "phylum":"$dataFromSpecies.phylum","class":"$dataFromSpecies.class","order":"$dataFromSpecies.order",
+    "family":"$dataFromSpecies.family","genus":"$dataFromSpecies.genus","specificEpithet":"$dataFromSpecies.specificEpithet",
+    "nameAccordingTo":"$dataFromSpecies.nameAccordingTo","TaxVerifSource":"$dataFromSpecies.TaxVerifSource",
+    "sppInCol":"$dataFromSpecies.sppInCol","speciesInCountry":"$dataFromSpecies.speciesInCountry",
+    "taxID":"$dataFromSpecies.taxID","validName":"$dataFromSpecies.validName"}},
+{$out: "dataFromSpecies"}
+])
+
+
+db.species.find().forEach( function(myDoc) { print( "species: " + myDoc.species ); } );
+
+db.records.aggregate([{$lookup:{from:"species", localField:"taxID", foreignField:"taxID", as:"dataFromSpecies"}}, 
+{$unwind: "$dataFromSpecies"},
+{$project: {"kingdom": "$dataFromSpecies.kingdom"}}])
+
+db.RECORDSLOQUESEA.aggregate([
+//{$match: {taxID: 10}},
+{$lookup:{from:"SPECIESLOQUESEA", localField:"species", foreignField:"species", as:"dataFromSpecies"}},
+{$unwind: "$dataFromSpecies"},
+{$project: {"species":1,"acceptedNameUsage":1"source":1,"occurrenceID":1,"speciesOriginal":1,"continent":1,"country":1,
+    "adm1":1,"adm2":1,"locality":1,"lat":1,"lon":1,"coordUncertaintyM":1,"alt":1,"institution":1,"collection":1,"catalogNumber":1,
+    "basisOfRecord":1,"collector":1,"earliestDateCollected":1,"downloadDate":1,"resourceName":1,"resourceFolder":1,
+    "resourceIncorporationDate":1,"privateData":1,"withLat":1,"withLon":1,"correctCountry":1,"suggestedCountry":1,"correctStateProvince":1,
+    "suggestedStateProvince":1,"correctCounty":1,"suggestedCounty":1,"sourceLayer":1,"recSizeBytes":1,"bigSizeRecord":1,"dbDuplicate":1,
+    "lowUncertainty":1,"hasTaxDoubt":1,"hasLocality":1,"inUrbanArea":1,"cellID":1,"spatialDuplicated":1,"override":1,
+    "visualizationPrivileges":1,"contributedRecord":1,"demAltitude":1,"privateDataset":1,"tmpTax":1,"tmpGeo":1,"use":1,"yyyy":1,"mm":1,
+    "dd":1,"originalGenus":"$dataFromSpecies.originalGenus","originalSpecificEpithet":"$dataFromSpecies.originalSpecificEpithet",
+    "taxonomicStatus":"$dataFromSpecies.taxonomicStatus","originalScientificNameID":"$dataFromSpecies.originalScientificNameID",
+    "scientificNameID":"$dataFromSpecies.scientificNameID","acceptedNameUsage":"$dataFromSpecies.acceptedNameUsage",
+    "scientificNameAuthorship":"$dataFromSpecies.scientificNameAuthorship","kingdom":"$dataFromSpecies.kingdom",
+    "phylum":"$dataFromSpecies.phylum","class":"$dataFromSpecies.class","order":"$dataFromSpecies.order",
+    "family":"$dataFromSpecies.family","genus":"$dataFromSpecies.genus","specificEpithet":"$dataFromSpecies.specificEpithet",
+    "nameAccordingTo":"$dataFromSpecies.nameAccordingTo","TaxVerifSource":"$dataFromSpecies.TaxVerifSource",
+    "sppInCol":"$dataFromSpecies.sppInCol","speciesInCountry":"$dataFromSpecies.speciesInCountry",
+    "taxID":"$dataFromSpecies.taxID","validName":"$dataFromSpecies.validName"}},
+{$out: "dataFromSpecies"}
+])
+
+db.RECORDSLOQUESEA.aggregate([
+{$lookup:{from:"SPECIESLOQUESEA", localField:"species", foreignField:"species", as:"dataFromSpecies"}},
+{$unwind: "$dataFromSpecies"},
+{$project: {"species":1,"acceptedNameUsage":1"source":1,"occurrenceID":1,"speciesOriginal":1,"continent":1,"country":1,
+    "adm1":1,"adm2":1,"locality":1,"lat":1,"lon":1,"coordUncertaintyM":1,"alt":1,"institution":1,"collection":1,"catalogNumber":1,
+    "basisOfRecord":1,"collector":1,"earliestDateCollected":1,"downloadDate":1,"resourceName":1,"resourceFolder":1,
+    "resourceIncorporationDate":1,"privateData":1,"withLat":1,"withLon":1,"correctCountry":1,"suggestedCountry":1,"correctStateProvince":1,
+    "suggestedStateProvince":1,"correctCounty":1,"suggestedCounty":1,"sourceLayer":1,"recSizeBytes":1,"bigSizeRecord":1,"dbDuplicate":1,
+    "lowUncertainty":1,"hasTaxDoubt":1,"hasLocality":1,"inUrbanArea":1,"cellID":1,"spatialDuplicated":1,"override":1,
+    "visualizationPrivileges":1,"contributedRecord":1,"demAltitude":1,"privateDataset":1,"tmpTax":1,"tmpGeo":1,"use":1,"yyyy":1,"mm":1,
+    "dd":1,"taxID":"$dataFromSpecies.taxID"}}])
+
+db.GBIF.count({country:/^co/i})
+
+Actualizar un campo en todos los documentos
+db.getCollection('SUBASE').updateMany({}, {$set: {"catalogNumber":"noCatalogNumber"} })
+Actualizar un campo en todos los documentos
+db.SUBASE.updateMany({'yyyy': {$exists : false}}, {$set: {'yyyy': 0}})
+Aggregation pipeline mongolite para colocar el taxID a partir de la colección "species"
+CONEXION$aggregate('[{"$match":{"taxID" : 14}},
+{"$lookup": {"from": "species", "localField":"taxID", "foreignField":"taxID", "as": "salida"}},
+{"$unwind":"$salida"}, {"$project": {"speciesOriginal":1, "continent":1, "country":1, "adm1":1, 
+"adm2":1, "locality":1,  "lat":1, "lon":1, "coordUncertaintyM":1, "alt":1, "institution":1, 
+"collection":1, "catalogNumber":1, "basisOfRecord":1, "collector":1, "earliestDateCollected":1, 
+"latestDateCollected":1, "downloadDate":1, "resourceName":1, "resourceFolder":1, "resourceIncorporationDate":1, 
+"privateData":1, "withLat":1, "withLon":1, "correctCountry":1, "suggestedCountry":1, "correctStateProvince":1, 
+"suggestedStateProvince":1, "correctCounty":1, "suggestedCounty":1, "sourceLayer":1, "suggestedMunicipality":1, 
+"recSizeBytes":1, "bigSizeRecord":1, "dbDuplicate":1, "lowUncertainty":1, "hasTaxDoubt":1, "hasLocality":1, 
+"inUrbanArea":1, "cellID":1, "spatialDuplicated":1, "url":1, "override":1, "visualizationPrivileges":1, 
+"contributedRecord":1, "insideKnownDistribution":1, "dist2KnowRange":1, "demAltitude":1, "altitudinalOutlier":1, 
+"environmentalOutlier":1, "consistentAltitude":1, "diferenceInAltitude":1, "privateDataset":1, "tmpTax":1, 
+"tmpGeo":1, "use":1, "yyyy":1, "mm":1, "dd":1, "ID":1, "taxID":"$salida.taxID"}}]')
+
+Recuperar el taxID más grande:
+getCollection('species').find({}, {taxID: 1}).sort({taxID: -1}).limit(1)db.getCollection('species').aggregate([{$sort: {taxID: -1}}, {$limit: 1}])
+Listar las especiesdb.species.find().forEach( function(myDoc) { print( "species: " + myDoc.species ); } );
+
+Insertar el taxID a partir de 0
+db.counters.insert(
+   {
+      taxID: "taxID",
+      seq: 0
+   }
+)
+
+function getNextSequence(taxID) {
+   var ret = db.counters.findAndModify(
+          {
+            query: { taxID: taxID },
+            update: { $inc: { seq: 1 } },
+            new: true
+          }
+   );
+
+   return ret.seq;
+}
+
+var seq = 1;
+db.getCollection('records').find().forEach( function(myDoc) 
+{ db.getCollection('records').update(myDoc, {$set:{taxID: seq}}); seq=seq+1; });
+
+db.records.aggregate([{$lookup:{from:"species", localField:"taxID", foreignField:"taxID", as:"dataFromSpecies"}}])
+
+db.getCollection('records').aggregate([
+   { $project:
+      { reportes:
+          { $cond:
+            {
+              if: { $and: [ { $isArray: "$created" }, {  }, {  } ] },
+              then: { $isArray:"$created"},
+              else: false
+            }
+          },
+
+      }
+   }
+])
+
+db.getCollection('species').find({}, {taxID: 1}).sort({taxID: -1}).limit(1)
+db.getCollection('species').aggregate([{$sort: {taxID: -1}}, {$limit: 1}])
+db.getCollection('records').aggregate([{$match:{"scriptID" : 14150292}}, {$lookup:{from: "species", localField: "taxID", foreignField: "taxID", as: "salida"}}])
+db.getCollection('records').find( { reported: { $size: 3 } } ).length()
+
+db.getCollection('records').aggregate([{$match:{"scriptID" : 14150292}}, 
+{$lookup:{from: "species", localField: "taxID", foreignField: "taxID", as: "salida"}},
+{$project: {taxID: 1, salida: 1}}])
+
+db.species.find().forEach( function(myDoc) { print( "species: " + myDoc.species ); } );
+
+db.records.aggregate([{$lookup:{from:"species", localField:"taxID", foreignField:"taxID", as:"dataFromSpecies"}}, 
+{$project: {"kingdom": "$dataFromSpecies.kingdom"}}])
+
+
+conexionRecordsPrueba$aggregate('[ {"$match": {"taxID": 10}}, 
+{"$lookup": {"$from": "species", "$localField": "taxID", "$foreignField": "taxID", "$as": "dataFromSpecies"}}, 
+{"$unwind": "$dataFromSpecies"},
+{"$project": {"species": 1}} ]')
+
+
+db.recordsprueba.aggregate([
+//{$match: {taxID: 10}},
+{$lookup:{from:"speciesprueba", localField:"taxID", foreignField:"taxID", as:"dataFromSpecies"}},
+{$unwind: "$dataFromSpecies"},
+{$project: {"species":1,"acceptedNameUsage":1,"taxID":1,"source":1,"occurrenceID":1,"speciesOriginal":1,"continent":1,"country":1,
+    "adm1":1,"adm2":1,"locality":1,"lat":1,"lon":1,"coordUncertaintyM":1,"alt":1,"institution":1,"collection":1,"catalogNumber":1,
+    "basisOfRecord":1,"collector":1,"earliestDateCollected":1,"downloadDate":1,"resourceName":1,"resourceFolder":1,
+    "resourceIncorporationDate":1,"privateData":1,"withLat":1,"withLon":1,"correctCountry":1,"suggestedCountry":1,"correctStateProvince":1,
+    "suggestedStateProvince":1,"correctCounty":1,"suggestedCounty":1,"sourceLayer":1,"recSizeBytes":1,"bigSizeRecord":1,"dbDuplicate":1,
+    "lowUncertainty":1,"hasTaxDoubt":1,"hasLocality":1,"inUrbanArea":1,"cellID":1,"spatialDuplicated":1,"override":1,
+    "visualizationPrivileges":1,"contributedRecord":1,"demAltitude":1,"privateDataset":1,"tmpTax":1,"tmpGeo":1,"use":1,"yyyy":1,"mm":1,
+    "dd":1,"originalGenus":"$dataFromSpecies.originalGenus","originalSpecificEpithet":"$dataFromSpecies.originalSpecificEpithet",
+    "taxonomicStatus":"$dataFromSpecies.taxonomicStatus","originalScientificNameID":"$dataFromSpecies.originalScientificNameID",
+    "scientificNameID":"$dataFromSpecies.scientificNameID","acceptedNameUsage":"$dataFromSpecies.acceptedNameUsage",
+    "scientificNameAuthorship":"$dataFromSpecies.scientificNameAuthorship","kingdom":"$dataFromSpecies.kingdom",
+    "phylum":"$dataFromSpecies.phylum","class":"$dataFromSpecies.class","order":"$dataFromSpecies.order",
+    "family":"$dataFromSpecies.family","genus":"$dataFromSpecies.genus","specificEpithet":"$dataFromSpecies.specificEpithet",
+    "nameAccordingTo":"$dataFromSpecies.nameAccordingTo","TaxVerifSource":"$dataFromSpecies.TaxVerifSource",
+    "sppInCol":"$dataFromSpecies.sppInCol","speciesInCountry":"$dataFromSpecies.speciesInCountry",
+    "taxID":"$dataFromSpecies.taxID","validName":"$dataFromSpecies.validName"}},
+{$out: "dataFromSpecies"}
+])
+
+db.getCollection('species').aggregate([
+{$group: {_id: {"bmClass":"$bmClass", "taxID": "$taxID" }}},
+{$unwind: "$_id"},
+{$project: {"bmClass":"$_id.bmClass", "taxID":"$_id.taxID", "_id":0}},
+{$lookup: {from: "records", localField: "taxID", foreignField: "taxID", as: "records" }},
+{$project: {"bmClass":"$bmClass", "taxID":"$taxID", "records": "$records.species", "_id":0}},
+{$project: {"bmClass":"$bmClass", "taxID":"$taxID", "records": {$size: "$records"},  "_id":0}},
+{$sort: {"taxID": 1}},
+
+{
+    "bmClass" : "Plantas",
+    "taxID" : 1,
+    "records" : 18
+}
+
+db.getCollection('species').aggregate([
+{$group: {_id: {"bmClass":"$bmClass", "taxID": "$taxID" }}},
+{$unwind: "$_id"},
+{$project: {"bmClass":"$_id.bmClass", "taxID":"$_id.taxID", "_id":0}},
+{$lookup: {from: "records", localField: "taxID", foreignField: "taxID", as: "records" }},
+{$project: {"bmClass":"$bmClass", "taxID":"$taxID", "records": "$records.species", "_id":0}},
+{$project: {"bmClass":"$bmClass", "taxID":"$taxID", "records": {$size: "$records"},  "_id":0}},
+{$sort: {"taxID": 1}},
+{$lookup: {from: "models", localField: "taxID", foreignField: "taxID", as: "models" }},
+{$unwind: "$models"},
+{$project: {"bmClass":"$bmClass", "taxID":"$taxID", "records": "$records", "modelStatus":"$models.modelStatus"}},
+{$group: {_id: {"bmClass": "$bmClass", "taxID": "$taxID", "records": "$records", "modelStatus": "$modelStatus"}}},
+{$unwind: "$_id"},
+{$project: {"bmClass":"$_id.bmClass", "taxID":"$_id.taxID", "records": "$_id.records", "modelStatus":"$_id.modelStatus", "_id": 0}},
+{$sort: {taxID: 1}}
+])
+
+{
+    "bmClass" : "Plantas",
+    "taxID" : 1,
+    "records" : 18,
+    "modelStatus" : "Approved"
+}
+
+SACA LA TOTALIDAD DE REGISTROS POR CADA CLASE
+db.species.aggregate([
+{$group: {_id: {"bmClass":"$bmClass", "taxID": "$taxID" }}},
+{$unwind: "$_id"},
+{$project: {"bmClass":"$_id.bmClass", "taxID":"$_id.taxID", "_id":0}},
+{$sort: {"taxID": 1}},
+{$lookup: {from: "records", localField: "taxID", foreignField: "taxID", as: "records" }},
+{$project: {"bmClass":"$bmClass", "records": "$records.species", "_id":0}},
+{$project: {"bmClass":"$bmClass", "records": {$size: "$records"},  "_id":0}},
+{$group: {_id: "$bmClass", registros: {$sum: 1}}}
+])
+
+SACA LA CANTIDAD DE MODELOS, SEGÚN STATUS POR CADA CLASE
+db.species.aggregate([
+{"$lookup": {"from": "models", "localField":"taxID", "foreignField":"taxID", "as": "fromModels"}},
+{"$unwind": "$fromModels"},
+{"$project":{"bmClass": "$bmClass", "taxID":"$fromModels.taxID", "modelStatus":"$fromModels.modelStatus", "_id": 0}},
+{"$group": {_id: {"bmClass": "$bmClass", "modelStatus": "$modelStatus"}, "totalModels": {"$sum":1}}},
+{"$unwind":"$_id"},
+{"$project": {"bmClass": "$_id.bmClass", "modelStatus": "$_id.modelStatus", "totalModels": "$totalModels", "_id": 0}},
+{"$sort": {"bmClass": 1, "modelStatus": 1}}
+])
+
+SACA LA CANTIDAD DE MODELOS, SEGUN STATUS, PARA CADA taxID
+db.models.aggregate(
+   [
+   {"$group":{ _id: { "taxID": "$taxID"}, modelStatus: { $addToSet: "$modelStatus" }}}, 
+   {"$unwind": "$_id"},
+   {"$project": {"taxID": "$_id.taxID", "modelStatus": "$modelStatus", "_id": 0}},
+   {"$sort": {"taxID": 1}}
+   ]
+)
+
+SACA LOS VALORES DEL STATUS DISGREGADOS, NO UNIDOS, POR TAXID
+db.models.aggregate(
+   [
+   {"$lookup": {from: "species", localField: "taxID", foreignField: "taxID", as: "fromSpecies"}},
+   {"$unwind": "$fromSpecies"},
+   {"$project": {"taxID": "$taxID", "bmClass": "$fromSpecies.bmClass", "modelStatus": "$modelStatus", "_id": 0}},
+   {"$sort": {"taxID": 1}}
+   ]
+)
+
+SACA LOS VALORES DEL STATUS AGREGADOS POR BMCLASS
+db.models.aggregate([
+    {"$lookup": {from: "species", localField: "taxID", foreignField: "taxID", as: "fromSpecies"}},
+    { "$group": {
+        "_id": {
+            "taxID": "$taxID",
+            "modelStatus": "$modelStatus",
+            "bmClass": "$fromSpecies.bmClass"
+        },
+        "count": { "$sum": 1 }
+    }},
+    { "$group": {
+        "_id": {
+            "bmClass": "$_id.bmClass",
+            "modelStatus": "$_id.modelStatus"
+        },
+        "totalCount": { "$sum": "$count" },
+        "distinctCount": { "$sum": 1 }
+    }},
+    {"$unwind": "$_id"},
+    {"$project": {"bmClass": "$_id.bmClass", "modelStatus": "$_id.modelStatus", "models": "$distinctCount", "_id": 0}},
+    {"$unwind": "$bmClass"},
+    {"$sort": {"bmClass": 1, "modelStatus": 1}}
+])
+
+{
+    "bmClass" : "Plantas",
+    "modelStatus" : "Published",
+    "models" : 2.0
+}
+
+MONTAJE DE TAXid A LOS MODELOS GENERADOS
+db.modelosPruebaBosqueSeco.aggregate([
+{"$lookup":{from:"speciesPruebaBosqueSeco", localField: "acceptedNameUsage", foreignField:"acceptedNameUsage", as: "fromRecords"}},
+{"$unwind":"$fromRecords"},
+{"$project":{"modelID":"$modelID","taxID":"$fromRecords.taxID","acceptedNameUsage":"$acceptedNameUsage","modelingMethod":"$modelingMethod","thresholdType":"$thresholdType",
+"thresholdValue":"$thresholdValue","validationType":"$validationType","perfStatType":"$perfStatType","perfStatValue":"$perfStatValue","perfStatSD":"$perfStatSD",
+"pValue":"$pValue","recsUsed":"$recsUsed","methodFile":"$methodFile","modelLevel":"$modelLevel","isActive":"$isActive","modelStatus":"$modelStatus","thumbPath":"$thumbPath",
+"pngPath":"$pngPath","tifPath":"$tifPath","zipPath":"$zipPath","modelAuthors":"$modelAuthors","yyyy":"$yyyy","mm":"$mm","dd":"$dd","consensusMethod":"$consensusMethod","omission":"$omission",
+"statRangeSize":"$statRangeSize","statModelEOO":"$statModelEOO","statRecsEOO":"$statRecsEOO","statRepPA":"$statRepPA","statRepPA1":"$statRepPA1","statRepPA2":"$statRepPA2",
+"statRepPA3":"$statRepPA3","statForestLoss90":"$statForestLoss90","statForestLoss00":"$statForestLoss00","statForestLoss05":"$statForestLoss05","statForestLoss10":"$statForestLoss10",
+"statForestLoss12":"$statForestLoss12","statFutureForest30h":"$statFutureForest30h","statFutureForest30d":"$statFutureForest30d","statFutureForest30c":"$statFutureForest30c",
+"statCoverLC1":"$statCoverLC1","statCoverLC2":"$statCoverLC2","statCoverLC3":"$statCoverLC3","statCoverLC4":"$statCoverLC4","statCoverLC5":"$statCoverLC5","statCoverLC6":"$statCoverLC6",
+"statCoverLC7":"$statCoverLC7","statCoverLC8":"$statCoverLC8","statCoverLC9":"$statCoverLC9","statCoverLC10":"$statCoverLC10","statCoverLC11":"$statCoverLC11","statCoverLC12":"$statCoverLC12",
+"statCoverLC13":"$statCoverLC13","statCoverLC14":"$statCoverLC14","statCoverLC15":"$statCoverLC15","statCoverLC16":"$statCoverLC16","statCoverLC17":"$statCoverLC17",
+"statCoverLC18":"$statCoverLC18","statCoverLC19":"$statCoverLC19","statCoverLC20":"$statCoverLC20","statCoverLC21":"$statCoverLC21","statCoverLC22":"$statCoverLC22","statCoverLC23":"$statCoverLC23",
+"statCoverLC24":"$statCoverLC24","statCoverLC25":"$statCoverLC25","statCoverLC26":"$statCoverLC26","statCoverLC27":"$statCoverLC27","statCoverLC28":"$statCoverLC28","statCoverLC29":"$statCoverLC29",
+"statCoverLC30":"$statCoverLC30","statCoverLC31":"$statCoverLC31","statCoverLC32":"$statCoverLC32","statCoverLC33":"$statCoverLC33","statCoverLC34":"$statCoverLC34","statCoverLC35":"$statCoverLC35",
+"statCoverLC36":"$statCoverLC36","statCoverLC37":"$statCoverLC37","statCoverLC38":"$statCoverLC38","statCoverLC39":"$statCoverLC39","statCoverLC40":"$statCoverLC40","statCoverLC41":"$statCoverLC41",
+"statCoverLC42":"$statCoverLC42","statCoverLC43":"$statCoverLC43","statCoverLC44":"$statCoverLC44","statCoverLC45":"$statCoverLC45","statCoverLC46":"$statCoverLC46","statCoverLC47":"$statCoverLC47",
+"statCoverLC48":"$statCoverLC48","statCoverLC49":"$statCoverLC49","statCoverLC50":"$statCoverLC50","statCoverLC51":"$statCoverLC51","statCoverLC52":"$statCoverLC52","statCoverLC53":"$statCoverLC53",
+"statCoverLC54":"$statCoverLC54","statCoverLC55":"$statCoverLC55"}},
+//{"$out": "modelosPruebaBosqueSecoCoincidentes"}
+])
+
+AUTO_NUMERACION PARA MODELid MODELOS DATACENTER
+var seq = 322;
+db.getCollection('modelos').find({"modelID":""}).forEach( function(myDoc) 
+{ db.getCollection('modelos').update(myDoc, {$set:{modelID: seq}}); seq=seq+1; });
+
+ENCONTRAR VALORES UNICOS DE ESPECIES EN ALGUNA COLECCION
+db.runCommand ( { distinct: "species", key: "acceptedNameUsage" } )
+
+TODOS LOS PARAMETROS DE LA CONSULTA DINAMICA
+db.getCollection('species').find( {
+            "$and" : [
+            { "$or" : [ { "species": {"$regex": /p/ig} } ] },
+            //{ "$or" : [ { "iucn": {"$in": ["Endangered", "Critically Endangered", "Vulnerable", "Threatened"] } } ] },
+            { "$or" : [ { "invasive": {"$in": [true]} } ] },
+            { "$or" : [ { "bmClass": {"$in": ["Invertebrados", "Reptiles"]} } ] },
+            
+       ]})
+
+CREACION DEL CAMPO TOTALmODELS EN LA COLECCION SPECIES
+db.species.aggregate([
+{"$lookup": {from: "models", localField: "taxID", foreignField: "taxID", as: "fromSpecies"}},
+{"$project": {"species": 1, "originalGenus": 1, "originalSpecificEpithet": 1, "taxonomicStatus": 1, "originalScientificNameID": 1, "scientificNameID": 1, "acceptedNameUsage": 1,
+    "scientificNameAuthorship": 1, "kingdom": 1, "phylum": 1, "class": 1, "order": 1, "family": 1, "genus": 1, "specificEpithet": 1, "nameAccordingTo": 1,
+    "TaxVerifSource": 1, "sppInCol": 1, "speciesInCountry": 1, "validName": 1, "taxID": 1, "bmClass": 1, "iucn": 1, "endemic": 1, "invasive": 1, "cites": 1, "totalModels": {"$size": "$fromSpecies"}}},
+    {"$out": "species1"}
+ ])
+
+db.species1.distinct("taxID", {"totalModels": 5}) //devuelve los taxID de los que tienen 5 modelos exactamente
+db.species1.distinct("taxID", {"totalModels": {"$gt: [2]}}) //devuelve los taxID de los que tienen más de 2 modelos
+
+GENERACION DE ESTADISTICAS DE MODELOS
+db.getCollection('species_copy').aggregate([
+{"$group": {"_id": {"bmClass":"$bmClass"}, totalSpecies: {"$sum": 1}}},
+{"$project": {"bmClass": "$_id.bmClass", "totalSpecies": "$totalSpecies", "_id": 0}},
+{"$lookup": {from: "models_copy_2", localField: "bmClass", foreignField: "bmClass", as: "totalModels"}},
+{"$project": {"totalSpecies": "$totalSpecies", "bmClass": "$bmClass", "cantidadModelos": {"$size": "$totalModels"}}},
+{"$sort": {"totalSpecies": -1}},
+{"$lookup": {from: "models_copy_2", localField: "bmClass", foreignField: "bmClass", as: "totalModels"}},
+{"$unwind": "$totalModels"},
+{"$project": {"totalSpecies": "$totalSpecies", "bmClass": "$bmClass", "cantidadModelos": "$cantidadModelos", "modelStatus": "$totalModels.modelStatus", "taxID": "$totalModels.taxID"}},
+{"$group": {"_id": {"bmClass": "$bmClass", "totalSpecies": "$totalSpecies", "cantidadModelos": "$cantidadModelos", "modelStatus": "$modelStatus"}, totalidad: {"$sum": 1}}},
+{"$project": {"bmClass": "$_id.bmClass", "totalSpecies":"$_id.totalSpecies", "totalModelos": "$_id.cantidadModelos", "modelStatus": "$_id.modelStatus", "cantidadModelos/status": "$totalidad", "_id":0}},
+{"$sort": {"bmClass": 1, "modelStatus": 1}},
+])
+
+GENERACION DE TOTAL DE ESPECIES, TOTAL DE MODELOS, POR CADA BMcLASS
+db.models.aggregate([
+{"$group": {"_id": {"bmClass":"$bmClass"}, totalSpecies: {"$sum": 1}}},
+{"$project": {"bmClass": "$_id.bmClass", "totalSpecies": "$totalSpecies", "_id": 0}},
+{"$lookup": {from: "models", localField: "bmClass", foreignField: "bmClass", as: "totalModels"}},
+{"$project": {"totalSpecies": "$totalSpecies", "bmClass": "$bmClass", "cantidadModelos": {"$size": "$totalModels"}}},
+//{"$sort": {"totalSpecies": -1}},
+//{"$lookup": {from: "models", localField: "bmClass", foreignField: "bmClass", as: "totalModels"}},
+//{"$unwind": "$totalModels"},
+//{"$project": {"bmClass": "$bmClass", "modelStatus": "$totalModels.modelStatus"}},
+//{"$group": {"_id": {"bmClass": "$bmClass", "totalSpecies": "$totalSpecies", "cantidadModelos": "$cantidadModelos", "modelStatus": "$modelStatus"}, totalidad: {"$sum": 1}}},
+//{"$project": {"bmClass": "$_id.bmClass", "totalSpecies":"$_id.totalSpecies", "totalModelos": "$_id.cantidadModelos", "modelStatus": "$_id.modelStatus", "cantidadModelos/status": "$totalidad", "_id":0}},
+//{"$sort": {"bmClass": 1, "modelStatus": 1}},
+])
+
+CANTIDAD DE MODELOS/BMcLASS
+db.getCollection('models').aggregate([
+{"$lookup": {from: "species", localField: "taxID", foreignField: "taxID", as: "fromSpecies"}},
+{"$unwind": "$fromSpecies"},
+{"$group": {"_id": {"bmClass": "$fromSpecies.bmClass"}, totalidad: {"$sum": 1}}},
+{"$project": {"bmClass": "$_id.bmClass", "Modelos totales": "$totalidad", "_id": 0}}//
+])
+
+//Cantidad de modelos/status para cada bmClass
+router.get('/stats/models', function(req, res) {
+    Model.aggregate([
+{"$lookup": {from: "species", localField: "taxID", foreignField: "taxID", as: "fromSpecies"}},
+{"$unwind": "$fromSpecies"},
+{"$project": {"modelStatus": "$modelStatus", "bmClass": "$fromSpecies.bmClass"}},
+{"$group": {"_id": {"bmClass":"$bmClass", "modelStatus": "$modelStatus"}, totalModels: {"$sum": 1}}},
+{"$project": {"bmClass": "$_id.bmClass", "modelStatus": "$_id.modelStatus", "totalModels": "$totalModels", "_id": 0}}
+], function(err, doc) {
+            if (err) {
+                res.json(err);
+            } else {
+                //var data = doc.map(function (obj) {  return {BmClass: obj.bmClass, modelStatus: obj.modelStatus, cantidad: obj["cantidadModelos/status"]}});
+                console.log("Salida de estadísticas");
+                res.send(doc);
+            }
+        });
+    });
+
+//MEJORAR Cantidad de registros/especie/bmClass
+router.get('/stats/totalModels', function(req, res) {
+    Model.aggregate([
+{"$lookup": {from: "species", localField: "taxID", foreignField: "taxID", as: "fromSpecies"}},
+{"$unwind": "$fromSpecies"},
+{"$group": {"_id": {"bmClass": "$fromSpecies.bmClass"}, totalidad: {"$sum": 1}}},
+{"$project": {"bmClass": "$_id.bmClass", "Modelos totales": "$totalidad", "_id": 0}}
+], function(err, doc) {
+            if (err) {
+                res.json(err);
+            } else {
+                //var data = doc.map(function (obj) {  return {BmClass: obj.bmClass, modelStatus: obj.modelStatus, cantidad: obj["cantidadModelos/status"]}});
+                console.log("Salida de estadísticas del total de modelos/bmClass");
+                res.send(doc);
+            }
+        });
+    });
+
+//MEJORAR Cantidad de registros/especie/bmClass
+router.get('/stats/bmClass', function(req, res) {
+    Record.aggregate([
+{"$lookup": {from: "species", localField: "taxID", foreignField: "taxID", as: "fromSpecies"}},
+{"$unwind": "$fromSpecies"},
+{"$project": {"species": "$species", "bmClass": "$fromSpecies.bmClass", "_id": 0}},
+{"$group": {"_id": {"bmClass": "$bmClass"}, "cantidad":{"$sum": 1}}},
+{"$project": {"bmClass": "$_id.bmClass", "cantidad": "$cantidad", "_id": 0}},
+{"$sort": {"bmClass": 1, "cantidad": 1}},
+], function(err, doc) {
+            if (err) {
+                res.json(err);
+            } else {
+                //var data = doc.map(function (obj) {  return {BmClass: obj.bmClass, modelStatus: obj.modelStatus, cantidad: obj["cantidadModelos/status"]}});
+                console.log("Salida de estadísticas del parcial de modelos/statusModel/bmClass");
+                res.send(doc);
+            }
+        });
+    });
+
+
+TAXID FROM ACCEPTEDNAME USAGE
+//db.species.aggregate([
+{$lookup:{from:"taxID", localField:"acceptedNameUsage", foreignField:"acceptedNameUsage", as:"fromTaxID"}},
+{$unwind: "$fromTaxID"},
+{$project: {"species":1, "originalGenus":1, "originalSpecificEpithet":1, "taxonomicStatus":1, "originalScientificNameID":1, "scientificNameID":1, "acceptedNameUsage":1, "scientificNameAuthorship":1, "kingdom":1, "phylum":1, "class":1, "order":1, "family":1, "genus":1, "specificEpithet":1, "nameAccordingTo":1, "TaxVerifSource":1, "sppInCol":1, "speciesInCountry":1, "validName":1, "bmClass":1, "iucn":1, "endemic":1, "invasive":1, "cites":1, "totalModels":1, 
+"taxID":"$fromTaxID.taxID"}},
+{"$out": "species"}
+])
+
+ELIMINAR DUPLICADOS
+db.records.aggregate([
+  { $group: { 
+    _id: { "occurrenceID": "$occurrenceID" }, 
+    uniqueIds: { $addToSet: "$_id" },
+    count: { $sum: 1 } 
+  }}, 
+  { $match: { 
+    count: { $gt: 1 } 
+  }},
+  {"$project": {"aborrar": "$_id.occurrenceID"}},
+  //{"$out": "aborrar"}
+  
+])
+
+db.records_copy.aggregate([
+    { "$group": {
+        "_id": { "occurrenceID": "$occurrenceID" },
+        "dups": { "$push": "$_id" },
+        "count": { "$sum": 1 }
+    }},
+    { "$match": { "count": { "$gt": 1 } }}
+]).forEach(function(doc) {
+    doc.dups.shift();
+    db.records_copy.remove({ "_id": {"$in": doc.dups }});
+});
+
+OBTENER TODOS LOS CAMPOS DE UNA COLECCION
+mr = db.runCommand({  
+  "mapreduce" : "esta_es_la_COLECCION",  
+  "map" : function() {  
+    for (var key in this) { emit(key, null); }  
+  },  
+  "reduce" : function(key, stuff) { return null; },  
+  "out": "esta_es_la_COLECCION" + "_keys"  
+})
+
+esperar y luego: 
+db[mr.result].distinct("_id")
+
+Actualizar un campo dentro de un arreglo (reported.userId_bm, por ejemplo)
+
+db.records.update(
+   { "reported.userId_bm": "Xyomara Carretero-Pinzon" },
+   { $set: { "reported.$.userId_bm" : 294 } },
+   { multi: true}
+)
+
+NO CORRER EL SIGUIENTE
+db.records.updateMany({"basisOfRecord": {"$in": [  "NA", "Specimen","Unknown","Registro biológico","Observation","Living","UNKNOWN",
+    "LIVING_SPECIMEN","","Colecion",    "Visual",    "Observación",    "visual",    "Londoño & Kobayashi 580",    "X. Londoño 001",
+    "coleccion",      "Coleccion", "Colección Botánica",    "Herbario y visual",    "Herbario COL",    "Observación personal",    "Voucher de Herbario UDBC (20945)",    "Coleccion botnica y visual",    "Colección botánica",   "MACHINE_OBSERVATION",   "FOSSIL_SPECIMEN",    "MachineObservation",
+   "MATERIAL_SAMPLE"
+]}},
+    {"$set": {"basisOfRecord": null}})
+
+variable<-records.aggregate('[{"$match":{"occurrenceID" : "BST_89"}}, 
+{"$unwind":"$reported"},
+{"$project": {"isOutlier_bm" : "$reported.isOutlier.bm",
+        "geoIssue_bm" : "$reported.geoIssue_bm",
+        "idIssue_bm" : "$reported.idIssue_bm",
+        "oldTaxonomy_bm" : "$reported.oldTaxonomy_bm",
+        "inCaptivity_bm" : "$reported.inCaptivity_bm",
+        "otherIssues_bm" : "$reported.otherIssues_bm",
+        "comments_bm" : "$reported.comments_bm",
+        "userId_bm" : "$reported.userId_bm",
+        "reportedDate" : "$reported.reportedDate"}}
+]')
