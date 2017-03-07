@@ -1,5 +1,5 @@
 {
-  "name": "BioModelos mongoDB API",
+  "name": "BioModelos_mongoDB_API",
   "main": "server.js",
   "dependencies": {
     "assert": "*",
