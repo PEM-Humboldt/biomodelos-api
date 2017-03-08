@@ -13,7 +13,7 @@ var ModelSchema = new mongoose.Schema({
     published: {type: Boolean, default: false},
     customCitation: {type: String, default: null},
     isActive: {type: Boolean, default: true},
-    modelID: {type: Number},
+    modelID: {type: String, default: null},
     recsUsed: {type: Number},
     ommision: {type: Number, min: 0, max: 1},
     perfStatSD: {type: Number},
