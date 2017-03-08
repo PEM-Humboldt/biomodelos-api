@@ -215,6 +215,22 @@ router.post("/records", function(req, res) {
     var created = new Created();
     record.taxID = +req.body.taxID;
     record.acceptedNameUsage = req.body.acceptedNameUsage;
+    if (!req.body.adm1 || (req.body.adm1 === "")) {
+            record.adm1 = null;
+        } else {
+            record.adm1 = req.body.adm1;
+        }
+    if (!req.body.adm2 || (req.body.adm2 === "")) {
+            record.adm2 = null;
+        } else {
+            record.adm2 = req.body.adm2;
+        }
+    
+    if (!req.body.citation_bm || (req.body.citation_bm === "")) {
+            record.citation_bm = null;
+        } else {
+            record.citation_bm = req.body.citation_bm;
+        }
     if (!req.body.locality || (req.body.locality === "")) {
             record.locality = null;
         } else {
