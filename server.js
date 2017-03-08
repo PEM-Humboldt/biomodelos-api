@@ -786,6 +786,21 @@ router.get("/records/metadata/:taxID", function(req, res) {
                     res.json({message: "Unique values of collectors of a species"});
                 }
             });
+        } else if (req.params.taxID && req.query.metadata == "source"){
+            Record.aggregate([
+                {"$match": {"taxID": +req.params.taxID}},
+                {"$group": {"_id": "$source", "collector": {"$first": "$source"}}},
+                {"$project": {"source": "$_id", _id: 0}},
+                {"$group": {"_id": null, "source": {"$push": "$source"}}},
+                {"$project": {"source": "$source", _id: 0}},
+        ], function(err, doc) {
+                if (err) {
+                    res.json(err);
+                } else {
+                    res.send(doc);
+                    res.json({message: "Unique values of sources of a species"});
+                }
+            });
         }
 });
 

@@ -21,6 +21,12 @@ db.runCommand({collMod: "models", validator: { $and:
                          {isActive: {"$type": "bool"}}, 
                          {isActive: {"$type": "null"}}
                          ]},
+                     {$or: [
+                         {modelID: {"$type": "string"}}, 
+                         {modelID: {"$type": "number"}},
+                         {modelID: {"$type": "null"}} 
+                         ]},
+                     
                      {modelID:{"$type": "number","$exists": true}},
                      {recsUsed:{"$type": "number","$exists": true}},
                      {$or: [
