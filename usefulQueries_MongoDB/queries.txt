@@ -533,13 +533,17 @@ mr = db.runCommand({
 esperar y luego: 
 db[mr.result].distinct("_id")
 
-Actualizar un campo dentro de un arreglo (reported.userId_bm, por ejemplo)
-
+Actualizar un campo dentro de un arreglo (reported.userId_bm, por ejemplo), fijarte en el uso del signo "$", que hace referencia al operador posicional.
 db.records.update(
    { "reported.userId_bm": "Xyomara Carretero-Pinzon" },
    { $set: { "reported.$.userId_bm" : 294 } },
    { multi: true}
 )
+
+db.records.updateMany({"reported.reportedDate": "30-10-2016"},{"$set": {"reported.$.reportedDate": ISODate("2016-10-30T00:00:001Z")}})
+
+MATAR EL SERVICIO QUE CORRE EN UN PUERTO DETERMINADO
+kill -9 $( lsof -i:PUERTO -t )
 
 NO CORRER EL SIGUIENTE
 db.records.updateMany({"basisOfRecord": {"$in": [  "NA", "Specimen","Unknown","Registro biológico","Observation","Living","UNKNOWN",
