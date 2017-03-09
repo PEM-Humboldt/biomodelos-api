@@ -22,7 +22,6 @@ db.runCommand({collMod: "models", validator: { $and:
                          {isActive: {"$type": "null"}}
                          ]},
                      {$or: [
-                         {modelID: {"$type": "string"}}, 
                          {modelID: {"$type": "number"}},
                          {modelID: {"$type": "null"}} 
                          ]},
