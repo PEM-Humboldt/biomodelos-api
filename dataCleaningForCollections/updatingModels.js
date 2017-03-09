@@ -31,7 +31,7 @@ db.models.updateMany({"$or": [{"perfStatType": {"$exists": false}}, {"perfStatTy
 db.models.updateMany({"$or": [{"perfStatValue": {"$exists": false}}, {"perfStatValue": {"$in": ["NULL", "","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"perfStatValue": null}});
 db.models.updateMany({"$or": [{"pValue": {"$exists": false}}, {"pValue": {"$in": ["NULL", "","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"pValue": null}});
 db.models.updateMany({"$or": [{"validationType": {"$exists": false}}, {"validationType": {"$in": ["NULL", "","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"validationType": null}});
-db.models.updateMany({"thresholdType": {"$in": ["continuous", "Continuous"]}}]}, {"$set": {"thresholdType": "Continuous"}});
+db.models.updateMany({"thresholdType": {"$in": ["continuous", "Continuous"]}}, {"$set": {"thresholdType": "Continuous"}});
 db.models.updateMany({"$or": [{"thresholdType": {"$exists": false}}, {"thresholdType": {"$nin": [0, 10, 20, 30, "Continuous"]}}]}, {"$set": {"thresholdType": null}});
 db.models.updateMany({"$or": [{"thresholdValue": {"$exists": false}}, {"thresholdValue": {"$in": ["NULL", "","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"thresholdValue": null}});
 db.models.updateMany({"$or": [{"modelAuthors": {"$exists": false}}, {"modelAuthors": {"$in": ["NULL", "","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"modelAuthors": null}});
