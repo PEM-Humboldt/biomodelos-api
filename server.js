@@ -677,7 +677,7 @@ router.get("/models/:taxID", function (req, res) {
 //metadata of a specific model
 router.get("/models/metadata/:modelID", function (req, res) { 
     if (req.params.modelID) {
-        Model.find({"modelID": +req.params.modelID}, {_id: 0, taxID: 1, modelingMethod: 1, modelLevel: 1, modelStatus: 1, perfStatType: 1, perfStatValue: 1, validationType: 1, thresholdType: 1, modelAuthors: 1, dd: 1 , mm: 1, yyyy: 1, modelID: 1, methodFile: 1}, function(err, docs) {
+        Model.find({"modelID": req.params.modelID}, {_id: 0, taxID: 1, modelingMethod: 1, modelLevel: 1, modelStatus: 1, perfStatType: 1, perfStatValue: 1, validationType: 1, thresholdType: 1, modelAuthors: 1, dd: 1 , mm: 1, yyyy: 1, modelID: 1, methodFile: 1}, function(err, docs) {
             if (err) {
                 res.json(err);
             } else {
