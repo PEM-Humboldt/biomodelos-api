@@ -692,7 +692,7 @@ router.get("/models/metadata/:modelID", function (req, res) {
 //extension occurrence statistics for approved model of a specific species 	
 router.get("/models/approved/eoo/:taxID", function (req, res) { 
     if (req.params.taxID) {
-        Model.find({"taxID": +req.params.taxID, "modelStatus":"Approved"}, {_id: 0, modelID: 1, statRangeSize: 1, statModelEOO: 1, statRecsEOO: 1}, function(err, docs) {
+        Model.find({"taxID": +req.params.taxID, "modelStatus":"Valid", "isActive": true}, {_id: 0, modelID: 1, statRangeSize: 1, statModelEOO: 1, statRecsEOO: 1}, function(err, docs) {
             if (err) {
                 res.json(err);
             } else {
@@ -707,7 +707,7 @@ router.get("/models/approved/eoo/:taxID", function (req, res) {
 //representation statistics for approved model of a specific species 	
 router.get("/models/approved/rpa/:taxID", function (req, res) { 
     if (req.params.taxID) {
-        Model.find({"taxID": +req.params.taxID, "modelStatus":"Approved"}, {_id: 0, modelID: 1, statRepPA: 1, statRepPA1: 1, statRepPA2: 1, statRepPA3: 1}, function(err, docs) {
+        Model.find({"taxID": +req.params.taxID, "modelStatus":"Valid", "isActive": true}, {_id: 0, modelID: 1, statRepPA: 1, statRepPA1: 1, statRepPA2: 1, statRepPA3: 1}, function(err, docs) {
             if (err) {
                 res.json(err);
             } else {
@@ -722,7 +722,7 @@ router.get("/models/approved/rpa/:taxID", function (req, res) {
 //spatial statistics of forest loss for approved model of a specific species
 router.get("/models/approved/forest_loss/:taxID", function (req, res) { 
     if (req.params.taxID) {
-        Model.find({"taxID": +req.params.taxID, "modelStatus":"Approved"}, {_id: 0, modelID: 1, statForestLoss90: 1, statForestLoss00: 1, statForestLoss05: 1, statForestLoss10: 1, statForestLoss12: 1, statFutureForest30h: 1, statFutureForest30d: 1, statFutureForest30c: 1}, function(err, docs) {
+        Model.find({"taxID": +req.params.taxID, "modelStatus":"Valid", "isActive": true}, {_id: 0, modelID: 1, statForestLoss90: 1, statForestLoss00: 1, statForestLoss05: 1, statForestLoss10: 1, statForestLoss12: 1, statFutureForest30h: 1, statFutureForest30d: 1, statFutureForest30c: 1}, function(err, docs) {
             if (err) {
                 res.json(err);
             } else {
@@ -737,7 +737,7 @@ router.get("/models/approved/forest_loss/:taxID", function (req, res) {
 //spatial statistics of covers for for approved model of a specific species
 router.get("/models/approved/covers/:taxID", function (req, res) { 
     if (req.params.taxID) {
-        Model.find({"taxID": +req.params.taxID, "modelStatus":"Approved"}, {_id: 0, modelID: 1, statCoverLC2: 1, statCoverLC3: 1, statCoverLC4: 1, statCoverLC5: 1, statCoverLC6: 1, statCoverLC7: 1, statCoverLC8: 1, statCoverLC9: 1, statCoverLC10: 1, statCoverLC11: 1, statCoverLC12: 1, statCoverLC13: 1, statCoverLC14: 1, statCoverLC15: 1, statCoverLC16: 1,statCoverLC17: 1, statCoverLC18: 1, statCoverLC19: 1, statCoverLC20: 1, statCoverLC21: 1, statCoverLC22: 1, statCoverLC23: 1, statCoverLC24: 1, statCoverLC25: 1, statCoverLC26: 1, statCoverLC27: 1, statCoverLC28: 1, statCoverLC29: 1, statCoverLC30: 1, statCoverLC31: 1, statCoverLC32: 1, statCoverLC33: 1, statCoverLC34: 1, statCoverLC35: 1, statCoverLC36: 1, statCoverLC37: 1, statCoverLC38: 1, statCoverLC39: 1, statCoverLC40: 1, statCoverLC41: 1, statCoverLC42: 1, statCoverLC43: 1, statCoverLC44: 1, statCoverLC45: 1, statCoverLC46: 1, statCoverLC47: 1, statCoverLC48: 1, statCoverLC49: 1, statCoverLC50: 1, statCoverLC51: 1, statCoverLC52: 1, statCoverLC53: 1, statCoverLC54: 1, statCoverLC55: 1}, function(err, docs) {
+        Model.find({"taxID": +req.params.taxID, "modelStatus":"Valid", "isActive": true}, {_id: 0, modelID: 1, statCoverLC2: 1, statCoverLC3: 1, statCoverLC4: 1, statCoverLC5: 1, statCoverLC6: 1, statCoverLC7: 1, statCoverLC8: 1, statCoverLC9: 1, statCoverLC10: 1, statCoverLC11: 1, statCoverLC12: 1, statCoverLC13: 1, statCoverLC14: 1, statCoverLC15: 1, statCoverLC16: 1,statCoverLC17: 1, statCoverLC18: 1, statCoverLC19: 1, statCoverLC20: 1, statCoverLC21: 1, statCoverLC22: 1, statCoverLC23: 1, statCoverLC24: 1, statCoverLC25: 1, statCoverLC26: 1, statCoverLC27: 1, statCoverLC28: 1, statCoverLC29: 1, statCoverLC30: 1, statCoverLC31: 1, statCoverLC32: 1, statCoverLC33: 1, statCoverLC34: 1, statCoverLC35: 1, statCoverLC36: 1, statCoverLC37: 1, statCoverLC38: 1, statCoverLC39: 1, statCoverLC40: 1, statCoverLC41: 1, statCoverLC42: 1, statCoverLC43: 1, statCoverLC44: 1, statCoverLC45: 1, statCoverLC46: 1, statCoverLC47: 1, statCoverLC48: 1, statCoverLC49: 1, statCoverLC50: 1, statCoverLC51: 1, statCoverLC52: 1, statCoverLC53: 1, statCoverLC54: 1, statCoverLC55: 1}, function(err, docs) {
             if (err) {
                 res.json(err);
             } else {
