@@ -565,3 +565,7 @@ variable<-records.aggregate('[{"$match":{"occurrenceID" : "BST_89"}},
         "userId_bm" : "$reported.userId_bm",
         "reportedDate" : "$reported.reportedDate"}}
 ]')
+
+Para llamar los registros creados y realizar la actualización en los campos adm1 y adm2:
+
+

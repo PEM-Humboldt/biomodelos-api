@@ -13,7 +13,7 @@ var ModelSchema = new mongoose.Schema({
     published: {type: Boolean, default: false},
     customCitation: {type: String, default: null},
     isActive: {type: Boolean, default: true},
-    modelID: {type: Number, default: null},
+    modelID: {type: String, default: null},
     recsUsed: {type: Number},
     ommision: {type: Number, min: 0, max: 1},
     perfStatSD: {type: Number},
@@ -96,9 +96,9 @@ var ModelSchema = new mongoose.Schema({
     statRepPA1: {type: Number},
     statRepPA2: {type: Number},
     statRepPA3: {type: Number},
-    thumbPath: {type: String},
-    zipPath: {type: String},
-    pngPath: {type: String},
+    thumb: {type: String},
+    zip: {type: String},
+    png: {type: String},
     methodFile: {type: String}
 }, {collection: 'models'});
 

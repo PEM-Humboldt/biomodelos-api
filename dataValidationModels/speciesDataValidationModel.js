@@ -27,7 +27,7 @@ db.runCommand({collMod: "species",
                    {endemic: {"$type": "bool", "$exists": true}},
                    {invasive: {"$type": "bool", "$exists": true}},
                    {$or: [
-                       {$and:[{migratoryType: {"$type": "string"}}, {migratoryType: {"$in": ["Altitudinal", "Boreal", "Austral"]}}]}, 
+                       {$and: [{migratoryType: {"$type": "string"}}, {migratoryType: {"$in": ["Altitudinal", "Boreal", "Austral"]}}]}, 
                        {migratoryType: {"$type": "null"}}
                          ]},
                    {$or: [

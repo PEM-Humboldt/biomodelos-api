@@ -1,11 +1,14 @@
 //DB connection
-var db = connect('localhost:27017/prueba');//localhost:27017/records
+//var db = connect('localhost:27017/produccion');//localhost:27017/records
 
 //unsetting useless/deprecated fields
 db.models.updateMany({}, {"$unset": {"tifPath": "", "statCoverLC1": ""}});
 
 //setting new fields with its default values
 db.models.updateMany({}, {"$set": {"published": false, "customCitation": null}});
+
+//renaming paths to files
+db.models.updateMany({}, {"$rename": {"pngPath": "png", "zipPath": "zip", "thumbPath": "thumb"}});
 
 //db field update for models collection
 db.models.updateMany({"$or": [{"consensusMethod": {"$exists": false}}, {"consensusMethod": {"$nin": ["all", "mean", "median"]}}]}, {"$set": {"consensusMethod": null}});
@@ -103,7 +106,7 @@ db.models.updateMany({"$or": [{"statRepPA": {"$exists": false}}, {"statRepPA": {
 db.models.updateMany({"$or": [{"statRepPA1": {"$exists": false}}, {"statRepPA1": {"$in": ["","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"statRepPA1": null}});
 db.models.updateMany({"$or": [{"statRepPA2": {"$exists": false}}, {"statRepPA2": {"$in": ["","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"statRepPA2": null}});
 db.models.updateMany({"$or": [{"statRepPA3": {"$exists": false}}, {"statRepPA3": {"$in": ["","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"statRepPA3": null}});
-db.models.updateMany({"$or": [{"thumbPath": {"$exists": false}}, {"thumbPath": {"$in": ["","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"thumbPath": null}});
-db.models.updateMany({"$or": [{"zipPath": {"$exists": false}}, {"zipPath": {"$in": ["","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"zipPath": null}});
-db.models.updateMany({"$or": [{"pngPath": {"$exists": false}}, {"pngPath": {"$in": ["","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"pngPath": null}});
+db.models.updateMany({"$or": [{"thumb": {"$exists": false}}, {"thumb": {"$in": ["","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"thumb": null}});
+db.models.updateMany({"$or": [{"zip": {"$exists": false}}, {"zip": {"$in": ["","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"zip": null}});
+db.models.updateMany({"$or": [{"png": {"$exists": false}}, {"png": {"$in": ["","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"png": null}});
 db.models.updateMany({"$or": [{"methodFile": {"$exists": false}}, {"methodFile": {"$in": ["","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"methodFile": null}});

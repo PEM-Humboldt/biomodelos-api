@@ -1,5 +1,5 @@
 //DB connection
-var db = connect('localhost:27017/prueba');//localhost:27017/records
+//var db = connect('localhost:27017/produccion');//localhost:27017/records
 
 //unsetting useless/deprecated fields
 db.species.updateMany({}, {"$unset": {"consecutivoID": "", "originalGenus": "", "originalScientificNameID": "", "originalSpecificEpithet": "", "scientificNameID": "", "totalModels": ""}});

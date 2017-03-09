@@ -27,7 +27,7 @@ db.runCommand({collMod: "models", validator: { $and:
                          {modelID: {"$type": "null"}} 
                          ]},
                      
-                     {modelID:{"$type": "number","$exists": true}},
+                     {modelID:{"$type": "string","$exists": true}},
                      {recsUsed:{"$type": "number","$exists": true}},
                      {$or: [
                          {omission: {"$type": "number"}}, 
@@ -69,17 +69,17 @@ db.runCommand({collMod: "models", validator: { $and:
                      {dd: {"$type": "number", "$gte": 1, "$lte": 31}},
                      {mm: {"$type": "number", "$gte": 1, "$lte": 12}},
                      {yyyy: {"$type": "number", "$gte": 1800, "$lte": 2100}},
-                    {$or: [
-                        {statCoverLC2: {"$type": "number"}}, 
-                        {statCoverLC2: {"$type": "null"}}
-                        ]},
-                    {$or: [
-                        {statCoverLC3: {"$type": "number"}}, 
-                        {statCoverLC3: {"$type": "null"}}
-                        ]},
-                    {$or: [
-                        {statCoverLC4: {"$type": "number"}}, 
-                        {statCoverLC4: {"$type": "null"}}
+                     {$or: [
+                         {statCoverLC2: {"$type": "number"}}, 
+                         {statCoverLC2: {"$type": "null"}}
+                         ]},
+                     {$or: [
+                         {statCoverLC3: {"$type": "number"}}, 
+                         {statCoverLC3: {"$type": "null"}}
+                         ]},
+                     {$or: [
+                         {statCoverLC4: {"$type": "number"}}, 
+                         {statCoverLC4: {"$type": "null"}}
                         ]},
                     {$or: [{statCoverLC5: {"$type": "number"}}, {statCoverLC5: {"$type": "null"}}]},
                     {$or: [{statCoverLC6: {"$type": "number"}}, {statCoverLC6: {"$type": "null"}}]},
@@ -147,9 +147,9 @@ db.runCommand({collMod: "models", validator: { $and:
                     {$or: [{statRepPA1: {"$type": "number"}}, {statRepPA1: {"$type": "null"}}]},
                     {$or: [{statRepPA2: {"$type": "number"}}, {statRepPA2: {"$type": "null"}}]},
                     {$or: [{statRepPA3: {"$type": "number"}}, {statRepPA3: {"$type": "null"}}]},
-                    {$or: [{thumbPath: {"$type": "string"}}, {thumbPath: {"$type": "null"}}]},
-                    {$or: [{zipPath: {"$type": "string"}}, {zipPath: {"$type": "null"}}]},
-                    {$or: [{pngPath: {"$type": "string"}}, {pngPath: {"$type": "null"}}]},
+                    {$or: [{thumb: {"$type": "string"}}, {thumb: {"$type": "null"}}]},
+                    {$or: [{zip: {"$type": "string"}}, {zip: {"$type": "null"}}]},
+                    {$or: [{png: {"$type": "string"}}, {png: {"$type": "null"}}]},
                     {$or: [{methodFile: {"$type": "string"}}, {methodFile: {"$type": "null"}}]}
                     ]
              },
