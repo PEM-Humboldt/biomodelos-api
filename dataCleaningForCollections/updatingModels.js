@@ -1,5 +1,5 @@
 //DB connection
-//var db = connect('localhost:27017/produccion');//localhost:27017/records
+var db = connect('localhost:27017/produccion');//localhost:27017/records
 
 //unsetting useless/deprecated fields
 db.models.updateMany({}, {"$unset": {"tifPath": "", "statCoverLC1": ""}});
@@ -35,6 +35,7 @@ db.models.updateMany({"thresholdType": {"$in": ["continuous"]}}, {"$set": {"thre
 db.models.updateMany({"$or": [{"thresholdType": {"$exists": false}}, {"thresholdType": {"$nin": [0, 10, 20, 30, "Continuous"]}}]}, {"$set": {"thresholdType": null}});
 db.models.updateMany({"$or": [{"thresholdValue": {"$exists": false}}, {"thresholdValue": {"$in": ["NULL", "","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"thresholdValue": null}});
 db.models.updateMany({"$or": [{"modelAuthors": {"$exists": false}}, {"modelAuthors": {"$in": ["NULL", "","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"modelAuthors": null}});
+db.models.updateMany({"$or": [{"userID_bm": {"$exists": false}}, {"userID_bm": {"$in": ["NULL", "","[\"NA\"]", "NA", "[]", -9999]}}]}, {"$set": {"userID_bm": null}});
 db.models.updateMany({"$or": [{"dd": {"$exists": false}},{"dd": {"$in": ["NULL", "","[\"NA\"]", "NA", -9999]}}]}, {"$set": {"dd": null}});
 db.models.updateMany({"$or": [{"mm": {"$exists": false}},{"mm": {"$in": ["NULL", "","[\"NA\"]", "NA", -9999]}}]}, {"$set": {"mm": null}});
 db.models.updateMany({"$or": [{"yyyy": {"$exists": false}}, {"yyyy": {"$gte": 2018}}, {"yyyy": {"$in": ["","[\"NA\"]", "NA", -9999]}}]}, {"$set": {"yyyy": null}});
