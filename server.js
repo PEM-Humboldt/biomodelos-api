@@ -5,7 +5,9 @@ var bodyParser = require("body-parser");//req&res using JSON
 var mongoose = require("mongoose");//MongoDB driver
 var GeoJSON = require("geojson");//JSON -> GeoJSON
 var newDate = new Date();
+var async = require("async"); // Package para manejo de llamados asincronos en JS
 mongoose.connect("mongodb://localhost:27017/produccion");//database address 
+
 
 //Schema for all the collections
 var Record = require("./models/record.js");//general schemaModel for records.records collection
@@ -819,6 +821,107 @@ router.get("/records/metadata/:taxID", function(req, res) {
             });
         }
 });
+
+
+//STA 3
+//Retorna el identifcador de los colaboradores que han reportado creado o actualizado los registros de la especie consultada 
+router.get("/records/metadata/collaborators/:taxID", function(req, res) {
+
+    var temp = [];
+   
+
+     if (req.params.taxID){
+        async.waterfall([
+            function(callback){
+                    Record.aggregate([
+                        {"$match": {"taxID": +req.params.taxID}},
+                        {"$group": {"_id": "$reported.userId_bm", "userId_bm": {"$first": "$reported.userId_bm"}}},
+                        {"$project": {"userId_bm": "$_id", _id: 0}},
+                        {"$unwind": "$userId_bm"},
+                        {"$group": {"_id": "$userId_bm", "userId_bm": {"$first": "$userId_bm"}}},
+                        {"$project": {"userId_bm": "$userId_bm", _id: 0}}
+    
+                    ], function(err, doc) {
+                        if (err) {
+                        res.json(err);
+                        } else {
+                                for(var i =0; i< doc.length; i++){
+                                    temp.push(doc[i].userId_bm);
+                                }
+
+                                callback(null, temp);
+                            }
+                    });
+            },
+
+            function(temp, callback){
+
+                    Record.aggregate([
+                        {"$match": {"taxID": +req.params.taxID}},
+                        {"$group": {"_id": "$created.userId_bm", "userId_bm": {"$first": "$created.userId_bm"}}},
+                        {"$project": {"userId_bm": "$_id", _id: 0}},
+                        {"$unwind": "$userId_bm"},
+                        {"$group": {"_id": "$userId_bm", "userId_bm": {"$first": "$userId_bm"}}},
+                        {"$project": {"userId_bm": "$userId_bm", _id: 0}}
+  
+                    ], function(err, doc) {
+                        if (err) {
+                        res.json(err);
+                        } else {
+                                for(var i = 0; i< doc.length; i++){
+                                    temp.push(doc[i].userId_bm);
+                                }
+
+                                 callback(null,temp);
+                            }
+                    });
+
+            },
+
+           function (temp, callback) {
+
+                    Record.aggregate([
+                        {"$match": {"taxID": +req.params.taxID}},
+                        {"$group": {"_id": "$updated.userId_bm", "userId_bm": {"$first": "$updated.userId_bm"}}},
+                        {"$project": {"userId_bm": "$_id", _id: 0}},
+                        {"$unwind": "$userId_bm"},
+                        {"$group": {"_id": "$userId_bm", "userId_bm": {"$first": "$userId_bm"}}},
+                        {"$project": {"userId_bm": "$userId_bm", _id: 0}}
+
+                    ], function(err, doc) {
+                        if (err) {
+                        res.json(err);
+                        } else {
+                                for(var i =0; i< doc.length; i++){
+                                    temp.push(doc[i].userId_bm);
+                                }
+                                  
+                        var uniqueArray = temp.filter(function(elem, pos) { //removing duplicates in Temp
+                         return temp.indexOf(elem) == pos;
+                        });
+
+                        var arrayJSON = {};
+
+                        arrayJSON.collaborators = uniqueArray;
+
+
+                        res.json(arrayJSON);
+                        res.json({message: "collaborators"});
+                
+                        }
+
+                });
+
+           }, 
+
+            ], function(err, result){
+
+
+            });
+         }; 
+
+    });
+
 
 app.use("/BioModelos", router);
 
