@@ -750,11 +750,12 @@ router.get("/models/approved/covers/:taxID", function (req, res) {
     }
 });
 
+
 //STA1
 //Obtener la totalidad de modelos según bmClass, discriminados por modelStatus
 router.get("/stats/models/:bmClass", function(req, res) {
     Specie.aggregate([
-        {"$match": {"bmClass": +req.params.bmClass}},
+        {"$match": {"bmClass": req.params.bmClass}},
         {"$lookup": {from: "models", localField: "taxID", foreignField: "taxID", as: "fromModels"}},
         {"$unwind": "$fromModels"},
         {"$project": {"modelStatus": "$fromModels.modelStatus", "bmClass": "$bmClass"}},
@@ -771,10 +772,11 @@ router.get("/stats/models/:bmClass", function(req, res) {
         });
     });
 
-//STA2	
-//unique values for metadata
-router.get("/records/metadata/:taxID", function(req, res) {
-    if (req.params.taxID && req.query.metadata == "institution"){
+
+//STA2
+//Obtener los unique values de instituciones que corresponde al taxID ingresado
+router.get("/records/metadata/institutions/:taxID", function(req, res) {
+    if (req.params.taxID){
         Record.aggregate([
             {"$match": {"taxID": +req.params.taxID}},
             {"$group": {"_id": "$institution", "institution": {"$first": "$institution"}}},
@@ -789,14 +791,21 @@ router.get("/records/metadata/:taxID", function(req, res) {
                     res.json({message: "Unique values of institutions of a species"});
                 }
             });
-        } else if (req.params.taxID && req.query.metadata == "collector"){
-            Record.aggregate([
-                {"$match": {"taxID": +req.params.taxID}},
-                {"$group": {"_id": "$collector", "collector": {"$first": "$collector"}}},
-                {"$project": {"collector": "$_id", _id: 0}},
-                {"$group": {"_id": null, "collector": {"$push": "$collector"}}},
-                {"$project": {"collector": "$collector", _id: 0}},
-        ], function(err, doc) {
+        } 
+});
+
+
+//STA3
+//Obtener los unique values de colectores que corresponde al taxID ingresado
+router.get("/records/metadata/collectors/:taxID", function(req, res) {
+    if (req.params.taxID){
+        Record.aggregate([
+            {"$match": {"taxID": +req.params.taxID}},
+            {"$group": {"_id": "$collector", "collector": {"$first": "$collector"}}},
+            {"$project": {"collector": "$_id", _id: 0}},
+            {"$group": {"_id": null, "collector": {"$push": "$collector"}}},
+            {"$project": {"source": "$collector", _id: 0}},
+       ], function(err, doc) {
                 if (err) {
                     res.json(err);
                 } else {
@@ -804,32 +813,38 @@ router.get("/records/metadata/:taxID", function(req, res) {
                     res.json({message: "Unique values of collectors of a species"});
                 }
             });
-        } else if (req.params.taxID && req.query.metadata == "source"){
-            Record.aggregate([
-                {"$match": {"taxID": +req.params.taxID}},
-                {"$group": {"_id": "$source", "source": {"$first": "$source"}}},
-                {"$project": {"source": "$_id", _id: 0}},
-                {"$group": {"_id": null, "source": {"$push": "$source"}}},
-                {"$project": {"source": "$source", _id: 0}},
-        ], function(err, doc) {
+        } 
+});
+
+
+//STA4  
+//Obtener los unique values del campo source que corresponde al taxID ingresado
+router.get("/records/metadata/sources/:taxID", function(req, res) {
+    if (req.params.taxID){
+        Record.aggregate([
+            {"$match": {"taxID": +req.params.taxID}},
+            {"$group": {"_id": "$source", "source": {"$first": "$source"}}},
+            {"$project": {"source": "$_id", _id: 0}},
+            {"$group": {"_id": null, "source": {"$push": "$source"}}},
+            {"$project": {"source": "$source", _id: 0}},
+       ], function(err, doc) {
                 if (err) {
                     res.json(err);
                 } else {
                     res.send(doc);
-                    res.json({message: "Unique values of sources of a species"});
+                    res.json({message: "Unique values of the field source"});
                 }
             });
-        }
+        } 
 });
 
 
-//STA 3
+//STA 5
 //Retorna el identifcador de los colaboradores que han reportado creado o actualizado los registros de la especie consultada 
 router.get("/records/metadata/collaborators/:taxID", function(req, res) {
 
     var temp = [];
    
-
      if (req.params.taxID){
         async.waterfall([
             function(callback){
@@ -917,10 +932,112 @@ router.get("/records/metadata/collaborators/:taxID", function(req, res) {
             ], function(err, result){
 
 
-            });
-         }; 
+        });
+    }; 
 
-    });
+});
+
+
+
+//STA 6
+//Retorna la ultima fecha de modificación (reported, created, updated) 
+router.get("/records/metadata/latest_date/:taxID", function(req, res) {
+
+    var maxdate='';
+   
+
+     if (req.params.taxID){
+        async.waterfall([
+            function(callback){
+            
+                    Record.aggregate([
+                        {"$match": {"taxID": +req.params.taxID}},
+                        {"$group": {"_id": "$reported.reportedDate", "reportedDate": {"$max": "$reported.reportedDate"}}},
+                        {"$project": {"reportedDate": "$_id", _id: 0}},
+                        {"$unwind": "$reportedDate"},
+                        {"$group": {"_id": "null", "reportedDateMax": {"$max": "$reportedDate"}}},
+                        {"$project": {"DateMax": "$reportedDateMax", _id: 0}}
+
+                    ], function(err, doc) {
+                        if (err) {
+                        res.json(err);
+                        } else {
+                                for(var i =0; i< doc.length; i++){
+                                 if(doc[i].DateMax>maxdate)
+                                   maxdate=doc[i].DateMax;
+                                }
+                                callback(null, maxdate);
+                            }
+                        });
+                },
+
+            function(temp, callback){
+
+                    Record.aggregate([
+                        {"$match": {"taxID": +req.params.taxID}},
+                        {"$group": {"_id": "$created.createdDate", "createdDate": {"$max": "$created.createdDate"}}},
+                        {"$project": {"createdDate": "$_id", _id: 0}},
+                        {"$unwind": "$createdDate"},
+                        {"$group": {"_id": "null", "createdDateMax": {"$max": "$createdDate"}}},
+                        {"$project": {"DateMax": "$createdDateMax", _id: 0}}
+
+                        ],function(err, doc) {
+                        if (err) {
+                        res.json(err);
+                        } else {
+                                for(var i = 0; i< doc.length; i++){
+                                 if(doc[i].DateMax>maxdate)
+                                   maxdate=doc[i].DateMax;
+                                }
+                                
+                                 callback(null,maxdate);
+                            }
+                    });
+
+                },
+
+           function (temp, callback) {
+
+
+                    Record.aggregate([
+                        {"$match": {"taxID": +req.params.taxID}},
+                        {"$group": {"_id": "$updated.updatedDate", "updatedDate": {"$max": "$updated.updatedDate"}}},
+                        {"$project": {"updatedDate": "$_id", _id: 0}},
+                        {"$unwind": "$updatedDate"},
+                        {"$group": {"_id": "null", "updatedDateMax": {"$max": "$updatedDate"}}},
+                        {"$project": {"DateMax": "$updatedDateMax", _id: 0}}
+                        ], function(err, doc) {
+                        if (err) {
+                        res.json(err);
+                        } else {
+                                for(var i =0; i< doc.length; i++){
+                                    
+                                if(doc[i].DateMax>maxdate)
+                                   maxdate=doc[i].DateMax;
+                                }
+
+
+                        var arrayJSON = {};
+
+                        arrayJSON.maxDate = maxdate;
+
+
+                        res.json(arrayJSON);
+                        res.json({message: "latest date of modification"});
+                
+                    }
+
+                });
+
+            }, 
+
+            ], function(err, result){
+
+
+        });
+    }; 
+
+});
 
 
 app.use("/BioModelos", router);
