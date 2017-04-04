@@ -68,7 +68,8 @@ router.get("/species/records/:taxID", function (req, res) {
                 return {_id : obj._id, "taxID": obj.taxID, acceptedNameUsage: obj.acceptedNameUsage, species: obj.species, speciesOriginal: obj.speciesOriginal, locality: obj.locality, lat: obj.lat, lon: obj.lon, alt: obj.alt, basisOfRecord: obj.basisOfRecord, catalogNumber : obj.catalogNumber, collector : obj.collector, institution : obj.institution, url : obj.url, dd : obj.dd, mm : obj.mm, yyyy : obj.yyyy, suggestedStateProvince : obj.suggestedStateProvince, suggestedCounty : obj.suggestedCounty, environmentalOutlier: obj.environmentalOutlier, source: obj.source, reported: obj.reported, updated: obj.updated}
                })
            res.send(GeoJSON.parse(docs, {Point: ["lat", "lon"]}));
-           res.json({message: "Records from acceptedNameUsage, with use=true & visualizationPrivileges = 0"});
+           //res.json({message: "Records from acceptedNameUsage, with use=true & visualizationPrivileges = 0"});
+           
         });
     }
 });
@@ -309,7 +310,8 @@ router.get("/species", function(req, res) {
 			res.json(err);
 		} else {
 			res.json(docs);
-			res.json({message: "All the species!"});
+            //res.json({message: "All the species!"});
+			
 		}
 	});
 });
@@ -336,7 +338,8 @@ router.get("/species/:taxID", function(req, res) {
                           doc[0]["_doc"]["totalRecords"] = 0;
                         }
                         res.json(doc);
-                        res.json({message: "Superior taxonomy of" + req.params.taxID});
+                        //res.json({message: "Superior taxonomy of" + req.params.taxID});
+                        
                     }
                 });
             }
@@ -356,7 +359,8 @@ router.get("/species/search/:species", function (req, res) {
                 res.json(err);
             } else {
                 res.json(docs);
-                res.json({message: "Species, just from a text fragment!"});
+                //res.json({message: "Species, just from a text fragment!"});
+                
             }
         });
     } else if (req.query.endangered == 1 && (!req.query.endemic && !req.query.invasive)) {
@@ -371,7 +375,8 @@ router.get("/species/search/:species", function (req, res) {
                 res.json(err);
             } else {
                 res.json(docs);
-                res.json({message: "Species, just from a text fragment & iucn!"});
+                //res.json({message: "Species, just from a text fragment & iucn!"});
+               
             }
         });
     } else if (req.query.endangered == 1 && req.query.endemic == 1 && !req.query.invasive) {
@@ -387,7 +392,8 @@ router.get("/species/search/:species", function (req, res) {
                 res.json(err);
             } else {
                 res.json(docs);
-                res.json({message: "Species, just from a text fragment & iucn & endemic!"});
+                //res.json({message: "Species, just from a text fragment & iucn & endemic!"});
+               
             }
         });
     } else if (req.query.endangered == 1 && req.query.endemic == 1 && req.query.invasive == 1) {
@@ -405,7 +411,8 @@ router.get("/species/search/:species", function (req, res) {
                 res.json(err);
             } else {
                 res.json(docs);
-                res.json({message: "Species, just from a text fragment & iucn & endemic & invasive!"});
+                //res.json({message: "Species, just from a text fragment & iucn & endemic & invasive!"});
+               
             }
         });
     } else if (!req.query.endangered && req.query.endemic == 1 && !req.query.invasive) {
@@ -420,7 +427,7 @@ router.get("/species/search/:species", function (req, res) {
                 res.json(err);
             } else {
                 res.json(docs);
-                res.json({message: "Species, just from a text fragment & endemic!"});
+                //res.json({message: "Species, just from a text fragment & endemic!"});
             }
         });
     } else if (!req.query.endangered && req.query.endemic == 1 && req.query.invasive == 1) {
@@ -436,7 +443,7 @@ router.get("/species/search/:species", function (req, res) {
                 res.json(err);
             } else {
                 res.json(docs);
-                res.json({message: "Species, just from a text fragment & endemic & invasive!"});
+                //res.json({message: "Species, just from a text fragment & endemic & invasive!"});
             }
         });
     } else if (!req.query.endangered && !req.query.endemic && req.query.invasive == 1) {
@@ -451,7 +458,8 @@ router.get("/species/search/:species", function (req, res) {
                 res.json(err);
             } else {
                 res.json(docs);
-                res.json({message: "Species, just from a text fragment & invasive!"});
+                //res.json({message: "Species, just from a text fragment & invasive!"});
+                
             }
         });
     } else if (req.query.endangered && !req.query.endemic && req.query.invasive == 1) {
@@ -467,7 +475,7 @@ router.get("/species/search/:species", function (req, res) {
                 res.json(err);
             } else {
                 res.json(docs);
-                res.json({message: "Species, just from a text fragment & iucn & invasive!"});
+               //res.json({message: "Species, just from a text fragment & iucn & invasive!"});
             }
         });
     }
@@ -485,7 +493,8 @@ router.get("/species/search/:species", function (req, res) {
                 res.json(err);
             } else {
                 res.json(docs);
-                res.json({message: "Species, just from a text fragment & several bmClass!"});
+                //res.json({message: "Species, just from a text fragment & several bmClass!"});
+                
             }
         });
     } else if (req.query.endangered == 1 && (!req.query.endemic && !req.query.invasive)) {
@@ -501,7 +510,7 @@ router.get("/species/search/:species", function (req, res) {
                 res.json(err);
             } else {
                 res.json(docs);
-                res.json({message: "Species, just from a text fragment & several bmClass & iucn!"});
+                //res.json({message: "Species, just from a text fragment & several bmClass & iucn!"});
             }
         });
     } else if (req.query.endangered == 1 && req.query.endemic == 1 && !req.query.invasive) {
@@ -518,7 +527,7 @@ router.get("/species/search/:species", function (req, res) {
                 res.json(err);
             } else {
                 res.json(docs);
-                res.json({message: "Species, just from a text fragment & several bmClass & iucn & endemic!"});
+                //res.json({message: "Species, just from a text fragment & several bmClass & iucn & endemic!"});
             }
         });
     } else if (req.query.endangered == 1 && req.query.endemic == 1 && req.query.invasive == 1) {
@@ -536,7 +545,7 @@ router.get("/species/search/:species", function (req, res) {
                 res.json(err);
             } else {
                 res.json(docs);
-                res.json({message: "Species, just from a text fragment & several bmClass & iucn & endemic & invasive!"});
+                //res.json({message: "Species, just from a text fragment & several bmClass & iucn & endemic & invasive!"});             
             }
         });
     } else if (!req.query.endangered && req.query.endemic == 1 && !req.query.invasive) {
@@ -552,7 +561,7 @@ router.get("/species/search/:species", function (req, res) {
                 res.json(err);
             } else {
                 res.json(docs);
-                res.json({message: "Species, just from a text fragment & several bmClass & endemic!"});
+                //res.json({message: "Species, just from a text fragment & several bmClass & endemic!"});
             }
         });
     } else if (!req.query.endangered && req.query.endemic == 1 && req.query.invasive == 1) {
@@ -569,7 +578,7 @@ router.get("/species/search/:species", function (req, res) {
                 res.json(err);
             } else {
                 res.json(docs);
-                res.json({message: "Species, just from a text fragment & several bmClass & endemic & invasive!"});
+                //res.json({message: "Species, just from a text fragment & several bmClass & endemic & invasive!"});
             }
         });
     } else if (!req.query.endangered && !req.query.endemic && req.query.invasive == 1) {
@@ -585,7 +594,7 @@ router.get("/species/search/:species", function (req, res) {
                 res.json(err);
             } else {
                 res.json(docs);
-                res.json({message: "Species, just from a text fragment & several bmClass & invasive!"});
+                //res.json({message: "Species, just from a text fragment & several bmClass & invasive!"});
             }
         });
     } else if (req.query.endangered && !req.query.endemic && req.query.invasive == 1) {
@@ -602,7 +611,7 @@ router.get("/species/search/:species", function (req, res) {
                 res.json(err);
             } else {
                 res.json(docs);
-                res.json({message: "Species, just from a text fragment & several bmClass & iucn & invasive!"});
+                //res.json({message: "Species, just from a text fragment & several bmClass & iucn & invasive!"});
             }
         });
     }
@@ -619,7 +628,7 @@ router.get("/models/:taxID", function (req, res) {
                     //return res.send();
                 } else {
                     res.json(docs);
-                    res.json({message: "All the models"});
+                    //res.json({message: "All the models"});
                 }
             });
         } else if (req.params.taxID && (req.query.type == "Continuous")){
@@ -629,7 +638,7 @@ router.get("/models/:taxID", function (req, res) {
                     //return res.send();
                 } else {
                     res.json(doc);
-                    res.json({message: "Just the Continuous model of threslholdType"});
+                    //res.json({message: "Just the Continuous model of threslholdType"});
                 }
             });
         } else if (req.params.taxID && (req.query.type == "Thresholds")){
@@ -639,7 +648,7 @@ router.get("/models/:taxID", function (req, res) {
                     //return res.send();
                 } else {
                     res.json(docs);
-                    res.json({message: "All the thresholds models of threslholdType"});
+                    //res.json({message: "All the thresholds models of threslholdType"});
                 }
             });
         } else if (req.params.taxID && (req.query.type == "Hypothesis")){
@@ -649,7 +658,7 @@ router.get("/models/:taxID", function (req, res) {
                     //return res.send();
                 } else {
                     res.json(docs);
-                    res.json({message: "All the hypothesis models"});
+                   //res.json({message: "All the hypothesis models"});
                 }
             });
         } else if (req.params.taxID && (req.query.type == "Valid")){
@@ -659,7 +668,7 @@ router.get("/models/:taxID", function (req, res) {
                     //return res.send();
                 } else {
                     res.json(doc);
-                    res.json({message: "Just the valid model"});
+                    //res.json({message: "Just the valid model"});
                 }
             });
         }  else if (req.params.taxID && (req.query.type == "Published")){
@@ -669,7 +678,7 @@ router.get("/models/:taxID", function (req, res) {
                     //return res.send();
                 } else {
                     res.json(docs);
-                    res.json({message: "All the published models"});
+                    //res.json({message: "All the published models"});
             }
         });
     }  
@@ -684,7 +693,7 @@ router.get("/models/metadata/:modelID", function (req, res) {
                 res.json(err);
             } else {
                 res.json(docs);
-                res.json({message: "Metadata from a model"});
+                //res.json({message: "Metadata from a model"});
                 }
             });
         }
@@ -699,7 +708,7 @@ router.get("/models/approved/eoo/:taxID", function (req, res) {
                 res.json(err);
             } else {
                 res.json(docs);
-                res.json({message: "Extension statistics of the approved model"});
+                //res.json({message: "Extension statistics of the approved model"});
                 }
             });
         }
@@ -714,7 +723,7 @@ router.get("/models/approved/rpa/:taxID", function (req, res) {
                 res.json(err);
             } else {
                 res.json(docs);
-                res.json({message: "Representation statistics of the approved model"});
+                //res.json({message: "Representation statistics of the approved model"});
             }
         });
     }
@@ -729,7 +738,7 @@ router.get("/models/approved/forest_loss/:taxID", function (req, res) {
                 res.json(err);
             } else {
                 res.json(docs);
-                res.json({message: "Spatial forest loss statistics of the approved model"});
+                //res.json({message: "Spatial forest loss statistics of the approved model"});
             }
         });
     }
@@ -744,7 +753,7 @@ router.get("/models/approved/covers/:taxID", function (req, res) {
                 res.json(err);
             } else {
                 res.json(docs);
-                res.json({message: "Spatial cover of the approved model"});
+                //res.json({message: "Spatial cover of the approved model"});
             }
         });
     }
@@ -767,7 +776,7 @@ router.get("/stats/models/:bmClass", function(req, res) {
                 res.json(err);
             } else {
                 res.send(doc);
-                res.json({message: "Models with its modelStatus of a bmClass"});
+                //res.json({message: "Models with its modelStatus of a bmClass"});
             }
         });
     });
@@ -788,7 +797,7 @@ router.get("/records/metadata/institutions/:taxID", function(req, res) {
                     res.json(err);
                 } else {
                     res.send(doc);
-                    res.json({message: "Unique values of institutions of a species"});
+                    //res.json({message: "Unique values of institutions of a species"});
                 }
             });
         } 
@@ -804,13 +813,13 @@ router.get("/records/metadata/collectors/:taxID", function(req, res) {
             {"$group": {"_id": "$collector", "collector": {"$first": "$collector"}}},
             {"$project": {"collector": "$_id", _id: 0}},
             {"$group": {"_id": null, "collector": {"$push": "$collector"}}},
-            {"$project": {"source": "$collector", _id: 0}},
+            {"$project": {"collector": "$collector", _id: 0}},
        ], function(err, doc) {
                 if (err) {
                     res.json(err);
                 } else {
                     res.send(doc);
-                    res.json({message: "Unique values of collectors of a species"});
+                    //res.json({message: "Unique values of collectors of a species"});
                 }
             });
         } 
@@ -832,7 +841,7 @@ router.get("/records/metadata/sources/:taxID", function(req, res) {
                     res.json(err);
                 } else {
                     res.send(doc);
-                    res.json({message: "Unique values of the field source"});
+                    //res.json({message: "Unique values of the field source"});
                 }
             });
         } 
@@ -921,7 +930,7 @@ router.get("/records/metadata/collaborators/:taxID", function(req, res) {
 
 
                         res.json(arrayJSON);
-                        res.json({message: "collaborators"});
+                        //res.json({message: "Unique collaborators ID"});
                 
                         }
 
@@ -945,7 +954,6 @@ router.get("/records/metadata/latest_date/:taxID", function(req, res) {
 
     var maxdate='';
    
-
      if (req.params.taxID){
         async.waterfall([
             function(callback){
@@ -998,7 +1006,6 @@ router.get("/records/metadata/latest_date/:taxID", function(req, res) {
 
            function (temp, callback) {
 
-
                     Record.aggregate([
                         {"$match": {"taxID": +req.params.taxID}},
                         {"$group": {"_id": "$updated.updatedDate", "updatedDate": {"$max": "$updated.updatedDate"}}},
@@ -1016,15 +1023,12 @@ router.get("/records/metadata/latest_date/:taxID", function(req, res) {
                                    maxdate=doc[i].DateMax;
                                 }
 
-
                         var arrayJSON = {};
 
                         arrayJSON.maxDate = maxdate;
 
-
                         res.json(arrayJSON);
-                        res.json({message: "latest date of modification"});
-                
+                        //res.json({message: "latest date of modification"});               
                     }
 
                 });
