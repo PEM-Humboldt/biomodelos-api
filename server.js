@@ -28,7 +28,7 @@ router.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");//allowed origins
     res.setHeader("Access-Control-Allow-Methods", "GET, PUT, POST");//allowed methods 
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");//headers
-    console.log("Conectado a BioModelos PRUEBA");//proof of connection
+    console.log("Conectado a BioModelos PRODUCCION");//proof of connection
     next();
 });
 
@@ -1041,6 +1041,28 @@ router.get("/records/metadata/latest_date/:taxID", function(req, res) {
         });
     }; 
 
+});
+
+
+//STA7
+//Obtener los unique values del campo colection que corresponde al taxID ingresado
+router.get("/records/metadata/collection/:taxID", function(req, res) {
+    if (req.params.taxID){
+        Record.aggregate([
+            {"$match": {"taxID": +req.params.taxID}},
+            {"$group": {"_id": "$colection", "colection": {"$first": "$colection"}}},
+            {"$project": {"colection": "$_id", _id: 0}},
+            {"$group": {"_id": null, "colection": {"$push": "$colection"}}},
+            {"$project": {"colection": "$colection", _id: 0}},
+       ], function(err, doc) {
+                if (err) {
+                    res.json(err);
+                } else {
+                    res.send(doc);
+                    //res.json({message: "Unique values of the field colection"});
+                }
+            });
+        } 
 });
 
 
