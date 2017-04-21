@@ -325,7 +325,7 @@ router.get("/species/:taxID", function(req, res) {
                 res.json(err);
             } else {
                 Record.aggregate([
-                    {"$match": {"taxID": +req.params.taxID, "use": true, "visualizationPrivileges": 0}},
+                    {"$match": {"taxID": +req.params.taxID, "use": true}},
                     {"$group":{_id: {"characteristics": {"taxID": "$taxID"}},"totalRecords": {"$sum":1}}},
                     {"$project": {"_id": 0,"taxID": "$_id.characteristics.taxID", "totalRecords": "$totalRecords" }}
                 ], function(err2, doc2) {
