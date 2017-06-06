@@ -6,7 +6,7 @@ var mongoose = require("mongoose");//MongoDB driver
 var GeoJSON = require("geojson");//JSON -> GeoJSON
 var newDate = new Date();
 var async = require("async"); // Package para manejo de llamados asincronos en JS
-mongoose.connect("mongodb://localhost:27017/produccion");//database address 
+mongoose.connect("mongodb://biomodelos:#F#W4ff4uV-7Kjmd@localhost:27017/produccion");//database address 
 
 
 //Schema for all the collections
@@ -42,7 +42,7 @@ router.get("/species/records/:taxID", function (req, res) {
     if(req.params.taxID) {
         Record.aggregate(
           [
-           {"$match": {taxID: + req.params.taxID, use: true, visualizationPrivileges: 0}
+           {"$match": {taxID: + req.params.taxID, use: true, visualizationPrivileges: 0, spatialDuplicated: false}
            }, 
            {"$project": { 
                reported:
@@ -325,7 +325,7 @@ router.get("/species/:taxID", function(req, res) {
                 res.json(err);
             } else {
                 Record.aggregate([
-                    {"$match": {"taxID": +req.params.taxID, "use": true}},
+                    {"$match": {"taxID": +req.params.taxID, "use": true, spatialDuplicated: false}},
                     {"$group":{_id: {"characteristics": {"taxID": "$taxID"}},"totalRecords": {"$sum":1}}},
                     {"$project": {"_id": 0,"taxID": "$_id.characteristics.taxID", "totalRecords": "$totalRecords" }}
                 ], function(err2, doc2) {
