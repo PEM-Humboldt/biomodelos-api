@@ -228,12 +228,7 @@ router.post("/records", function(req, res) {
         } else {
             record.adm2 = req.body.adm2;
         }
-    
-    if (!req.body.citation_bm || (req.body.citation_bm === "")) {
-            record.citation_bm = null;
-        } else {
-            record.citation_bm = req.body.citation_bm;
-        }
+
     if (!req.body.locality || (req.body.locality === "")) {
             record.locality = null;
         } else {
