@@ -189,7 +189,7 @@ db.runCommand({collMod: "records",
                           {source: {"$type": "null"}},
                           ]},
                      {"$or": [
-                          {contributedRecord: {"$type": "bool"}},
+                          {contributedRecord: {"$type": "string"}},
                           {contributedRecord: {"$type": "null"}},
                           ]},
                      {"$or": [
