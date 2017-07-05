@@ -617,7 +617,7 @@ router.get("/species/search/:species", function (req, res) {
 //models of a specific species, with some query body
 router.get("/models/:taxID", function (req, res) { 
     if (req.params.taxID && (!req.query.type)) {
-        Model.find({taxID: req.params.taxID, isActive: true}, {_id: 0, taxID: 1, modelLevel: 1, modelStatus: 1, published: 1, modelID: 1, thresholdType: 1, thumb: 1,  zip: 1, png: 1,  methodFile: 1}, function(err, docs) {
+        Model.find({taxID: req.params.taxID, isActive: true}, {_id: 0, taxID: 1, modelLevel: 1, modelStatus: 1, published: 1, modelID: 1, thresholdType: 1, thumb: 1,  zip: 1, png: 1,  methodFile: 1, customCitation: 1, license: 1}, function(err, docs) {
                 if (err) {
                     res.json(err);
                     //return res.send();
@@ -627,7 +627,7 @@ router.get("/models/:taxID", function (req, res) {
                 }
             });
         } else if (req.params.taxID && (req.query.type == "Continuous")){
-            Model.find({taxID: req.params.taxID, modelStatus : "Developing", thresholdType: "Continuous", isActive: true}, {_id: 0, taxID: 1, modelLevel: 1, modelStatus: 1, published: 1, modelID: 1, thresholdType: 1, thumb: 1,  zip: 1, png: 1,  methodFile: 1, modelStatus: 1}, function(err, doc) {
+            Model.find({taxID: req.params.taxID, modelStatus : "Developing", thresholdType: "Continuous", isActive: true}, {_id: 0, taxID: 1, modelLevel: 1, modelStatus: 1, published: 1, modelID: 1, thresholdType: 1, thumb: 1,  zip: 1, png: 1,  methodFile: 1, modelStatus: 1, customCitation: 1, license: 1}, function(err, doc) {
                 if (err) {
                     res.json(err);
                     //return res.send();
@@ -637,7 +637,7 @@ router.get("/models/:taxID", function (req, res) {
                 }
             });
         } else if (req.params.taxID && (req.query.type == "Thresholds")){
-            Model.find({taxID: req.params.taxID, modelStatus : "Developing",  thresholdType: {"$nin": ["Continuous"]}, isActive: true}, {_id: 0, taxID: 1, modelLevel: 1, modelStatus: 1, published: 1, modelID: 1, thresholdType: 1, thumb: 1,  zip: 1, png: 1,  methodFile: 1},  function(err, docs) {
+            Model.find({taxID: req.params.taxID, modelStatus : "Developing",  thresholdType: {"$nin": ["Continuous"]}, isActive: true}, {_id: 0, taxID: 1, modelLevel: 1, modelStatus: 1, published: 1, modelID: 1, thresholdType: 1, thumb: 1,  zip: 1, png: 1,  methodFile: 1, customCitation: 1, license: 1},  function(err, docs) {
                 if (err) {
                     res.json(err);
                     //return res.send();
@@ -647,7 +647,7 @@ router.get("/models/:taxID", function (req, res) {
                 }
             });
         } else if (req.params.taxID && (req.query.type == "Hypothesis")){
-            Model.find({taxID: req.params.taxID, modelStatus: {"$in": ["pendingValidation"]}, isActive: true}, {_id: 0, taxID: 1, modelLevel: 1, modelStatus: 1, published: 1, modelID: 1, thresholdType: 1, thumb: 1,  zip: 1, png: 1,  methodFile: 1},  function(err, docs) {
+            Model.find({taxID: req.params.taxID, modelStatus: {"$in": ["pendingValidation"]}, isActive: true}, {_id: 0, taxID: 1, modelLevel: 1, modelStatus: 1, published: 1, modelID: 1, thresholdType: 1, thumb: 1,  zip: 1, png: 1,  methodFile: 1, customCitation: 1, license: 1},  function(err, docs) {
                 if (err) {
                     res.json(err);
                     //return res.send();
@@ -657,7 +657,7 @@ router.get("/models/:taxID", function (req, res) {
                 }
             });
         } else if (req.params.taxID && (req.query.type == "Valid")){
-            Model.find({taxID: req.params.taxID, modelStatus: {"$in": ["Valid"]}, isActive: true}, {_id: 0, taxID: 1, modelLevel: 1, modelStatus: 1, published: 1, modelID: 1, thresholdType: 1, thumb: 1,  zip: 1, png: 1,  methodFile: 1},  function(err, doc) {
+            Model.find({taxID: req.params.taxID, modelStatus: {"$in": ["Valid"]}, isActive: true}, {_id: 0, taxID: 1, modelLevel: 1, modelStatus: 1, published: 1, modelID: 1, thresholdType: 1, thumb: 1,  zip: 1, png: 1,  methodFile: 1, customCitation: 1, license: 1},  function(err, doc) {
                 if (err) {
                     res.json(err);
                     //return res.send();
@@ -667,7 +667,7 @@ router.get("/models/:taxID", function (req, res) {
                 }
             });
         }  else if (req.params.taxID && (req.query.type == "Published")){
-            Model.find({taxID: req.params.taxID, isActive: true, published: true, isActive: true}, {_id: 0, taxID: 1, modelLevel: 1, modelStatus: 1, published: 1, modelID: 1, thresholdType: 1, thumb: 1,  zip: 1, png: 1,  methodFile: 1},  function(err, docs) {
+            Model.find({taxID: req.params.taxID, isActive: true, published: true, isActive: true}, {_id: 0, taxID: 1, modelLevel: 1, modelStatus: 1, published: 1, modelID: 1, thresholdType: 1, thumb: 1,  zip: 1, png: 1,  methodFile: 1, customCitation: 1, license: 1},  function(err, docs) {
                 if (err) {
                     res.json(err);
                     //return res.send();
