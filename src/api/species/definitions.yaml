@@ -1,0 +1,212 @@
+# complex objects have schema definitions
+definitions:
+  FeatureSpecieRecord:
+    type: object
+    description: GeoJSON feoture for specie record
+    required:
+      - type
+      - geometry
+      - properties
+    properties:
+      type:
+        type: string
+        default: "feature"
+      geometry:
+        $ref: "#/definitions/Point"
+      properties:
+        $ref: "#/definitions/SpecieRecordProperties"
+  Geometry:
+    type: object
+    description: GeoJSon geometry
+    discriminator: type
+    required:
+      - type
+    externalDocs:
+      url: http://geojson.org/geojson-spec.html#geometry-objects
+    properties:
+      type:
+        type: string
+        enum:
+        - Point
+        - LineString
+        - Polygon
+        - MultiPoint
+        - MultiLineString
+        - MultiPolygon
+        description: the geometry type
+  Point2D:
+    type: array
+    maxItems: 2
+    minItems: 2
+    items:
+      type: number
+  Point:
+    type: object
+    description: GeoJSon geometry
+    externalDocs:
+      url: http://geojson.org/geojson-spec.html#id2
+    allOf:
+      - $ref: "#/definitions/Geometry"
+      - properties:
+          coordinates:
+            $ref: '#/definitions/Point2D'
+  # LineString:
+  #   type: object
+  #   description: GeoJSon geometry
+  #   externalDocs:
+  #     url: http://geojson.org/geojson-spec.html#id3
+  #   allOf:
+  #     - $ref: "#/definitions/Geometry"
+  #     - properties:
+  #         coordinates:
+  #           type: array
+  #           items:
+  #             $ref: '#/definitions/Point2D'
+  # Polygon:
+  #   type: object
+  #   description: GeoJSon geometry
+  #   externalDocs:
+  #     url: http://geojson.org/geojson-spec.html#id4
+  #   allOf:
+  #     - $ref: "#/definitions/Geometry"
+  #     - properties:
+  #         coordinates:
+  #           type: array
+  #           items:
+  #             type: array
+  #             items:
+  #               $ref: '#/definitions/Point2D'
+  # MultiPoint:
+  #   type: object
+  #   description: GeoJSon geometry
+  #   externalDocs:
+  #     url: http://geojson.org/geojson-spec.html#id5
+  #   allOf:
+  #     - $ref: "#/definitions/Geometry"
+  #     - properties:
+  #         coordinates:
+  #           type: array
+  #           items:
+  #             $ref: '#/definitions/Point2D'
+  # MultiLineString:
+  #   type: object
+  #   description: GeoJSon geometry
+  #   externalDocs:
+  #     url: http://geojson.org/geojson-spec.html#id6
+  #   allOf:
+  #     - $ref: "#/definitions/Geometry"
+  #     - properties:
+  #         coordinates:
+  #           type: array
+  #           items:
+  #             type: array
+  #             items:
+  #               $ref: '#/definitions/Point2D'
+  # MultiPolygon:
+  #   type: object
+  #   description: GeoJSon geometry
+  #   externalDocs:
+  #     url: http://geojson.org/geojson-spec.html#id6
+  #   allOf:
+  #     - $ref: "#/definitions/Geometry"
+  #     - properties:
+  #         coordinates:
+  #           type: array
+  #           items:
+  #             type: array
+  #             items:
+  #               type: array
+  #               items:
+  #                 $ref: '#/definitions/Point2D'
+  # GeometryCollection:
+  #   type: object
+  #   description: GeoJSon geometry collection
+  #   required:
+  #    - type
+  #    - geometries
+  #   externalDocs:
+  #     url: http://geojson.org/geojson-spec.html#geometrycollection
+  #   properties:
+  #     type:
+  #       type: string
+  #       enum:
+  #       - GeometryCollection
+  #       description: Geometry collection data
+  #     geometries:
+  #         type: array
+  #         items:
+  #           $ref: '#/definitions/Geometry'
+  SpecieRecordProperties:
+    type: object
+    description: Group of properties about species
+    required:
+      - "_id"
+      - species
+      - acceptedNameUsage
+      - source
+      - speciesOriginal
+      - locality
+      - alt
+      - institution
+      - catalogNumber
+      - basisOfRecord
+      - collector
+      - suggestedStateProvince
+      - suggestedCounty
+      - yyyy
+      - mm
+      - dd
+      - taxID
+      - url
+      - environmentalOutlier
+      - reported
+      - updated
+    properties:
+      _id:
+        type: string
+      species:
+        type: string
+      acceptedNameUsage:
+        type: string
+      source:
+        type: string
+      speciesOriginal:
+        type: string
+      locality:
+        type: string
+      alt:
+        type: integer
+      institution:
+        type: string
+      catalogNumber:
+        type: string
+      basisOfRecord:
+        type: string
+      collector:
+        type: string
+      suggestedStateProvince:
+        type: string
+      suggestedCounty:
+        type: string
+      yyyy:
+        type: integer
+      mm:
+        type: integer
+      dd:
+        type: integer
+      taxID:
+        type: integer
+      url:
+        type: string
+      environmentalOutlier:
+        type: string
+      reported:
+        type: string
+      updated:
+        type: string
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
