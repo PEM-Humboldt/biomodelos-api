@@ -67,4 +67,4 @@ const SpecieSchema = new Schema(
   { collection: 'species' }
 );
 
-export default mongoose.model('Specie', SpecieSchema);
+export default mongoose.model('Specie', SpecieSchema, 'species');

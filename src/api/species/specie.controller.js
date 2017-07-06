@@ -1,5 +1,5 @@
 import GeoJSON from 'geojson';
-import Record from '../../models/record.model';
+import { Record } from '../../models/record.model';
 import Specie from '../../models/specie.model';
 
 /**
@@ -92,8 +92,8 @@ export async function read(req, res) {
         }
       ]);
       res.send(GeoJSON.parse(docs, { Point: ['lat', 'lon'] }));
-    } catch (error) {
-      res.send(error);
+    } catch (err) {
+      res.send(err);
     }
   }
 }
@@ -135,8 +135,8 @@ export async function getAllSpecies(req, res) {
   try {
     const docs = await Specie.find({}, { species: 1, taxID: 1, _id: 0 });
     res.json(docs);
-  } catch (error) {
-    res.json(error);
+  } catch (err) {
+    res.json(err);
   }
 }
 
@@ -220,11 +220,11 @@ export async function getTaxonomyAndRecords(req, res) {
           doc[0]['_doc']['totalRecords'] = 0;
         }
         res.json(doc);
-      } catch (error) {
-        res.json(error);
+      } catch (err) {
+        res.json(err);
       }
-    } catch (error) {
-      res.json(error);
+    } catch (err) {
+      res.json(err);
     }
   }
 }
@@ -290,8 +290,8 @@ export async function searchSpecie(req, res) {
           }
         );
         res.json(docs);
-      } catch (error) {
-        res.json(error);
+      } catch (err) {
+        res.json(err);
       }
     } else if (
       req.query.endangered == 1 &&
@@ -325,8 +325,8 @@ export async function searchSpecie(req, res) {
           }
         );
         res.json(docs);
-      } catch (error) {
-        res.json(error);
+      } catch (err) {
+        res.json(err);
       }
     } else if (
       req.query.endangered == 1 &&
@@ -362,8 +362,8 @@ export async function searchSpecie(req, res) {
           }
         );
         res.json(docs);
-      } catch (error) {
-        res.json(error);
+      } catch (err) {
+        res.json(err);
       }
     } else if (
       req.query.endangered == 1 &&
@@ -400,8 +400,8 @@ export async function searchSpecie(req, res) {
           }
         );
         res.json(docs);
-      } catch (error) {
-        res.json(error);
+      } catch (err) {
+        res.json(err);
       }
     } else if (
       !req.query.endangered &&
@@ -428,8 +428,8 @@ export async function searchSpecie(req, res) {
           }
         );
         res.json(docs);
-      } catch (error) {
-        res.json(error);
+      } catch (err) {
+        res.json(err);
       }
     } else if (
       !req.query.endangered &&
@@ -457,8 +457,8 @@ export async function searchSpecie(req, res) {
           }
         );
         res.json(docs);
-      } catch (error) {
-        res.json(error);
+      } catch (err) {
+        res.json(err);
       }
     } else if (
       !req.query.endangered &&
@@ -485,8 +485,8 @@ export async function searchSpecie(req, res) {
           }
         );
         res.json(docs);
-      } catch (error) {
-        res.json(error);
+      } catch (err) {
+        res.json(err);
       }
     } else if (
       req.query.endangered &&
@@ -522,8 +522,8 @@ export async function searchSpecie(req, res) {
           }
         );
         res.json(docs);
-      } catch (error) {
-        res.json(error);
+      } catch (err) {
+        res.json(err);
       }
     }
   } else if (
@@ -574,8 +574,8 @@ export async function searchSpecie(req, res) {
           }
         );
         res.json(docs);
-      } catch (error) {
-        res.json(error);
+      } catch (err) {
+        res.json(err);
       }
     } else if (
       req.query.endangered == 1 &&
@@ -626,8 +626,8 @@ export async function searchSpecie(req, res) {
           }
         );
         res.json(docs);
-      } catch (error) {
-        res.json(error);
+      } catch (err) {
+        res.json(err);
       }
     } else if (
       req.query.endangered == 1 &&
@@ -680,8 +680,8 @@ export async function searchSpecie(req, res) {
           }
         );
         res.json(docs);
-      } catch (error) {
-        res.json(error);
+      } catch (err) {
+        res.json(err);
       }
     } else if (
       req.query.endangered == 1 &&
@@ -735,8 +735,8 @@ export async function searchSpecie(req, res) {
           }
         );
         res.json(docs);
-      } catch (error) {
-        res.json(error);
+      } catch (err) {
+        res.json(err);
       }
     } else if (
       !req.query.endangered &&
@@ -780,8 +780,8 @@ export async function searchSpecie(req, res) {
           }
         );
         res.json(docs);
-      } catch (error) {
-        res.json(error);
+      } catch (err) {
+        res.json(err);
       }
     } else if (
       !req.query.endangered &&
@@ -826,8 +826,8 @@ export async function searchSpecie(req, res) {
           }
         );
         res.json(docs);
-      } catch (error) {
-        res.json(error);
+      } catch (err) {
+        res.json(err);
       }
     } else if (
       !req.query.endangered &&
@@ -871,8 +871,8 @@ export async function searchSpecie(req, res) {
           }
         );
         res.json(docs);
-      } catch (error) {
-        res.json(error);
+      } catch (err) {
+        res.json(err);
       }
     } else if (
       req.query.endangered &&
@@ -925,8 +925,8 @@ export async function searchSpecie(req, res) {
           }
         );
         res.json(docs);
-      } catch (error) {
-        res.json(error);
+      } catch (err) {
+        res.json(err);
       }
     }
   }

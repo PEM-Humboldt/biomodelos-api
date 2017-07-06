@@ -1,4 +1,4 @@
-import { Specie } from '../../models/specie.model';
+import Specie from '../../models/specie.model';
 
 /**
  * @swagger
@@ -68,7 +68,7 @@ export async function allModelAccordingBmClass(req, res) {
       { $sort: { modelStatus: 1 } }
     ]);
     res.send(doc);
-  } catch (error) {
-    res.json(error);
+  } catch (err) {
+    res.json(err);
   }
 }

@@ -104,9 +104,13 @@ const ModelSchema = new Schema(
     zip: { type: String },
     png: { type: String },
     methodFile: { type: String },
-    license: {type: String, in: ['by', 'by-sa', 'by-nc', 'by-nc-sa', 'cc-zero'], default: 'by-nc-sa'}
+    license: {
+      type: String,
+      in: ['by', 'by-sa', 'by-nc', 'by-nc-sa', 'cc-zero'],
+      default: 'by-nc-sa'
+    }
   },
   { collection: 'models' }
 );
 
-export default mongoose.model('Model', ModelSchema);
+export default mongoose.model('Model', ModelSchema, 'models');
