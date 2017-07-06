@@ -48,6 +48,7 @@ const CreatedSchema = new Schema({
 
 const RecordSchema = new Schema(
   {
+    _id: { type: Schema.ObjectId },
     occurrenceID: { type: String, default: null },
     taxID: { type: Number, required: true },
     acceptedNameUsage: { type: String, required: true },
