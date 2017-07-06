@@ -1,4 +1,4 @@
-import { Model } from '../../models/model.model';
+import Model from '../../models/model.model';
 
 /**
  * @swagger
@@ -55,8 +55,8 @@ export async function read(req, res) {
         }
       );
       res.json(docs);
-    } catch (error) {
-      res.json(error);
+    } catch (err) {
+      res.json(err);
     }
   } else if (req.params.taxID && req.query.type == 'Continuous') {
     try {
@@ -85,8 +85,8 @@ export async function read(req, res) {
         }
       );
       res.json(doc);
-    } catch (error) {
-      res.json(error);
+    } catch (err) {
+      res.json(err);
     }
   } else if (req.params.taxID && req.query.type == 'Thresholds') {
     try {
@@ -114,8 +114,8 @@ export async function read(req, res) {
         }
       );
       res.json(doc);
-    } catch (error) {
-      res.json(error);
+    } catch (err) {
+      res.json(err);
     }
   } else if (req.params.taxID && req.query.type == 'Hypothesis') {
     try {
@@ -142,8 +142,8 @@ export async function read(req, res) {
         }
       );
       res.json(doc);
-    } catch (error) {
-      res.json(error);
+    } catch (err) {
+      res.json(err);
     }
   } else if (req.params.taxID && req.query.type == 'Valid') {
     try {
@@ -170,8 +170,8 @@ export async function read(req, res) {
         }
       );
       res.json(doc);
-    } catch (error) {
-      res.json(error);
+    } catch (err) {
+      res.json(err);
     }
   } else if (req.params.taxID && req.query.type == 'Published') {
     try {
@@ -199,8 +199,8 @@ export async function read(req, res) {
         }
       );
       res.json(doc);
-    } catch (error) {
-      res.json(error);
+    } catch (err) {
+      res.json(err);
     }
   }
 }
@@ -262,8 +262,8 @@ export async function readModelMetadata(req, res) {
         }
       );
       res.json(docs);
-    } catch (error) {
-      res.json(error);
+    } catch (err) {
+      res.json(err);
     }
   }
 }
@@ -315,8 +315,8 @@ export async function ocurrenceEooStatsModel(req, res) {
         }
       );
       res.json(docs);
-    } catch (error) {
-      res.json(error);
+    } catch (err) {
+      res.json(err);
     }
   }
 }
@@ -369,8 +369,8 @@ export async function ocurrenceRepStatsModel(req, res) {
         }
       );
       res.json(docs);
-    } catch (error) {
-      res.json(error);
+    } catch (err) {
+      res.json(err);
     }
   }
 }
@@ -427,8 +427,8 @@ export async function ocurrenceForestLossStatsModel(req, res) {
         }
       );
       res.json(docs);
-    } catch (error) {
-      res.json(error);
+    } catch (err) {
+      res.json(err);
     }
   }
 }
@@ -531,8 +531,8 @@ export async function ocurrenceCoversStatsModel(req, res) {
         }
       );
       res.json(docs);
-    } catch (error) {
-      res.json(error);
+    } catch (err) {
+      res.json(err);
     }
   }
 }

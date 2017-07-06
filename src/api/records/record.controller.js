@@ -114,11 +114,11 @@ export async function update(req, res) {
       res.json({
         message: `The record ${record._id} was successfully updated!`
       });
-    } catch (error) {
-      res.send(error);
+    } catch (err) {
+      res.send(err);
     }
-  } catch (error) {
-    res.send(error);
+  } catch (err) {
+    res.send(err);
   }
 }
 
@@ -215,11 +215,11 @@ export async function create(req, res) {
       res.json({
         message: `The record ${record._id} was reported!`
       });
-    } catch (error) {
-      res.send(error);
+    } catch (err) {
+      res.send(err);
     }
-  } catch (error) {
-    res.send(error);
+  } catch (err) {
+    res.send(err);
   }
 }
 
@@ -334,8 +334,8 @@ export async function createWithoutId(req, res) {
   try {
     await record.save();
     res.json({ message: `Record created! ${record._id}` });
-  } catch (error) {
-    res.send(error);
+  } catch (err) {
+    res.send(err);
   }
 }
 
@@ -393,8 +393,8 @@ export async function uniqueValuesInstitutions(req, res) {
         { $project: { institution: '$institution', _id: 0 } }
       ]);
       res.send(doc);
-    } catch (error) {
-      res.json(error);
+    } catch (err) {
+      res.json(err);
     }
   }
 }
@@ -443,8 +443,8 @@ export async function uniqueValuesCollectors(req, res) {
         { $project: { collector: '$collector', _id: 0 } }
       ]);
       res.send(doc);
-    } catch (error) {
-      res.json(error);
+    } catch (err) {
+      res.json(err);
     }
   }
 }
@@ -493,8 +493,8 @@ export async function uniqueValuesSources(req, res) {
         { $project: { source: '$source', _id: 0 } }
       ]);
       res.send(doc);
-    } catch (error) {
-      res.json(error);
+    } catch (err) {
+      res.json(err);
     }
   }
 }
@@ -609,14 +609,14 @@ export async function collaboratorsOfSpecie(req, res) {
           const arrayJSON = {};
           arrayJSON.collaborators = uniqueArray;
           res.json(arrayJSON);
-        } catch (error) {
-          res.json(error);
+        } catch (err) {
+          res.json(err);
         }
-      } catch (error) {
-        res.json(error);
+      } catch (err) {
+        res.json(err);
       }
-    } catch (error) {
-      res.json(error);
+    } catch (err) {
+      res.json(err);
     }
   }
 }
@@ -737,14 +737,14 @@ export async function latestChange(req, res) {
           const arrayJSON = {};
           arrayJSON.maxDate = maxdate;
           res.json(arrayJSON);
-        } catch (error) {
-          res.json(error);
+        } catch (err) {
+          res.json(err);
         }
-      } catch (error) {
-        res.json(error);
+      } catch (err) {
+        res.json(err);
       }
-    } catch (error) {
-      res.json(error);
+    } catch (err) {
+      res.json(err);
     }
   }
 }
@@ -798,8 +798,8 @@ export async function uniqueValuesCollection(req, res) {
         { $project: { colection: '$colection', _id: 0 } }
       ]);
       res.send(doc);
-    } catch (error) {
-      res.json(error);
+    } catch (err) {
+      res.json(err);
     }
   }
 }
