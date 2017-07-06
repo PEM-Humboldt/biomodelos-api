@@ -1,5 +1,5 @@
 import GeoJSON from 'geojson';
-import Record from '../../models/record.model';
+import { Record } from '../../models/record.model';
 import Specie from '../../models/specie.model';
 
 /**

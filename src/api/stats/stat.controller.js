@@ -1,4 +1,4 @@
-import { Specie } from '../../models/specie.model';
+import Specie from '../../models/specie.model';
 
 /**
  * @swagger

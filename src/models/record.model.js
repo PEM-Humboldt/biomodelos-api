@@ -48,7 +48,6 @@ const CreatedSchema = new Schema({
 
 const RecordSchema = new Schema(
   {
-    _id: { type: Schema.ObjectId },
     occurrenceID: { type: String, default: null },
     taxID: { type: Number, required: true },
     acceptedNameUsage: { type: String, required: true },
@@ -124,4 +123,4 @@ const RecordSchema = new Schema(
   { collection: 'records' }
 );
 
-export default mongoose.model('Record', RecordSchema);
+export const Record = mongoose.model('Record', RecordSchema, 'records');

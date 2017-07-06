@@ -437,12 +437,7 @@ export async function uniqueValuesCollectors(req, res) {
     try {
       const doc = await Record.aggregate([
         { $match: { taxID: +req.params.taxID } },
-        {
-          $group: {
-            _id: '$collector',
-            collector: { $first: '$collector' }
-          }
-        },
+        { $group: { _id: '$collector', collector: { $first: '$collector' } } },
         { $project: { collector: '$_id', _id: 0 } },
         { $group: { _id: null, collector: { $push: '$collector' } } },
         { $project: { collector: '$collector', _id: 0 } }
