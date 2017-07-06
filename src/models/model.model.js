@@ -103,7 +103,8 @@ const ModelSchema = new Schema(
     thumb: { type: String },
     zip: { type: String },
     png: { type: String },
-    methodFile: { type: String }
+    methodFile: { type: String },
+    license: {type: String, in: ['by', 'by-sa', 'by-nc', 'by-nc-sa', 'cc-zero'], default: 'by-nc-sa'}
   },
   { collection: 'models' }
 );
