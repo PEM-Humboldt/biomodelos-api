@@ -49,13 +49,13 @@ export async function update(req, res) {
       record.taxID = req.body.taxID;
     }
     if (
-      !req.body.acceptedNameUsage ||
-      req.body.acceptedNameUsage === record.acceptedNameUsage
+      !req.body.speciesOriginal ||
+      req.body.speciesOriginal === record.speciesOriginal
     ) {
-      !updated.acceptedNameUsage;
+      !updated.speciesOriginal;
     } else {
-      updated.acceptedNameUsage = record.acceptedNameUsage;
-      record.acceptedNameUsage = req.body.acceptedNameUsage;
+      updated.speciesOriginal = record.speciesOriginal;
+      record.speciesOriginal = req.body.speciesOriginal;
     }
     if (!req.body.locality || req.body.locality === record.locality) {
       !updated.locality;
@@ -95,7 +95,7 @@ export async function update(req, res) {
     }
     if (
       !req.body.taxID &&
-      !req.body.acceptedNameUsage &&
+      !req.body.speciesOriginal &&
       !req.body.locality &&
       !req.body.lat &&
       !req.body.lon &&
