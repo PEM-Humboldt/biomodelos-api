@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 // esquema para la corrección de registros biológicos
 const UpdatedSchema = new Schema({
-  acceptedNameUsage: { type: String },
+  speciesOriginal: { type: String },
   locality: { type: String },
   lat: { type: Number },
   lon: { type: Number },
