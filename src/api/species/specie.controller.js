@@ -2,6 +2,44 @@ import GeoJSON from 'geojson';
 import { Record } from '../../models/record.model';
 import Specie from '../../models/specie.model';
 
+function constructQuery(req) {
+  const bmClass = {
+    $or: [
+      {
+        bmClass: {
+          $in: req.query.bmClass
+        }
+      }
+    ]
+  };
+  const endemic = { $or: [{ endemic: { $in: [true] } }] };
+  const invasive = { $or: [{ invasive: { $in: [true] } }] };
+  const endangered = {
+    $or: [
+      {
+        iucn: {
+          $in: ['EN', 'LC', 'VU', 'CR', 'NT']
+        }
+      }
+    ]
+  };
+  const query = {};
+  if (
+    req.params.species ||
+    req.query.bmClass ||
+    req.query.endangered ||
+    req.query.endemic ||
+    req.query.invasive
+  ) {
+    query.$and = [];
+    if (req.query.bmClass) query.$and.push(bmClass);
+    if (req.query.endangered) query.$and.push(endangered);
+    if (req.query.endemic) query.$and.push(endemic);
+    if (req.query.invasive) query.$and.push(invasive);
+  }
+  return query;
+}
+
 /**
  * @swagger
  * /species/records/{taxID}:
@@ -132,8 +170,13 @@ export async function read(req, res) {
  *         $ref: "#/definitions/ErrorResponse"
  */
 export async function getAllSpecies(req, res) {
+  const query = constructQuery(req);
   try {
-    const docs = await Specie.find({}, { species: 1, taxID: 1, _id: 0 });
+    const docs = await Specie.find(query, {
+      species: 1,
+      taxID: 1,
+      _id: 0
+    }).sort({ species: 1 });
     res.json(docs);
   } catch (err) {
     res.json(err);
@@ -263,671 +306,24 @@ export async function getTaxonomyAndRecords(req, res) {
  *         $ref: "#/definitions/ErrorResponse"
  */
 export async function searchSpecie(req, res) {
-  if (
-    req.params.species &&
-    (!req.query.bmClass1 &&
-      !req.query.bmClass2 &&
-      !req.query.bmClass3 &&
-      !req.query.bmClass4 &&
-      !req.query.bmClass5 &&
-      !req.query.bmClass6 &&
-      !req.query.bmClass7)
-  ) {
+  const query = constructQuery(req);
+  if (req.params.species) {
     const regEx = new RegExp(req.params.species, 'ig');
-    if (!req.query.endangered && !req.query.endemic && !req.query.invasive) {
-      try {
-        const docs = await Specie.find(
-          { species: { $regex: regEx } },
-          {
-            _id: 0,
-            species: 1,
-            taxID: 1,
-            taxonomicStatus: 1,
-            iucn: 1,
-            bmClass: 1,
-            endemic: 1,
-            invasive: 1
-          }
-        );
-        res.json(docs);
-      } catch (err) {
-        res.json(err);
-      }
-    } else if (
-      req.query.endangered == 1 &&
-      (!req.query.endemic && !req.query.invasive)
-    ) {
-      try {
-        const docs = await Specie.find(
-          {
-            $and: [
-              { species: { $regex: regEx } },
-              {
-                $or: [
-                  {
-                    iucn: {
-                      $in: ['EN', 'LC', 'VU', 'CR', 'NT']
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            _id: 0,
-            species: 1,
-            taxID: 1,
-            taxonomicStatus: 1,
-            iucn: 1,
-            bmClass: 1,
-            endemic: 1,
-            invasive: 1
-          }
-        );
-        res.json(docs);
-      } catch (err) {
-        res.json(err);
-      }
-    } else if (
-      req.query.endangered == 1 &&
-      req.query.endemic == 1 &&
-      !req.query.invasive
-    ) {
-      try {
-        const docs = await Specie.find(
-          {
-            $and: [
-              { $or: [{ species: { $regex: regEx } }] },
-              {
-                $or: [
-                  {
-                    iucn: {
-                      $in: ['EN', 'LC', 'VU', 'CR', 'NT']
-                    }
-                  }
-                ]
-              },
-              { $or: [{ endemic: { $in: [true] } }] }
-            ]
-          },
-          {
-            _id: 0,
-            species: 1,
-            taxID: 1,
-            taxonomicStatus: 1,
-            iucn: 1,
-            bmClass: 1,
-            endemic: 1,
-            invasive: 1
-          }
-        );
-        res.json(docs);
-      } catch (err) {
-        res.json(err);
-      }
-    } else if (
-      req.query.endangered == 1 &&
-      req.query.endemic == 1 &&
-      req.query.invasive == 1
-    ) {
-      try {
-        const docs = await Specie.find(
-          {
-            $and: [
-              { $or: [{ species: { $regex: regEx } }] },
-              {
-                $or: [
-                  {
-                    iucn: {
-                      $in: ['EN', 'LC', 'VU', 'CR', 'NT']
-                    }
-                  }
-                ]
-              },
-              { $or: [{ endemic: { $in: [true] } }] },
-              { $or: [{ invasive: { $in: [true] } }] }
-            ]
-          },
-          {
-            _id: 0,
-            species: 1,
-            taxID: 1,
-            taxonomicStatus: 1,
-            iucn: 1,
-            bmClass: 1,
-            endemic: 1,
-            invasive: 1
-          }
-        );
-        res.json(docs);
-      } catch (err) {
-        res.json(err);
-      }
-    } else if (
-      !req.query.endangered &&
-      req.query.endemic == 1 &&
-      !req.query.invasive
-    ) {
-      try {
-        const docs = await Specie.find(
-          {
-            $and: [
-              { $or: [{ species: { $regex: regEx } }] },
-              { $or: [{ endemic: { $in: [true] } }] }
-            ]
-          },
-          {
-            _id: 0,
-            species: 1,
-            taxID: 1,
-            taxonomicStatus: 1,
-            iucn: 1,
-            bmClass: 1,
-            endemic: 1,
-            invasive: 1
-          }
-        );
-        res.json(docs);
-      } catch (err) {
-        res.json(err);
-      }
-    } else if (
-      !req.query.endangered &&
-      req.query.endemic == 1 &&
-      req.query.invasive == 1
-    ) {
-      try {
-        const docs = await Specie.find(
-          {
-            $and: [
-              { $or: [{ species: { $regex: regEx } }] },
-              { $or: [{ endemic: { $in: [true] } }] },
-              { $or: [{ invasive: { $in: [true] } }] }
-            ]
-          },
-          {
-            _id: 0,
-            species: 1,
-            taxID: 1,
-            taxonomicStatus: 1,
-            iucn: 1,
-            bmClass: 1,
-            endemic: 1,
-            invasive: 1
-          }
-        );
-        res.json(docs);
-      } catch (err) {
-        res.json(err);
-      }
-    } else if (
-      !req.query.endangered &&
-      !req.query.endemic &&
-      req.query.invasive == 1
-    ) {
-      try {
-        const docs = await Specie.find(
-          {
-            $and: [
-              { $or: [{ species: { $regex: regEx } }] },
-              { $or: [{ invasive: { $in: [true] } }] }
-            ]
-          },
-          {
-            _id: 0,
-            species: 1,
-            taxID: 1,
-            taxonomicStatus: 1,
-            iucn: 1,
-            bmClass: 1,
-            endemic: 1,
-            invasive: 1
-          }
-        );
-        res.json(docs);
-      } catch (err) {
-        res.json(err);
-      }
-    } else if (
-      req.query.endangered &&
-      !req.query.endemic &&
-      req.query.invasive == 1
-    ) {
-      try {
-        const docs = await Specie.find(
-          {
-            $and: [
-              { $or: [{ species: { $regex: regEx } }] },
-              {
-                $or: [
-                  {
-                    iucn: {
-                      $in: ['EN', 'LC', 'VU', 'CR', 'NT']
-                    }
-                  }
-                ]
-              },
-              { $or: [{ invasive: { $in: [true] } }] }
-            ]
-          },
-          {
-            _id: 0,
-            species: 1,
-            taxID: 1,
-            taxonomicStatus: 1,
-            iucn: 1,
-            bmClass: 1,
-            endemic: 1,
-            invasive: 1
-          }
-        );
-        res.json(docs);
-      } catch (err) {
-        res.json(err);
-      }
-    }
-  } else if (
-    req.params.species &&
-    (req.query.bmClass1 ||
-      req.query.bmClass2 ||
-      req.query.bmClass3 ||
-      req.query.bmClass4 ||
-      req.query.bmClass5 ||
-      req.query.bmClass6 ||
-      req.query.bmClass7)
-  ) {
-    const regEx = new RegExp(req.params.species, 'ig');
-    if (!req.query.endangered && !req.query.endemic && !req.query.invasive) {
-      try {
-        const docs = await Specie.find(
-          {
-            $and: [
-              { species: { $regex: regEx } },
-              {
-                $or: [
-                  {
-                    bmClass: {
-                      $in: [
-                        req.query.bmClass1,
-                        req.query.bmClass2,
-                        req.query.bmClass3,
-                        req.query.bmClass4,
-                        req.query.bmClass5,
-                        req.query.bmClass6,
-                        req.query.bmClass7
-                      ]
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            _id: 0,
-            species: 1,
-            taxID: 1,
-            taxonomicStatus: 1,
-            iucn: 1,
-            bmClass: 1,
-            endemic: 1,
-            invasive: 1
-          }
-        );
-        res.json(docs);
-      } catch (err) {
-        res.json(err);
-      }
-    } else if (
-      req.query.endangered == 1 &&
-      (!req.query.endemic && !req.query.invasive)
-    ) {
-      try {
-        const docs = await Specie.find(
-          {
-            $and: [
-              { species: { $regex: regEx } },
-              {
-                $or: [
-                  {
-                    iucn: {
-                      $in: ['EN', 'LC', 'VU', 'CR', 'NT']
-                    }
-                  }
-                ]
-              },
-              {
-                $or: [
-                  {
-                    bmClass: {
-                      $in: [
-                        req.query.bmClass1,
-                        req.query.bmClass2,
-                        req.query.bmClass3,
-                        req.query.bmClass4,
-                        req.query.bmClass5,
-                        req.query.bmClass6,
-                        req.query.bmClass7
-                      ]
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            _id: 0,
-            species: 1,
-            taxID: 1,
-            taxonomicStatus: 1,
-            iucn: 1,
-            bmClass: 1,
-            endemic: 1,
-            invasive: 1
-          }
-        );
-        res.json(docs);
-      } catch (err) {
-        res.json(err);
-      }
-    } else if (
-      req.query.endangered == 1 &&
-      req.query.endemic == 1 &&
-      !req.query.invasive
-    ) {
-      try {
-        const docs = await Specie.find(
-          {
-            $and: [
-              { $or: [{ species: { $regex: regEx } }] },
-              {
-                $or: [
-                  {
-                    iucn: {
-                      $in: ['EN', 'LC', 'VU', 'CR', 'NT']
-                    }
-                  }
-                ]
-              },
-              { $or: [{ endemic: { $in: [true] } }] },
-              {
-                $or: [
-                  {
-                    bmClass: {
-                      $in: [
-                        req.query.bmClass1,
-                        req.query.bmClass2,
-                        req.query.bmClass3,
-                        req.query.bmClass4,
-                        req.query.bmClass5,
-                        req.query.bmClass6,
-                        req.query.bmClass7
-                      ]
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            _id: 0,
-            species: 1,
-            taxID: 1,
-            taxonomicStatus: 1,
-            iucn: 1,
-            bmClass: 1,
-            endemic: 1,
-            invasive: 1
-          }
-        );
-        res.json(docs);
-      } catch (err) {
-        res.json(err);
-      }
-    } else if (
-      req.query.endangered == 1 &&
-      req.query.endemic == 1 &&
-      req.query.invasive == 1
-    ) {
-      try {
-        const docs = await Specie.find(
-          {
-            $and: [
-              { $or: [{ species: { $regex: regEx } }] },
-              {
-                $or: [
-                  {
-                    iucn: {
-                      $in: ['EN', 'LC', 'VU', 'CR', 'NT']
-                    }
-                  }
-                ]
-              },
-              { $or: [{ endemic: { $in: [true] } }] },
-              { $or: [{ invasive: { $in: [true] } }] },
-              {
-                $or: [
-                  {
-                    bmClass: {
-                      $in: [
-                        req.query.bmClass1,
-                        req.query.bmClass2,
-                        req.query.bmClass3,
-                        req.query.bmClass4,
-                        req.query.bmClass5,
-                        req.query.bmClass6,
-                        req.query.bmClass7
-                      ]
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            _id: 0,
-            species: 1,
-            taxID: 1,
-            taxonomicStatus: 1,
-            iucn: 1,
-            bmClass: 1,
-            endemic: 1,
-            invasive: 1
-          }
-        );
-        res.json(docs);
-      } catch (err) {
-        res.json(err);
-      }
-    } else if (
-      !req.query.endangered &&
-      req.query.endemic == 1 &&
-      !req.query.invasive
-    ) {
-      try {
-        const docs = await Specie.find(
-          {
-            $and: [
-              { $or: [{ species: { $regex: regEx } }] },
-              { $or: [{ endemic: { $in: [true] } }] },
-              {
-                $or: [
-                  {
-                    bmClass: {
-                      $in: [
-                        req.query.bmClass1,
-                        req.query.bmClass2,
-                        req.query.bmClass3,
-                        req.query.bmClass4,
-                        req.query.bmClass5,
-                        req.query.bmClass6,
-                        req.query.bmClass7
-                      ]
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            _id: 0,
-            species: 1,
-            taxID: 1,
-            taxonomicStatus: 1,
-            iucn: 1,
-            bmClass: 1,
-            endemic: 1,
-            invasive: 1
-          }
-        );
-        res.json(docs);
-      } catch (err) {
-        res.json(err);
-      }
-    } else if (
-      !req.query.endangered &&
-      req.query.endemic == 1 &&
-      req.query.invasive == 1
-    ) {
-      try {
-        const docs = await Specie.find(
-          {
-            $and: [
-              { $or: [{ species: { $regex: regEx } }] },
-              { $or: [{ endemic: { $in: [true] } }] },
-              { $or: [{ invasive: { $in: [true] } }] },
-              {
-                $or: [
-                  {
-                    bmClass: {
-                      $in: [
-                        req.query.bmClass1,
-                        req.query.bmClass2,
-                        req.query.bmClass3,
-                        req.query.bmClass4,
-                        req.query.bmClass5,
-                        req.query.bmClass6,
-                        req.query.bmClass7
-                      ]
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            _id: 0,
-            species: 1,
-            taxID: 1,
-            taxonomicStatus: 1,
-            iucn: 1,
-            bmClass: 1,
-            endemic: 1,
-            invasive: 1
-          }
-        );
-        res.json(docs);
-      } catch (err) {
-        res.json(err);
-      }
-    } else if (
-      !req.query.endangered &&
-      !req.query.endemic &&
-      req.query.invasive == 1
-    ) {
-      try {
-        const docs = await Specie.find(
-          {
-            $and: [
-              { $or: [{ species: { $regex: regEx } }] },
-              { $or: [{ invasive: { $in: [true] } }] },
-              {
-                $or: [
-                  {
-                    bmClass: {
-                      $in: [
-                        req.query.bmClass1,
-                        req.query.bmClass2,
-                        req.query.bmClass3,
-                        req.query.bmClass4,
-                        req.query.bmClass5,
-                        req.query.bmClass6,
-                        req.query.bmClass7
-                      ]
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            _id: 0,
-            species: 1,
-            taxID: 1,
-            taxonomicStatus: 1,
-            iucn: 1,
-            bmClass: 1,
-            endemic: 1,
-            invasive: 1
-          }
-        );
-        res.json(docs);
-      } catch (err) {
-        res.json(err);
-      }
-    } else if (
-      req.query.endangered &&
-      !req.query.endemic &&
-      req.query.invasive == 1
-    ) {
-      try {
-        const docs = await Specie.find(
-          {
-            $and: [
-              { $or: [{ species: { $regex: regEx } }] },
-              {
-                $or: [
-                  {
-                    iucn: {
-                      $in: ['EN', 'LC', 'VU', 'CR', 'NT']
-                    }
-                  }
-                ]
-              },
-              { $or: [{ invasive: { $in: [true] } }] },
-              {
-                $or: [
-                  {
-                    bmClass: {
-                      $in: [
-                        req.query.bmClass1,
-                        req.query.bmClass2,
-                        req.query.bmClass3,
-                        req.query.bmClass4,
-                        req.query.bmClass5,
-                        req.query.bmClass6,
-                        req.query.bmClass7
-                      ]
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            _id: 0,
-            species: 1,
-            taxID: 1,
-            taxonomicStatus: 1,
-            iucn: 1,
-            bmClass: 1,
-            endemic: 1,
-            invasive: 1
-          }
-        );
-        res.json(docs);
-      } catch (err) {
-        res.json(err);
-      }
-    }
+    query.$and.push({ species: { $regex: regEx } });
+  }
+  try {
+    const docs = await Specie.find(query, {
+      _id: 0,
+      species: 1,
+      taxID: 1,
+      taxonomicStatus: 1,
+      iucn: 1,
+      bmClass: 1,
+      endemic: 1,
+      invasive: 1
+    });
+    res.json(docs);
+  } catch (err) {
+    res.json(err);
   }
 }
