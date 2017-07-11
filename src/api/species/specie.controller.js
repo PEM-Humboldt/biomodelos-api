@@ -7,10 +7,11 @@ function constructQuery(req) {
     $or: [
       {
         bmClass: {
-          $in:
-            req.query.bmClass.constructor === Array
+          $in: req.query.bmClass
+            ? req.query.bmClass.constructor === Array
               ? req.query.bmClass
               : [req.query.bmClass]
+            : undefined
         }
       }
     ]
