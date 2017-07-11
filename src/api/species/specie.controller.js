@@ -7,7 +7,10 @@ function constructQuery(req) {
     $or: [
       {
         bmClass: {
-          $in: req.query.bmClass
+          $in:
+            req.query.bmClass.constructor === Array
+              ? req.query.bmClass
+              : [req.query.bmClass]
         }
       }
     ]
@@ -171,15 +174,46 @@ export async function read(req, res) {
  */
 export async function getAllSpecies(req, res) {
   const query = constructQuery(req);
-  try {
-    const docs = await Specie.find(query, {
-      species: 1,
-      taxID: 1,
-      _id: 0
-    }).sort({ species: 1 });
-    res.json(docs);
-  } catch (err) {
-    res.json(err);
+  if (req.query.modelStatus) {
+    try {
+      const docs = await Specie.aggregate([
+        {
+          $match: query
+        },
+        {
+          $lookup: {
+            localField: 'taxID',
+            from: 'models',
+            foreignField: 'taxID',
+            as: 'models'
+          }
+        },
+        {
+          $match: { 'models.modelStatus': req.query.modelStatus }
+        },
+        {
+          $project: {
+            species: 1,
+            taxID: 1,
+            _id: 0
+          }
+        }
+      ]);
+      res.json(docs);
+    } catch (err) {
+      res.json(err);
+    }
+  } else {
+    try {
+      const docs = await Specie.find(query, {
+        species: 1,
+        taxID: 1,
+        _id: 0
+      }).sort({ species: 1 });
+      res.json(docs);
+    } catch (err) {
+      res.json(err);
+    }
   }
 }
 
@@ -311,19 +345,55 @@ export async function searchSpecie(req, res) {
     const regEx = new RegExp(req.params.species, 'ig');
     query.$and.push({ species: { $regex: regEx } });
   }
-  try {
-    const docs = await Specie.find(query, {
-      _id: 0,
-      species: 1,
-      taxID: 1,
-      taxonomicStatus: 1,
-      iucn: 1,
-      bmClass: 1,
-      endemic: 1,
-      invasive: 1
-    });
-    res.json(docs);
-  } catch (err) {
-    res.json(err);
+  if (req.query.modelStatus) {
+    try {
+      const docs = await Specie.aggregate([
+        {
+          $match: query
+        },
+        {
+          $lookup: {
+            localField: 'taxID',
+            from: 'models',
+            foreignField: 'taxID',
+            as: 'models'
+          }
+        },
+        {
+          $match: { 'models.modelStatus': req.query.modelStatus }
+        },
+        {
+          $project: {
+            _id: 0,
+            species: 1,
+            taxID: 1,
+            taxonomicStatus: 1,
+            iucn: 1,
+            bmClass: 1,
+            endemic: 1,
+            invasive: 1
+          }
+        }
+      ]);
+      res.json(docs);
+    } catch (err) {
+      res.json(err);
+    }
+  } else {
+    try {
+      const docs = await Specie.find(query, {
+        _id: 0,
+        species: 1,
+        taxID: 1,
+        taxonomicStatus: 1,
+        iucn: 1,
+        bmClass: 1,
+        endemic: 1,
+        invasive: 1
+      }).sort({ species: 1 });
+      res.json(docs);
+    } catch (err) {
+      res.json(err);
+    }
   }
 }
