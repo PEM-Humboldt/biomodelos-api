@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>BioModelos - API</title>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Open+Sans:300,400,600,700" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./swagger-ui.css" >
   <link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32" />
   <link rel="icon" type="image/png" href="./favicon-16x16.png" sizes="16x16" />
@@ -25,11 +25,54 @@
     body {
       margin:0;
       background: #fafafa;
+      font-family: 'Lato', sans-serif !important;
     }
     /* Disable header for BioModelos */
     .swagger-ui .topbar .download-url-wrapper {
       display: none !important;
     }
+    .swagger-ui .topbar {
+      background-color: #1b3337 !important;
+    }
+    section.swagger-ui.swagger-container {
+      background: -webkit-linear-gradient(#e3af24 0%, #e3af24 347px, #e3af24 347px, transparent 347px, transparent 100%);
+      background: -o-linear-gradient(#e3af24 0%, #e3af24 347px, #e3af24 347px, transparent 347px, transparent 100%);
+      background: linear-gradient(#e3af24 0%, #e3af24 347px, #e3af24 347px, transparent 347px, transparent 100%);
+    }
+
+    .opblock .opblock-summary-path,
+    .opblock .opblock-summary-operation-id,
+    .opblock .opblock-summary-path__deprecated,
+    .opblock-t,
+    .models h4{
+      font-family: 'Lato', sans-serif !important;
+    }
+
+    .swagger-ui .opblock .opblock-summary-method {
+      font-family: 'Open Sans', sans-serif !important;
+    }
+
+    .btn.authorize {
+      color: #1b3337 !important;
+      border-radius: 0 !important;
+      border-color: #1b3337 !important;
+    }
+
+    .btn.authorize svg {
+      fill: #1b3337 !important;
+    }
+
+    .topbar-wrapper img {
+      display: none;
+    }
+
+    .topbar a span {
+      content: '' !important;
+      content: 'BioModelos' !important;
+      font-weight: 700 !important;
+      font-family: 'Lato', sans-serif !important;
+    }
+
   </style>
 </head>
 
