@@ -199,7 +199,7 @@ export async function getAllSpecies(req, res) {
             _id: 0
           }
         }
-      ]);
+      ]).sort({ species: 1 });
       res.json(docs);
     } catch (err) {
       res.json(err);
@@ -375,7 +375,7 @@ export async function searchSpecie(req, res) {
             invasive: 1
           }
         }
-      ]);
+      ]).sort({ species: 1 });
       res.json(docs);
     } catch (err) {
       res.json(err);
