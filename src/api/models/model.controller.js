@@ -260,7 +260,7 @@ export async function readModelMetadata(req, res) {
           yyyy: 1,
           modelID: 1,
           methodFile: 1,
-          recsUsed:1
+          recsUsed: 1
         }
       );
       res.json(docs);
@@ -573,19 +573,17 @@ export async function ocurrenceCoversStatsModel(req, res) {
  *         $ref: "#/definitions/ErrorResponse"
  */
 export async function generalModelStats(req, res) {
-  let taxonomicGroup = {};
   const totalStats = [
     {
-      taxonomicGroup: 'Mamíferos',
-      totalSpecies: 492,
-      validModels: 10,
-      developingModels: 25
+      taxonomicGroup: 'mamiferos',
+      totalSpecies: 492
     },
-    { taxonomicGroup: 'Aves', totalSpecies: 1921 },
-    { taxonomicGroup: 'Reptiles', totalSpecies: 537 },
-    { taxonomicGroup: 'Anfibios', totalSpecies: 803 },
-    { taxonomicGroup: 'Peces', totalSpecies: 1435 },
-    { taxonomicGroup: 'Invertebrados', totalSpecies: 19312 }
+    { taxonomicGroup: 'aves', totalSpecies: 1921 },
+    { taxonomicGroup: 'reptiles', totalSpecies: 537 },
+    { taxonomicGroup: 'anfibios', totalSpecies: 803 },
+    { taxonomicGroup: 'peces', totalSpecies: 1435 },
+    { taxonomicGroup: 'invertebrados', totalSpecies: 19312 },
+    { taxonomicGroup: 'plantas', totalSpecies: 22840 }
   ];
   try {
     const docs = await Specie.aggregate([
@@ -639,25 +637,25 @@ export async function generalModelStats(req, res) {
         }
       }
     ]);
-    taxonomicGroup = { taxonomicGroup: 'Plantas', totalSpecies: 22840 };
-    console.log(docs);
-    /*docs[0].modelStatus.map(elem => {
-      console.log(elem);
-      switch (elem._id) {
-        case 'Developing':
-          taxonomicGroup.developingModels = elem.count;
-          break;
-        case 'Valid':
-          taxonomicGroup.validModels = elem.count;
-          break;
-        case 'pendingValidation':
-          taxonomicGroup.pendingValidation = elem.count;
-          break;
-      }
+    docs.map(elem => {
+      let obj = totalStats.find(x => x.taxonomicGroup === elem._id);
+      let index = totalStats.indexOf(obj);
+      elem.modelStatus.map(elem => {
+        switch (elem.status) {
+          case 'Developing':
+            totalStats[index].developingModels = elem.count;
+            break;
+          case 'Valid':
+            totalStats[index].validModels = elem.count;
+            break;
+          case 'pendingValidation':
+            totalStats[index].pendingValidation = elem.count;
+            break;
+        }
+      });
     });
-    totalStats.push(taxonomicGroup);*/
     res.json(totalStats);
   } catch (err) {
-    console.log(err);
+    res.json(err);
   }
 }
