@@ -17,7 +17,7 @@
   "dependencies": {
     "babel-register": "^6.24.1",
     "body-parser": "1.17.2",
-    "compression": "^1.6.2",
+    "compression": "^1.7.0",
     "convict": "^4.0.0",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.3",
@@ -31,7 +31,7 @@
     "morgan": "^1.8.2",
     "serve-favicon": "^2.4.3",
     "swagger-express-mw": "^0.7.0",
-    "swagger-jsdoc": "^1.9.5",
+    "swagger-jsdoc": "^1.9.6",
     "swagger-tools": "^0.10.1",
     "swagger-ui-express": "^2.0.1",
     "winston": "^2.3.1"

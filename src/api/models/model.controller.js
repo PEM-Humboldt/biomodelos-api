@@ -1,4 +1,5 @@
 import Model from '../../models/model.model';
+import Specie from '../../models/specie.model';
 
 /**
  * @swagger
@@ -534,5 +535,128 @@ export async function ocurrenceCoversStatsModel(req, res) {
     } catch (err) {
       res.json(err);
     }
+  }
+}
+
+/**
+ * @swagger
+ * /stats/:
+ *   get:
+ *     description: "Estadísticas generales de modelos por grupo taxonómico"
+ *     operationId: STA8
+ *     parameters:
+ *       - name: taxID
+ *         in: path
+ *         description: The taxon ID of the specie
+ *         required: true
+ *         type: string
+ *     responses:
+ *       "200":
+ *         description: Success
+ *         schema:
+ *           type: object
+ *           required:
+ *             - type
+ *             - features
+ *           properties:
+ *             type:
+ *               type: string
+ *               default: "FeatureCollection"
+ *             features:
+ *               type: array
+ *               items:
+ *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *     default:
+ *       description: Error
+ *       schema:
+ *         $ref: "#/definitions/ErrorResponse"
+ */
+export async function generalModelStats(req, res) {
+  let taxonomicGroup = {};
+  const totalStats = [
+    {
+      taxonomicGroup: 'Mamíferos',
+      totalSpecies: 492,
+      validModels: 10,
+      developingModels: 25
+    },
+    { taxonomicGroup: 'Aves', totalSpecies: 1921 },
+    { taxonomicGroup: 'Reptiles', totalSpecies: 537 },
+    { taxonomicGroup: 'Anfibios', totalSpecies: 803 },
+    { taxonomicGroup: 'Peces', totalSpecies: 1435 },
+    { taxonomicGroup: 'Invertebrados', totalSpecies: 19312 }
+  ];
+  try {
+    const docs = await Specie.aggregate([
+      {
+        $match: {
+          $and: [
+            {
+              $or: [
+                {
+                  bmClass: {
+                    $in: [
+                      'mamiferos',
+                      'aves',
+                      'reptiles',
+                      'anfibios',
+                      'peces',
+                      'invertebrados',
+                      'plantas'
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        $lookup: {
+          localField: 'taxID',
+          from: 'models',
+          foreignField: 'taxID',
+          as: 'models'
+        }
+      },
+      { $unwind: '$models' },
+      {
+        $group: {
+          _id: {
+            taxonomyClass: '$bmClass',
+            modelStatus: '$models.modelStatus'
+          },
+          count: { $sum: 1 }
+        }
+      },
+      {
+        $group: {
+          _id: '$_id.taxonomyClass',
+          modelStatus: {
+            $push: { status: '$_id.modelStatus', count: '$count' }
+          }
+        }
+      }
+    ]);
+    taxonomicGroup = { taxonomicGroup: 'Plantas', totalSpecies: 22840 };
+    console.log(docs);
+    /*docs[0].modelStatus.map(elem => {
+      console.log(elem);
+      switch (elem._id) {
+        case 'Developing':
+          taxonomicGroup.developingModels = elem.count;
+          break;
+        case 'Valid':
+          taxonomicGroup.validModels = elem.count;
+          break;
+        case 'pendingValidation':
+          taxonomicGroup.pendingValidation = elem.count;
+          break;
+      }
+    });
+    totalStats.push(taxonomicGroup);*/
+    res.json(totalStats);
+  } catch (err) {
+    console.log(err);
   }
 }

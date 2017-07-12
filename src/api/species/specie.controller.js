@@ -22,7 +22,7 @@ function constructQuery(req) {
     $or: [
       {
         iucn: {
-          $in: ['EN', 'LC', 'VU', 'CR', 'NT']
+          $in: ['EN', 'VU', 'CR']
         }
       }
     ]
