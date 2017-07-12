@@ -259,7 +259,8 @@ export async function readModelMetadata(req, res) {
           mm: 1,
           yyyy: 1,
           modelID: 1,
-          methodFile: 1
+          methodFile: 1,
+          recsUsed:1
         }
       );
       res.json(docs);
