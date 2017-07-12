@@ -67,10 +67,14 @@
     }
 
     .topbar a span {
-      content: '' !important;
+      display: none;
+    }
+
+    .topbar a:after {
       content: 'BioModelos' !important;
-      font-weight: 700 !important;
+      font-weight: 400 !important;
       font-family: 'Lato', sans-serif !important;
+      font-size: 35px !important;
     }
 
   </style>
@@ -134,6 +138,8 @@ window.onload = function() {
   });
 
   window.ui = ui;
+
+  document.getElementById("myspan").textContent="newtext";
 };
 </script>
 </body>
