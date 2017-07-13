@@ -140,6 +140,69 @@ export async function read(req, res) {
   }
 }
 
+export async function readValidForGroup(req, res) {
+  if (req.params.taxID) {
+    try {
+      const docs = await Record.aggregate([
+        {
+          $match: {
+            taxID: +req.params.taxID,
+            use: true,
+            visualizationPrivileges: 1,
+            spatialDuplicated: false
+          }
+        },
+        {
+          $project: {
+            reported: {
+              $cond: {
+                if: {
+                  $and: [{ $isArray: '$reported' }, { $ne: ['$reported', []] }]
+                },
+                then: { $isArray: '$reported' },
+                else: false
+              }
+            },
+            updated: {
+              $cond: {
+                if: {
+                  $and: [{ $isArray: '$updated' }, { $ne: ['$updated', []] }]
+                },
+                then: { $isArray: '$updated' },
+                else: false
+              }
+            },
+            _id: 1,
+            taxID: 1,
+            acceptedNameUsage: 1,
+            species: 1,
+            speciesOriginal: 1,
+            locality: 1,
+            lat: 1,
+            lon: 1,
+            alt: 1,
+            basisOfRecord: 1,
+            catalogNumber: 1,
+            collector: 1,
+            institution: 1,
+            url: 1,
+            dd: 1,
+            mm: 1,
+            yyyy: 1,
+            suggestedStateProvince: 1,
+            suggestedCounty: 1,
+            environmentalOutlier: 1,
+            source: 1
+          }
+        }
+      ]);
+      res.send(GeoJSON.parse(docs, { Point: ['lat', 'lon'] }));
+    } catch (err) {
+      res.send(err);
+    }
+  }
+}
+
 /**
  * @swagger
  * /species:
