@@ -103,7 +103,7 @@ const RecordSchema = new Schema(
     resourceIncorporationDate: { type: String, default: null },
     resourceName: { type: String, default: null },
     source: { type: String, default: null },
-    contributedRecord: { type: Boolean, default: false },
+    contributedRecord: { type: String, default: null },
     override: { type: Boolean, default: false },
     privateData: { type: Number, in: [0, 1, 2], default: 0 },
     use: { type: Boolean, default: true },
