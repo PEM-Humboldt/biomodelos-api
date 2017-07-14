@@ -148,7 +148,7 @@ export async function readValidForGroup(req, res) {
           $match: {
             taxID: +req.params.taxID,
             use: true,
-            visualizationPrivileges: 1,
+            visualizationPrivileges: { $in: [1, 0] },
             spatialDuplicated: false
           }
         },
