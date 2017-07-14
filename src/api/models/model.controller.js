@@ -313,7 +313,8 @@ export async function ocurrenceEooStatsModel(req, res) {
           modelID: 1,
           statRangeSize: 1,
           statModelEOO: 1,
-          statRecsEOO: 1
+          statRecsEOO: 1,
+          recsUsed: 1
         }
       );
       res.json(docs);
