@@ -621,10 +621,41 @@ export async function generalModelStats(req, res) {
       },
       { $unwind: '$models' },
       {
+        $match: {
+          $and: [
+            { 'models.isActive': { $in: [true] } },
+            { 'models.modelLevel': { $in: [1] } }
+          ]
+        }
+      },
+      {
         $group: {
           _id: {
             taxonomyClass: '$bmClass',
-            modelStatus: '$models.modelStatus'
+            modelStatus: '$models.modelStatus',
+            taxID: '$taxID'
+          },
+          count: { $sum: 1 }
+        }
+      },
+      {
+        $group: {
+          _id: { taxonomyClass: '$_id.taxonomyClass', taxID: '$_id.taxID' },
+          modelStatus: {
+            $push: { status: '$_id.modelStatus', count: '$count' }
+          }
+        }
+      },
+      { $unwind: '$modelStatus' },
+      {
+        $sort: { 'modelStatus.status': -1 }
+      },
+      { $group: { _id: '$_id', modelStatus: { $first: '$modelStatus' } } },
+      {
+        $group: {
+          _id: {
+            taxonomyClass: '$_id.taxonomyClass',
+            modelStatus: '$modelStatus.status'
           },
           count: { $sum: 1 }
         }
