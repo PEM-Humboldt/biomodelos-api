@@ -16,13 +16,13 @@ const SpecieSchema = new Schema(
     bmClass: {
       type: String,
       in: [
-        'Plantas',
-        'Invertebrados',
-        'Aves',
-        'Peces',
-        'Reptiles',
-        'Mamiferos',
-        'Anfibios'
+        'plantas',
+        'invertebrados',
+        'aves',
+        'peces',
+        'reptiles',
+        'mamiferos',
+        'anfibios'
       ],
       required: true
     },
