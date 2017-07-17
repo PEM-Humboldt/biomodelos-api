@@ -37,7 +37,10 @@ function constructQuery(req) {
   ) {
     query.$and = [];
     if (req.query.bmClass) query.$and.push(bmClass);
-    if (req.query.endangered) query.$and.push(endangered);
+    if (req.query.endangered) {
+      query.$and.push(endangered);
+      query.$and.push({ $or: [{ iucn: { $ne: null } }] });
+    }
     if (req.query.endemic) query.$and.push(endemic);
     if (req.query.invasive) query.$and.push(invasive);
   }
