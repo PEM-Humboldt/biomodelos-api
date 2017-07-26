@@ -107,18 +107,7 @@ const RecordSchema = new Schema(
     override: { type: Boolean, default: false },
     privateData: { type: Number, in: [0, 1, 2], default: 0 },
     use: { type: Boolean, default: true },
-    visualizationPrivileges: { type: Number, in: [0, 1, 2], default: 0 },
-    isOutlier_bm: { type: Boolean },
-    geoIssue_bm: { type: Boolean },
-    idIssue_bm: { type: Boolean },
-    oldTaxonomy_bm: { type: Boolean },
-    inCaptivity_bm: { type: Boolean },
-    otherIssues_bm: { type: Boolean },
-    comments_bm: { type: String },
-    citation_bm: { type: String },
-    userId_bm: { type: Number },
-    updatedDate: { type: Date },
-    reportedDate: { type: Date }
+    visualizationPrivileges: { type: Number, in: [0, 1, 2], default: 0 }
   },
   { collection: 'records' }
 );
