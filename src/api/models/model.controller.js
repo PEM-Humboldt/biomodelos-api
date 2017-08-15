@@ -35,171 +35,70 @@ import Specie from '../../models/specie.model';
  *         $ref: "#/definitions/ErrorResponse"
  */
 export async function read(req, res) {
-  if (req.params.taxID && !req.query.type) {
-    try {
-      const docs = await Model.find(
-        { taxID: req.params.taxID, isActive: true },
-        {
-          _id: 0,
-          taxID: 1,
-          modelLevel: 1,
-          modelStatus: 1,
-          published: 1,
-          modelID: 1,
-          thresholdType: 1,
-          thumb: 1,
-          zip: 1,
-          png: 1,
-          methodFile: 1,
-          customCitation: 1,
-          license: 1
-        }
-      );
-      res.json(docs);
-    } catch (err) {
-      res.json(err);
-    }
-  } else if (req.params.taxID && req.query.type == 'Continuous') {
-    try {
-      const doc = await Model.find(
+  if (req.params.taxID) {
+    let queryForQueryType = new Map([
+      [undefined, { taxID: req.params.taxID, isActive: true }],
+      [
+        'Continuous',
         {
           taxID: req.params.taxID,
           modelStatus: 'Developing',
           thresholdType: 'Continuous',
           isActive: true
-        },
-        {
-          _id: 0,
-          taxID: 1,
-          modelLevel: 1,
-          modelStatus: 1,
-          published: 1,
-          modelID: 1,
-          thresholdType: 1,
-          thumb: 1,
-          zip: 1,
-          png: 1,
-          methodFile: 1,
-          modelStatus: 1,
-          customCitation: 1,
-          license: 1
         }
-      );
-      res.json(doc);
-    } catch (err) {
-      res.json(err);
-    }
-  } else if (req.params.taxID && req.query.type == 'Thresholds') {
-    try {
-      const doc = await Model.find(
+      ],
+      [
+        'Thresholds',
         {
           taxID: req.params.taxID,
           modelStatus: 'Developing',
           thresholdType: { $nin: ['Continuous'] },
           isActive: true
-        },
-        {
-          _id: 0,
-          taxID: 1,
-          modelLevel: 1,
-          modelStatus: 1,
-          published: 1,
-          modelID: 1,
-          thresholdType: 1,
-          thumb: 1,
-          zip: 1,
-          png: 1,
-          methodFile: 1,
-          customCitation: 1,
-          license: 1
         }
-      );
-      res.json(doc);
-    } catch (err) {
-      res.json(err);
-    }
-  } else if (req.params.taxID && req.query.type == 'Hypothesis') {
-    try {
-      const doc = await Model.find(
+      ],
+      [
+        'Hypothesis',
         {
           taxID: req.params.taxID,
           modelStatus: { $in: ['pendingValidation'] },
           isActive: true
-        },
-        {
-          _id: 0,
-          taxID: 1,
-          modelLevel: 1,
-          modelStatus: 1,
-          published: 1,
-          modelID: 1,
-          thresholdType: 1,
-          thumb: 1,
-          zip: 1,
-          png: 1,
-          methodFile: 1,
-          customCitation: 1,
-          license: 1
         }
-      );
-      res.json(doc);
-    } catch (err) {
-      res.json(err);
-    }
-  } else if (req.params.taxID && req.query.type == 'Valid') {
-    try {
-      const doc = await Model.find(
+      ],
+      [
+        'Valid',
         {
           taxID: req.params.taxID,
           modelStatus: { $in: ['Valid'] },
           isActive: true
-        },
-        {
-          _id: 0,
-          taxID: 1,
-          modelLevel: 1,
-          modelStatus: 1,
-          published: 1,
-          modelID: 1,
-          thresholdType: 1,
-          thumb: 1,
-          zip: 1,
-          png: 1,
-          methodFile: 1,
-          customCitation: 1,
-          license: 1
         }
-      );
-      res.json(doc);
-    } catch (err) {
-      res.json(err);
-    }
-  } else if (req.params.taxID && req.query.type == 'Published') {
-    try {
-      const doc = await Model.find(
+      ],
+      [
+        'Published',
         {
           taxID: req.params.taxID,
           isActive: true,
           published: true,
           isActive: true
-        },
-        {
-          _id: 0,
-          taxID: 1,
-          modelLevel: 1,
-          modelStatus: 1,
-          published: 1,
-          modelID: 1,
-          thresholdType: 1,
-          thumb: 1,
-          zip: 1,
-          png: 1,
-          methodFile: 1,
-          customCitation: 1,
-          license: 1
         }
-      );
-      res.json(doc);
+      ]
+    ]);
+    try {
+      const docs = await Model.find(queryForQueryType.get(req.query.type), {
+        _id: 0,
+        taxID: 1,
+        modelLevel: 1,
+        modelStatus: 1,
+        published: 1,
+        modelID: 1,
+        thresholdType: 1,
+        thumb: 1,
+        zip: 1,
+        png: 1,
+        methodFile: 1,
+        customCitation: 1,
+        license: 1
+      });
+      res.json(docs);
     } catch (err) {
       res.json(err);
     }
