@@ -210,6 +210,7 @@ export async function ocurrenceEooStatsModel(req, res) {
         {
           _id: 0,
           modelID: 1,
+          modelLevel: 1,
           statRangeSize: 1,
           statModelEOO: 1,
           statRecsEOO: 1,
@@ -264,6 +265,7 @@ export async function ocurrenceRepStatsModel(req, res) {
         {
           _id: 0,
           modelID: 1,
+          modelLevel: 1,
           statRepPA: 1,
           statRepPA1: 1,
           statRepPA2: 1,
@@ -318,6 +320,7 @@ export async function ocurrenceForestLossStatsModel(req, res) {
         {
           _id: 0,
           modelID: 1,
+          modelLevel: 1,
           statForestLoss90: 1,
           statForestLoss00: 1,
           statForestLoss05: 1,
