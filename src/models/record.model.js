@@ -113,3 +113,6 @@ const RecordSchema = new Schema(
 );
 
 export const Record = mongoose.model('Record', RecordSchema, 'records');
+export const Reported = mongoose.model('ReportedSchema', ReportedSchema);
+export const Updated = mongoose.model('UpdatedSchema', UpdatedSchema);
+export const Created = mongoose.model('CreatedSchema', CreatedSchema);

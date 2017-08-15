@@ -1,9 +1,4 @@
-import {
-  Record,
-  Record as Updated,
-  Record as Reported,
-  Record as Created
-} from '../../models/record.model';
+import { Record, Updated, Reported, Created } from '../../models/record.model';
 
 /**
  * @swagger
@@ -107,6 +102,9 @@ export async function update(req, res) {
     } else {
       updated.userId_bm = req.body.userId_bm;
       updated.updatedDate = Date.now;
+      if (!record.updated) {
+        record.updated = [];
+      }
       record.updated.push(updated);
     }
     try {
@@ -208,6 +206,9 @@ export async function create(req, res) {
     } else {
       reported.userId_bm = req.body.userId_bm;
       reported.reportedDate = Date.now;
+      if (!record.reported) {
+        record.reported = [];
+      }
       record.reported.push(reported);
     }
     try {
@@ -330,6 +331,7 @@ export async function createWithoutId(req, res) {
   record.contributedRecord = true;
   record.updated = [];
   record.reported = [];
+  record.created = [];
   record.created.push(created);
   try {
     await record.save();
