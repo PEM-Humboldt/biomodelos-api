@@ -476,7 +476,13 @@ export async function ocurrenceCoversStatsModel(req, res) {
  *         $ref: "#/definitions/ErrorResponse"
  */
 export async function generalModelStats(req, res) {
-  const totalStats = [
+  const totalStats: Array<{
+    taxonomicGroup: string,
+    totalSpecies: number,
+    developingModels?: number,
+    validModels?: number,
+    pendingValidation?: number
+  }> = [
     {
       taxonomicGroup: 'mamiferos',
       totalSpecies: 492
@@ -573,7 +579,7 @@ export async function generalModelStats(req, res) {
     ]);
     docs.map(elem => {
       let obj = totalStats.find(x => x.taxonomicGroup === elem._id);
-      let index = totalStats.indexOf(obj);
+      let index = totalStats.indexOf((obj: any));
       elem.modelStatus.map(elem => {
         switch (elem.status) {
           case 'Developing':
