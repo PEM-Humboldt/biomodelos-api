@@ -379,6 +379,7 @@ export async function ocurrenceCoversStatsModel(req, res) {
         {
           _id: 0,
           modelID: 1,
+          modelLevel: 1,
           statCoverLC2: 1,
           statCoverLC3: 1,
           statCoverLC4: 1,
