@@ -66,7 +66,7 @@ const RecordSchema = new Schema(
     cellID: { type: Number, min: 0, default: null },
     basisOfRecord: { type: String, default: null },
     catalogNumber: { type: String, default: null },
-    colection: { type: String, default: null },
+    colection: { type: String, default: null }, //We have to fix this name, the good one is: collection
     collector: { type: String, default: null },
     institution: { type: String, default: null },
     url: { type: String, default: null },
