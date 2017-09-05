@@ -132,7 +132,9 @@ export async function read(req, res) {
             suggestedStateProvince: 1,
             suggestedCounty: 1,
             environmentalOutlier: 1,
-            source: 1
+            source: 1,
+            adm1: 1,
+            adm2: 1
           }
         }
       ]);
