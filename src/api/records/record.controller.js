@@ -262,6 +262,18 @@ export async function createWithoutId(req, res) {
   const created = new Created();
   record.taxID = +req.body.taxID;
   record.acceptedNameUsage = req.body.acceptedNameUsage;
+  record.colection =
+    !req.body.collection || req.body.colection === ''
+      ? null
+      : req.body.colection;
+  record.catalogNumber =
+    !req.body.catalogNumber || req.body.catalogNumber === ''
+      ? null
+      : req.body.catalogNumber;
+  record.institution =
+    !req.body.institution || req.body.institution === ''
+      ? null
+      : req.body.institution;
   if (!req.body.adm1 || req.body.adm1 === '') {
     record.adm1 = null;
   } else {

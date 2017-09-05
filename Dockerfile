@@ -1,4 +1,5 @@
-FROM node:8.3.0-onbuild
+FROM node:8.4.0-onbuild
 MAINTAINER Valentina Grajales Olarte (lgrajales@humboldt.org.co)
-ONBUILD RUN npm run build
+
+RUN npm run build
 EXPOSE 3000
