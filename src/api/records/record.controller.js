@@ -262,10 +262,10 @@ export async function createWithoutId(req, res) {
   const created = new Created();
   record.taxID = +req.body.taxID;
   record.acceptedNameUsage = req.body.acceptedNameUsage;
-  record.colection =
-    !req.body.collection || req.body.colection === ''
+  record.collection =
+    !req.body.collection || req.body.collection === ''
       ? null
-      : req.body.colection;
+      : req.body.collection;
   record.catalogNumber =
     !req.body.catalogNumber || req.body.catalogNumber === ''
       ? null
@@ -767,7 +767,7 @@ export async function latestChange(req, res) {
  * @swagger
  * /records/metadata/collection/{taxID}:
  *   get:
- *     description: "Obtener los unique values del campo colection que corresponde al taxID ingresado"
+ *     description: "Obtener los unique values del campo collection que corresponde al taxID ingresado"
  *     operationId: STA7
  *     parameters:
  *       - name: taxID
@@ -803,13 +803,13 @@ export async function uniqueValuesCollection(req, res) {
         { $match: { taxID: +req.params.taxID } },
         {
           $group: {
-            _id: '$colection',
-            colection: { $first: '$colection' }
+            _id: '$collection',
+            collection: { $first: '$collection' }
           }
         },
-        { $project: { colection: '$_id', _id: 0 } },
-        { $group: { _id: null, colection: { $push: '$colection' } } },
-        { $project: { colection: '$colection', _id: 0 } }
+        { $project: { collection: '$_id', _id: 0 } },
+        { $group: { _id: null, collection: { $push: '$collection' } } },
+        { $project: { collection: '$collection', _id: 0 } }
       ]);
       res.send(doc);
     } catch (err) {
