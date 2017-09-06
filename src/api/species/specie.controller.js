@@ -123,7 +123,7 @@ export async function read(req, res) {
             alt: 1,
             basisOfRecord: 1,
             catalogNumber: 1,
-            collection: 1,
+            collection_code: 1,
             collector: 1,
             institution: 1,
             url: 1,
