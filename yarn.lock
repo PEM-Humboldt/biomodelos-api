@@ -7,8 +7,8 @@ URIjs@^1.16.0:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/URIjs/-/URIjs-1.16.1.tgz#edebc678b8b74b26b05d2b481e12383f5ae04b8b"
 
 abbrev@1:
-  version "1.1.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/abbrev/-/abbrev-1.1.0.tgz#d0554c2256636e2f56e7c2e5ad183f859428d81f"
+  version "1.1.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
 
 accepts@1.3.3:
   version "1.3.3"
@@ -17,7 +17,7 @@ accepts@1.3.3:
     mime-types "~2.1.11"
     negotiator "0.6.1"
 
-accepts@~1.3.3:
+accepts@~1.3.4:
   version "1.3.4"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/accepts/-/accepts-1.3.4.tgz#86246758c7dd6d21a6474ff084a4740ec05eb21f"
   dependencies:
@@ -35,32 +35,32 @@ acorn@^3.0.4:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/acorn/-/acorn-3.3.0.tgz#45e37fb39e8da3f25baee3ff5369e2bb5f22017a"
 
 acorn@^5.1.1:
-  version "5.1.2"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/acorn/-/acorn-5.1.2.tgz#911cb53e036807cf0fa778dc5d370fbd864246d7"
+  version "5.2.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/acorn/-/acorn-5.2.1.tgz#317ac7821826c22c702d66189ab8359675f135d7"
 
 after@0.8.2:
   version "0.8.2"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/after/-/after-0.8.2.tgz#fedb394f9f0e02aa9768e702bda23b505fae7e1f"
 
-ajv-keywords@^1.0.0:
-  version "1.5.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/ajv-keywords/-/ajv-keywords-1.5.1.tgz#314dd0a4b3368fad3dfcdc54ede6171b886daf3c"
+ajv-keywords@^2.1.0:
+  version "2.1.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/ajv-keywords/-/ajv-keywords-2.1.1.tgz#617997fc5f60576894c435f940d819e135b80762"
 
-ajv@^4.7.0, ajv@^4.9.1:
+ajv@^4.9.1:
   version "4.11.8"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/ajv/-/ajv-4.11.8.tgz#82ffb02b29e662ae53bdc20af15947706739c536"
   dependencies:
     co "^4.6.0"
     json-stable-stringify "^1.0.1"
 
-ajv@^5.2.0, ajv@^5.2.2:
-  version "5.2.2"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/ajv/-/ajv-5.2.2.tgz#47c68d69e86f5d953103b0074a9430dc63da5e39"
+ajv@^5.1.0, ajv@^5.2.0, ajv@^5.2.2, ajv@^5.2.3:
+  version "5.3.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/ajv/-/ajv-5.3.0.tgz#4414ff74a50879c208ee5fdc826e32c303549eda"
   dependencies:
     co "^4.6.0"
     fast-deep-equal "^1.0.0"
+    fast-json-stable-stringify "^2.0.0"
     json-schema-traverse "^0.3.0"
-    json-stable-stringify "^1.0.1"
 
 align-text@^0.1.1, align-text@^0.1.3:
   version "0.1.4"
@@ -74,6 +74,12 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
+ansi-align@^2.0.0:
+  version "2.0.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/ansi-align/-/ansi-align-2.0.0.tgz#c36aeccba563b89ceb556f3690f0b1d9e3547f7f"
+  dependencies:
+    string-width "^2.0.0"
+
 ansi-cyan@^0.1.1:
   version "0.1.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/ansi-cyan/-/ansi-cyan-0.1.1.tgz#538ae528af8982f28ae30d86f2f17456d2609873"
@@ -84,9 +90,9 @@ ansi-escapes@^1.1.0:
   version "1.4.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/ansi-escapes/-/ansi-escapes-1.4.0.tgz#d3a8a83b319aa67793662b13e761c7911422306e"
 
-ansi-escapes@^2.0.0:
-  version "2.0.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/ansi-escapes/-/ansi-escapes-2.0.0.tgz#5bae52be424878dd9783e8910e3fc2922e83c81b"
+ansi-escapes@^3.0.0:
+  version "3.0.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/ansi-escapes/-/ansi-escapes-3.0.0.tgz#ec3e8b4e9f8064fc02c3ac9b65f1c275bda8ef92"
 
 ansi-html@0.0.7:
   version "0.0.7"
@@ -150,8 +156,8 @@ append-field@^0.1.0:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/append-field/-/append-field-0.1.0.tgz#6ddc58fa083c7bc545d3c5995b2830cc2366d44a"
 
 aproba@^1.0.3:
-  version "1.1.2"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/aproba/-/aproba-1.1.2.tgz#45c6629094de4e96f693ef7eab74ae079c240fc1"
+  version "1.2.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/aproba/-/aproba-1.2.0.tgz#6802e6264efd18c790a1b0d517f0f2627bf2c94a"
 
 archy@^1.0.0:
   version "1.0.0"
@@ -301,7 +307,7 @@ async@^1.2.1, async@^1.3.0, async@^1.4.0, async@^1.4.2, async@^1.5.0, async@^1.5
   version "1.5.2"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
 
-async@^2.0.1:
+async@^2.0.1, async@^2.5.0:
   version "2.5.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/async/-/async-2.5.0.tgz#843190fd6b7357a0b9e1c956edddd5ec8462b54d"
   dependencies:
@@ -323,7 +329,11 @@ aws-sign2@~0.6.0:
   version "0.6.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/aws-sign2/-/aws-sign2-0.6.0.tgz#14342dd38dbcc94d0e5b87d763cd63612c0e794f"
 
-aws4@^1.2.1:
+aws-sign2@~0.7.0:
+  version "0.7.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/aws-sign2/-/aws-sign2-0.7.0.tgz#b46e890934a9591f2d2f6f86d7e6a9f1b3fe76a8"
+
+aws4@^1.2.1, aws4@^1.6.0:
   version "1.6.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
 
@@ -353,6 +363,14 @@ babel-cli@^6.26.0:
     v8flags "^2.1.1"
   optionalDependencies:
     chokidar "^1.6.1"
+
+babel-code-frame@7.0.0-beta.0:
+  version "7.0.0-beta.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/babel-code-frame/-/babel-code-frame-7.0.0-beta.0.tgz#418a7b5f3f7dc9a4670e61b1158b4c5661bec98d"
+  dependencies:
+    chalk "^2.0.0"
+    esutils "^2.0.2"
+    js-tokens "^3.0.0"
 
 babel-code-frame@^6.22.0, babel-code-frame@^6.26.0:
   version "6.26.0"
@@ -386,14 +404,14 @@ babel-core@^6.26.0:
     slash "^1.0.0"
     source-map "^0.5.6"
 
-babel-eslint@^7.2.3:
-  version "7.2.3"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/babel-eslint/-/babel-eslint-7.2.3.tgz#b2fe2d80126470f5c19442dc757253a897710827"
+babel-eslint@^8.0.1:
+  version "8.0.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/babel-eslint/-/babel-eslint-8.0.1.tgz#5d718be7a328625d006022eb293ed3008cbd6346"
   dependencies:
-    babel-code-frame "^6.22.0"
-    babel-traverse "^6.23.1"
-    babel-types "^6.23.0"
-    babylon "^6.17.0"
+    babel-code-frame "7.0.0-beta.0"
+    babel-traverse "7.0.0-beta.0"
+    babel-types "7.0.0-beta.0"
+    babylon "7.0.0-beta.22"
 
 babel-generator@^6.26.0:
   version "6.26.0"
@@ -441,6 +459,15 @@ babel-helper-explode-class@^6.24.1:
     babel-traverse "^6.24.1"
     babel-types "^6.24.1"
 
+babel-helper-function-name@7.0.0-beta.0:
+  version "7.0.0-beta.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/babel-helper-function-name/-/babel-helper-function-name-7.0.0-beta.0.tgz#d1b6779b647e5c5c31ebeb05e13b998e4d352d56"
+  dependencies:
+    babel-helper-get-function-arity "7.0.0-beta.0"
+    babel-template "7.0.0-beta.0"
+    babel-traverse "7.0.0-beta.0"
+    babel-types "7.0.0-beta.0"
+
 babel-helper-function-name@^6.24.1:
   version "6.24.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/babel-helper-function-name/-/babel-helper-function-name-6.24.1.tgz#d3475b8c03ed98242a25b48351ab18399d3580a9"
@@ -450,6 +477,12 @@ babel-helper-function-name@^6.24.1:
     babel-template "^6.24.1"
     babel-traverse "^6.24.1"
     babel-types "^6.24.1"
+
+babel-helper-get-function-arity@7.0.0-beta.0:
+  version "7.0.0-beta.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/babel-helper-get-function-arity/-/babel-helper-get-function-arity-7.0.0-beta.0.tgz#9d1ab7213bb5efe1ef1638a8ea1489969b5a8b6e"
+  dependencies:
+    babel-types "7.0.0-beta.0"
 
 babel-helper-get-function-arity@^6.24.1:
   version "6.24.1"
@@ -474,6 +507,10 @@ babel-helpers@^6.24.1:
   dependencies:
     babel-runtime "^6.22.0"
     babel-template "^6.24.1"
+
+babel-messages@7.0.0-beta.0:
+  version "7.0.0-beta.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/babel-messages/-/babel-messages-7.0.0-beta.0.tgz#6df01296e49fc8fbd0637394326a167f36da817b"
 
 babel-messages@^6.23.0:
   version "6.23.0"
@@ -648,6 +685,15 @@ babel-runtime@^6.22.0, babel-runtime@^6.23.0, babel-runtime@^6.26.0:
     core-js "^2.4.0"
     regenerator-runtime "^0.11.0"
 
+babel-template@7.0.0-beta.0:
+  version "7.0.0-beta.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/babel-template/-/babel-template-7.0.0-beta.0.tgz#85083cf9e4395d5e48bf5154d7a8d6991cafecfb"
+  dependencies:
+    babel-traverse "7.0.0-beta.0"
+    babel-types "7.0.0-beta.0"
+    babylon "7.0.0-beta.22"
+    lodash "^4.2.0"
+
 babel-template@^6.24.1, babel-template@^6.26.0:
   version "6.26.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/babel-template/-/babel-template-6.26.0.tgz#de03e2d16396b069f46dd9fff8521fb1a0e35e02"
@@ -658,7 +704,21 @@ babel-template@^6.24.1, babel-template@^6.26.0:
     babylon "^6.18.0"
     lodash "^4.17.4"
 
-babel-traverse@^6.23.1, babel-traverse@^6.24.1, babel-traverse@^6.26.0:
+babel-traverse@7.0.0-beta.0:
+  version "7.0.0-beta.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/babel-traverse/-/babel-traverse-7.0.0-beta.0.tgz#da14be9b762f62a2f060db464eaafdd8cd072a41"
+  dependencies:
+    babel-code-frame "7.0.0-beta.0"
+    babel-helper-function-name "7.0.0-beta.0"
+    babel-messages "7.0.0-beta.0"
+    babel-types "7.0.0-beta.0"
+    babylon "7.0.0-beta.22"
+    debug "^3.0.1"
+    globals "^10.0.0"
+    invariant "^2.2.0"
+    lodash "^4.2.0"
+
+babel-traverse@^6.24.1, babel-traverse@^6.26.0:
   version "6.26.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/babel-traverse/-/babel-traverse-6.26.0.tgz#46a9cbd7edcc62c8e5c064e2d2d8d0f4035766ee"
   dependencies:
@@ -672,7 +732,15 @@ babel-traverse@^6.23.1, babel-traverse@^6.24.1, babel-traverse@^6.26.0:
     invariant "^2.2.2"
     lodash "^4.17.4"
 
-babel-types@^6.23.0, babel-types@^6.24.1, babel-types@^6.26.0:
+babel-types@7.0.0-beta.0:
+  version "7.0.0-beta.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/babel-types/-/babel-types-7.0.0-beta.0.tgz#eb8b6e556470e6dcc4aef982d79ad229469b5169"
+  dependencies:
+    esutils "^2.0.2"
+    lodash "^4.2.0"
+    to-fast-properties "^2.0.0"
+
+babel-types@^6.24.1, babel-types@^6.26.0:
   version "6.26.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/babel-types/-/babel-types-6.26.0.tgz#a3b073f94ab49eb6fa55cd65227a334380632497"
   dependencies:
@@ -681,7 +749,11 @@ babel-types@^6.23.0, babel-types@^6.24.1, babel-types@^6.26.0:
     lodash "^4.17.4"
     to-fast-properties "^1.0.3"
 
-babylon@^6.17.0, babylon@^6.18.0:
+babylon@7.0.0-beta.22:
+  version "7.0.0-beta.22"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/babylon/-/babylon-7.0.0-beta.22.tgz#74f0ad82ed7c7c3cfeab74cf684f815104161b65"
+
+babylon@^6.18.0:
   version "6.18.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/babylon/-/babylon-6.18.0.tgz#af2f3b88fa6f5c1e4c634d1a0f8eac4f55b395e3"
 
@@ -717,9 +789,11 @@ base64id@1.0.0:
   version "1.0.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/base64id/-/base64id-1.0.0.tgz#47688cb99bb6804f0e06d3e763b1c32e57d8e6b6"
 
-basic-auth@~1.1.0:
-  version "1.1.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/basic-auth/-/basic-auth-1.1.0.tgz#45221ee429f7ee1e5035be3f51533f1cdfd29884"
+basic-auth@~2.0.0:
+  version "2.0.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/basic-auth/-/basic-auth-2.0.0.tgz#015db3f353e02e56377755f962742e8981e7bbba"
+  dependencies:
+    safe-buffer "5.1.1"
 
 batch@0.6.1:
   version "0.6.1"
@@ -742,8 +816,8 @@ better-assert@~1.0.0:
     callsite "1.0.0"
 
 big.js@^3.1.3:
-  version "3.1.3"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/big.js/-/big.js-3.1.3.tgz#4cada2193652eb3ca9ec8e55c9015669c9806978"
+  version "3.2.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/big.js/-/big.js-3.2.0.tgz#a5fc298b81b9e0dca2e458824784b65c52ba588e"
 
 binary-extensions@^1.0.0:
   version "1.10.0"
@@ -787,9 +861,9 @@ blocked@^1.2.1:
   version "1.2.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/blocked/-/blocked-1.2.1.tgz#e22efe767863c65ab8197f6252929104e1ec9ce2"
 
-bluebird@2.10.2:
-  version "2.10.2"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/bluebird/-/bluebird-2.10.2.tgz#024a5517295308857f14f91f1106fc3b555f446b"
+bluebird@^3.5.0:
+  version "3.5.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/bluebird/-/bluebird-3.5.1.tgz#d9551f9de98f1fcda1e683d17ee91a0602ee2eb9"
 
 body-parser@1.12.4:
   version "1.12.4"
@@ -805,19 +879,19 @@ body-parser@1.12.4:
     raw-body "~2.0.1"
     type-is "~1.6.2"
 
-body-parser@1.17.2, body-parser@^1.14.1:
-  version "1.17.2"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/body-parser/-/body-parser-1.17.2.tgz#f8892abc8f9e627d42aedafbca66bf5ab99104ee"
+body-parser@1.18.2, body-parser@^1.14.1:
+  version "1.18.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/body-parser/-/body-parser-1.18.2.tgz#87678a19d84b47d859b83199bd59bce222b10454"
   dependencies:
-    bytes "2.4.0"
-    content-type "~1.0.2"
-    debug "2.6.7"
-    depd "~1.1.0"
-    http-errors "~1.6.1"
-    iconv-lite "0.4.15"
+    bytes "3.0.0"
+    content-type "~1.0.4"
+    debug "2.6.9"
+    depd "~1.1.1"
+    http-errors "~1.6.2"
+    iconv-lite "0.4.19"
     on-finished "~2.3.0"
-    qs "6.4.0"
-    raw-body "~2.2.0"
+    qs "6.5.1"
+    raw-body "2.3.2"
     type-is "~1.6.15"
 
 bonjour@^3.5.0:
@@ -837,6 +911,18 @@ boom@2.x.x:
   dependencies:
     hoek "2.x.x"
 
+boom@4.x.x:
+  version "4.3.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/boom/-/boom-4.3.1.tgz#4f8a3005cb4a7e3889f749030fd25b96e01d2e31"
+  dependencies:
+    hoek "4.x.x"
+
+boom@5.x.x:
+  version "5.2.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/boom/-/boom-5.2.0.tgz#5dd9da6ee3a5f302077436290cb717d3f4a54e02"
+  dependencies:
+    hoek "4.x.x"
+
 boron@^0.2.3:
   version "0.2.3"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/boron/-/boron-0.2.3.tgz#63a1800771c0cb2b0d8f616687c62c1248cfb8a0"
@@ -848,8 +934,20 @@ bowser@1.6.1:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/bowser/-/bowser-1.6.1.tgz#9157e9498f456e937173a2918f3b2161e5353eb3"
 
 bowser@^1.0.0:
-  version "1.7.3"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/bowser/-/bowser-1.7.3.tgz#504bdb43118ca8db9cbbadf28fd60f265af96e4f"
+  version "1.8.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/bowser/-/bowser-1.8.1.tgz#49785777e7302febadb1a5b71d9a646520ed310d"
+
+boxen@^1.2.1:
+  version "1.2.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/boxen/-/boxen-1.2.2.tgz#3f1d4032c30ffea9d4b02c322eaf2ea741dcbce5"
+  dependencies:
+    ansi-align "^2.0.0"
+    camelcase "^4.0.0"
+    chalk "^2.0.1"
+    cli-boxes "^1.0.0"
+    string-width "^2.0.0"
+    term-size "^1.2.0"
+    widest-line "^1.0.0"
 
 brace-expansion@^1.0.0, brace-expansion@^1.1.7:
   version "1.1.8"
@@ -919,13 +1017,9 @@ bytes@2.1.0:
   version "2.1.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/bytes/-/bytes-2.1.0.tgz#ac93c410e2ffc9cc7cf4b464b38289067f5e47b4"
 
-bytes@2.4.0:
-  version "2.4.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/bytes/-/bytes-2.4.0.tgz#7d97196f9d5baf7f6935e25985549edd2a6c2339"
-
-bytes@2.5.0:
-  version "2.5.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/bytes/-/bytes-2.5.0.tgz#4c9423ea2d252c270c41b2bdefeff9bb6b62c06a"
+bytes@3.0.0:
+  version "3.0.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/bytes/-/bytes-3.0.0.tgz#d32815404d689699f85a4ea4fa8755dd13a96048"
 
 call-me-maybe@^1.0.1:
   version "1.0.1"
@@ -971,9 +1065,17 @@ camelcase@^3.0.0:
   version "3.0.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/camelcase/-/camelcase-3.0.0.tgz#32fc4b9fcdaf845fcdf7e73bb97cac2261f0ab0a"
 
+camelcase@^4.0.0, camelcase@^4.1.0:
+  version "4.1.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/camelcase/-/camelcase-4.1.0.tgz#d545635be1e33c542649c69173e5de6acfae34dd"
+
 camelize@1.0.0:
   version "1.0.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/camelize/-/camelize-1.0.0.tgz#164a5483e630fa4321e5af07020e531831b2609b"
+
+capture-stack-trace@^1.0.0:
+  version "1.0.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/capture-stack-trace/-/capture-stack-trace-1.0.0.tgz#4a6fa07399c26bba47f0b2496b4d0fb408c5550d"
 
 cardinal@^1.0.0:
   version "1.0.0"
@@ -1017,17 +1119,17 @@ chalk@^1.0.0, chalk@^1.1.0, chalk@^1.1.1, chalk@^1.1.3:
     strip-ansi "^3.0.0"
     supports-color "^2.0.0"
 
-chalk@^2.0.0, chalk@^2.1.0:
-  version "2.1.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/chalk/-/chalk-2.1.0.tgz#ac5becf14fa21b99c6c92ca7a7d7cfd5b17e743e"
+chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0:
+  version "2.3.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/chalk/-/chalk-2.3.0.tgz#b5ea48efc9c1793dccc9b4767c93914d3f2d52ba"
   dependencies:
     ansi-styles "^3.1.0"
     escape-string-regexp "^1.0.5"
     supports-color "^4.0.0"
 
 chance@~1.0.1:
-  version "1.0.11"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/chance/-/chance-1.0.11.tgz#48e82f7583df356053e0ad122d4654c5066c570d"
+  version "1.0.12"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/chance/-/chance-1.0.12.tgz#6764c9cb7b4f34856fb780d07f0e17a6601c6c08"
 
 charenc@~0.0.1:
   version "0.0.2"
@@ -1037,7 +1139,7 @@ charm@~0.1.0:
   version "0.1.2"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/charm/-/charm-0.1.2.tgz#06c21eed1a1b06aeb67553cdc53e23274bac2296"
 
-chokidar@^1.4.3, chokidar@^1.6.0, chokidar@^1.6.1, chokidar@^1.7.0:
+chokidar@^1.6.0, chokidar@^1.6.1, chokidar@^1.7.0:
   version "1.7.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/chokidar/-/chokidar-1.7.0.tgz#798e689778151c8076b4b360e5edd28cda2bb468"
   dependencies:
@@ -1056,13 +1158,13 @@ circular-json@^0.3.1:
   version "0.3.3"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/circular-json/-/circular-json-0.3.3.tgz#815c99ea84f6809529d2f45791bdf82711352d66"
 
-classnames@^2.1.3:
+classnames@^2.1.3, classnames@^2.2.5:
   version "2.2.5"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
 
 clean-css@4.1.x:
-  version "4.1.8"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/clean-css/-/clean-css-4.1.8.tgz#061455b2494a750ac98f46d8d5ebb17c679ea9d1"
+  version "4.1.9"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/clean-css/-/clean-css-4.1.9.tgz#35cee8ae7687a49b98034f70de00c4edd3826301"
   dependencies:
     source-map "0.5.x"
 
@@ -1072,6 +1174,10 @@ clean-css@^3.4.24:
   dependencies:
     commander "2.8.x"
     source-map "0.4.x"
+
+cli-boxes@^1.0.0:
+  version "1.0.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/cli-boxes/-/cli-boxes-1.0.0.tgz#4fa917c3e59c94a004cd61f8ee509da651687143"
 
 cli-cursor@^1.0.1:
   version "1.0.2"
@@ -1166,7 +1272,7 @@ commander@0.6.1:
   version "0.6.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/commander/-/commander-0.6.1.tgz#fa68a14f6a945d54dbbe50d8cdb3320e9e3b1a06"
 
-commander@2.11.x, commander@^2.11.0, commander@^2.7.1, commander@^2.8.1, commander@^2.9.0, commander@~2.11.0:
+commander@2.11.0, commander@2.11.x, commander@^2.10.0, commander@^2.11.0, commander@^2.7.1, commander@^2.8.1, commander@^2.9.0, commander@~2.11.0:
   version "2.11.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/commander/-/commander-2.11.0.tgz#157152fd1e7a6c8d98a5b715cf376df928004563"
 
@@ -1177,12 +1283,6 @@ commander@2.3.0:
 commander@2.8.x:
   version "2.8.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/commander/-/commander-2.8.1.tgz#06be367febfda0c330aa1e2a072d3dc9762425d4"
-  dependencies:
-    graceful-readlink ">= 1.0.0"
-
-commander@2.9.0:
-  version "2.9.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/commander/-/commander-2.9.0.tgz#9c99094176e12240cb22d6c5146098400fe0f7d4"
   dependencies:
     graceful-readlink ">= 1.0.0"
 
@@ -1202,6 +1302,15 @@ commonmark@^0.24.0:
   dependencies:
     entities "~ 1.1.1"
     mdurl "~ 1.0.1"
+    string.prototype.repeat "^0.2.0"
+
+commonmark@^0.28.1:
+  version "0.28.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/commonmark/-/commonmark-0.28.1.tgz#06eab8d52338b839fa1a2d75af0085eed1b1beae"
+  dependencies:
+    entities "~ 1.1.1"
+    mdurl "~ 1.0.1"
+    minimist "~ 1.2.0"
     string.prototype.repeat "^0.2.0"
 
 component-bind@1.0.0:
@@ -1251,23 +1360,23 @@ component-type@1.1.0:
   version "1.1.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/component-type/-/component-type-1.1.0.tgz#95b666aad53e5c8d1f2be135c45b5d499197c0c5"
 
-compressible@~2.0.10:
-  version "2.0.11"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/compressible/-/compressible-2.0.11.tgz#16718a75de283ed8e604041625a2064586797d8a"
+compressible@~2.0.11:
+  version "2.0.12"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/compressible/-/compressible-2.0.12.tgz#c59a5c99db76767e9876500e271ef63b3493bd66"
   dependencies:
-    mime-db ">= 1.29.0 < 2"
+    mime-db ">= 1.30.0 < 2"
 
-compression@^1.5.2, compression@^1.7.0:
-  version "1.7.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/compression/-/compression-1.7.0.tgz#030c9f198f1643a057d776a738e922da4373012d"
+compression@^1.5.2, compression@^1.7.1:
+  version "1.7.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/compression/-/compression-1.7.1.tgz#eff2603efc2e22cf86f35d2eb93589f9875373db"
   dependencies:
-    accepts "~1.3.3"
-    bytes "2.5.0"
-    compressible "~2.0.10"
-    debug "2.6.8"
+    accepts "~1.3.4"
+    bytes "3.0.0"
+    compressible "~2.0.11"
+    debug "2.6.9"
     on-headers "~1.0.1"
     safe-buffer "5.1.1"
-    vary "~1.1.1"
+    vary "~1.1.2"
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -1282,54 +1391,43 @@ concat-stream@^1.5.0, concat-stream@^1.6.0:
     typedarray "^0.0.6"
 
 config@^1.16.0:
-  version "1.26.2"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/config/-/config-1.26.2.tgz#2466291168d8afae0aae8ab99ea4d4272f520cae"
+  version "1.27.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/config/-/config-1.27.0.tgz#3ab30d0080ff76f407c2f47ac1326adfd908af5f"
   dependencies:
     json5 "0.4.0"
     os-homedir "1.0.2"
 
-configstore@^1.0.0:
-  version "1.4.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/configstore/-/configstore-1.4.0.tgz#c35781d0501d268c25c54b8b17f6240e8a4fb021"
+configstore@^3.0.0:
+  version "3.1.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/configstore/-/configstore-3.1.1.tgz#094ee662ab83fad9917678de114faaea8fcdca90"
   dependencies:
+    dot-prop "^4.1.0"
     graceful-fs "^4.1.2"
-    mkdirp "^0.5.0"
-    object-assign "^4.0.1"
-    os-tmpdir "^1.0.0"
-    osenv "^0.1.0"
-    uuid "^2.0.1"
-    write-file-atomic "^1.1.2"
-    xdg-basedir "^2.0.0"
+    make-dir "^1.0.0"
+    unique-string "^1.0.0"
+    write-file-atomic "^2.0.0"
+    xdg-basedir "^3.0.0"
 
 connect-history-api-fallback@1.1.0:
   version "1.1.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/connect-history-api-fallback/-/connect-history-api-fallback-1.1.0.tgz#5a6dee82d9a648cb29131d3f9dd400ffa4593742"
 
 connect-history-api-fallback@^1.3.0:
-  version "1.3.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/connect-history-api-fallback/-/connect-history-api-fallback-1.3.0.tgz#e51d17f8f0ef0db90a64fdb47de3051556e9f169"
+  version "1.4.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/connect-history-api-fallback/-/connect-history-api-fallback-1.4.0.tgz#3db24f973f4b923b0e82f619ce0df02411ca623d"
 
 connect-livereload@^0.6.0:
   version "0.6.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/connect-livereload/-/connect-livereload-0.6.0.tgz#f9f009874ad6837183afb170b4c4e3857a1d7ceb"
 
-connect@3.6.2:
-  version "3.6.2"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/connect/-/connect-3.6.2.tgz#694e8d20681bfe490282c8ab886be98f09f42fe7"
-  dependencies:
-    debug "2.6.7"
-    finalhandler "1.0.3"
-    parseurl "~1.3.1"
-    utils-merge "1.0.0"
-
 connect@^3.3.5:
-  version "3.6.3"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/connect/-/connect-3.6.3.tgz#f7320d46a25b4be7b483a2236517f24b1e27e301"
+  version "3.6.5"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/connect/-/connect-3.6.5.tgz#fb8dde7ba0763877d0ec9df9dac0b4b40e72c7da"
   dependencies:
-    debug "2.6.8"
-    finalhandler "1.0.4"
-    parseurl "~1.3.1"
-    utils-merge "1.0.0"
+    debug "2.6.9"
+    finalhandler "1.0.6"
+    parseurl "~1.3.2"
+    utils-merge "1.0.1"
 
 console-browserify@1.1.x:
   version "1.1.0"
@@ -1355,9 +1453,9 @@ content-security-policy-builder@1.1.0:
   dependencies:
     dashify "^0.2.0"
 
-content-type@~1.0.1, content-type@~1.0.2:
-  version "1.0.2"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/content-type/-/content-type-1.0.2.tgz#b7d113aee7a8dd27bd21133c4dc2529df1721eed"
+content-type@~1.0.1, content-type@~1.0.4:
+  version "1.0.4"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/content-type/-/content-type-1.0.4.tgz#e138cc75e040c727b1966fe5e5f8c9aee256fe3b"
 
 convert-source-map@^1.5.0:
   version "1.5.0"
@@ -1367,16 +1465,16 @@ convert-to-ecmascript-compatible-varname@^0.1.0:
   version "0.1.5"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/convert-to-ecmascript-compatible-varname/-/convert-to-ecmascript-compatible-varname-0.1.5.tgz#f67a4938c5233443564250479c67014bac878499"
 
-convict@^4.0.0:
-  version "4.0.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/convict/-/convict-4.0.0.tgz#73507fd0b7370d103bd0d08504dbb6a24f2fc09f"
+convict@^4.0.1:
+  version "4.0.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/convict/-/convict-4.0.1.tgz#df286e9df68d8a4e3789c09f92f49d2ba7b9d59e"
   dependencies:
-    depd "1.1.0"
+    depd "1.1.1"
     json5 "0.5.1"
     lodash.clonedeep "4.5.0"
-    minimist "1.2.0"
-    moment "2.17.1"
-    validator "7.0.0"
+    moment "2.18.1"
+    validator "7.2.0"
+    yargs-parser "7.0.0"
   optionalDependencies:
     varify "0.2.0"
 
@@ -1391,7 +1489,7 @@ cookie-signature@1.0.6:
   version "1.0.6"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/cookie-signature/-/cookie-signature-1.0.6.tgz#e303a882b342cc3ee8ca513a79999734dab3ae2c"
 
-cookie@0.3.1:
+cookie@0.3.1, cookie@^0.3.1:
   version "0.3.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/cookie/-/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
 
@@ -1422,6 +1520,12 @@ cors@^2.5.3, cors@^2.8.4:
     object-assign "^4"
     vary "^1"
 
+create-error-class@^3.0.0:
+  version "3.0.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/create-error-class/-/create-error-class-3.0.2.tgz#06be7abef947a3f14a30fd610671d401bca8b7b6"
+  dependencies:
+    capture-stack-trace "^1.0.0"
+
 create-react-class@15.5.2:
   version "15.5.2"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/create-react-class/-/create-react-class-15.5.2.tgz#6a8758348df660b88326a0e764d569f274aad681"
@@ -1430,8 +1534,8 @@ create-react-class@15.5.2:
     object-assign "^4.1.1"
 
 create-react-class@^15.5.1, create-react-class@^15.6.0:
-  version "15.6.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/create-react-class/-/create-react-class-15.6.0.tgz#ab448497c26566e1e29413e883207d57cfe7bed4"
+  version "15.6.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/create-react-class/-/create-react-class-15.6.2.tgz#cf1ed15f12aad7f14ef5f2dfe05e6c42f91ef02a"
   dependencies:
     fbjs "^0.8.9"
     loose-envify "^1.3.1"
@@ -1444,7 +1548,7 @@ cross-spawn@^4.0.2:
     lru-cache "^4.0.1"
     which "^1.2.9"
 
-cross-spawn@^5.1.0:
+cross-spawn@^5.0.1, cross-spawn@^5.1.0:
   version "5.1.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/cross-spawn/-/cross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"
   dependencies:
@@ -1461,6 +1565,20 @@ cryptiles@2.x.x:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/cryptiles/-/cryptiles-2.0.5.tgz#3bdfecdc608147c1c67202fa291e7dca59eaa3b8"
   dependencies:
     boom "2.x.x"
+
+cryptiles@3.x.x:
+  version "3.1.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/cryptiles/-/cryptiles-3.1.2.tgz#a89fbb220f5ce25ec56e8c4aa8a4fd7b5b0d29fe"
+  dependencies:
+    boom "5.x.x"
+
+crypto-random-string@^1.0.0:
+  version "1.0.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/crypto-random-string/-/crypto-random-string-1.0.0.tgz#a230f64f568310e1498009940790ec99545bca7e"
+
+css.escape@1.5.1:
+  version "1.5.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/css.escape/-/css.escape-1.5.1.tgz#42e27d4fa04ae32f931a4b4d4191fa9cddee97cb"
 
 currently-unhandled@^0.4.1:
   version "0.4.1"
@@ -1512,12 +1630,12 @@ dateformat@^1.0.11, dateformat@^1.0.7-1.2.3:
     meow "^3.3.0"
 
 dateformat@^2.0.0:
-  version "2.0.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/dateformat/-/dateformat-2.0.0.tgz#2743e3abb5c3fc2462e527dca445e04e9f4dee17"
+  version "2.2.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/dateformat/-/dateformat-2.2.0.tgz#4065e2013cf9fb916ddfd82efb506ad4c6769062"
 
-debug@2, debug@2.6.8, debug@^2.1.1, debug@^2.1.2, debug@^2.1.3, debug@^2.2.0, debug@^2.6.0, debug@^2.6.6, debug@^2.6.8:
-  version "2.6.8"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/debug/-/debug-2.6.8.tgz#e731531ca2ede27d188222427da17821d68ff4fc"
+debug@2, debug@2.6.9, debug@^2.1.1, debug@^2.1.2, debug@^2.1.3, debug@^2.2.0, debug@^2.6.6, debug@^2.6.8, debug@^2.6.9:
+  version "2.6.9"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
   dependencies:
     ms "2.0.0"
 
@@ -1533,15 +1651,9 @@ debug@2.3.3:
   dependencies:
     ms "0.7.2"
 
-debug@2.6.7:
-  version "2.6.7"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/debug/-/debug-2.6.7.tgz#92bad1f6d05bbb6bba22cca88bcd0ec894c2861e"
-  dependencies:
-    ms "2.0.0"
-
-debug@^3.0.0, debug@^3.0.1:
-  version "3.0.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/debug/-/debug-3.0.1.tgz#0564c612b521dc92d9f2988f0549e34f9c98db64"
+debug@3.1.0, debug@^3.0.0, debug@^3.0.1, debug@^3.1.0:
+  version "3.1.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
   dependencies:
     ms "2.0.0"
 
@@ -1568,6 +1680,10 @@ deep-extend@^0.4.0, deep-extend@^0.4.1, deep-extend@~0.4.0:
 deep-is@~0.1.3:
   version "0.1.3"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
+
+deepmerge@^1.3.2:
+  version "1.5.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/deepmerge/-/deepmerge-1.5.2.tgz#10499d868844cdad4fee0842df8c7f6f0c95a753"
 
 defaults@^1.0.0:
   version "1.0.3"
@@ -1613,11 +1729,7 @@ delegates@^1.0.0:
   version "1.0.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/delegates/-/delegates-1.0.0.tgz#84c6e159b81904fdca59a0ef44cd870d31250f9a"
 
-depd@1.1.0:
-  version "1.1.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/depd/-/depd-1.1.0.tgz#e1bd82c6aab6ced965b97b88b17ed3e528ca18c3"
-
-depd@1.1.1, depd@~1.1.0, depd@~1.1.1:
+depd@1.1.1, depd@~1.1.1:
   version "1.1.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/depd/-/depd-1.1.1.tgz#5783b4e1c459f06fa5ca27f991f3d06e7a310359"
 
@@ -1666,9 +1778,9 @@ diff@1.4.0:
   version "1.4.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/diff/-/diff-1.4.0.tgz#7f28d2eb9ee7b15a97efd89ce63dcfdaa3ccbabf"
 
-diff@3.2.0:
-  version "3.2.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/diff/-/diff-3.2.0.tgz#c9ce393a4b7cbd0b058a725c93df299027868ff9"
+diff@3.3.1:
+  version "3.3.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/diff/-/diff-3.3.1.tgz#aa8567a6eed03c531fc89d3f711cd0e5259dec75"
 
 discontinuous-range@1.0.0:
   version "1.0.0"
@@ -1763,11 +1875,17 @@ dont-sniff-mimetype@1.0.0:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/dont-sniff-mimetype/-/dont-sniff-mimetype-1.0.0.tgz#5932890dc9f4e2f19e5eb02a20026e5e5efc8f58"
 
 dot-object@^1.2.0:
-  version "1.6.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/dot-object/-/dot-object-1.6.0.tgz#61c61ca764ea780cb563fe3b51a56d0cf5aa4070"
+  version "1.7.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/dot-object/-/dot-object-1.7.0.tgz#3b8ecda78b0f2aa52b8871c180fe1b3e09926a41"
   dependencies:
-    commander "^2.9.0"
-    glob "^7.0.5"
+    commander "^2.10.0"
+    glob "^7.1.2"
+
+dot-prop@^4.1.0:
+  version "4.2.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/dot-prop/-/dot-prop-4.2.0.tgz#1f19e0c2e1aa0e32797c49799f2837ac6af69c57"
+  dependencies:
+    is-obj "^1.0.0"
 
 drawille-blessed-contrib@>=0.0.1:
   version "1.0.0"
@@ -1789,18 +1907,13 @@ duplexer2@0.0.2:
   dependencies:
     readable-stream "~1.1.9"
 
+duplexer3@^0.1.4:
+  version "0.1.4"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/duplexer3/-/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
+
 duplexer@~0.1.1:
   version "0.1.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/duplexer/-/duplexer-0.1.1.tgz#ace6ff808c1ce66b57d1ebf97977acb02334cfc1"
-
-duplexify@^3.2.0:
-  version "3.5.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/duplexify/-/duplexify-3.5.1.tgz#4e1516be68838bc90a49994f0b39a6e5960befcd"
-  dependencies:
-    end-of-stream "^1.0.0"
-    inherits "^2.0.1"
-    readable-stream "^2.0.0"
-    stream-shift "^1.0.0"
 
 ease-component@1.0.0:
   version "1.0.0"
@@ -1837,12 +1950,6 @@ encoding@^0.1.11:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/encoding/-/encoding-0.1.12.tgz#538b66f3ee62cd1ab51ec323829d1f9480c74beb"
   dependencies:
     iconv-lite "~0.4.13"
-
-end-of-stream@^1.0.0:
-  version "1.4.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/end-of-stream/-/end-of-stream-1.4.0.tgz#7a90d833efda6cfa6eac0f4949dbb0fad3a63206"
-  dependencies:
-    once "^1.4.0"
 
 end-of-stream@~0.1.5:
   version "0.1.5"
@@ -1910,8 +2017,8 @@ error-ex@^1.2.0:
     is-arrayish "^0.2.1"
 
 es-abstract@^1.6.1, es-abstract@^1.7.0:
-  version "1.8.2"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/es-abstract/-/es-abstract-1.8.2.tgz#25103263dc4decbda60e0c737ca32313518027ee"
+  version "1.9.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/es-abstract/-/es-abstract-1.9.0.tgz#690829a07cae36b222e7fd9b75c0d0573eb25227"
   dependencies:
     es-to-primitive "^1.1.1"
     function-bind "^1.1.1"
@@ -1927,26 +2034,26 @@ es-to-primitive@^1.1.1:
     is-date-object "^1.0.1"
     is-symbol "^1.0.1"
 
-es5-ext@^0.10.12, es5-ext@^0.10.14, es5-ext@^0.10.9, es5-ext@~0.10.14, es5-ext@~0.10.2:
-  version "0.10.30"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/es5-ext/-/es5-ext-0.10.30.tgz#7141a16836697dbabfaaaeee41495ce29f52c939"
+es5-ext@^0.10.12, es5-ext@^0.10.14, es5-ext@^0.10.35, es5-ext@^0.10.9, es5-ext@~0.10.14, es5-ext@~0.10.2:
+  version "0.10.35"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/es5-ext/-/es5-ext-0.10.35.tgz#18ee858ce6a3c45c7d79e91c15fcca9ec568494f"
   dependencies:
-    es6-iterator "2"
-    es6-symbol "~3.1"
+    es6-iterator "~2.0.1"
+    es6-symbol "~3.1.1"
 
-es6-iterator@2, es6-iterator@^2.0.1:
-  version "2.0.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/es6-iterator/-/es6-iterator-2.0.1.tgz#8e319c9f0453bf575d374940a655920e59ca5512"
+es6-iterator@^2.0.1, es6-iterator@~2.0.1:
+  version "2.0.3"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/es6-iterator/-/es6-iterator-2.0.3.tgz#a7de889141a05a94b0854403b2d0a0fbfa98f3b7"
   dependencies:
     d "1"
-    es5-ext "^0.10.14"
-    es6-symbol "^3.1"
+    es5-ext "^0.10.35"
+    es6-symbol "^3.1.1"
 
 es6-promise@3.2.1:
   version "3.2.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/es6-promise/-/es6-promise-3.2.1.tgz#ec56233868032909207170c39448e24449dd1fc4"
 
-es6-promise@^3.0.2:
+es6-promise@^3.0.2, es6-promise@^3.3.1:
   version "3.3.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/es6-promise/-/es6-promise-3.3.1.tgz#a08cdde84ccdbf34d027a1451bc91d4bcd28a613"
 
@@ -1954,7 +2061,7 @@ es6-promise@^4.1.1:
   version "4.1.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/es6-promise/-/es6-promise-4.1.1.tgz#8811e90915d9a0dba36274f0b242dbda78f9c92a"
 
-es6-symbol@^3.1, es6-symbol@^3.1.1, es6-symbol@~3.1:
+es6-symbol@^3.1.1, es6-symbol@~3.1.1:
   version "3.1.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/es6-symbol/-/es6-symbol-3.1.1.tgz#bf00ef4fdab6ba1b46ecb7b629b4c7ed5715cc77"
   dependencies:
@@ -1996,9 +2103,9 @@ eslint-module-utils@^2.1.1:
     debug "^2.6.8"
     pkg-dir "^1.0.0"
 
-eslint-plugin-import@^2.7.0:
-  version "2.7.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/eslint-plugin-import/-/eslint-plugin-import-2.7.0.tgz#21de33380b9efb55f5ef6d2e210ec0e07e7fa69f"
+eslint-plugin-import@^2.8.0:
+  version "2.8.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/eslint-plugin-import/-/eslint-plugin-import-2.8.0.tgz#fa1b6ef31fcb3c501c09859c1b86f1fc5b986894"
   dependencies:
     builtin-modules "^1.1.1"
     contains-path "^0.1.0"
@@ -2023,16 +2130,16 @@ eslint-plugin-jsx-a11y@^6.0.2:
     emoji-regex "^6.1.0"
     jsx-ast-utils "^1.4.0"
 
-eslint-plugin-prettier@^2.2.0:
-  version "2.2.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/eslint-plugin-prettier/-/eslint-plugin-prettier-2.2.0.tgz#f2837ad063903d73c621e7188fb3d41486434088"
+eslint-plugin-prettier@^2.3.1:
+  version "2.3.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/eslint-plugin-prettier/-/eslint-plugin-prettier-2.3.1.tgz#e7a746c67e716f335274b88295a9ead9f544e44d"
   dependencies:
     fast-diff "^1.1.1"
-    jest-docblock "^20.0.1"
+    jest-docblock "^21.0.0"
 
-eslint-plugin-react@^7.3.0:
-  version "7.3.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/eslint-plugin-react/-/eslint-plugin-react-7.3.0.tgz#ca9368da36f733fbdc05718ae4e91f778f38e344"
+eslint-plugin-react@^7.4.0:
+  version "7.4.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/eslint-plugin-react/-/eslint-plugin-react-7.4.0.tgz#300a95861b9729c087d362dd64abcc351a74364a"
   dependencies:
     doctrine "^2.0.0"
     has "^1.0.1"
@@ -2046,19 +2153,19 @@ eslint-scope@^3.7.1:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint@^4.6.1:
-  version "4.6.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/eslint/-/eslint-4.6.1.tgz#ddc7fc7fd70bf93205b0b3449bb16a1e9e7d4950"
+eslint@^4.10.0:
+  version "4.10.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/eslint/-/eslint-4.10.0.tgz#f25d0d7955c81968c2309aa5c9a229e045176bb7"
   dependencies:
     ajv "^5.2.0"
     babel-code-frame "^6.22.0"
     chalk "^2.1.0"
     concat-stream "^1.6.0"
     cross-spawn "^5.1.0"
-    debug "^2.6.8"
+    debug "^3.0.1"
     doctrine "^2.0.0"
     eslint-scope "^3.7.1"
-    espree "^3.5.0"
+    espree "^3.5.1"
     esquery "^1.0.0"
     estraverse "^4.2.0"
     esutils "^2.0.2"
@@ -2079,7 +2186,7 @@ eslint@^4.6.1:
     natural-compare "^1.4.0"
     optionator "^0.8.2"
     path-is-inside "^1.0.2"
-    pluralize "^4.0.0"
+    pluralize "^7.0.0"
     progress "^2.0.0"
     require-uncached "^1.0.3"
     semver "^5.3.0"
@@ -2088,9 +2195,9 @@ eslint@^4.6.1:
     table "^4.0.1"
     text-table "~0.2.0"
 
-espree@^3.5.0:
-  version "3.5.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/espree/-/espree-3.5.0.tgz#98358625bdd055861ea27e2867ea729faf463d8d"
+espree@^3.5.1:
+  version "3.5.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/espree/-/espree-3.5.1.tgz#0c988b8ab46db53100a1954ae4ba995ddd27d87e"
   dependencies:
     acorn "^5.1.1"
     acorn-jsx "^3.0.0"
@@ -2124,9 +2231,9 @@ esutils@^2.0.2:
   version "2.0.2"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/esutils/-/esutils-2.0.2.tgz#0abf4f1caa5bcb1f7a9d8acc6dea4faaa04bac9b"
 
-etag@~1.8.0:
-  version "1.8.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/etag/-/etag-1.8.0.tgz#6f631aef336d6c46362b51764044ce216be3c051"
+etag@~1.8.1:
+  version "1.8.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
 
 event-emitter@^0.3.4:
   version "0.3.5"
@@ -2162,6 +2269,18 @@ eventsource@0.1.6:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/eventsource/-/eventsource-0.1.6.tgz#0acede849ed7dd1ccc32c811bb11b944d4f29232"
   dependencies:
     original ">=0.0.5"
+
+execa@^0.7.0:
+  version "0.7.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/execa/-/execa-0.7.0.tgz#944becd34cc41ee32a63a9faf27ad5a65fc59777"
+  dependencies:
+    cross-spawn "^5.0.1"
+    get-stream "^3.0.0"
+    is-stream "^1.1.0"
+    npm-run-path "^2.0.0"
+    p-finally "^1.0.0"
+    signal-exit "^3.0.0"
+    strip-eof "^1.0.0"
 
 exit-hook@^1.0.0:
   version "1.1.1"
@@ -2211,38 +2330,40 @@ expect@1.20.2:
     object-keys "^1.0.9"
     tmatch "^2.0.1"
 
-express@4.15.4, express@^4.13.3:
-  version "4.15.4"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/express/-/express-4.15.4.tgz#032e2253489cf8fce02666beca3d11ed7a2daed1"
+express@4.16.2, express@^4.13.3:
+  version "4.16.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/express/-/express-4.16.2.tgz#e35c6dfe2d64b7dca0a5cd4f21781be3299e076c"
   dependencies:
-    accepts "~1.3.3"
+    accepts "~1.3.4"
     array-flatten "1.1.1"
+    body-parser "1.18.2"
     content-disposition "0.5.2"
-    content-type "~1.0.2"
+    content-type "~1.0.4"
     cookie "0.3.1"
     cookie-signature "1.0.6"
-    debug "2.6.8"
+    debug "2.6.9"
     depd "~1.1.1"
     encodeurl "~1.0.1"
     escape-html "~1.0.3"
-    etag "~1.8.0"
-    finalhandler "~1.0.4"
-    fresh "0.5.0"
+    etag "~1.8.1"
+    finalhandler "1.1.0"
+    fresh "0.5.2"
     merge-descriptors "1.0.1"
     methods "~1.1.2"
     on-finished "~2.3.0"
-    parseurl "~1.3.1"
+    parseurl "~1.3.2"
     path-to-regexp "0.1.7"
-    proxy-addr "~1.1.5"
-    qs "6.5.0"
+    proxy-addr "~2.0.2"
+    qs "6.5.1"
     range-parser "~1.2.0"
-    send "0.15.4"
-    serve-static "1.12.4"
-    setprototypeof "1.0.3"
+    safe-buffer "5.1.1"
+    send "0.16.1"
+    serve-static "1.13.1"
+    setprototypeof "1.1.0"
     statuses "~1.3.1"
     type-is "~1.6.15"
-    utils-merge "1.0.0"
-    vary "~1.1.1"
+    utils-merge "1.0.1"
+    vary "~1.1.2"
 
 extend-shallow@^1.1.2:
   version "1.1.4"
@@ -2254,17 +2375,17 @@ extend@3.0.0:
   version "3.0.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/extend/-/extend-3.0.0.tgz#5a474353b9f3353ddd8176dfd37b91c83a46f1d4"
 
-extend@^3.0.0, extend@~3.0.0:
+extend@^3.0.0, extend@~3.0.0, extend@~3.0.1:
   version "3.0.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/extend/-/extend-3.0.1.tgz#a755ea7bc1adfcc5a31ce7e762dbaadc5e636444"
 
 external-editor@^2.0.4:
-  version "2.0.4"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/external-editor/-/external-editor-2.0.4.tgz#1ed9199da9cbfe2ef2f7a31b2fde8b0d12368972"
+  version "2.0.5"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/external-editor/-/external-editor-2.0.5.tgz#52c249a3981b9ba187c7cacf5beb50bf1d91a6bc"
   dependencies:
     iconv-lite "^0.4.17"
     jschardet "^1.4.2"
-    tmp "^0.0.31"
+    tmp "^0.0.33"
 
 extglob@^0.3.1:
   version "0.3.2"
@@ -2296,12 +2417,16 @@ fast-deep-equal@^1.0.0:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/fast-deep-equal/-/fast-deep-equal-1.0.0.tgz#96256a3bc975595eb36d82e9929d060d893439ff"
 
 fast-diff@^1.1.1:
-  version "1.1.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/fast-diff/-/fast-diff-1.1.1.tgz#0aea0e4e605b6a2189f0e936d4b7fbaf1b7cfd9b"
+  version "1.1.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/fast-diff/-/fast-diff-1.1.2.tgz#4b62c42b8e03de3f848460b639079920695d0154"
 
-fast-json-patch@~1.1.8:
-  version "1.1.10"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/fast-json-patch/-/fast-json-patch-1.1.10.tgz#d4e6739202ab948af82dd5f24496cab737b5c50a"
+fast-json-patch@1.1.8:
+  version "1.1.8"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/fast-json-patch/-/fast-json-patch-1.1.8.tgz#8db58c9d12c3ff9c23456ee812cc29fac722b772"
+
+fast-json-stable-stringify@^2.0.0:
+  version "2.0.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/fast-json-stable-stringify/-/fast-json-stable-stringify-2.0.0.tgz#d5142c0caee6b1189f87d3a76111064f86c8bbf2"
 
 fast-levenshtein@~2.0.4:
   version "2.0.6"
@@ -2319,9 +2444,9 @@ faye-websocket@~0.11.0:
   dependencies:
     websocket-driver ">=0.5.1"
 
-fbjs@^0.8.4, fbjs@^0.8.9:
-  version "0.8.14"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/fbjs/-/fbjs-0.8.14.tgz#d1dbe2be254c35a91e09f31f9cd50a40b2a0ed1c"
+fbjs@^0.8.16, fbjs@^0.8.4, fbjs@^0.8.9:
+  version "0.8.16"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/fbjs/-/fbjs-0.8.16.tgz#5e67432f550dc41b572bf55847b8aca64e5337db"
   dependencies:
     core-js "^1.0.0"
     isomorphic-fetch "^2.1.1"
@@ -2365,27 +2490,27 @@ fill-range@^2.1.0:
     repeat-element "^1.1.2"
     repeat-string "^1.5.2"
 
-finalhandler@1.0.3:
-  version "1.0.3"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/finalhandler/-/finalhandler-1.0.3.tgz#ef47e77950e999780e86022a560e3217e0d0cc89"
+finalhandler@1.0.6:
+  version "1.0.6"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/finalhandler/-/finalhandler-1.0.6.tgz#007aea33d1a4d3e42017f624848ad58d212f814f"
   dependencies:
-    debug "2.6.7"
+    debug "2.6.9"
     encodeurl "~1.0.1"
     escape-html "~1.0.3"
     on-finished "~2.3.0"
-    parseurl "~1.3.1"
+    parseurl "~1.3.2"
     statuses "~1.3.1"
     unpipe "~1.0.0"
 
-finalhandler@1.0.4, finalhandler@~1.0.4:
-  version "1.0.4"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/finalhandler/-/finalhandler-1.0.4.tgz#18574f2e7c4b98b8ae3b230c21f201f31bdb3fb7"
+finalhandler@1.1.0:
+  version "1.1.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/finalhandler/-/finalhandler-1.1.0.tgz#ce0b6855b45853e791b2fcc680046d88253dd7f5"
   dependencies:
-    debug "2.6.8"
+    debug "2.6.9"
     encodeurl "~1.0.1"
     escape-html "~1.0.3"
     on-finished "~2.3.0"
-    parseurl "~1.3.1"
+    parseurl "~1.3.2"
     statuses "~1.3.1"
     unpipe "~1.0.0"
 
@@ -2434,8 +2559,8 @@ flagged-respawn@^0.3.2:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/flagged-respawn/-/flagged-respawn-0.3.2.tgz#ff191eddcd7088a675b2610fffc976be9b8074b5"
 
 flat-cache@^1.2.1:
-  version "1.2.2"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/flat-cache/-/flat-cache-1.2.2.tgz#fa86714e72c21db88601761ecf2f555d1abc6b96"
+  version "1.3.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/flat-cache/-/flat-cache-1.3.0.tgz#d3030b32b38154f4e3b7e9c709f490f7ef97c481"
   dependencies:
     circular-json "^0.3.1"
     del "^2.0.2"
@@ -2486,7 +2611,7 @@ form-data@^1.0.0-rc3:
     combined-stream "^1.0.5"
     mime-types "^2.1.11"
 
-form-data@^2.1.1:
+form-data@^2.3.1, form-data@~2.3.1:
   version "2.3.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/form-data/-/form-data-2.3.1.tgz#6fb94fbd71885306d73d15cc497fe4cc4ecd44bf"
   dependencies:
@@ -2514,17 +2639,17 @@ formidable@~1.0.14:
   version "1.0.17"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/formidable/-/formidable-1.0.17.tgz#ef5491490f9433b705faa77249c99029ae348559"
 
-forwarded@~0.1.0:
-  version "0.1.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/forwarded/-/forwarded-0.1.0.tgz#19ef9874c4ae1c297bcf078fde63a09b66a84363"
+forwarded@~0.1.2:
+  version "0.1.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/forwarded/-/forwarded-0.1.2.tgz#98c23dab1175657b8c0573e8ceccd91b0ff18c84"
 
 frameguard@3.0.0:
   version "3.0.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/frameguard/-/frameguard-3.0.0.tgz#7bcad469ee7b96e91d12ceb3959c78235a9272e9"
 
-fresh@0.5.0:
-  version "0.5.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/fresh/-/fresh-0.5.0.tgz#f474ca5e6a9246d6fd8e0953cfa9b9c805afa78e"
+fresh@0.5.2:
+  version "0.5.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/fresh/-/fresh-0.5.2.tgz#3d8cadd90d976569fa835ab1f8e4b23a105605a7"
 
 from@~0:
   version "0.1.7"
@@ -2614,6 +2739,10 @@ get-stdin@^4.0.1:
   version "4.0.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/get-stdin/-/get-stdin-4.0.1.tgz#b968c6b0a04384324902e8bf1a5df32579a450fe"
 
+get-stream@^3.0.0:
+  version "3.0.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/get-stream/-/get-stream-3.0.0.tgz#8e943d1358dc37555054ecbe2edb05aa174ede14"
+
 getbase@^2.8.2:
   version "2.8.2"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/getbase/-/getbase-2.8.2.tgz#cad757ffb2b5f531d32ad6fac4871e626a4c09cb"
@@ -2671,14 +2800,14 @@ glob@3.2.11:
     inherits "2"
     minimatch "0.3"
 
-glob@7.1.1:
-  version "7.1.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/glob/-/glob-7.1.1.tgz#805211df04faaf1c63a3600306cdf5ade50b2ec8"
+glob@7.1.2, glob@^7.0.3, glob@^7.0.5, glob@^7.1.1, glob@^7.1.2:
+  version "7.1.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/glob/-/glob-7.1.2.tgz#c19c9df9a028702d678612384a6552404c636d15"
   dependencies:
     fs.realpath "^1.0.0"
     inflight "^1.0.4"
     inherits "2"
-    minimatch "^3.0.2"
+    minimatch "^3.0.4"
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
@@ -2691,17 +2820,6 @@ glob@^4.3.1:
     minimatch "^2.0.1"
     once "^1.3.0"
 
-glob@^7.0.3, glob@^7.0.5, glob@^7.1.1, glob@^7.1.2:
-  version "7.1.2"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/glob/-/glob-7.1.2.tgz#c19c9df9a028702d678612384a6552404c636d15"
-  dependencies:
-    fs.realpath "^1.0.0"
-    inflight "^1.0.4"
-    inherits "2"
-    minimatch "^3.0.4"
-    once "^1.3.0"
-    path-is-absolute "^1.0.0"
-
 glob@~3.1.21:
   version "3.1.21"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/glob/-/glob-3.1.21.tgz#d29e0a055dea5138f4d07ed40e8982e83c2066cd"
@@ -2709,6 +2827,12 @@ glob@~3.1.21:
     graceful-fs "~1.2.0"
     inherits "1"
     minimatch "~0.2.11"
+
+global-dirs@^0.1.0:
+  version "0.1.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/global-dirs/-/global-dirs-0.1.0.tgz#10d34039e0df04272e262cf24224f7209434df4f"
+  dependencies:
+    ini "^1.3.4"
 
 global-modules@^0.2.3:
   version "0.2.3"
@@ -2725,6 +2849,10 @@ global-prefix@^0.1.4:
     ini "^1.3.4"
     is-windows "^0.2.0"
     which "^1.2.12"
+
+globals@^10.0.0:
+  version "10.2.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/globals/-/globals-10.2.0.tgz#69490789091fcaa7f7d512c668c8eb73894a4ef2"
 
 globals@^9.17.0, globals@^9.18.0:
   version "9.18.0"
@@ -2765,20 +2893,21 @@ glogg@^1.0.0:
   dependencies:
     sparkles "^1.0.0"
 
-got@^3.2.0:
-  version "3.3.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/got/-/got-3.3.1.tgz#e5d0ed4af55fc3eef4d56007769d98192bcb2eca"
+got@^6.7.1:
+  version "6.7.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/got/-/got-6.7.1.tgz#240cd05785a9a18e561dc1b44b41c763ef1e8db0"
   dependencies:
-    duplexify "^3.2.0"
-    infinity-agent "^2.0.0"
+    create-error-class "^3.0.0"
+    duplexer3 "^0.1.4"
+    get-stream "^3.0.0"
     is-redirect "^1.0.0"
+    is-retry-allowed "^1.0.0"
     is-stream "^1.0.0"
     lowercase-keys "^1.0.0"
-    nested-error-stacks "^1.0.0"
-    object-assign "^3.0.0"
-    prepend-http "^1.0.0"
-    read-all-stream "^3.0.0"
-    timed-out "^2.0.0"
+    safe-buffer "^5.0.1"
+    timed-out "^4.0.0"
+    unzip-response "^2.0.1"
+    url-parse-lax "^1.0.0"
 
 graceful-fs@^3.0.0:
   version "3.0.11"
@@ -2803,6 +2932,10 @@ graphlib@^2.1.1:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/graphlib/-/graphlib-2.1.1.tgz#42352c52ba2f4d035cb566eb91f7395f76ebc951"
   dependencies:
     lodash "^4.11.1"
+
+growl@1.10.3:
+  version "1.10.3"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/growl/-/growl-1.10.3.tgz#1926ba90cf3edfe2adb4927f5880bc22c66c790f"
 
 growl@1.9.2:
   version "1.9.2"
@@ -2910,8 +3043,8 @@ handle-thing@^1.2.5:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/handle-thing/-/handle-thing-1.2.5.tgz#fd7aad726bf1a5fd16dfc29b2f7a6601d27139c4"
 
 handlebars@^4.0.5:
-  version "4.0.10"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/handlebars/-/handlebars-4.0.10.tgz#3d30c718b09a3d96f23ea4cc1f403c4d3ba9ff4f"
+  version "4.0.11"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/handlebars/-/handlebars-4.0.11.tgz#630a35dfe0294bc281edae6ffc5d329fc7982dcc"
   dependencies:
     async "^1.4.0"
     optimist "^0.6.1"
@@ -2923,12 +3056,23 @@ har-schema@^1.0.5:
   version "1.0.5"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/har-schema/-/har-schema-1.0.5.tgz#d263135f43307c02c602afc8fe95970c0151369e"
 
+har-schema@^2.0.0:
+  version "2.0.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/har-schema/-/har-schema-2.0.0.tgz#a94c2224ebcac04782a0d9035521f24735b7ec92"
+
 har-validator@~4.2.1:
   version "4.2.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/har-validator/-/har-validator-4.2.1.tgz#33481d0f1bbff600dd203d75812a6a5fba002e2a"
   dependencies:
     ajv "^4.9.1"
     har-schema "^1.0.5"
+
+har-validator@~5.0.3:
+  version "5.0.3"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/har-validator/-/har-validator-5.0.3.tgz#ba402c266194f15956ef15e0fcf242993f6a7dfd"
+  dependencies:
+    ajv "^5.1.0"
+    har-schema "^2.0.0"
 
 has-ansi@^0.1.0:
   version "0.1.0"
@@ -2976,7 +3120,7 @@ has@^1.0.1:
   dependencies:
     function-bind "^1.0.2"
 
-hawk@~3.1.3:
+hawk@3.1.3, hawk@~3.1.3:
   version "3.1.3"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/hawk/-/hawk-3.1.3.tgz#078444bd7c1640b0fe540d2c9b73d59678e8e1c4"
   dependencies:
@@ -2985,13 +3129,22 @@ hawk@~3.1.3:
     hoek "2.x.x"
     sntp "1.x.x"
 
-he@1.1.x:
+hawk@~6.0.2:
+  version "6.0.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/hawk/-/hawk-6.0.2.tgz#af4d914eb065f9b5ce4d9d11c1cb2126eecc3038"
+  dependencies:
+    boom "4.x.x"
+    cryptiles "3.x.x"
+    hoek "4.x.x"
+    sntp "2.x.x"
+
+he@1.1.1, he@1.1.x:
   version "1.1.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
 
-helmet-csp@2.5.1:
-  version "2.5.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/helmet-csp/-/helmet-csp-2.5.1.tgz#5f3deec8f922fa7e074dbc3987c168a50573c36d"
+helmet-csp@2.6.0:
+  version "2.6.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/helmet-csp/-/helmet-csp-2.6.0.tgz#c1f5595afbc5f83e5f1e6c15f842f07a10f6ea04"
   dependencies:
     camelize "1.0.0"
     content-security-policy-builder "1.1.0"
@@ -2999,16 +3152,15 @@ helmet-csp@2.5.1:
     lodash.reduce "4.6.0"
     platform "1.3.4"
 
-helmet@^3.8.1:
-  version "3.8.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/helmet/-/helmet-3.8.1.tgz#bef2b68ffbaa19759e858c19cca7db213bb58b2d"
+helmet@^3.9.0:
+  version "3.9.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/helmet/-/helmet-3.9.0.tgz#7b2cf015a2d109bca83ede7924420799c0e67dee"
   dependencies:
-    connect "3.6.2"
     dns-prefetch-control "0.1.0"
     dont-sniff-mimetype "1.0.0"
     expect-ct "0.1.0"
     frameguard "3.0.0"
-    helmet-csp "2.5.1"
+    helmet-csp "2.6.0"
     hide-powered-by "1.0.0"
     hpkp "2.0.0"
     hsts "2.1.0"
@@ -3029,6 +3181,10 @@ hoek@2.x.x:
   version "2.16.3"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
 
+hoek@4.x.x:
+  version "4.2.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/hoek/-/hoek-4.2.0.tgz#72d9d0754f7fe25ca2d01ad8f8f9a9449a89526d"
+
 hoist-non-react-statics@^1.0.3:
   version "1.2.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/hoist-non-react-statics/-/hoist-non-react-statics-1.2.0.tgz#aa448cf0986d55cc40773b17174b7dd066cb7cfb"
@@ -3046,9 +3202,9 @@ homedir-polyfill@^1.0.0, homedir-polyfill@^1.0.1:
   dependencies:
     parse-passwd "^1.0.0"
 
-hooks-fixed@2.0.0:
-  version "2.0.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/hooks-fixed/-/hooks-fixed-2.0.0.tgz#a01d894d52ac7f6599bbb1f63dfc9c411df70cba"
+hooks-fixed@2.0.2:
+  version "2.0.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/hooks-fixed/-/hooks-fixed-2.0.2.tgz#20076daa07e77d8a6106883ce3f1722e051140b0"
 
 hosted-git-info@^2.1.4:
   version "2.5.0"
@@ -3076,8 +3232,8 @@ html-entities@^1.2.0:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/html-entities/-/html-entities-1.2.1.tgz#0df29351f0721163515dfb9e5543e5f6eed5162f"
 
 html-minifier@^3.2.3:
-  version "3.5.3"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/html-minifier/-/html-minifier-3.5.3.tgz#4a275e3b1a16639abb79b4c11191ff0d0fcf1ab9"
+  version "3.5.6"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/html-minifier/-/html-minifier-3.5.6.tgz#7e4e661a09999599c7d8e8a2b8d7fb7430bb5c3e"
   dependencies:
     camel-case "3.0.x"
     clean-css "4.1.x"
@@ -3086,7 +3242,7 @@ html-minifier@^3.2.3:
     ncname "1.0.x"
     param-case "2.1.x"
     relateurl "0.2.x"
-    uglify-js "3.0.x"
+    uglify-js "3.1.x"
 
 htmlparser2@3.8.x:
   version "3.8.3"
@@ -3113,7 +3269,7 @@ http-deceiver@^1.2.7:
   version "1.2.7"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/http-deceiver/-/http-deceiver-1.2.7.tgz#fa7168944ab9a519d337cb0bec7284dc3e723d87"
 
-http-errors@~1.6.1, http-errors@~1.6.2:
+http-errors@1.6.2, http-errors@~1.6.2:
   version "1.6.2"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/http-errors/-/http-errors-1.6.2.tgz#0a002cc85707192a7e7946ceedc11155f60ec736"
   dependencies:
@@ -3121,6 +3277,10 @@ http-errors@~1.6.1, http-errors@~1.6.2:
     inherits "2.0.3"
     setprototypeof "1.0.3"
     statuses ">= 1.3.1 < 2"
+
+http-parser-js@>=0.4.0:
+  version "0.4.9"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/http-parser-js/-/http-parser-js-0.4.9.tgz#ea1a04fb64adff0242e9974f297dd4c3cad271e1"
 
 http-proxy-middleware@~0.17.4:
   version "0.17.4"
@@ -3146,21 +3306,25 @@ http-signature@~1.1.0:
     jsprim "^1.2.2"
     sshpk "^1.7.0"
 
+http-signature@~1.2.0:
+  version "1.2.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/http-signature/-/http-signature-1.2.0.tgz#9aecd925114772f3d95b65a60abb8f7c18fbace1"
+  dependencies:
+    assert-plus "^1.0.0"
+    jsprim "^1.2.2"
+    sshpk "^1.7.0"
+
 hyphenate-style-name@^1.0.1:
   version "1.0.2"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/hyphenate-style-name/-/hyphenate-style-name-1.0.2.tgz#31160a36930adaf1fc04c6074f7eb41465d4ec4b"
 
-iconv-lite@0.4.15:
-  version "0.4.15"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/iconv-lite/-/iconv-lite-0.4.15.tgz#fe265a218ac6a57cfe854927e9d04c19825eddeb"
+iconv-lite@0.4.19, iconv-lite@^0.4.17, iconv-lite@~0.4.13:
+  version "0.4.19"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/iconv-lite/-/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
 
 iconv-lite@0.4.8:
   version "0.4.8"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/iconv-lite/-/iconv-lite-0.4.8.tgz#c6019a7595f2cefca702eab694a010bcd9298d20"
-
-iconv-lite@^0.4.17, iconv-lite@~0.4.13:
-  version "0.4.18"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/iconv-lite/-/iconv-lite-0.4.18.tgz#23d8656b16aae6742ac29732ea8f0336a4789cf2"
 
 ieee754@^1.1.8:
   version "1.1.8"
@@ -3170,21 +3334,25 @@ ienoopen@1.0.0:
   version "1.0.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/ienoopen/-/ienoopen-1.0.0.tgz#346a428f474aac8f50cf3784ea2d0f16f62bda6b"
 
-ignore-by-default@^1.0.0:
+ignore-by-default@^1.0.1:
   version "1.0.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/ignore-by-default/-/ignore-by-default-1.0.1.tgz#48ca6d72f6c6a3af00a9ad4ae6876be3889e2b09"
 
 ignore@^3.3.3:
-  version "3.3.5"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/ignore/-/ignore-3.3.5.tgz#c4e715455f6073a8d7e5dae72d2fc9d71663dba6"
+  version "3.3.7"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/ignore/-/ignore-3.3.7.tgz#612289bfb3c220e186a58118618d5be8c1bab021"
 
 immediate@~3.0.5:
   version "3.0.6"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/immediate/-/immediate-3.0.6.tgz#9db1dbd0faf8de6fbe0f5dd5e56bb606280de69b"
 
 immutable@^3.7.6, immutable@^3.x.x:
-  version "3.8.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/immutable/-/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"
+  version "3.8.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/immutable/-/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
+
+import-lazy@^2.1.0:
+  version "2.1.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/import-lazy/-/import-lazy-2.1.0.tgz#05698e3d45c88e8d7e9d92cb0584e77f096f3e43"
 
 imurmurhash@^0.1.4:
   version "0.1.4"
@@ -3203,10 +3371,6 @@ indent-string@^2.1.0:
 indexof@0.0.1:
   version "0.0.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/indexof/-/indexof-0.0.1.tgz#82dc336d232b9062179d05ab3293a66059fd435d"
-
-infinity-agent@^2.0.0:
-  version "2.0.3"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/infinity-agent/-/infinity-agent-2.0.3.tgz#45e0e2ff7a9eb030b27d62b74b3744b7a7ac4216"
 
 inflight@^1.0.4:
   version "1.0.6"
@@ -3256,10 +3420,10 @@ inquirer@^0.10.0:
     through "^2.3.6"
 
 inquirer@^3.0.6:
-  version "3.2.3"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/inquirer/-/inquirer-3.2.3.tgz#1c7b1731cf77b934ec47d22c9ac5aa8fe7fbe095"
+  version "3.3.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/inquirer/-/inquirer-3.3.0.tgz#9dd2f2ad765dcab1ff0443b491442a20ba227dc9"
   dependencies:
-    ansi-escapes "^2.0.0"
+    ansi-escapes "^3.0.0"
     chalk "^2.0.0"
     cli-cursor "^2.1.0"
     cli-width "^2.0.0"
@@ -3281,10 +3445,10 @@ internal-ip@^1.2.0:
     meow "^3.3.0"
 
 interpret@^1.0.0:
-  version "1.0.3"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/interpret/-/interpret-1.0.3.tgz#cbc35c62eeee73f19ab7b10a801511401afc0f90"
+  version "1.0.4"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/interpret/-/interpret-1.0.4.tgz#820cdd588b868ffb191a809506d6c9c8f212b1b0"
 
-invariant@^2.0.0, invariant@^2.2.2:
+invariant@^2.0.0, invariant@^2.2.0, invariant@^2.2.2:
   version "2.2.2"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/invariant/-/invariant-2.2.2.tgz#9e1f56ac0acdb6bf303306f338be3b204ae60360"
   dependencies:
@@ -3298,9 +3462,9 @@ ip@^1.1.0:
   version "1.1.5"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/ip/-/ip-1.1.5.tgz#bdded70114290828c0a039e72ef25f5aaec4354a"
 
-ipaddr.js@1.4.0:
-  version "1.4.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/ipaddr.js/-/ipaddr.js-1.4.0.tgz#296aca878a821816e5b85d0a285a99bcff4582f0"
+ipaddr.js@1.5.2:
+  version "1.5.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/ipaddr.js/-/ipaddr.js-1.5.2.tgz#d4b505bde9946987ccf0fc58d9010ff9607e3fa0"
 
 is-absolute@^0.2.3:
   version "0.2.6"
@@ -3330,8 +3494,8 @@ is-boolean-object@^1.0.0:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/is-boolean-object/-/is-boolean-object-1.0.0.tgz#98f8b28030684219a95f375cfbd88ce3405dff93"
 
 is-buffer@^1.1.5, is-buffer@~1.1.1:
-  version "1.1.5"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/is-buffer/-/is-buffer-1.1.5.tgz#1f3b26ef613b214b88cbca23cc6c01d87961eecc"
+  version "1.1.6"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/is-buffer/-/is-buffer-1.1.6.tgz#efaa2ea9daa0d7ab2ea13a97b2b8ad51fefbe8be"
 
 is-builtin-module@^1.0.0:
   version "1.0.0"
@@ -3417,6 +3581,13 @@ is-glob@^3.1.0:
   dependencies:
     is-extglob "^2.1.0"
 
+is-installed-globally@^0.1.0:
+  version "0.1.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/is-installed-globally/-/is-installed-globally-0.1.0.tgz#0dfd98f5a9111716dd535dda6492f67bf3d25a80"
+  dependencies:
+    global-dirs "^0.1.0"
+    is-path-inside "^1.0.0"
+
 is-invalid-path@^0.1.0:
   version "0.1.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/is-invalid-path/-/is-invalid-path-0.1.0.tgz#307a855b3cf1a938b44ea70d2c61106053714f34"
@@ -3442,6 +3613,10 @@ is-number@^3.0.0:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/is-number/-/is-number-3.0.0.tgz#24fd6201a4782cf50561c810276afc7d12d71195"
   dependencies:
     kind-of "^3.0.2"
+
+is-obj@^1.0.0:
+  version "1.0.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/is-obj/-/is-obj-1.0.1.tgz#3e4729ac1f5fde025cd7d83a896dab9f4f67db0f"
 
 is-path-cwd@^1.0.0:
   version "1.0.0"
@@ -3499,7 +3674,11 @@ is-resolvable@^1.0.0:
   dependencies:
     tryit "^1.0.1"
 
-is-stream@^1.0.0, is-stream@^1.0.1:
+is-retry-allowed@^1.0.0:
+  version "1.1.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/is-retry-allowed/-/is-retry-allowed-1.1.0.tgz#11a060568b67339444033d0125a61a20d564fb34"
+
+is-stream@^1.0.0, is-stream@^1.0.1, is-stream@^1.1.0:
   version "1.1.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/is-stream/-/is-stream-1.1.0.tgz#12d4a3dd4e68e0b79ceb8dbc84173ae80d91ca44"
 
@@ -3581,21 +3760,21 @@ jade@0.26.3:
     commander "0.6.1"
     mkdirp "0.3.0"
 
-jest-docblock@^20.0.1:
-  version "20.0.3"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/jest-docblock/-/jest-docblock-20.0.3.tgz#17bea984342cc33d83c50fbe1545ea0efaa44712"
+jest-docblock@^21.0.0:
+  version "21.2.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/jest-docblock/-/jest-docblock-21.2.0.tgz#51529c3b30d5fd159da60c27ceedc195faf8d414"
 
 js-base64@^2.1.9:
-  version "2.1.9"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/js-base64/-/js-base64-2.1.9.tgz#f0e80ae039a4bd654b5f281fc93f04a914a7fcce"
+  version "2.3.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/js-base64/-/js-base64-2.3.2.tgz#a79a923666372b580f8e27f51845c6f7e8fbfbaf"
 
 js-tokens@^3.0.0, js-tokens@^3.0.2:
   version "3.0.2"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
 
-js-yaml@^3.3.0, js-yaml@^3.3.1, js-yaml@^3.4.6, js-yaml@^3.5.2, js-yaml@^3.5.5, js-yaml@^3.8.1, js-yaml@^3.8.3, js-yaml@^3.8.4, js-yaml@^3.9.1:
-  version "3.9.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/js-yaml/-/js-yaml-3.9.1.tgz#08775cebdfdd359209f0d2acd383c8f86a6904a0"
+js-yaml@^3.10.0, js-yaml@^3.3.0, js-yaml@^3.3.1, js-yaml@^3.4.6, js-yaml@^3.5.2, js-yaml@^3.5.5, js-yaml@^3.8.1, js-yaml@^3.8.3, js-yaml@^3.8.4, js-yaml@^3.9.1:
+  version "3.10.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/js-yaml/-/js-yaml-3.10.0.tgz#2e78441646bd4682e963f22b6e92823c309c62dc"
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
@@ -3605,8 +3784,8 @@ jsbn@~0.1.0:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
 
 jschardet@^1.4.2:
-  version "1.5.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/jschardet/-/jschardet-1.5.1.tgz#c519f629f86b3a5bedba58a88d311309eec097f9"
+  version "1.6.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/jschardet/-/jschardet-1.6.0.tgz#c7d1a71edcff2839db2f9ec30fc5d5ebd3c1a678"
 
 jsesc@^1.3.0:
   version "1.3.0"
@@ -3638,6 +3817,19 @@ json-refs@^2.1.5:
     js-yaml "^3.8.3"
     native-promise-only "^0.8.1"
     path-loader "^1.0.2"
+    slash "^1.0.0"
+    uri-js "^3.0.2"
+
+json-refs@^3.0.1:
+  version "3.0.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/json-refs/-/json-refs-3.0.2.tgz#2143baeb3a5f85c215695bd4771893d97c737d65"
+  dependencies:
+    commander "^2.11.0"
+    graphlib "^2.1.1"
+    js-yaml "^3.10.0"
+    lodash "^4.17.4"
+    native-promise-only "^0.8.1"
+    path-loader "^1.0.4"
     slash "^1.0.0"
     uri-js "^3.0.2"
 
@@ -3761,11 +3953,11 @@ kind-of@^4.0.0:
   dependencies:
     is-buffer "^1.1.5"
 
-latest-version@^1.0.0:
-  version "1.0.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/latest-version/-/latest-version-1.0.1.tgz#72cfc46e3e8d1be651e1ebb54ea9f6ea96f374bb"
+latest-version@^3.0.0:
+  version "3.1.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/latest-version/-/latest-version-3.1.0.tgz#a205383fea322b33b5ae3b18abee0dc2f356ee15"
   dependencies:
-    package-json "^1.0.0"
+    package-json "^4.0.0"
 
 lazy-cache@^1.0.3:
   version "1.0.4"
@@ -3883,10 +4075,6 @@ lodash._baseclone@~2.4.1:
 lodash._basecopy@^3.0.0:
   version "3.0.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/lodash._basecopy/-/lodash._basecopy-3.0.1.tgz#8da0e6a876cf344c0ad8a54882111dd3c5c7ca36"
-
-lodash._basecreate@^3.0.0:
-  version "3.0.3"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/lodash._basecreate/-/lodash._basecreate-3.0.3.tgz#1bc661614daa7fc311b7d03bf16806a0213cf821"
 
 lodash._basecreate@~2.4.1:
   version "2.4.1"
@@ -4075,14 +4263,6 @@ lodash.clonedeep@^2.4.1:
 lodash.cond@^4.3.0:
   version "4.5.2"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/lodash.cond/-/lodash.cond-4.5.2.tgz#f471a1da486be60f6ab955d17115523dd1d255d5"
-
-lodash.create@3.1.1:
-  version "3.1.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/lodash.create/-/lodash.create-3.1.1.tgz#d7f2849f0dbda7e04682bb8cd72ab022461debe7"
-  dependencies:
-    lodash._baseassign "^3.0.0"
-    lodash._basecreate "^3.0.0"
-    lodash._isiterateecall "^3.0.0"
 
 lodash.defaults@^3.1.2:
   version "3.1.2"
@@ -4275,7 +4455,7 @@ lodash@4.17.2:
   version "4.17.2"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/lodash/-/lodash-4.17.2.tgz#34a3055babe04ce42467b607d700072c7ff6bf42"
 
-lodash@>=3.0.0, lodash@^4.0.0, lodash@^4.11.1, lodash@^4.14.0, lodash@^4.16.2, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.7.0:
+lodash@>=3.0.0, lodash@^4.11.1, lodash@^4.14.0, lodash@^4.16.2, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.7.0:
   version "4.17.4"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -4366,6 +4546,12 @@ machinepack-urls@^4.0.0:
   dependencies:
     lodash "^3.9.2"
     machine "^9.0.3"
+
+make-dir@^1.0.0:
+  version "1.1.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/make-dir/-/make-dir-1.1.0.tgz#19b4369fe48c116f53c2af95ad102c0e39e85d51"
+  dependencies:
+    pify "^3.0.0"
 
 map-cache@^0.2.0:
   version "0.2.2"
@@ -4475,14 +4661,14 @@ merge-descriptors@1.0.1:
   version "1.0.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/merge-descriptors/-/merge-descriptors-1.0.1.tgz#b00aaa556dd8b44568150ec9d1b953f3f90cbb61"
 
-method-override@^2.3.9:
-  version "2.3.9"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/method-override/-/method-override-2.3.9.tgz#bd151f2ce34cf01a76ca400ab95c012b102d8f71"
+method-override@^2.3.10:
+  version "2.3.10"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/method-override/-/method-override-2.3.10.tgz#e3daf8d5dee10dd2dce7d4ae88d62bbee77476b4"
   dependencies:
-    debug "2.6.8"
+    debug "2.6.9"
     methods "~1.1.2"
-    parseurl "~1.3.1"
-    vary "~1.1.1"
+    parseurl "~1.3.2"
+    vary "~1.1.2"
 
 methods@^1.1.1, methods@~1.1.1, methods@~1.1.2:
   version "1.1.2"
@@ -4506,11 +4692,15 @@ micromatch@^2.1.5, micromatch@^2.3.11, micromatch@^2.3.7:
     parse-glob "^3.0.4"
     regex-cache "^0.4.2"
 
-"mime-db@>= 1.29.0 < 2", mime-db@~1.30.0:
+"mime-db@>= 1.30.0 < 2":
+  version "1.31.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/mime-db/-/mime-db-1.31.0.tgz#a49cd8f3ebf3ed1a482b60561d9105ad40ca74cb"
+
+mime-db@~1.30.0:
   version "1.30.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/mime-db/-/mime-db-1.30.0.tgz#74c643da2dd9d6a45399963465b26d5ca7d71f01"
 
-mime-types@^2.1.11, mime-types@^2.1.12, mime-types@^2.1.3, mime-types@~2.1.11, mime-types@~2.1.15, mime-types@~2.1.16, mime-types@~2.1.7:
+mime-types@^2.1.11, mime-types@^2.1.12, mime-types@^2.1.3, mime-types@~2.1.11, mime-types@~2.1.15, mime-types@~2.1.16, mime-types@~2.1.17, mime-types@~2.1.7:
   version "2.1.17"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/mime-types/-/mime-types-2.1.17.tgz#09d7a393f03e995a79f8af857b70a9e0ab16557a"
   dependencies:
@@ -4520,9 +4710,9 @@ mime@1.3.4:
   version "1.3.4"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/mime/-/mime-1.3.4.tgz#115f9e3b6b3daf2959983cb38f149a2d40eb5d53"
 
-mime@^1.3.4, mime@^1.3.6:
-  version "1.4.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/mime/-/mime-1.4.0.tgz#69e9e0db51d44f2a3b56e48b7817d7d137f1a343"
+mime@1.4.1, mime@^1.3.4, mime@^1.4.1:
+  version "1.4.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/mime/-/mime-1.4.1.tgz#121f9ebc49e3766f311a76e1fa1c8003c4b03aa6"
 
 mimic-fn@^1.0.0:
   version "1.1.0"
@@ -4562,13 +4752,13 @@ minimist@0.0.8:
   version "0.0.8"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/minimist/-/minimist-0.0.8.tgz#857fcabfc3397d2625b8228262e86aa7a011b05d"
 
-minimist@1.2.0, minimist@^1.1.0, minimist@^1.1.3, minimist@^1.2.0:
-  version "1.2.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
-
 minimist@^0.2.0:
   version "0.2.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/minimist/-/minimist-0.2.0.tgz#4dffe525dae2b864c66c2e23c6271d7afdecefce"
+
+minimist@^1.1.0, minimist@^1.1.3, minimist@^1.2.0, "minimist@~ 1.2.0":
+  version "1.2.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
 
 minimist@~0.0.1:
   version "0.0.10"
@@ -4599,65 +4789,64 @@ mocha@^2.2.1:
     supports-color "1.2.0"
     to-iso-string "0.0.2"
 
-mocha@^3.5.0:
-  version "3.5.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/mocha/-/mocha-3.5.0.tgz#1328567d2717f997030f8006234bce9b8cd72465"
+mocha@^4.0.1:
+  version "4.0.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/mocha/-/mocha-4.0.1.tgz#0aee5a95cf69a4618820f5e51fa31717117daf1b"
   dependencies:
     browser-stdout "1.3.0"
-    commander "2.9.0"
-    debug "2.6.8"
-    diff "3.2.0"
+    commander "2.11.0"
+    debug "3.1.0"
+    diff "3.3.1"
     escape-string-regexp "1.0.5"
-    glob "7.1.1"
-    growl "1.9.2"
-    json3 "3.3.2"
-    lodash.create "3.1.1"
+    glob "7.1.2"
+    growl "1.10.3"
+    he "1.1.1"
     mkdirp "0.5.1"
-    supports-color "3.1.2"
+    supports-color "4.4.0"
 
-moment@2.17.1:
-  version "2.17.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/moment/-/moment-2.17.1.tgz#fed9506063f36b10f066c8b59a144d7faebe1d82"
+moment@2.18.1:
+  version "2.18.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
 
-mongodb-core@2.1.15:
-  version "2.1.15"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/mongodb-core/-/mongodb-core-2.1.15.tgz#841f53b87ffff4c7458189c35c8ae827e1169764"
+mongodb-core@2.1.17:
+  version "2.1.17"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/mongodb-core/-/mongodb-core-2.1.17.tgz#a418b337a14a14990fb510b923dee6a813173df8"
   dependencies:
     bson "~1.0.4"
     require_optional "~1.0.0"
 
-mongodb@2.2.31, mongodb@^2.2.31:
-  version "2.2.31"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/mongodb/-/mongodb-2.2.31.tgz#1940445c661e19217bb3bf8245d9854aaef548db"
+mongodb@2.2.33, mongodb@^2.2.33:
+  version "2.2.33"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/mongodb/-/mongodb-2.2.33.tgz#b537c471d34a6651b48f36fdbf29750340e08b50"
   dependencies:
     es6-promise "3.2.1"
-    mongodb-core "2.1.15"
+    mongodb-core "2.1.17"
     readable-stream "2.2.7"
 
-mongoose@4.11.10:
-  version "4.11.10"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/mongoose/-/mongoose-4.11.10.tgz#f68b131df09893b9f0073f46d5dcab0116789f56"
+mongoose@4.12.5:
+  version "4.12.5"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/mongoose/-/mongoose-4.12.5.tgz#c5fecc40a48402120e9a2cf5bd27a674da9ce331"
   dependencies:
     async "2.1.4"
     bson "~1.0.4"
-    hooks-fixed "2.0.0"
+    hooks-fixed "2.0.2"
     kareem "1.5.0"
-    mongodb "2.2.31"
+    mongodb "2.2.33"
     mpath "0.3.0"
     mpromise "0.5.5"
-    mquery "2.3.1"
+    mquery "2.3.2"
     ms "2.0.0"
-    muri "1.2.2"
+    muri "1.3.0"
     regexp-clone "0.0.1"
     sliced "1.0.1"
 
-morgan@^1.8.2:
-  version "1.8.2"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/morgan/-/morgan-1.8.2.tgz#784ac7734e4a453a9c6e6e8680a9329275c8b687"
+morgan@^1.9.0:
+  version "1.9.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/morgan/-/morgan-1.9.0.tgz#d01fa6c65859b76fcf31b3cb53a3821a311d8051"
   dependencies:
-    basic-auth "~1.1.0"
-    debug "2.6.8"
-    depd "~1.1.0"
+    basic-auth "~2.0.0"
+    debug "2.6.9"
+    depd "~1.1.1"
     on-finished "~2.3.0"
     on-headers "~1.0.1"
 
@@ -4673,13 +4862,13 @@ mpromise@0.5.5:
   version "0.5.5"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/mpromise/-/mpromise-0.5.5.tgz#f5b24259d763acc2257b0a0c8c6d866fd51732e6"
 
-mquery@2.3.1:
-  version "2.3.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/mquery/-/mquery-2.3.1.tgz#9ab36749714800ff0bb53a681ce4bc4d5f07c87b"
+mquery@2.3.2:
+  version "2.3.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/mquery/-/mquery-2.3.2.tgz#e2c60ad117cf080f2efb1ecdd144e7bbffbfca11"
   dependencies:
-    bluebird "2.10.2"
-    debug "2.6.8"
-    regexp-clone "0.0.1"
+    bluebird "^3.5.0"
+    debug "^2.6.9"
+    regexp-clone "^0.0.1"
     sliced "0.0.5"
 
 ms@0.7.1:
@@ -4724,9 +4913,9 @@ multipipe@^0.1.0, multipipe@^0.1.2:
   dependencies:
     duplexer2 "0.0.2"
 
-muri@1.2.2:
-  version "1.2.2"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/muri/-/muri-1.2.2.tgz#63198132650db08a04cc79ccd00dd389afd2631c"
+muri@1.3.0:
+  version "1.3.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/muri/-/muri-1.3.0.tgz#aeccf3db64c56aa7c5b34e00f95b7878527a4721"
 
 mustache@^2.1.3:
   version "2.3.0"
@@ -4766,19 +4955,13 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
-nested-error-stacks@^1.0.0:
-  version "1.0.2"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/nested-error-stacks/-/nested-error-stacks-1.0.2.tgz#19f619591519f096769a5ba9a86e6eeec823c3cf"
-  dependencies:
-    inherits "~2.0.1"
-
 next-tick@1:
   version "1.0.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
 
 no-case@^2.2.0:
-  version "2.3.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/no-case/-/no-case-2.3.1.tgz#7aeba1c73a52184265554b7dc03baf720df80081"
+  version "2.3.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/no-case/-/no-case-2.3.2.tgz#60b813396be39b3f1288a4c1ed5d1e7d28b464ac"
   dependencies:
     lower-case "^1.1.1"
 
@@ -4793,8 +4976,8 @@ node-emoji@^1.4.1:
     lodash.toarray "^4.4.0"
 
 node-fetch@^1.0.1:
-  version "1.7.2"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/node-fetch/-/node-fetch-1.7.2.tgz#c54e9aac57e432875233525f3c891c4159ffefd7"
+  version "1.7.3"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/node-fetch/-/node-fetch-1.7.3.tgz#980f6f72d85211a5347c6b2bc18c5b84c3eb47ef"
   dependencies:
     encoding "^0.1.11"
     is-stream "^1.0.1"
@@ -4804,14 +4987,15 @@ node-forge@0.6.33:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/node-forge/-/node-forge-0.6.33.tgz#463811879f573d45155ad6a9f43dc296e8e85ebc"
 
 node-pre-gyp@^0.6.36:
-  version "0.6.36"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/node-pre-gyp/-/node-pre-gyp-0.6.36.tgz#db604112cb74e0d477554e9b505b17abddfab786"
+  version "0.6.38"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/node-pre-gyp/-/node-pre-gyp-0.6.38.tgz#e92a20f83416415bb4086f6d1fb78b3da73d113d"
   dependencies:
+    hawk "3.1.3"
     mkdirp "^0.5.1"
     nopt "^4.0.1"
     npmlog "^4.0.2"
     rc "^1.1.7"
-    request "^2.81.0"
+    request "2.81.0"
     rimraf "^2.6.1"
     semver "^5.3.0"
     tar "^2.2.1"
@@ -4833,20 +5017,20 @@ nodejs-dashboard@^0.4.1:
     socket.io "^1.4.8"
     socket.io-client "^1.4.8"
 
-nodemon@^1.11.1, nodemon@^1.3.7:
-  version "1.11.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/nodemon/-/nodemon-1.11.1.tgz#ad96ce93dfb1d925aad076697229cc076bba8529"
+nodemon@^1.12.1, nodemon@^1.3.7:
+  version "1.12.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/nodemon/-/nodemon-1.12.1.tgz#996a56dc49d9f16bbf1b78a4de08f13634b3878d"
   dependencies:
-    chokidar "^1.4.3"
-    debug "^2.2.0"
-    es6-promise "^3.0.2"
-    ignore-by-default "^1.0.0"
+    chokidar "^1.7.0"
+    debug "^2.6.8"
+    es6-promise "^3.3.1"
+    ignore-by-default "^1.0.1"
     lodash.defaults "^3.1.2"
-    minimatch "^3.0.0"
-    ps-tree "^1.0.1"
-    touch "1.0.0"
+    minimatch "^3.0.4"
+    ps-tree "^1.1.0"
+    touch "^3.1.0"
     undefsafe "0.0.3"
-    update-notifier "0.5.0"
+    update-notifier "^2.2.0"
 
 nopt@^4.0.1:
   version "4.0.1"
@@ -4882,6 +5066,12 @@ normalize-path@^2.0.0, normalize-path@^2.0.1:
   dependencies:
     remove-trailing-separator "^1.0.1"
 
+npm-run-path@^2.0.0:
+  version "2.0.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/npm-run-path/-/npm-run-path-2.0.2.tgz#35a9232dfa35d7067b4cb2ddf2357b1871536c5f"
+  dependencies:
+    path-key "^2.0.0"
+
 npmlog@^4.0.2:
   version "4.1.2"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/npmlog/-/npmlog-4.1.2.tgz#08a7f2a8bf734604779a9efa4ad5cc717abb954b"
@@ -4895,7 +5085,7 @@ number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
 
-oauth-sign@~0.8.1:
+oauth-sign@~0.8.1, oauth-sign@~0.8.2:
   version "0.8.2"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/oauth-sign/-/oauth-sign-0.8.2.tgz#46a6ab7f0aead8deae9ec0565780b7d4efeb9d43"
 
@@ -4920,8 +5110,8 @@ object-hash@~0.3.0:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/object-hash/-/object-hash-0.3.0.tgz#548208e43b36a44e4da30bad6c56ac53b885e744"
 
 object-inspect@^1.1.0:
-  version "1.3.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/object-inspect/-/object-inspect-1.3.0.tgz#5b1eb8e6742e2ee83342a637034d844928ba2f6d"
+  version "1.4.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/object-inspect/-/object-inspect-1.4.0.tgz#7bcd84fd8db2e833285282bf8356ed87dcef7cf8"
 
 object-keys@^1.0.8, object-keys@^1.0.9:
   version "1.0.11"
@@ -4982,7 +5172,7 @@ on-headers@~1.0.1:
   version "1.0.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/on-headers/-/on-headers-1.0.1.tgz#928f5d0f470d49342651ea6794b0857c100693f7"
 
-once@^1.3.0, once@^1.3.3, once@^1.4.0:
+once@^1.3.0, once@^1.3.3:
   version "1.4.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/once/-/once-1.4.0.tgz#583b1aa775961d4b113ac17d9c50baef9dd76bd1"
   dependencies:
@@ -5083,11 +5273,11 @@ os-locale@^1.4.0:
   dependencies:
     lcid "^1.0.0"
 
-os-tmpdir@^1.0.0, os-tmpdir@^1.0.1, os-tmpdir@~1.0.1:
+os-tmpdir@^1.0.0, os-tmpdir@^1.0.1, os-tmpdir@~1.0.2:
   version "1.0.2"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/os-tmpdir/-/os-tmpdir-1.0.2.tgz#bbe67406c79aa85c5cfec766fe5734555dfa1274"
 
-osenv@^0.1.0, osenv@^0.1.4:
+osenv@^0.1.4:
   version "0.1.4"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/osenv/-/osenv-0.1.4.tgz#42fe6d5953df06c8064be6f176c3d05aaaa34644"
   dependencies:
@@ -5102,6 +5292,10 @@ output-file-sync@^1.1.2:
     mkdirp "^0.5.1"
     object-assign "^4.1.0"
 
+p-finally@^1.0.0:
+  version "1.0.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/p-finally/-/p-finally-1.0.0.tgz#3fbcfb15b899a44123b34b6dcc18b724336a2cae"
+
 p-limit@^1.1.0:
   version "1.1.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/p-limit/-/p-limit-1.1.0.tgz#b07ff2d9a5d88bec806035895a2bab66a27988bc"
@@ -5113,15 +5307,17 @@ p-locate@^2.0.0:
     p-limit "^1.1.0"
 
 p-map@^1.1.1:
-  version "1.1.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/p-map/-/p-map-1.1.1.tgz#05f5e4ae97a068371bc2a5cc86bfbdbc19c4ae7a"
-
-package-json@^1.0.0:
   version "1.2.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/package-json/-/package-json-1.2.0.tgz#c8ecac094227cdf76a316874ed05e27cc939a0e0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/p-map/-/p-map-1.2.0.tgz#e4e94f311eabbc8633a1e79908165fca26241b6b"
+
+package-json@^4.0.0:
+  version "4.0.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/package-json/-/package-json-4.0.1.tgz#8869a0401253661c4c4ca3da6c2121ed555f5eed"
   dependencies:
-    got "^3.2.0"
-    registry-url "^3.0.0"
+    got "^6.7.1"
+    registry-auth-token "^3.0.1"
+    registry-url "^3.0.3"
+    semver "^5.1.0"
 
 param-case@2.1.x:
   version "2.1.1"
@@ -5174,9 +5370,9 @@ parseuri@0.0.5:
   dependencies:
     better-assert "~1.0.0"
 
-parseurl@^1.3.0, parseurl@~1.3.1:
-  version "1.3.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/parseurl/-/parseurl-1.3.1.tgz#c8ab8c9223ba34888aa64a297b28853bec18da56"
+parseurl@^1.3.0, parseurl@~1.3.2:
+  version "1.3.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/parseurl/-/parseurl-1.3.2.tgz#fc289d4ed8993119460c156253262cdc8de65bf3"
 
 pascalcase@^0.1.1:
   version "0.1.1"
@@ -5200,12 +5396,16 @@ path-is-inside@^1.0.1, path-is-inside@^1.0.2:
   version "1.0.2"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/path-is-inside/-/path-is-inside-1.0.2.tgz#365417dede44430d1c11af61027facf074bdfc53"
 
-path-loader@^1.0.2:
-  version "1.0.2"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/path-loader/-/path-loader-1.0.2.tgz#cd5c73e7e39a91011be148d6bfdd8a85bb931ef9"
+path-key@^2.0.0:
+  version "2.0.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/path-key/-/path-key-2.0.1.tgz#411cadb574c5a140d3a4b1910d40d80cc9f40b40"
+
+path-loader@^1.0.2, path-loader@^1.0.4:
+  version "1.0.4"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/path-loader/-/path-loader-1.0.4.tgz#107dc8b1b7c0f6a8a18e7749bdaf46a26c2d98b4"
   dependencies:
     native-promise-only "^0.8.1"
-    superagent "^3.5.2"
+    superagent "^3.6.3"
 
 path-parse@^1.0.5:
   version "1.0.5"
@@ -5230,6 +5430,10 @@ path-to-regexp@^1.2.0, path-to-regexp@^1.2.1:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/path-to-regexp/-/path-to-regexp-1.7.0.tgz#59fde0f435badacba103a84e9d3bc64e96b9937d"
   dependencies:
     isarray "0.0.1"
+
+path-to-regexp@^2.0.0:
+  version "2.1.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/path-to-regexp/-/path-to-regexp-2.1.0.tgz#7e30f9f5b134bd6a28ffc2e3ef1e47075ac5259b"
 
 path-type@^1.0.0:
   version "1.1.0"
@@ -5272,8 +5476,8 @@ picture-tube@0.0.4:
     x256 "~0.0.1"
 
 pidusage@^1.0.8:
-  version "1.1.6"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/pidusage/-/pidusage-1.1.6.tgz#d708d8e38cc7ccfaa191fb6adac1fd674a4be184"
+  version "1.2.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/pidusage/-/pidusage-1.2.0.tgz#65ee96ace4e08a4cd3f9240996c85b367171ee92"
 
 pify@^2.0.0:
   version "2.3.0"
@@ -5324,9 +5528,9 @@ plugin-log@^0.1.0:
     chalk "^1.1.1"
     dateformat "^1.0.11"
 
-pluralize@^4.0.0:
-  version "4.0.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/pluralize/-/pluralize-4.0.0.tgz#59b708c1c0190a2f692f1c7618c446b052fd1762"
+pluralize@^7.0.0:
+  version "7.0.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/pluralize/-/pluralize-7.0.0.tgz#298b89df8b93b0221dbf421ad2b1b1ea23fc6777"
 
 png-js@~0.1.0:
   version "0.1.1"
@@ -5344,7 +5548,7 @@ prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
 
-prepend-http@^1.0.0:
+prepend-http@^1.0.1:
   version "1.0.4"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
 
@@ -5352,9 +5556,9 @@ preserve@^0.2.0:
   version "0.2.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
-prettier@^1.6.1:
-  version "1.6.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/prettier/-/prettier-1.6.1.tgz#850f411a3116226193e32ea5acfc21c0f9a76d7d"
+prettier@^1.7.4:
+  version "1.7.4"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/prettier/-/prettier-1.7.4.tgz#5e8624ae9363c80f95ec644584ecdf55d74f93fa"
 
 pretty-bytes@^3.0.1:
   version "3.0.1"
@@ -5367,8 +5571,8 @@ pretty-hrtime@^1.0.0:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/pretty-hrtime/-/pretty-hrtime-1.0.3.tgz#b7e3ea42435a4c9b2759d99e0f201eb195802ee1"
 
 private@^0.1.7:
-  version "0.1.7"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/private/-/private-0.1.7.tgz#68ce5e8a1ef0a23bb570cc28537b5332aba63ef1"
+  version "0.1.8"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/private/-/private-0.1.8.tgz#2381edb3689f7a53d653190060fcf822d2f368ff"
 
 process-nextick-args@~1.0.6:
   version "1.0.7"
@@ -5398,24 +5602,25 @@ prop-types@15.5.8:
     fbjs "^0.8.9"
 
 prop-types@^15.5.1, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6:
-  version "15.5.10"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
+  version "15.6.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
   dependencies:
-    fbjs "^0.8.9"
+    fbjs "^0.8.16"
     loose-envify "^1.3.1"
+    object-assign "^4.1.1"
 
-proxy-addr@~1.1.5:
-  version "1.1.5"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/proxy-addr/-/proxy-addr-1.1.5.tgz#71c0ee3b102de3f202f3b64f608d173fcba1a918"
+proxy-addr@~2.0.2:
+  version "2.0.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/proxy-addr/-/proxy-addr-2.0.2.tgz#6571504f47bb988ec8180253f85dd7e14952bdec"
   dependencies:
-    forwarded "~0.1.0"
-    ipaddr.js "1.4.0"
+    forwarded "~0.1.2"
+    ipaddr.js "1.5.2"
 
 prr@~0.0.0:
   version "0.0.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/prr/-/prr-0.0.0.tgz#1a84b85908325501411853d0081ee3fa86e2926a"
 
-ps-tree@^1.0.1:
+ps-tree@^1.1.0:
   version "1.1.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/ps-tree/-/ps-tree-1.1.0.tgz#b421b24140d6203f1ed3c76996b4427b08e8c014"
   dependencies:
@@ -5445,17 +5650,17 @@ qs@2.4.2:
   version "2.4.2"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/qs/-/qs-2.4.2.tgz#f7ce788e5777df0b5010da7f7c4e73ba32470f5a"
 
-qs@6.4.0, qs@~6.4.0:
-  version "6.4.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
-
-qs@6.5.0, qs@^6.3.0, qs@^6.4.0:
-  version "6.5.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/qs/-/qs-6.5.0.tgz#8d04954d364def3efc55b5a0793e1e2c8b1e6e49"
+qs@6.5.1, qs@^6.0.3, qs@^6.3.0, qs@^6.4.0, qs@^6.5.1, qs@~6.5.1:
+  version "6.5.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/qs/-/qs-6.5.1.tgz#349cdf6eef89ec45c12d7d5eb3fc0c870343a6d8"
 
 qs@^4.0.0:
   version "4.0.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/qs/-/qs-4.0.0.tgz#c31d9b74ec27df75e543a86c78728ed8d4623607"
+
+qs@~6.4.0:
+  version "6.4.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
 
 querystring@0.2.0:
   version "0.2.0"
@@ -5470,8 +5675,8 @@ querystringify@~1.0.0:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/querystringify/-/querystringify-1.0.0.tgz#6286242112c5b712fa654e526652bf6a13ff05cb"
 
 raf@^3.1.0:
-  version "3.3.2"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/raf/-/raf-3.3.2.tgz#0c13be0b5b49b46f76d6669248d527cf2b02fe27"
+  version "3.4.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/raf/-/raf-3.4.0.tgz#a28876881b4bc2ca9117d4138163ddb80f781575"
   dependencies:
     performance-now "^2.1.0"
 
@@ -5493,6 +5698,15 @@ range-parser@^1.0.3, range-parser@~1.2.0:
   version "1.2.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/range-parser/-/range-parser-1.2.0.tgz#f49be6b487894ddc40dcc94a322f611092e00d5e"
 
+raw-body@2.3.2:
+  version "2.3.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/raw-body/-/raw-body-2.3.2.tgz#bcd60c77d3eb93cde0050295c3f379389bc88f89"
+  dependencies:
+    bytes "3.0.0"
+    http-errors "1.6.2"
+    iconv-lite "0.4.19"
+    unpipe "1.0.0"
+
 raw-body@~2.0.1:
   version "2.0.2"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/raw-body/-/raw-body-2.0.2.tgz#a2c2f98c8531cee99c63d8d238b7de97bb659fca"
@@ -5500,17 +5714,9 @@ raw-body@~2.0.1:
     bytes "2.1.0"
     iconv-lite "0.4.8"
 
-raw-body@~2.2.0:
-  version "2.2.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/raw-body/-/raw-body-2.2.0.tgz#994976cf6a5096a41162840492f0bdc5d6e7fb96"
-  dependencies:
-    bytes "2.4.0"
-    iconv-lite "0.4.15"
-    unpipe "1.0.0"
-
-rc@^1.0.1, rc@^1.1.7:
-  version "1.2.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/rc/-/rc-1.2.1.tgz#2e03e8e42ee450b8cb3dce65be1bf8974e1dfd95"
+rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
+  version "1.2.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/rc/-/rc-1.2.2.tgz#d8ce9cb57e8d64d9c7badd9876c7c34cbe3c7077"
   dependencies:
     deep-extend "~0.4.0"
     ini "~1.3.0"
@@ -5518,8 +5724,8 @@ rc@^1.0.1, rc@^1.1.7:
     strip-json-comments "~2.0.1"
 
 react-addons-css-transition-group@^15.4.2:
-  version "15.6.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/react-addons-css-transition-group/-/react-addons-css-transition-group-15.6.0.tgz#69887cf6e4874d25cd66e22a699e29f0d648aba0"
+  version "15.6.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/react-addons-css-transition-group/-/react-addons-css-transition-group-15.6.2.tgz#9e4376bcf40b5217d14ec68553081cee4b08a6d6"
   dependencies:
     react-transition-group "^1.2.0"
 
@@ -5535,8 +5741,8 @@ react-addons-shallow-compare@0.14.8:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/react-addons-shallow-compare/-/react-addons-shallow-compare-0.14.8.tgz#1f26533d78cadabf4639756ec0dae5ab45427a74"
 
 react-addons-test-utils@^15.4.0:
-  version "15.6.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/react-addons-test-utils/-/react-addons-test-utils-15.6.0.tgz#062d36117fe8d18f3ba5e06eb33383b0b85ea5b9"
+  version "15.6.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/react-addons-test-utils/-/react-addons-test-utils-15.6.2.tgz#c12b6efdc2247c10da7b8770d185080a7b047156"
 
 react-collapse@2.3.1:
   version "2.3.1"
@@ -5551,8 +5757,8 @@ react-dd-menu@^2.0.0:
     react-transition-group "^1.1.3"
 
 react-dom@^15.4.0, react-dom@^15.x:
-  version "15.6.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/react-dom/-/react-dom-15.6.1.tgz#2cb0ed4191038e53c209eb3a79a23e2a4cf99470"
+  version "15.6.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/react-dom/-/react-dom-15.6.2.tgz#41cfadf693b757faf2708443a1d1fd5a02bef730"
   dependencies:
     fbjs "^0.8.9"
     loose-envify "^1.1.0"
@@ -5560,8 +5766,8 @@ react-dom@^15.4.0, react-dom@^15.x:
     prop-types "^15.5.10"
 
 react-file-download@^0.3.2:
-  version "0.3.4"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/react-file-download/-/react-file-download-0.3.4.tgz#4e1cfc7a47df6eeb299dfd845b99676cdedab5d2"
+  version "0.3.5"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/react-file-download/-/react-file-download-0.3.5.tgz#7a4e75874528806bfa53ddddd98b4da427d3a897"
 
 react-height@^2.0.0:
   version "2.2.1"
@@ -5616,12 +5822,6 @@ react-redux@^4.x.x:
     loose-envify "^1.1.0"
     prop-types "^15.5.4"
 
-react-remarkable@1.1.1:
-  version "1.1.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/react-remarkable/-/react-remarkable-1.1.1.tgz#37908ac95894576d0d39187bd289bc2cbb5ac6de"
-  dependencies:
-    remarkable "^1.4.1"
-
 react-split-pane@0.1.57:
   version "0.1.57"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/react-split-pane/-/react-split-pane-0.1.57.tgz#7cc2d30841ae6a3e246ee613a9858012528d894f"
@@ -5634,8 +5834,8 @@ react-style-proptype@^1.4.0:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/react-style-proptype/-/react-style-proptype-1.4.0.tgz#d82c4093b73767e3efaacba013cea22a50e7b5ee"
 
 react-transition-group@^1.1.1, react-transition-group@^1.1.3, react-transition-group@^1.2.0:
-  version "1.2.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/react-transition-group/-/react-transition-group-1.2.0.tgz#b51fc921b0c3835a7ef7c571c79fc82c73e9204f"
+  version "1.2.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/react-transition-group/-/react-transition-group-1.2.1.tgz#e11f72b257f921b213229a774df46612346c7ca6"
   dependencies:
     chain-function "^1.0.0"
     dom-helpers "^3.2.0"
@@ -5644,21 +5844,14 @@ react-transition-group@^1.1.1, react-transition-group@^1.1.3, react-transition-g
     warning "^3.0.0"
 
 react@^15.4.0, react@^15.x:
-  version "15.6.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/react/-/react-15.6.1.tgz#baa8434ec6780bde997cdc380b79cd33b96393df"
+  version "15.6.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/react/-/react-15.6.2.tgz#dba0434ab439cfe82f108f0f511663908179aa72"
   dependencies:
     create-react-class "^15.6.0"
     fbjs "^0.8.9"
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
     prop-types "^15.5.10"
-
-read-all-stream@^3.0.0:
-  version "3.1.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/read-all-stream/-/read-all-stream-3.1.0.tgz#35c3e177f2078ef789ee4bfafa4373074eaef4fa"
-  dependencies:
-    pinkie-promise "^2.0.0"
-    readable-stream "^2.0.0"
 
 read-pkg-up@^1.0.1:
   version "1.0.1"
@@ -5738,7 +5931,7 @@ readable-stream@2.2.7:
     isarray "0.0.1"
     string_decoder "~0.10.x"
 
-readable-stream@^2.0.0, readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.5, readable-stream@^2.0.6, readable-stream@^2.1.4, readable-stream@^2.1.5, readable-stream@^2.2.2, readable-stream@^2.2.9:
+readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.5, readable-stream@^2.0.6, readable-stream@^2.1.4, readable-stream@^2.1.5, readable-stream@^2.2.2, readable-stream@^2.2.9:
   version "2.3.3"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/readable-stream/-/readable-stream-2.3.3.tgz#368f2512d79f9d46fdfc71349ae7878bbc1eb95c"
   dependencies:
@@ -5833,7 +6026,7 @@ regex-cache@^0.4.2:
   dependencies:
     is-equal-shallow "^0.1.3"
 
-regexp-clone@0.0.1:
+regexp-clone@0.0.1, regexp-clone@^0.0.1:
   version "0.0.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/regexp-clone/-/regexp-clone-0.0.1.tgz#a7c2e09891fdbf38fbb10d376fb73003e68ac589"
 
@@ -5841,7 +6034,14 @@ regexp-quote@0.0.0:
   version "0.0.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/regexp-quote/-/regexp-quote-0.0.0.tgz#1e0f4650c862dcbfed54fd42b148e9bb1721fcf2"
 
-registry-url@^3.0.0:
+registry-auth-token@^3.0.1:
+  version "3.3.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/registry-auth-token/-/registry-auth-token-3.3.1.tgz#fb0d3289ee0d9ada2cbb52af5dfe66cb070d3006"
+  dependencies:
+    rc "^1.1.6"
+    safe-buffer "^5.0.1"
+
+registry-url@^3.0.3:
   version "3.1.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/registry-url/-/registry-url-3.1.0.tgz#3d4ef870f73dde1d77f0cf9a381432444e174942"
   dependencies:
@@ -5851,7 +6051,7 @@ relateurl@0.2.x:
   version "0.2.7"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/relateurl/-/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
 
-remarkable@^1.4.1:
+remarkable@^1.7.1:
   version "1.7.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/remarkable/-/remarkable-1.7.1.tgz#aaca4972100b66a642a63a1021ca4bac1be3bff6"
   dependencies:
@@ -5870,12 +6070,6 @@ repeat-string@^1.5.2:
   version "1.6.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/repeat-string/-/repeat-string-1.6.1.tgz#8dcae470e1c88abc2d600fff4a776286da75e637"
 
-repeating@^1.1.2:
-  version "1.1.3"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/repeating/-/repeating-1.1.3.tgz#3d4114218877537494f97f77f9785fab810fa4ac"
-  dependencies:
-    is-finite "^1.0.0"
-
 repeating@^2.0.0:
   version "2.0.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/repeating/-/repeating-2.0.1.tgz#5214c53a926d3552707527fbab415dbc08d06dda"
@@ -5886,7 +6080,7 @@ replace-ext@0.0.1:
   version "0.0.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/replace-ext/-/replace-ext-0.0.1.tgz#29bbd92078a739f0bcce2b4ee41e837953522924"
 
-request@^2.53.0, request@^2.55.0, request@^2.81.0:
+request@2.81.0:
   version "2.81.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/request/-/request-2.81.0.tgz#c6928946a0e06c5f8d6f8a9333469ffda46298a0"
   dependencies:
@@ -5912,6 +6106,33 @@ request@^2.53.0, request@^2.55.0, request@^2.81.0:
     tough-cookie "~2.3.0"
     tunnel-agent "^0.6.0"
     uuid "^3.0.0"
+
+request@^2.53.0, request@^2.55.0:
+  version "2.83.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/request/-/request-2.83.0.tgz#ca0b65da02ed62935887808e6f510381034e3356"
+  dependencies:
+    aws-sign2 "~0.7.0"
+    aws4 "^1.6.0"
+    caseless "~0.12.0"
+    combined-stream "~1.0.5"
+    extend "~3.0.1"
+    forever-agent "~0.6.1"
+    form-data "~2.3.1"
+    har-validator "~5.0.3"
+    hawk "~6.0.2"
+    http-signature "~1.2.0"
+    is-typedarray "~1.0.0"
+    isstream "~0.1.2"
+    json-stringify-safe "~5.0.1"
+    mime-types "~2.1.17"
+    oauth-sign "~0.8.2"
+    performance-now "^2.1.0"
+    qs "~6.5.1"
+    safe-buffer "^5.1.1"
+    stringstream "~0.0.5"
+    tough-cookie "~2.3.3"
+    tunnel-agent "^0.6.0"
+    uuid "^3.1.0"
 
 request@~2.9.202:
   version "2.9.203"
@@ -5963,8 +6184,8 @@ resolve-from@^2.0.0:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/resolve-from/-/resolve-from-2.0.0.tgz#9480ab20e94ffa1d9e80a804c7ea147611966b57"
 
 resolve@^1.1.6, resolve@^1.1.7, resolve@^1.2.0:
-  version "1.4.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/resolve/-/resolve-1.4.0.tgz#a75be01c53da25d934a98ebd0e4c4a7312f92a86"
+  version "1.5.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/resolve/-/resolve-1.5.0.tgz#1f09acce796c9a762579f31b2c1cc4c3cddf9f36"
   dependencies:
     path-parse "^1.0.5"
 
@@ -5993,8 +6214,8 @@ right-align@^0.1.1:
     align-text "^0.1.1"
 
 rimraf@2, rimraf@^2.2.8, rimraf@^2.5.1, rimraf@^2.6.1:
-  version "2.6.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/rimraf/-/rimraf-2.6.1.tgz#c2338ec643df7a1b7fe5c54fa86f57428a55f33d"
+  version "2.6.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/rimraf/-/rimraf-2.6.2.tgz#2ed8150d24a16ea8651e6d6ef0f47c4158ce7a36"
   dependencies:
     glob "^7.0.5"
 
@@ -6036,11 +6257,7 @@ rx-lite@^3.1.2:
   version "3.1.2"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/rx-lite/-/rx-lite-3.1.2.tgz#19ce502ca572665f3b647b10939f97fd1615f102"
 
-safe-buffer@5.0.1:
-  version "5.0.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/safe-buffer/-/safe-buffer-5.0.1.tgz#d263ca54696cd8a306b5ca6551e92de57918fbe7"
-
-safe-buffer@5.1.1, safe-buffer@^5.0.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
+safe-buffer@5.1.1, safe-buffer@^5.0.1, safe-buffer@^5.1.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
 
@@ -6099,19 +6316,19 @@ semver@^4.1.0:
   version "4.3.6"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/semver/-/semver-4.3.6.tgz#300bc6e0e86374f7ba61068b5b1ecd57fc6532da"
 
-send@0.15.4:
-  version "0.15.4"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/send/-/send-0.15.4.tgz#985faa3e284b0273c793364a35c6737bd93905b9"
+send@0.16.1:
+  version "0.16.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/send/-/send-0.16.1.tgz#a70e1ca21d1382c11d0d9f6231deb281080d7ab3"
   dependencies:
-    debug "2.6.8"
+    debug "2.6.9"
     depd "~1.1.1"
     destroy "~1.0.4"
     encodeurl "~1.0.1"
     escape-html "~1.0.3"
-    etag "~1.8.0"
-    fresh "0.5.0"
+    etag "~1.8.1"
+    fresh "0.5.2"
     http-errors "~1.6.2"
-    mime "1.3.4"
+    mime "1.4.1"
     ms "2.0.0"
     on-finished "~2.3.0"
     range-parser "~1.2.0"
@@ -6125,36 +6342,36 @@ serialize-error@2.0.0:
   version "2.0.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/serialize-error/-/serialize-error-2.0.0.tgz#6c1153f7ee3fe7f73ff1b1b7d2b494b67b675eba"
 
-serve-favicon@^2.4.3:
-  version "2.4.3"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/serve-favicon/-/serve-favicon-2.4.3.tgz#5986b17b0502642b641c21f818b1acce32025d23"
+serve-favicon@^2.4.5:
+  version "2.4.5"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/serve-favicon/-/serve-favicon-2.4.5.tgz#49d9a46863153a9240691c893d2b0e7d85d6d436"
   dependencies:
-    etag "~1.8.0"
-    fresh "0.5.0"
+    etag "~1.8.1"
+    fresh "0.5.2"
     ms "2.0.0"
-    parseurl "~1.3.1"
-    safe-buffer "5.0.1"
+    parseurl "~1.3.2"
+    safe-buffer "5.1.1"
 
 serve-index@^1.7.2:
-  version "1.9.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/serve-index/-/serve-index-1.9.0.tgz#d2b280fc560d616ee81b48bf0fa82abed2485ce7"
+  version "1.9.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/serve-index/-/serve-index-1.9.1.tgz#d3768d69b1e7d82e5ce050fff5b453bea12a9239"
   dependencies:
-    accepts "~1.3.3"
+    accepts "~1.3.4"
     batch "0.6.1"
-    debug "2.6.8"
+    debug "2.6.9"
     escape-html "~1.0.3"
-    http-errors "~1.6.1"
-    mime-types "~2.1.15"
-    parseurl "~1.3.1"
+    http-errors "~1.6.2"
+    mime-types "~2.1.17"
+    parseurl "~1.3.2"
 
-serve-static@1.12.4, serve-static@^1.10.0, serve-static@^1.9.2:
-  version "1.12.4"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/serve-static/-/serve-static-1.12.4.tgz#9b6aa98eeb7253c4eedc4c1f6fdbca609901a961"
+serve-static@1.13.1, serve-static@^1.10.0, serve-static@^1.9.2:
+  version "1.13.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/serve-static/-/serve-static-1.13.1.tgz#4c57d53404a761d8f2e7c1e8a18a47dbf278a719"
   dependencies:
     encodeurl "~1.0.1"
     escape-html "~1.0.3"
-    parseurl "~1.3.1"
-    send "0.15.4"
+    parseurl "~1.3.2"
+    send "0.16.1"
 
 set-blocking@^2.0.0, set-blocking@~2.0.0:
   version "2.0.0"
@@ -6171,6 +6388,10 @@ setimmediate@^1.0.5:
 setprototypeof@1.0.3:
   version "1.0.3"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/setprototypeof/-/setprototypeof-1.0.3.tgz#66567e37043eeb4f04d91bd658c0cbefb55b8e04"
+
+setprototypeof@1.1.0:
+  version "1.1.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/setprototypeof/-/setprototypeof-1.1.0.tgz#d0bd85536887b6fe7c0d818cb962d9d91c54e656"
 
 shallowequal@0.2.2:
   version "0.2.2"
@@ -6220,9 +6441,9 @@ should-util@^1.0.0:
   version "1.0.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/should-util/-/should-util-1.0.0.tgz#c98cda374aa6b190df8ba87c9889c2b4db620063"
 
-should@^12.0.0:
-  version "12.0.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/should/-/should-12.0.0.tgz#846667cd241691a6509fff0820f44d39143ddcf7"
+should@^13.1.3:
+  version "13.1.3"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/should/-/should-13.1.3.tgz#a089bdf7979392a8272a712c8b63acbaafb7948f"
   dependencies:
     should-equal "^2.0.0"
     should-format "^3.0.3"
@@ -6242,9 +6463,11 @@ slash@^1.0.0:
   version "1.0.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 
-slice-ansi@0.0.4:
-  version "0.0.4"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/slice-ansi/-/slice-ansi-0.0.4.tgz#edbf8903f66f7ce2f8eafd6ceed65e264c831b35"
+slice-ansi@1.0.0:
+  version "1.0.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/slice-ansi/-/slice-ansi-1.0.0.tgz#044f1a49d8842ff307aad6b505ed178bd950134d"
+  dependencies:
+    is-fullwidth-code-point "^2.0.0"
 
 sliced@0.0.5:
   version "0.0.5"
@@ -6254,15 +6477,17 @@ sliced@1.0.1:
   version "1.0.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/sliced/-/sliced-1.0.1.tgz#0b3a662b5d04c3177b1926bea82b03f837a2ef41"
 
-slide@^1.1.5:
-  version "1.1.6"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/slide/-/slide-1.1.6.tgz#56eb027d65b4d2dce6cb2e2d32c4d4afc9e1d707"
-
 sntp@1.x.x:
   version "1.0.9"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/sntp/-/sntp-1.0.9.tgz#6541184cc90aeea6c6e7b35e2659082443c66198"
   dependencies:
     hoek "2.x.x"
+
+sntp@2.x.x:
+  version "2.1.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/sntp/-/sntp-2.1.0.tgz#2c6cec14fedc2222739caf9b5c3d85d1cc5a2cc8"
+  dependencies:
+    hoek "4.x.x"
 
 socket.io-adapter@0.5.0:
   version "0.5.0"
@@ -6330,16 +6555,23 @@ sockjs-client@^1.0.3:
     json3 "^3.3.2"
     url-parse "^1.1.8"
 
-sockjs@0.3.18, sockjs@^0.3.15:
+sockjs@0.3.18:
   version "0.3.18"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/sockjs/-/sockjs-0.3.18.tgz#d9b289316ca7df77595ef299e075f0f937eb4207"
   dependencies:
     faye-websocket "^0.10.0"
     uuid "^2.0.2"
 
+sockjs@^0.3.15:
+  version "0.3.19"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/sockjs/-/sockjs-0.3.19.tgz#d976bbe800af7bd20ae08598d582393508993c0d"
+  dependencies:
+    faye-websocket "^0.10.0"
+    uuid "^3.0.1"
+
 source-map-support@^0.4.15:
-  version "0.4.17"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/source-map-support/-/source-map-support-0.4.17.tgz#6f2150553e6375375d0ccb3180502b78c18ba430"
+  version "0.4.18"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/source-map-support/-/source-map-support-0.4.18.tgz#0286a6de8be42641338594e97ccea75f0a2c585f"
   dependencies:
     source-map "^0.5.6"
 
@@ -6353,9 +6585,17 @@ source-map@0.5.x, source-map@^0.5.1, source-map@^0.5.6, source-map@~0.5.1:
   version "0.5.7"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
 
+source-map@~0.6.1:
+  version "0.6.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
+
 spark-md5@^1.0.0:
   version "1.0.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/spark-md5/-/spark-md5-1.0.1.tgz#c4b9a8d41cf7b0845423a821824f8dffa0f51b7c"
+
+spark-md5@^3.0.0:
+  version "3.0.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/spark-md5/-/spark-md5-3.0.0.tgz#3722227c54e2faf24b1dc6d933cc144e6f71bfef"
 
 sparkles@^1.0.0:
   version "1.0.0"
@@ -6433,7 +6673,11 @@ stack-trace@0.0.x:
   version "0.0.10"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/stack-trace/-/stack-trace-0.0.10.tgz#547c70b347e8d32b4e108ea1a2a159e5fdde19c0"
 
-"statuses@>= 1.3.1 < 2", statuses@~1.3.1:
+"statuses@>= 1.3.1 < 2":
+  version "1.4.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/statuses/-/statuses-1.4.0.tgz#bb73d446da2796106efcc1b601a253d6c46bd087"
+
+statuses@~1.3.1:
   version "1.3.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/statuses/-/statuses-1.3.1.tgz#faf51b9eb74aaef3b3acf4ad5f61abf24cb7b93e"
 
@@ -6451,19 +6695,9 @@ stream-consume@~0.1.0:
   version "0.1.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/stream-consume/-/stream-consume-0.1.0.tgz#a41ead1a6d6081ceb79f65b061901b6d8f3d1d0f"
 
-stream-shift@^1.0.0:
-  version "1.0.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/stream-shift/-/stream-shift-1.0.0.tgz#d5c752825e5367e786f78e18e445ea223a155952"
-
 streamsearch@0.1.2:
   version "0.1.2"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/streamsearch/-/streamsearch-0.1.2.tgz#808b9d0e56fc273d809ba57338e929919a1a9f1a"
-
-string-length@^1.0.0:
-  version "1.0.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/string-length/-/string-length-1.0.1.tgz#56970fb1c38558e9e70b728bf3de269ac45adfac"
-  dependencies:
-    strip-ansi "^3.0.0"
 
 string-width@^1.0.1, string-width@^1.0.2:
   version "1.0.2"
@@ -6473,7 +6707,7 @@ string-width@^1.0.1, string-width@^1.0.2:
     is-fullwidth-code-point "^1.0.0"
     strip-ansi "^3.0.0"
 
-string-width@^2.0.0, string-width@^2.1.0:
+string-width@^2.0.0, string-width@^2.1.0, string-width@^2.1.1:
   version "2.1.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/string-width/-/string-width-2.1.1.tgz#ab93f27a8dc13d28cac815c462143a6d9012ae9e"
   dependencies:
@@ -6498,7 +6732,7 @@ string_decoder@~1.0.0, string_decoder@~1.0.3:
   dependencies:
     safe-buffer "~5.1.0"
 
-stringstream@~0.0.4:
+stringstream@~0.0.4, stringstream@~0.0.5:
   version "0.0.5"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/stringstream/-/stringstream-0.0.5.tgz#4e484cd4de5a0bbbee18e46307710a8a81621878"
 
@@ -6537,6 +6771,10 @@ strip-bom@^3.0.0:
   version "3.0.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/strip-bom/-/strip-bom-3.0.0.tgz#2334c18e9c759f7bdd56fdef7e9ae3d588e68ed3"
 
+strip-eof@^1.0.0:
+  version "1.0.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/strip-eof/-/strip-eof-1.0.0.tgz#bb43ff5598a6eb05d89b59fcd129c983313606bf"
+
 strip-indent@^1.0.1:
   version "1.0.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/strip-indent/-/strip-indent-1.0.1.tgz#0c7962a6adefa7bbd4ac366460a638552ae1a0a2"
@@ -6567,19 +6805,19 @@ superagent@^1.2.0:
     readable-stream "1.0.27-1"
     reduce-component "1.0.1"
 
-superagent@^3.0.0, superagent@^3.5.2:
-  version "3.6.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/superagent/-/superagent-3.6.0.tgz#eb679651057c3462199c7b902b696c25350e1b87"
+superagent@^3.0.0, superagent@^3.5.2, superagent@^3.6.3:
+  version "3.8.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/superagent/-/superagent-3.8.0.tgz#87e3ed536c8860c08c7c7d1225da9a80cab064c6"
   dependencies:
     component-emitter "^1.2.0"
     cookiejar "^2.1.0"
-    debug "^2.6.0"
+    debug "^3.1.0"
     extend "^3.0.0"
-    form-data "^2.1.1"
+    form-data "^2.3.1"
     formidable "^1.1.1"
     methods "^1.1.1"
-    mime "^1.3.6"
-    qs "^6.4.0"
+    mime "^1.4.1"
+    qs "^6.5.1"
     readable-stream "^2.0.5"
 
 supertest@^3.0.0:
@@ -6593,11 +6831,11 @@ supports-color@1.2.0:
   version "1.2.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/supports-color/-/supports-color-1.2.0.tgz#ff1ed1e61169d06b3cf2d588e188b18d8847e17e"
 
-supports-color@3.1.2:
-  version "3.1.2"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/supports-color/-/supports-color-3.1.2.tgz#72a262894d9d408b956ca05ff37b2ed8a6e2a2d5"
+supports-color@4.4.0:
+  version "4.4.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/supports-color/-/supports-color-4.4.0.tgz#883f7ddabc165142b2a61427f3352ded195d1a3e"
   dependencies:
-    has-flag "^1.0.0"
+    has-flag "^2.0.0"
 
 supports-color@^0.2.0:
   version "0.2.0"
@@ -6614,19 +6852,20 @@ supports-color@^3.1.1:
     has-flag "^1.0.0"
 
 supports-color@^4.0.0:
-  version "4.4.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/supports-color/-/supports-color-4.4.0.tgz#883f7ddabc165142b2a61427f3352ded195d1a3e"
+  version "4.5.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/supports-color/-/supports-color-4.5.0.tgz#be7a0de484dec5c5cddf8b3d59125044912f635b"
   dependencies:
     has-flag "^2.0.0"
 
-swagger-client@3.0.20:
-  version "3.0.20"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/swagger-client/-/swagger-client-3.0.20.tgz#d09d2f2d55fefd472c978c339a1dd3d929e1b65f"
+swagger-client@^3.3.0, swagger-client@^3.3.1:
+  version "3.3.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/swagger-client/-/swagger-client-3.3.1.tgz#5c28b4296a83605be2e191d8ebecd02b84a69f0c"
   dependencies:
     babel-runtime "^6.23.0"
     btoa "1.1.2"
+    cookie "^0.3.1"
     deep-extend "^0.4.1"
-    fast-json-patch "~1.1.8"
+    fast-json-patch "1.1.8"
     isomorphic-fetch "2.2.1"
     isomorphic-form-data "0.0.1"
     js-yaml "^3.8.1"
@@ -6650,15 +6889,16 @@ swagger-editor@^2.9.2:
   version "2.10.5"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/swagger-editor/-/swagger-editor-2.10.5.tgz#a4316ccb0d40a77d30dadf91f0f4db7e475f948a"
 
-swagger-editor@^3.1.6:
-  version "3.1.6"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/swagger-editor/-/swagger-editor-3.1.6.tgz#3e9e6f13d3525a2800bf7227a08636ac74e2f664"
+swagger-editor@^3.1.12:
+  version "3.1.12"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/swagger-editor/-/swagger-editor-3.1.12.tgz#b326d46cb46db6b3a9c43bbba160d8b71de3efcb"
   dependencies:
     ajv "^5.2.2"
     boron "^0.2.3"
     bowser "1.6.1"
     classnames "^2.1.3"
     core-js "^2.4.1"
+    deepmerge "^1.3.2"
     immutable "^3.x.x"
     js-yaml "^3.5.5"
     json-beautify "^1.0.1"
@@ -6670,8 +6910,8 @@ swagger-editor@^3.1.6:
     react-redux "^4.x.x"
     react-transition-group "^1.1.1"
     redux "^3.x.x"
-    swagger-client "3.0.20"
-    swagger-ui "3.1.7"
+    swagger-client "^3.3.0"
+    swagger-ui "^3.4.0"
     whatwg-fetch "^2.0.3"
   optionalDependencies:
     webpack-dev-server "1.14.0"
@@ -6734,8 +6974,8 @@ swagger-schema-official@2.0.0-bab6bed:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/swagger-schema-official/-/swagger-schema-official-2.0.0-bab6bed.tgz#70070468d6d2977ca5237b2e519ca7d06a2ea3fd"
 
 swagger-test-templates@^1.2.0:
-  version "1.4.2"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/swagger-test-templates/-/swagger-test-templates-1.4.2.tgz#40d84422d5ed712e2d7d398ffdfaf83e169dc06d"
+  version "1.4.3"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/swagger-test-templates/-/swagger-test-templates-1.4.3.tgz#e047473aec06b938992e427665cafdbb6a01cfc0"
   dependencies:
     handlebars "^4.0.5"
     json-schema-deref-sync "^0.3.1"
@@ -6743,25 +6983,25 @@ swagger-test-templates@^1.2.0:
     sanitize-filename "^1.3.0"
     string "^3.3.0"
 
-swagger-tools@^0.10.1:
-  version "0.10.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/swagger-tools/-/swagger-tools-0.10.1.tgz#a455b257998ecf20de5b4e99bdcf1a709ab0fedc"
+swagger-tools@^0.10.3:
+  version "0.10.3"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/swagger-tools/-/swagger-tools-0.10.3.tgz#edeccb45a8c5746bdbf2883cf17e4b85c802d772"
   dependencies:
-    async "^1.3.0"
-    body-parser "1.12.4"
-    commander "^2.8.1"
-    debug "^2.2.0"
+    async "^2.5.0"
+    body-parser "1.18.2"
+    commander "^2.11.0"
+    debug "^3.1.0"
     js-yaml "^3.3.1"
-    json-refs "^2.1.5"
-    lodash-compat "^3.10.0"
+    json-refs "^3.0.1"
+    lodash "^4.17.4"
     multer "^1.1.0"
     parseurl "^1.3.0"
-    path-to-regexp "^1.2.0"
-    qs "^4.0.0"
+    path-to-regexp "^2.0.0"
+    qs "^6.0.3"
     serve-static "^1.10.0"
-    spark-md5 "^1.0.0"
+    spark-md5 "^3.0.0"
     string "^3.3.0"
-    superagent "^1.2.0"
+    superagent "^3.5.2"
     swagger-converter "^0.1.7"
     traverse "^0.6.6"
     z-schema "^3.15.4"
@@ -6789,16 +7029,19 @@ swagger-tools@^0.9.0:
     traverse "^0.6.6"
     z-schema "^3.15.4"
 
-swagger-ui-express@^2.0.7:
-  version "2.0.7"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/swagger-ui-express/-/swagger-ui-express-2.0.7.tgz#012a23894983624d5f7d5ebaffc224e66e2076ab"
+swagger-ui-express@^2.0.8:
+  version "2.0.8"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/swagger-ui-express/-/swagger-ui-express-2.0.8.tgz#94198e79a38fd9d2e05d85beb465e8ce0467cf64"
 
-swagger-ui@3.1.7:
-  version "3.1.7"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/swagger-ui/-/swagger-ui-3.1.7.tgz#d9f355588c9d6d6bad06e03ba019018a9351c70a"
+swagger-ui@^3.4.0:
+  version "3.4.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/swagger-ui/-/swagger-ui-3.4.1.tgz#b2dc7c3faca7fda30e45e0ad9a67533a35f5068e"
   dependencies:
     base64-js "^1.2.0"
     brace "0.7.0"
+    classnames "^2.2.5"
+    commonmark "^0.28.1"
+    css.escape "1.5.1"
     deep-extend "0.4.1"
     expect "1.20.2"
     getbase "^2.8.2"
@@ -6823,17 +7066,17 @@ swagger-ui@3.1.7:
     react-motion "0.4.4"
     react-object-inspector "0.2.1"
     react-redux "^4.x.x"
-    react-remarkable "1.1.1"
     react-split-pane "0.1.57"
     redux "^3.x.x"
     redux-immutable "3.0.8"
     redux-logger "*"
+    remarkable "^1.7.1"
     reselect "2.5.3"
     sanitize-html "^1.14.1"
     scroll-to-element "^2.0.0"
     serialize-error "2.0.0"
     shallowequal "0.2.2"
-    swagger-client "3.0.20"
+    swagger-client "^3.3.1"
     url-parse "^1.1.8"
     whatwg-fetch "0.11.1"
     worker-loader "^0.7.1"
@@ -6895,19 +7138,19 @@ symbol-observable@^1.0.3:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/symbol-observable/-/symbol-observable-1.0.4.tgz#29bf615d4aa7121bdd898b22d4b3f9bc4e2aa03d"
 
 table@^4.0.1:
-  version "4.0.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/table/-/table-4.0.1.tgz#a8116c133fac2c61f4a420ab6cdf5c4d61f0e435"
+  version "4.0.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/table/-/table-4.0.2.tgz#a33447375391e766ad34d3486e6e2aedc84d2e36"
   dependencies:
-    ajv "^4.7.0"
-    ajv-keywords "^1.0.0"
-    chalk "^1.1.1"
-    lodash "^4.0.0"
-    slice-ansi "0.0.4"
-    string-width "^2.0.0"
+    ajv "^5.2.3"
+    ajv-keywords "^2.1.0"
+    chalk "^2.1.0"
+    lodash "^4.17.4"
+    slice-ansi "1.0.0"
+    string-width "^2.1.1"
 
 tar-pack@^3.4.0:
-  version "3.4.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/tar-pack/-/tar-pack-3.4.0.tgz#23be2d7f671a8339376cbdb0b8fe3fdebf317984"
+  version "3.4.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/tar-pack/-/tar-pack-3.4.1.tgz#e1dbc03a9b9d3ba07e896ad027317eb679a10a1f"
   dependencies:
     debug "^2.2.0"
     fstream "^1.0.10"
@@ -6929,6 +7172,12 @@ tar@^2.2.1:
 term-canvas@0.0.5:
   version "0.0.5"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/term-canvas/-/term-canvas-0.0.5.tgz#597afac2fa6369a6f17860bce9c5f66d6ea0ca96"
+
+term-size@^1.2.0:
+  version "1.2.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/term-size/-/term-size-1.2.0.tgz#458b83887f288fc56d6fffbfad262e26638efa69"
+  dependencies:
+    execa "^0.7.0"
 
 text-table@~0.2.0:
   version "0.2.0"
@@ -6984,9 +7233,9 @@ time-stamp@^2.0.0:
   version "2.0.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/time-stamp/-/time-stamp-2.0.0.tgz#95c6a44530e15ba8d6f4a3ecb8c3a3fac46da357"
 
-timed-out@^2.0.0:
-  version "2.0.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/timed-out/-/timed-out-2.0.0.tgz#f38b0ae81d3747d628001f41dafc652ace671c0a"
+timed-out@^4.0.0:
+  version "4.0.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/timed-out/-/timed-out-4.0.1.tgz#f32eacac5a175bea25d7fab565ab3ed8741ef56f"
 
 timers-ext@0.1:
   version "0.1.2"
@@ -6999,11 +7248,11 @@ tmatch@^2.0.1:
   version "2.0.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/tmatch/-/tmatch-2.0.1.tgz#0c56246f33f30da1b8d3d72895abaf16660f38cf"
 
-tmp@^0.0.31:
-  version "0.0.31"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/tmp/-/tmp-0.0.31.tgz#8f38ab9438e17315e5dbd8b3657e8bfb277ae4a7"
+tmp@^0.0.33:
+  version "0.0.33"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/tmp/-/tmp-0.0.33.tgz#6d34335889768d21b2bcda0aa277ced3b1bfadf9"
   dependencies:
-    os-tmpdir "~1.0.1"
+    os-tmpdir "~1.0.2"
 
 to-array@0.1.4:
   version "0.1.4"
@@ -7013,19 +7262,23 @@ to-fast-properties@^1.0.3:
   version "1.0.3"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/to-fast-properties/-/to-fast-properties-1.0.3.tgz#b83571fa4d8c25b82e231b06e3a3055de4ca1a47"
 
+to-fast-properties@^2.0.0:
+  version "2.0.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/to-fast-properties/-/to-fast-properties-2.0.0.tgz#dc5e698cbd079265bc73e0377681a4e4e83f616e"
+
 to-iso-string@0.0.2:
   version "0.0.2"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/to-iso-string/-/to-iso-string-0.0.2.tgz#4dc19e664dfccbe25bd8db508b00c6da158255d1"
 
-touch@1.0.0:
-  version "1.0.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/touch/-/touch-1.0.0.tgz#449cbe2dbae5a8c8038e30d71fa0ff464947c4de"
+touch@^3.1.0:
+  version "3.1.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/touch/-/touch-3.1.0.tgz#fe365f5f75ec9ed4e56825e0bb76d24ab74af83b"
   dependencies:
     nopt "~1.0.10"
 
-tough-cookie@~2.3.0:
-  version "2.3.2"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/tough-cookie/-/tough-cookie-2.3.2.tgz#f081f76e4c85720e6c37a5faced737150d84072a"
+tough-cookie@~2.3.0, tough-cookie@~2.3.3:
+  version "2.3.3"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/tough-cookie/-/tough-cookie-2.3.3.tgz#0b618a5565b6dea90bf3425d04d55edc475a7561"
   dependencies:
     punycode "^1.4.1"
 
@@ -7079,15 +7332,15 @@ typedarray@^0.0.6:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
 ua-parser-js@^0.7.9:
-  version "0.7.14"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/ua-parser-js/-/ua-parser-js-0.7.14.tgz#110d53fa4c3f326c121292bbeac904d2e03387ca"
+  version "0.7.17"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/ua-parser-js/-/ua-parser-js-0.7.17.tgz#e9ec5f9498b9ec910e7ae3ac626a805c4d09ecac"
 
-uglify-js@3.0.x:
-  version "3.0.28"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/uglify-js/-/uglify-js-3.0.28.tgz#96b8495f0272944787b5843a1679aa326640d5f7"
+uglify-js@3.1.x:
+  version "3.1.6"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/uglify-js/-/uglify-js-3.1.6.tgz#918832602036e95d2318e11f27ee8461a8592c5d"
   dependencies:
     commander "~2.11.0"
-    source-map "~0.5.1"
+    source-map "~0.6.1"
 
 uglify-js@^2.6, uglify-js@^2.8.20:
   version "2.8.29"
@@ -7130,21 +7383,33 @@ unique-stream@^1.0.0:
   version "1.0.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/unique-stream/-/unique-stream-1.0.0.tgz#d59a4a75427447d9aa6c91e70263f8d26a4b104b"
 
+unique-string@^1.0.0:
+  version "1.0.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/unique-string/-/unique-string-1.0.0.tgz#9e1057cca851abb93398f8b33ae187b99caec11a"
+  dependencies:
+    crypto-random-string "^1.0.0"
+
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/unpipe/-/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"
 
-update-notifier@0.5.0:
-  version "0.5.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/update-notifier/-/update-notifier-0.5.0.tgz#07b5dc2066b3627ab3b4f530130f7eddda07a4cc"
+unzip-response@^2.0.1:
+  version "2.0.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/unzip-response/-/unzip-response-2.0.1.tgz#d2f0f737d16b0615e72a6935ed04214572d56f97"
+
+update-notifier@^2.2.0:
+  version "2.3.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/update-notifier/-/update-notifier-2.3.0.tgz#4e8827a6bb915140ab093559d7014e3ebb837451"
   dependencies:
-    chalk "^1.0.0"
-    configstore "^1.0.0"
+    boxen "^1.2.1"
+    chalk "^2.0.1"
+    configstore "^3.0.0"
+    import-lazy "^2.1.0"
+    is-installed-globally "^0.1.0"
     is-npm "^1.0.0"
-    latest-version "^1.0.0"
-    repeating "^1.1.2"
+    latest-version "^3.0.0"
     semver-diff "^2.0.0"
-    string-length "^1.0.0"
+    xdg-basedir "^3.0.0"
 
 upper-case@^1.1.1:
   version "1.1.3"
@@ -7155,6 +7420,12 @@ uri-js@^3.0.2:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/uri-js/-/uri-js-3.0.2.tgz#f90b858507f81dea4dcfbb3c4c3dbfa2b557faaa"
   dependencies:
     punycode "^2.1.0"
+
+url-parse-lax@^1.0.0:
+  version "1.0.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/url-parse-lax/-/url-parse-lax-1.0.0.tgz#7af8f303645e9bd79a272e7a14ac68bc0609da73"
+  dependencies:
+    prepend-http "^1.0.1"
 
 url-parse@1.0.x:
   version "1.0.5"
@@ -7195,15 +7466,15 @@ util@0.10.3:
   dependencies:
     inherits "2.0.1"
 
-utils-merge@1.0.0:
-  version "1.0.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/utils-merge/-/utils-merge-1.0.0.tgz#0294fb922bb9375153541c4f7096231f287c8af8"
+utils-merge@1.0.1:
+  version "1.0.1"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
 
-uuid@^2.0.1, uuid@^2.0.2:
+uuid@^2.0.2:
   version "2.0.3"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/uuid/-/uuid-2.0.3.tgz#67e2e863797215530dff318e5bf9dcebfd47b21a"
 
-uuid@^3.0.0:
+uuid@^3.0.0, uuid@^3.0.1, uuid@^3.1.0:
   version "3.1.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/uuid/-/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
 
@@ -7224,13 +7495,13 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "~1.0.0"
     spdx-expression-parse "~1.0.0"
 
-validator@7.0.0:
-  version "7.0.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/validator/-/validator-7.0.0.tgz#c74deb8063512fac35547938e6f0b1504a282fd2"
+validator@7.2.0:
+  version "7.2.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/validator/-/validator-7.2.0.tgz#a63dcbaba51d4350bf8df20988e0d5a54d711791"
 
 validator@^8.0.0:
-  version "8.1.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/validator/-/validator-8.1.0.tgz#89cf6b512ff71eba886afd8d10d47f8dc800eac0"
+  version "8.2.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/validator/-/validator-8.2.0.tgz#3c1237290e37092355344fef78c231249dab77b9"
 
 varify@0.2.0:
   version "0.2.0"
@@ -7239,9 +7510,9 @@ varify@0.2.0:
     redeyed "~1.0.1"
     through "~2.3.4"
 
-vary@^1, vary@~1.1.1:
-  version "1.1.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/vary/-/vary-1.1.1.tgz#67535ebb694c1d52257457984665323f587e8d37"
+vary@^1, vary@~1.1.2:
+  version "1.1.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
 
 verror@1.10.0:
   version "1.10.0"
@@ -7361,14 +7632,15 @@ webpack-dev-server@2.5.0:
     yargs "^6.0.0"
 
 websocket-driver@>=0.5.1:
-  version "0.6.5"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/websocket-driver/-/websocket-driver-0.6.5.tgz#5cb2556ceb85f4373c6d8238aa691c8454e13a36"
+  version "0.7.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/websocket-driver/-/websocket-driver-0.7.0.tgz#0caf9d2d755d93aee049d4bdd0d3fe2cca2a24eb"
   dependencies:
+    http-parser-js ">=0.4.0"
     websocket-extensions ">=0.1.1"
 
 websocket-extensions@>=0.1.1:
-  version "0.1.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/websocket-extensions/-/websocket-extensions-0.1.1.tgz#76899499c184b6ef754377c2dbb0cd6cb55d29e7"
+  version "0.1.2"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/websocket-extensions/-/websocket-extensions-0.1.2.tgz#0e18781de629a18308ce1481650f67ffa2693a5d"
 
 whatwg-fetch@0.11.1:
   version "0.11.1"
@@ -7394,13 +7666,19 @@ wide-align@^1.1.0:
   dependencies:
     string-width "^1.0.2"
 
+widest-line@^1.0.0:
+  version "1.0.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/widest-line/-/widest-line-1.0.0.tgz#0c09c85c2a94683d0d7eaf8ee097d564bf0e105c"
+  dependencies:
+    string-width "^1.0.1"
+
 window-size@0.1.0:
   version "0.1.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/window-size/-/window-size-0.1.0.tgz#5438cd2ea93b202efa3a19fe8887aee7c94f9c9d"
 
-winston@^2.3.1:
-  version "2.3.1"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/winston/-/winston-2.3.1.tgz#0b48420d978c01804cf0230b648861598225a119"
+winston@^2.4.0:
+  version "2.4.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/winston/-/winston-2.4.0.tgz#808050b93d52661ed9fb6c26b3f0c826708b0aee"
   dependencies:
     async "~1.0.0"
     colors "1.0.x"
@@ -7438,13 +7716,13 @@ wrappy@1:
   version "1.0.2"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
 
-write-file-atomic@^1.1.2:
-  version "1.3.4"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/write-file-atomic/-/write-file-atomic-1.3.4.tgz#f807a4f0b1d9e913ae7a48112e6cc3af1991b45f"
+write-file-atomic@^2.0.0:
+  version "2.3.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/write-file-atomic/-/write-file-atomic-2.3.0.tgz#1ff61575c2e2a4e8e510d6fa4e243cce183999ab"
   dependencies:
     graceful-fs "^4.1.11"
     imurmurhash "^0.1.4"
-    slide "^1.1.5"
+    signal-exit "^3.0.2"
 
 write@^0.2.1:
   version "0.2.1"
@@ -7478,11 +7756,9 @@ x256@>=0.0.1, x256@~0.0.1:
   version "0.0.2"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/x256/-/x256-0.0.2.tgz#c9af18876f7a175801d564fe70ad9e8317784934"
 
-xdg-basedir@^2.0.0:
-  version "2.0.0"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/xdg-basedir/-/xdg-basedir-2.0.0.tgz#edbc903cc385fc04523d966a335504b5504d1bd2"
-  dependencies:
-    os-homedir "^1.0.0"
+xdg-basedir@^3.0.0:
+  version "3.0.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/xdg-basedir/-/xdg-basedir-3.0.0.tgz#496b2cc109eca8dbacfe2dc72b603c17c5870ad4"
 
 xml-char-classes@^1.0.0:
   version "1.0.0"
@@ -7537,6 +7813,12 @@ yaml-js@0.2.0:
   version "0.2.0"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/yaml-js/-/yaml-js-0.2.0.tgz#30cdcc7bf678fdd00695ec34eb17b13aa8961632"
 
+yargs-parser@7.0.0:
+  version "7.0.0"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/yargs-parser/-/yargs-parser-7.0.0.tgz#8d0ac42f16ea55debd332caf4c4038b3e3f5dfd9"
+  dependencies:
+    camelcase "^4.1.0"
+
 yargs-parser@^4.2.0:
   version "4.2.1"
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/yargs-parser/-/yargs-parser-4.2.1.tgz#29cceac0dc4f03c6c87b4a9f217dd18c9f74871c"
@@ -7575,8 +7857,8 @@ yeast@0.1.2:
   resolved "https://repository.sibcolombia.net/repository/npm_proxy/yeast/-/yeast-0.1.2.tgz#008e06d8094320c372dbc2f8ed76a0ca6c8ac419"
 
 z-schema@^3.15.4, z-schema@^3.16.1:
-  version "3.18.3"
-  resolved "https://repository.sibcolombia.net/repository/npm_proxy/z-schema/-/z-schema-3.18.3.tgz#45592990891d0342fe20a36823fc44d89ab4d8a2"
+  version "3.18.4"
+  resolved "https://repository.sibcolombia.net/repository/npm_proxy/z-schema/-/z-schema-3.18.4.tgz#ea8132b279533ee60be2485a02f7e3e42541a9a2"
   dependencies:
     lodash.get "^4.0.0"
     lodash.isequal "^4.0.0"

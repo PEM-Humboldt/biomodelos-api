@@ -1,4 +1,4 @@
-FROM node:8.4.0-onbuild
+FROM node:9.3.0-onbuild
 MAINTAINER Valentina Grajales Olarte (lgrajales@humboldt.org.co)
 
 RUN npm run build

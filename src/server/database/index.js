@@ -44,6 +44,7 @@ export const connect = async (config, dboptions) => {
     });
 
     mongoose.Promise = global.Promise;
+
     try {
       connectionDB = await mongoose.connect(getMongoURL(config), {
         user: config.get('database.mongodb.user'),
