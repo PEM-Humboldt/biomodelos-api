@@ -21,7 +21,6 @@
     "swaggerRunMockup": "swagger_swagger_fileName=src/swagger/swagger.yaml swagger project start -m"
   },
   "dependencies": {
-    "babel-register": "^6.26.0",
     "body-parser": "1.18.2",
     "compression": "^1.7.1",
     "convict": "^4.0.2",
