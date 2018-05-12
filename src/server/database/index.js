@@ -46,9 +46,7 @@ export const connect = async (config, dboptions) => {
     mongoose.Promise = global.Promise;
 
     try {
-      connectionDB = await mongoose.connect(getMongoURL(config), {
-        useMongoClient: true
-      });
+      connectionDB = await mongoose.connect(getMongoURL(config));
       log.info('Successful connection with MongoDB Database');
       connectionDB = true;
     } catch (error) {
