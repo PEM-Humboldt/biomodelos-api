@@ -1,5 +1,29 @@
 import { Record, Updated, Reported, Created } from '../../models/record.model';
 
+export async function read(req, res) {
+  if(req.params.record_id){
+    try {
+      const record = await Record.findById(req.params.record_id,
+        {
+          _id: 0,
+          cellID: 0,
+          dbDuplicate: 0,
+          downloadDate: 0,
+          override: 0,
+          resourceFolder: 0,
+          resourceIncorporationDate: 0,
+          resourceName: 0,
+          sourceLayer: 0,
+          spatialDuplicate: 0
+        }
+      );
+      res.json(record);
+    } catch (e) {
+      res.json(e);
+    }
+  }
+}
+
 /**
  * @swagger
  * /records/{record_id}:
