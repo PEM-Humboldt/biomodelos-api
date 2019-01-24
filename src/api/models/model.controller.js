@@ -210,6 +210,7 @@ export async function ocurrenceEooStatsModel(req, res) {
         {
           _id: 0,
           modelID: 1,
+          modelLevel: 1,
           statRangeSize: 1,
           statModelEOO: 1,
           statRecsEOO: 1,
@@ -264,6 +265,7 @@ export async function ocurrenceRepStatsModel(req, res) {
         {
           _id: 0,
           modelID: 1,
+          modelLevel: 1,
           statRepPA: 1,
           statRepPA1: 1,
           statRepPA2: 1,
@@ -318,6 +320,7 @@ export async function ocurrenceForestLossStatsModel(req, res) {
         {
           _id: 0,
           modelID: 1,
+          modelLevel: 1,
           statForestLoss90: 1,
           statForestLoss00: 1,
           statForestLoss05: 1,
@@ -376,6 +379,7 @@ export async function ocurrenceCoversStatsModel(req, res) {
         {
           _id: 0,
           modelID: 1,
+          modelLevel: 1,
           statCoverLC2: 1,
           statCoverLC3: 1,
           statCoverLC4: 1,
@@ -473,7 +477,13 @@ export async function ocurrenceCoversStatsModel(req, res) {
  *         $ref: "#/definitions/ErrorResponse"
  */
 export async function generalModelStats(req, res) {
-  const totalStats = [
+  const totalStats: Array<{
+    taxonomicGroup: string,
+    totalSpecies: number,
+    developingModels?: number,
+    validModels?: number,
+    pendingValidation?: number
+  }> = [
     {
       taxonomicGroup: 'mamiferos',
       totalSpecies: 492
@@ -570,7 +580,7 @@ export async function generalModelStats(req, res) {
     ]);
     docs.map(elem => {
       let obj = totalStats.find(x => x.taxonomicGroup === elem._id);
-      let index = totalStats.indexOf(obj);
+      let index = totalStats.indexOf((obj: any));
       elem.modelStatus.map(elem => {
         switch (elem.status) {
           case 'Developing':

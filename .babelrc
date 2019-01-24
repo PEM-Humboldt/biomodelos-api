@@ -1,9 +1,10 @@
 {
 	"presets": [
-		"es2016",
+    ["env", {
+      "targets": {
+        "node": "current"
+      }
+    }],
     "flow"
-	],
-  "plugins": [
-    "transform-es2015-modules-commonjs"
-  ]
+	]
 }

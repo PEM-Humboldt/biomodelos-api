@@ -48,7 +48,6 @@ const server = http.createServer(app);
   try {
     log.info('Connecting with Biomodel Database');
     await dbConnect(config, dbSettings);
-    log.info('Connection with Biomodel Database successfully');
     // Start https server in listening mode
     server.listen(
       config.get('server.port'),

@@ -1,5 +1,29 @@
 import { Record, Updated, Reported, Created } from '../../models/record.model';
 
+export async function read(req, res) {
+  if(req.params.record_id){
+    try {
+      const record = await Record.findById(req.params.record_id,
+        {
+          _id: 0,
+          cellID: 0,
+          dbDuplicate: 0,
+          downloadDate: 0,
+          override: 0,
+          resourceFolder: 0,
+          resourceIncorporationDate: 0,
+          resourceName: 0,
+          sourceLayer: 0,
+          spatialDuplicate: 0
+        }
+      );
+      res.json(record);
+    } catch (e) {
+      res.json(e);
+    }
+  }
+}
+
 /**
  * @swagger
  * /records/{record_id}:
@@ -262,6 +286,18 @@ export async function createWithoutId(req, res) {
   const created = new Created();
   record.taxID = +req.body.taxID;
   record.acceptedNameUsage = req.body.acceptedNameUsage;
+  record.collection_code =
+    !req.body.collection_code || req.body.collection_code === ''
+      ? null
+      : req.body.collection_code;
+  record.catalogNumber =
+    !req.body.catalogNumber || req.body.catalogNumber === ''
+      ? null
+      : req.body.catalogNumber;
+  record.institution =
+    !req.body.institution || req.body.institution === ''
+      ? null
+      : req.body.institution;
   if (!req.body.adm1 || req.body.adm1 === '') {
     record.adm1 = null;
   } else {
@@ -755,7 +791,7 @@ export async function latestChange(req, res) {
  * @swagger
  * /records/metadata/collection/{taxID}:
  *   get:
- *     description: "Obtener los unique values del campo colection que corresponde al taxID ingresado"
+ *     description: "Obtener los unique values del campo collection que corresponde al taxID ingresado"
  *     operationId: STA7
  *     parameters:
  *       - name: taxID
@@ -791,13 +827,15 @@ export async function uniqueValuesCollection(req, res) {
         { $match: { taxID: +req.params.taxID } },
         {
           $group: {
-            _id: '$colection',
-            colection: { $first: '$colection' }
+            _id: '$collection_code',
+            collection_code: { $first: '$collection_code' }
           }
         },
-        { $project: { colection: '$_id', _id: 0 } },
-        { $group: { _id: null, colection: { $push: '$colection' } } },
-        { $project: { colection: '$colection', _id: 0 } }
+        { $project: { collection_code: '$_id', _id: 0 } },
+        {
+          $group: { _id: null, collection_code: { $push: '$collection_code' } }
+        },
+        { $project: { collection_code: '$collection_code', _id: 0 } }
       ]);
       res.send(doc);
     } catch (err) {

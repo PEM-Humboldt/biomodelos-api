@@ -44,15 +44,9 @@ export const connect = async (config, dboptions) => {
     });
 
     mongoose.Promise = global.Promise;
+
     try {
-      connectionDB = await mongoose.connect(getMongoURL(config), {
-        user: config.get('database.mongodb.user'),
-        pass: config.get('database.mongodb.pass'),
-        auth: config.get('database.mongodb.authMechanism'),
-        db: dboptions.dbParameters(),
-        server: dboptions.serverParameters(),
-        replset: dboptions.replsetParameters()
-      });
+      connectionDB = await mongoose.connect(getMongoURL(config));
       log.info('Successful connection with MongoDB Database');
       connectionDB = true;
     } catch (error) {

@@ -123,6 +123,7 @@ export async function read(req, res) {
             alt: 1,
             basisOfRecord: 1,
             catalogNumber: 1,
+            collection_code: 1,
             collector: 1,
             institution: 1,
             url: 1,
@@ -132,7 +133,9 @@ export async function read(req, res) {
             suggestedStateProvince: 1,
             suggestedCounty: 1,
             environmentalOutlier: 1,
-            source: 1
+            source: 1,
+            adm1: 1,
+            adm2: 1
           }
         }
       ]);
@@ -186,6 +189,7 @@ export async function readValidForGroup(req, res) {
             alt: 1,
             basisOfRecord: 1,
             catalogNumber: 1,
+            collection_code: 1,
             collector: 1,
             institution: 1,
             url: 1,
@@ -195,7 +199,9 @@ export async function readValidForGroup(req, res) {
             suggestedStateProvince: 1,
             suggestedCounty: 1,
             environmentalOutlier: 1,
-            source: 1
+            source: 1,
+            adm1: 1,
+            adm2: 1
           }
         }
       ]);
