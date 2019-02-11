@@ -28,6 +28,7 @@ function constructQuery(req) {
     ]
   };
   const query = {};
+  // TODO: Remove first level if
   if (
     req.params.species ||
     req.query.bmClass ||
@@ -386,9 +387,9 @@ export async function getTaxonomyAndRecords(req, res) {
  *     description: "Get general query to obtain species with some specific characteristics"
  *     operationId: SPE3
  *     parameters:
- *       - name: taxID
+ *       - name: species
  *         in: path
- *         description: The taxon ID of the specie
+ *         description: The scientific name to filter by.
  *         required: true
  *         type: string
  *     responses:
@@ -418,6 +419,7 @@ export async function searchSpecie(req, res) {
     const regEx = new RegExp(req.params.species, 'ig');
     query.$and.push({ species: { $regex: regEx } });
   }
+  //TODO: let the projection and sort outside the if in vars
   if (req.query.modelStatus) {
     try {
       const docs = await Specie.aggregate([
