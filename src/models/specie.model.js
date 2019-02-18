@@ -105,7 +105,9 @@ const SpecieSchema = new Schema(
       in: [0, 1, 2],
       required: true,
       default: 0
-    }
+    },
+    uploadUser: { type: String, required: true, default: null },
+    uploadDate: { type: Date, required: true, default: null }
   },
   { collection: 'species' }
 );
