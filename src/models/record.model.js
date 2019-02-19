@@ -56,7 +56,7 @@ const RecordSchema = new Schema(
     continent: { type: String, default: null },
     country: { type: String, default: null },
     stateProvince: { type: String, default: null },
-    adm2: { type: String, default: null },
+    county: { type: String, default: null },
     locality: { type: String, default: null },
     lat: { type: Number, min: -90, max: 90 },
     lon: { type: Number, min: -180, max: 180 },

@@ -302,10 +302,10 @@ export async function createWithoutId(req, res) {
   } else {
     record.stateProvince = req.body.stateProvince;
   }
-  if (!req.body.adm2 || req.body.adm2 === '') {
-    record.adm2 = null;
+  if (!req.body.county || req.body.county === '') {
+    record.county = null;
   } else {
-    record.adm2 = req.body.adm2;
+    record.county = req.body.county;
   }
 
   if (!req.body.locality || req.body.locality === '') {

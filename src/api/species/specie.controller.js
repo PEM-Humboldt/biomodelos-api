@@ -136,7 +136,7 @@ export async function read(req, res) {
             environmentalOutlier: 1,
             source: 1,
             stateProvince: 1,
-            adm2: 1
+            county: 1
           }
         }
       ]);
@@ -202,7 +202,7 @@ export async function readValidForGroup(req, res) {
             environmentalOutlier: 1,
             source: 1,
             stateProvince: 1,
-            adm2: 1
+            county: 1
           }
         }
       ]);
