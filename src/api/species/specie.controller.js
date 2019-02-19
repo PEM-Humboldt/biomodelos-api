@@ -135,7 +135,7 @@ export async function read(req, res) {
             suggestedCounty: 1,
             environmentalOutlier: 1,
             source: 1,
-            adm1: 1,
+            stateProvince: 1,
             adm2: 1
           }
         }
@@ -201,7 +201,7 @@ export async function readValidForGroup(req, res) {
             suggestedCounty: 1,
             environmentalOutlier: 1,
             source: 1,
-            adm1: 1,
+            stateProvince: 1,
             adm2: 1
           }
         }

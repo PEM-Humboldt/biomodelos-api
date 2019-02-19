@@ -297,10 +297,10 @@ export async function createWithoutId(req, res) {
     !req.body.institution || req.body.institution === ''
       ? null
       : req.body.institution;
-  if (!req.body.adm1 || req.body.adm1 === '') {
-    record.adm1 = null;
+  if (!req.body.stateProvince || req.body.stateProvince === '') {
+    record.stateProvince = null;
   } else {
-    record.adm1 = req.body.adm1;
+    record.stateProvince = req.body.stateProvince;
   }
   if (!req.body.adm2 || req.body.adm2 === '') {
     record.adm2 = null;

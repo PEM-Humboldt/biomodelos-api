@@ -55,7 +55,7 @@ const RecordSchema = new Schema(
     speciesOriginal: { type: String, default: null },
     continent: { type: String, default: null },
     country: { type: String, default: null },
-    adm1: { type: String, default: null },
+    stateProvince: { type: String, default: null },
     adm2: { type: String, default: null },
     locality: { type: String, default: null },
     lat: { type: Number, min: -90, max: 90 },
