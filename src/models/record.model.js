@@ -81,7 +81,7 @@ const RecordSchema = new Schema(
     suggestedMunicipality: { type: String, default: null },
     suggestedStateProvince: { type: String, default: null },
     sourceLayer: { type: String, default: null },
-    coordUncertaintyM: { type: Number, default: null },
+    coordinateUncertaintyInMeters: { type: Number, default: null },
     lowUncertainty: { type: Boolean, default: null },
     altitudinalOutlier: { type: Boolean, default: null },
     consistentAltitude: { type: Boolean, default: null },
