@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const ModelSchema = new Schema(
   {
-    _id: { type: Schema.ObjectId },
+    _id: { type: Schema.ObjectId, required: true },
     taxID: { type: Number, required: true },
     acceptedNameUsage: { type: String, required: true },
     consensusMethod: {
@@ -11,7 +11,19 @@ const ModelSchema = new Schema(
       in: ['all', 'mean', 'median'],
       required: true
     },
-    modelingMethod: { type: String, required: true },
+    modelingMethod: {
+      type: String,
+      required: true,
+      in: [
+        'Maxent',
+        'Bioclim',
+        'Convex hull',
+        'Expert map',
+        'Hybrid (Maxent + Expert opinion)',
+        'Hybrid (Bioclim + Expert opinion)',
+        'Hybrid (Maxent + Bioclim)'
+      ]
+    },
     modelLevel: { type: Number, in: [0, 1, 2, 3, 4] },
     modelStatus: { type: String, in: ['Developing', 'Consensus', 'Valid'] },
     published: { type: Boolean, default: false },
@@ -19,7 +31,7 @@ const ModelSchema = new Schema(
     isActive: { type: Boolean, default: true },
     modelID: { type: String, default: null },
     recsUsed: { type: Number },
-    ommision: { type: Number, min: 0, max: 1 },
+    omission: { type: Number, min: 0, max: 1 },
     perfStatSD: { type: Number },
     perfStatType: { type: String },
     perfStatValue: { type: Number },
@@ -106,8 +118,78 @@ const ModelSchema = new Schema(
     methodFile: { type: String },
     license: {
       type: String,
-      in: ['by', 'by-sa', 'by-nc', 'by-nc-sa', 'cc-zero'],
-      default: 'by-nc-sa'
+      in: ['by', 'by-sa', 'by-nc', 'by-nc-sa', 'cc-zero']
+    },
+    pValue: { type: Number, min: 0, max: 1 },
+    statForestLoss00min: { type: Number },
+    statForestLoss00max: { type: Number },
+    statForestLoss05min: { type: Number },
+    statForestLoss05max: { type: Number },
+    statForestLoss10min: { type: Number },
+    statForestLoss10max: { type: Number },
+    statForestLoss12min: { type: Number },
+    statForestLoss12max: { type: Number },
+    statForestLoss90min: { type: Number },
+    statForestLoss90max: { type: Number },
+    statForestLoss13min: { type: Number },
+    statForestLoss13max: { type: Number },
+    statForestLoss13: { type: Number },
+    statForestLoss14min: { type: Number },
+    statForestLoss14max: { type: Number },
+    statForestLoss14: { type: Number },
+    statForestLoss16min: { type: Number },
+    statForestLoss16max: { type: Number },
+    statForestLoss16: { type: Number },
+    statForestSinInfo90: { type: Number },
+    statForestSinInfo00: { type: Number },
+    statForestSinInfo05: { type: Number },
+    statForestSinInfo10: { type: Number },
+    statForestSinInfo12: { type: Number },
+    statForestSinInfo13: { type: Number },
+    statForestSinInfo14: { type: Number },
+    statForestSinInfo16: { type: Number },
+    statForestAll90: { type: Number },
+    statForestAll00: { type: Number },
+    statForestAll05: { type: Number },
+    statForestAll10: { type: Number },
+    statForestAll12: { type: Number },
+    statForestAll13: { type: Number },
+    statForestAll14: { type: Number },
+    statForestAll16: { type: Number },
+    userID_bm: { type: Number },
+    wms: { type: String },
+    idRecords: { type: Array },
+    modelSeason: {
+      type: String,
+      default: 'resident',
+      in: [
+        'resident',
+        'breeding season',
+        'non-breeding season',
+        'passage',
+        'seasonal occurrence uncertain'
+      ]
+    },
+    modelOrigin: {
+      type: String,
+      default: 'native',
+      in: [
+        'resident',
+        'breeding season',
+        'non-breeding season',
+        'passage',
+        'seasonal occurrence uncertain'
+      ]
+    },
+    modelGeoExtent: {
+      type: String,
+      default: 'national',
+      in: ['national', 'regional']
+    },
+    modelEpoch: {
+      type: String,
+      default: 'present',
+      in: ['present', 'past', 'future']
     }
   },
   { collection: 'models' }
