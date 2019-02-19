@@ -71,7 +71,6 @@ const RecordSchema = new Schema(
     institution: { type: String, default: null },
     url: { type: String, default: null },
     earliestDateCollected: { type: String, default: null },
-    latestDateCollected: { type: String, default: null },
     dd: { type: Number, min: 1, max: 31, default: null },
     mm: { type: Number, min: 1, max: 12, default: null },
     yyyy: { type: Number, min: 1800, max: 2100, default: null },
@@ -104,7 +103,6 @@ const RecordSchema = new Schema(
     resourceName: { type: String, default: null },
     source: { type: String, default: null },
     contributedRecord: { type: String, default: null },
-    override: { type: Boolean, default: false },
     privateData: { type: Number, in: [0, 1, 2], default: 0 },
     use: { type: Boolean, default: true },
     visualizationPrivileges: { type: Number, in: [0, 1, 2], default: 0 }

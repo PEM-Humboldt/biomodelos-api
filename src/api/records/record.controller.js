@@ -9,7 +9,6 @@ export async function read(req, res) {
           cellID: 0,
           dbDuplicate: 0,
           downloadDate: 0,
-          override: 0,
           resourceFolder: 0,
           resourceIncorporationDate: 0,
           resourceName: 0,
