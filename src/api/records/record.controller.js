@@ -75,11 +75,12 @@ export async function update(req, res) {
       updated.speciesOriginal = record.speciesOriginal;
       record.speciesOriginal = req.body.speciesOriginal;
     }
-    if (!req.body.locality || req.body.locality === record.locality) {
-      !updated.locality;
-    } else {
-      updated.locality = record.locality;
-      record.locality = req.body.locality;
+    if (
+      req.body.verbatimLocality &&
+      req.body.verbatimLocality !== record.verbatimLocality
+    ) {
+      record.updatedLocality = record.verbatimLocality;
+      record.verbatimLocality = req.body.verbatimLocality;
     }
     if (!req.body.lat || req.body.lat === record.lat) {
       !updated.lat;
@@ -114,7 +115,6 @@ export async function update(req, res) {
     if (
       !req.body.taxID &&
       !req.body.speciesOriginal &&
-      !req.body.locality &&
       !req.body.lat &&
       !req.body.lon &&
       !req.body.dd &&
@@ -308,10 +308,10 @@ export async function createWithoutId(req, res) {
     record.county = req.body.county;
   }
 
-  if (!req.body.locality || req.body.locality === '') {
-    record.locality = null;
+  if (!req.body.verbatimLocality || req.body.verbatimLocality === '') {
+    record.verbatimLocality = null;
   } else {
-    record.locality = req.body.locality;
+    record.verbatimLocality = req.body.verbatimLocality;
   }
   record.lat = +req.body.lat;
   record.lon = +req.body.lon;
