@@ -301,10 +301,10 @@ export async function createWithoutId(req, res) {
   }
   record.decimalLatitude = +req.body.decimalLatitude;
   record.decimalLongitude = +req.body.decimalLongitude;
-  if (!req.body.alt || req.body.alt === '') {
-    record.alt = null;
+  if (!req.body.verbatimElevation || req.body.verbatimElevation === '') {
+    record.verbatimElevation = null;
   } else {
-    record.alt = +req.body.alt;
+    record.verbatimElevation = +req.body.verbatimElevation;
   }
   if (!req.body.basisOfRecord || req.body.basisOfRecord === '') {
     record.basisOfRecord = null;
