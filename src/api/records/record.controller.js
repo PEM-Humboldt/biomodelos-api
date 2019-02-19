@@ -113,23 +113,8 @@ export async function update(req, res) {
       updated.yyyy = record.yyyy;
       record.yyyy = req.body.yyyy;
     }
-    if (
-      !req.body.taxID &&
-      !req.body.speciesOriginal &&
-      !req.body.lon &&
-      !req.body.dd &&
-      !req.body.mm &&
-      !req.body.yyyy
-    ) {
-      updated = [];
-    } else {
-      updated.userId_bm = req.body.userId_bm;
-      updated.updatedDate = Date.now;
-      if (!record.updated) {
-        record.updated = [];
-      }
-      record.updated.push(updated);
-    }
+    record.updatedDate = Date.now;
+    record.userId_bm = req.body.userId_bm;
     try {
       await record.save();
       res.json({
