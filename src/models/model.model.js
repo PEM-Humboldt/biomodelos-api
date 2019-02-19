@@ -19,9 +19,9 @@ const ModelSchema = new Schema(
         'Bioclim',
         'Convex hull',
         'Expert map',
-        'Hybrid (Maxent + Expert opinion',
-        'Hybrid (Bioclim + Expert opinion',
-        'Hybrid (Maxent + Bioclim'
+        'Hybrid (Maxent + Expert opinion)',
+        'Hybrid (Bioclim + Expert opinion)',
+        'Hybrid (Maxent + Bioclim)'
       ]
     },
     modelLevel: { type: Number, in: [0, 1, 2, 3, 4] },
