@@ -120,7 +120,7 @@ export async function read(req, res) {
             speciesOriginal: 1,
             verbatimLocality: 1,
             decimalLatitude: 1,
-            lon: 1,
+            decimalLongitude: 1,
             alt: 1,
             basisOfRecord: 1,
             catalogNumber: 1,
@@ -140,7 +140,9 @@ export async function read(req, res) {
           }
         }
       ]);
-      res.send(GeoJSON.parse(docs, { Point: ['decimalLatitude', 'lon'] }));
+      res.send(
+        GeoJSON.parse(docs, { Point: ['decimalLatitude', 'decimalLongitude'] })
+      );
     } catch (err) {
       res.send(err);
     }
@@ -186,7 +188,7 @@ export async function readValidForGroup(req, res) {
             speciesOriginal: 1,
             verbatimLocality: 1,
             decimalLatitude: 1,
-            lon: 1,
+            decimalLongitude: 1,
             alt: 1,
             basisOfRecord: 1,
             catalogNumber: 1,
@@ -206,7 +208,9 @@ export async function readValidForGroup(req, res) {
           }
         }
       ]);
-      res.send(GeoJSON.parse(docs, { Point: ['decimalLatitude', 'lon'] }));
+      res.send(
+        GeoJSON.parse(docs, { Point: ['decimalLatitude', 'decimalLongitude'] })
+      );
     } catch (err) {
       res.send(err);
     }

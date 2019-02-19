@@ -89,11 +89,12 @@ export async function update(req, res) {
       record.updatedLat = record.decimalLatitude;
       record.decimalLatitude = req.body.decimalLatitude;
     }
-    if (!req.body.lon || req.body.lon === record.lon) {
-      !updated.lon;
-    } else {
-      updated.lon = record.lon;
-      record.lon = req.body.lon;
+    if (
+      req.body.decimalLongitude &&
+      req.body.decimalLongitude !== record.decimalLongitude
+    ) {
+      record.updatedLon = record.decimalLongitude;
+      record.decimalLongitude = req.body.decimalLongitude;
     }
     if (!req.body.dd || req.body.dd === record.dd) {
       !updated.dd;
@@ -299,7 +300,7 @@ export async function createWithoutId(req, res) {
     record.verbatimLocality = req.body.verbatimLocality;
   }
   record.decimalLatitude = +req.body.decimalLatitude;
-  record.lon = +req.body.lon;
+  record.decimalLongitude = +req.body.decimalLongitude;
   if (!req.body.alt || req.body.alt === '') {
     record.alt = null;
   } else {
