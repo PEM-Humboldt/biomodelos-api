@@ -82,11 +82,12 @@ export async function update(req, res) {
       record.updatedLocality = record.verbatimLocality;
       record.verbatimLocality = req.body.verbatimLocality;
     }
-    if (!req.body.lat || req.body.lat === record.lat) {
-      !updated.lat;
-    } else {
-      updated.lat = record.lat;
-      record.lat = req.body.lat;
+    if (
+      req.body.decimalLatitude &&
+      req.body.decimalLatitude !== record.decimalLatitude
+    ) {
+      record.updatedLat = record.decimalLatitude;
+      record.decimalLatitude = req.body.decimalLatitude;
     }
     if (!req.body.lon || req.body.lon === record.lon) {
       !updated.lon;
@@ -115,7 +116,6 @@ export async function update(req, res) {
     if (
       !req.body.taxID &&
       !req.body.speciesOriginal &&
-      !req.body.lat &&
       !req.body.lon &&
       !req.body.dd &&
       !req.body.mm &&
@@ -313,7 +313,7 @@ export async function createWithoutId(req, res) {
   } else {
     record.verbatimLocality = req.body.verbatimLocality;
   }
-  record.lat = +req.body.lat;
+  record.decimalLatitude = +req.body.decimalLatitude;
   record.lon = +req.body.lon;
   if (!req.body.alt || req.body.alt === '') {
     record.alt = null;

@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 // esquema para la corrección de registros biológicos
 const UpdatedSchema = new Schema({
   speciesOriginal: { type: String },
-  lat: { type: Number },
   lon: { type: Number },
   dd: { type: Number },
   mm: { type: Number },
@@ -32,7 +31,6 @@ const CreatedSchema = new Schema({
   _id: { type: Schema.ObjectId },
   taxID: { type: Number },
   acceptedNameUsage: String,
-  lat: { type: Number },
   lon: { type: Number },
   alt: { type: String },
   basisOfRecord: { type: String },
@@ -57,7 +55,8 @@ const RecordSchema = new Schema(
     county: { type: String, default: null },
     verbatimLocality: { type: String, default: null },
     updatedLocality: { type: String, default: null },
-    lat: { type: Number, min: -90, max: 90 },
+    decimalLatitude: { type: Number, required: true, min: -90, max: 90 },
+    updatedLat: { type: Number, min: -90, max: 90 },
     lon: { type: Number, min: -180, max: 180 },
     alt: { type: String, default: null },
     demAltitude: { type: Number, min: 0, max: 8000, default: null },
