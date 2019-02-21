@@ -104,11 +104,9 @@ export async function update(req, res) {
       updated.month = record.month;
       record.month = req.body.month;
     }
-    if (!req.body.yyyy || req.body.yyyy === record.yyyy) {
-      !updated.yyyy;
-    } else {
-      updated.yyyy = record.yyyy;
-      record.yyyy = req.body.yyyy;
+    if (req.body.year && req.body.year !== record.year) {
+      updated.year = record.year;
+      record.year = req.body.year;
     }
 
     if (
@@ -118,7 +116,8 @@ export async function update(req, res) {
       req.body.decimalLatitude ||
       req.body.decimalLongitude ||
       req.body.day ||
-      req.body.month
+      req.body.month ||
+      req.body.year
     ) {
       updated.updatedDate = Date.now;
       updated.userId_bm = req.body.userId_bm;
@@ -344,10 +343,10 @@ export async function createWithoutId(req, res) {
   } else {
     record.day = +req.body.day;
   }
-  if (!req.body.yyyy || req.body.yyyy === '') {
-    record.yyyy = null;
+  if (!req.body.year || req.body.year === '') {
+    record.year = null;
   } else {
-    record.yyyy = +req.body.yyyy;
+    record.year = +req.body.year;
   }
   if (!req.body.comments_bm || req.body.comments_bm === '') {
     created.comments_bm = null;

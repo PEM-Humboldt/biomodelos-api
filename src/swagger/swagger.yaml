@@ -269,7 +269,7 @@ definitions:
       - collector
       - suggestedStateProvince
       - suggestedCounty
-      - yyyy
+      - year
       - month
       - day
       - taxID
@@ -304,7 +304,7 @@ definitions:
         type: string
       suggestedCounty:
         type: string
-      yyyy:
+      year:
         type: integer
       month:
         type: integer

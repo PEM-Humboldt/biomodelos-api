@@ -8,8 +8,8 @@ const UpdatedSchema = new Schema({
   decimalLongitude: { type: Number, min: -180, max: 180 },
   speciesOriginal: { type: String },
   day: { type: Number, min: 1, max: 31, default: null },
-  mm: { type: Number },
-  yyyy: { type: Number },
+  month: { type: Number, min: 1, max: 12, default: null },
+  year: { type: Number, min: 1800, max: 2100, default: null },
   updatedDate: { type: Date, default: Date.now },
   userId_bm: { type: Number }
 });
@@ -67,8 +67,8 @@ const RecordSchema = new Schema(
     url: { type: String, default: null },
     earliestDateCollected: { type: String, default: null },
     day: { type: Number, min: 1, max: 31, default: null },
-    mm: { type: Number, min: 1, max: 12, default: null },
-    yyyy: { type: Number, min: 1800, max: 2100, default: null },
+    month: { type: Number, min: 1, max: 12, default: null },
+    year: { type: Number, min: 1800, max: 2100, default: null },
     correctCountry: { type: Boolean, default: null },
     correctStateProvince: { type: Boolean, default: null },
     correctCounty: { type: Boolean, default: null },
