@@ -64,7 +64,7 @@ const RecordSchema = new Schema(
     catalogNumber: { type: String, default: null },
     colection: { type: String, default: null },
     collector: { type: String, default: null },
-    institution: { type: String, default: null },
+    institutionCode: { type: String, default: null },
     url: { type: String, default: null },
     earliestDateCollected: { type: String, default: null },
     dd: { type: Number, min: 1, max: 31, default: null },

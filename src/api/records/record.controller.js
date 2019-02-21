@@ -279,10 +279,10 @@ export async function createWithoutId(req, res) {
     !req.body.catalogNumber || req.body.catalogNumber === ''
       ? null
       : req.body.catalogNumber;
-  record.institution =
-    !req.body.institution || req.body.institution === ''
+  record.institutionCode =
+    !req.body.institutionCode || req.body.institutionCode === ''
       ? null
-      : req.body.institution;
+      : req.body.institutionCode;
   if (!req.body.stateProvince || req.body.stateProvince === '') {
     record.stateProvince = null;
   } else {
@@ -402,8 +402,8 @@ export async function uniqueValuesInstitutions(req, res) {
         { $match: { taxID: +req.params.taxID } },
         {
           $group: {
-            _id: '$institution',
-            institution: { $first: '$institution' }
+            _id: '$institutionCode',
+            institution: { $first: '$institutionCode' }
           }
         },
         { $project: { institution: '$_id', _id: 0 } },
