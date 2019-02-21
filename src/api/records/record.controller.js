@@ -284,10 +284,10 @@ export async function createWithoutId(req, res) {
   const created = new Created();
   record.taxID = +req.body.taxID;
   record.acceptedNameUsage = req.body.acceptedNameUsage;
-  record.collection_code =
-    !req.body.collection_code || req.body.collection_code === ''
+  record.collectionCode =
+    !req.body.collectionCode || req.body.collectionCode === ''
       ? null
-      : req.body.collection_code;
+      : req.body.collectionCode;
   record.catalogNumber =
     !req.body.catalogNumber || req.body.catalogNumber === ''
       ? null
@@ -825,8 +825,8 @@ export async function uniqueValuesCollection(req, res) {
         { $match: { taxID: +req.params.taxID } },
         {
           $group: {
-            _id: '$collection_code',
-            collection_code: { $first: '$collection_code' }
+            _id: '$collectionCode',
+            collection_code: { $first: '$collectionCode' }
           }
         },
         { $project: { collection_code: '$_id', _id: 0 } },

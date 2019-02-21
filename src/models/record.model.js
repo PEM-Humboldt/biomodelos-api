@@ -101,7 +101,8 @@ const RecordSchema = new Schema(
     contributedRecord: { type: String, default: null },
     privateData: { type: Number, in: [0, 1, 2], default: 0 },
     use: { type: Boolean, default: true },
-    visualizationPrivileges: { type: Number, in: [0, 1, 2], default: 0 }
+    visualizationPrivileges: { type: Number, in: [0, 1, 2], default: 0 },
+    collectionCode: { type: String, default: null }
   },
   { collection: 'records' }
 );
