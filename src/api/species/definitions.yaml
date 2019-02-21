@@ -155,7 +155,7 @@ definitions:
       - suggestedCounty
       - yyyy
       - mm
-      - dd
+      - day
       - taxID
       - url
       - environmentalOutlier
@@ -192,7 +192,7 @@ definitions:
         type: integer
       mm:
         type: integer
-      dd:
+      day:
         type: integer
       taxID:
         type: integer

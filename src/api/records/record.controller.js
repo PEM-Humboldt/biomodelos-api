@@ -96,11 +96,9 @@ export async function update(req, res) {
       updated.decimalLongitude = record.decimalLongitude;
       record.decimalLongitude = req.body.decimalLongitude;
     }
-    if (!req.body.dd || req.body.dd === record.dd) {
-      !updated.dd;
-    } else {
-      updated.dd = record.dd;
-      record.dd = req.body.dd;
+    if (req.body.day && req.body.day !== record.day) {
+      updated.day = record.day;
+      record.day = req.body.day;
     }
     if (!req.body.mm || req.body.mm === record.mm) {
       !updated.mm;
@@ -118,7 +116,10 @@ export async function update(req, res) {
     if (
       req.body.verbatimLocality ||
       req.body.decimalLatitude ||
-      req.body.decimalLongitude
+      req.body.decimalLongitude ||
+      req.body.decimalLatitude ||
+      req.body.decimalLongitude ||
+      req.body.day
     ) {
       updated.updatedDate = Date.now;
       updated.userId_bm = req.body.userId_bm;
@@ -339,10 +340,10 @@ export async function createWithoutId(req, res) {
   } else {
     record.mm = +req.body.mm;
   }
-  if (!req.body.dd || req.body.dd === '') {
-    record.dd = null;
+  if (!req.body.day || req.body.day === '') {
+    record.day = null;
   } else {
-    record.dd = +req.body.dd;
+    record.day = +req.body.day;
   }
   if (!req.body.yyyy || req.body.yyyy === '') {
     record.yyyy = null;
