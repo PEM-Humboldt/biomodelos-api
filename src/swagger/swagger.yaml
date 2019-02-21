@@ -270,7 +270,7 @@ definitions:
       - suggestedStateProvince
       - suggestedCounty
       - yyyy
-      - mm
+      - month
       - day
       - taxID
       - url
@@ -306,7 +306,7 @@ definitions:
         type: string
       yyyy:
         type: integer
-      mm:
+      month:
         type: integer
       day:
         type: integer
