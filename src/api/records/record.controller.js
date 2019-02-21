@@ -324,10 +324,10 @@ export async function createWithoutId(req, res) {
   } else {
     record.basisOfRecord = req.body.basisOfRecord;
   }
-  if (!req.body.collector || req.body.collector === '') {
-    record.collector = null;
+  if (!req.body.recordedBy || req.body.recordedBy === '') {
+    record.recordedBy = null;
   } else {
-    record.collector = req.body.collector;
+    record.recordedBy = req.body.recordedBy;
   }
   if (!req.body.source || req.body.source === '') {
     record.source = null;
@@ -473,7 +473,9 @@ export async function uniqueValuesCollectors(req, res) {
     try {
       const doc = await Record.aggregate([
         { $match: { taxID: +req.params.taxID } },
-        { $group: { _id: '$collector', collector: { $first: '$collector' } } },
+        {
+          $group: { _id: '$recordedBy', collector: { $first: '$recordedBy' } }
+        },
         { $project: { collector: '$_id', _id: 0 } },
         { $group: { _id: null, collector: { $push: '$collector' } } },
         { $project: { collector: '$collector', _id: 0 } }

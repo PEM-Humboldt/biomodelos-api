@@ -150,7 +150,7 @@ definitions:
       - institution
       - catalogNumber
       - basisOfRecord
-      - collector
+      - recordedBy
       - suggestedStateProvince
       - suggestedCounty
       - yyyy
@@ -182,7 +182,7 @@ definitions:
         type: string
       basisOfRecord:
         type: string
-      collector:
+      recordedBy:
         type: string
       suggestedStateProvince:
         type: string
