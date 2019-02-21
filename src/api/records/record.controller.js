@@ -79,21 +79,21 @@ export async function update(req, res) {
       req.body.verbatimLocality &&
       req.body.verbatimLocality !== record.verbatimLocality
     ) {
-      record.updatedLocality = record.verbatimLocality;
+      updated.verbatimLocality = record.verbatimLocality;
       record.verbatimLocality = req.body.verbatimLocality;
     }
     if (
       req.body.decimalLatitude &&
       req.body.decimalLatitude !== record.decimalLatitude
     ) {
-      record.updatedLat = record.decimalLatitude;
+      updated.decimalLatitude = record.decimalLatitude;
       record.decimalLatitude = req.body.decimalLatitude;
     }
     if (
       req.body.decimalLongitude &&
       req.body.decimalLongitude !== record.decimalLongitude
     ) {
-      record.updatedLon = record.decimalLongitude;
+      updated.decimalLongitude = record.decimalLongitude;
       record.decimalLongitude = req.body.decimalLongitude;
     }
     if (!req.body.dd || req.body.dd === record.dd) {
@@ -114,8 +114,21 @@ export async function update(req, res) {
       updated.yyyy = record.yyyy;
       record.yyyy = req.body.yyyy;
     }
-    record.updatedDate = Date.now;
-    record.userId_bm = req.body.userId_bm;
+
+    if (
+      req.body.verbatimLocality ||
+      req.body.decimalLatitude ||
+      req.body.decimalLongitude
+    ) {
+      updated.updatedDate = Date.now;
+      updated.userId_bm = req.body.userId_bm;
+    }
+
+    if (!record.updated) {
+      record.updated = [];
+    }
+    record.updated.push(updated);
+
     try {
       await record.save();
       res.json({
