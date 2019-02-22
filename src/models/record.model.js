@@ -11,7 +11,7 @@ const UpdatedSchema = new Schema({
   month: { type: Number, min: 1, max: 12, default: null },
   year: { type: Number, min: 1800, max: 2100, default: null },
   updatedDate: { type: Date, default: Date.now },
-  userId_bm: { type: Number }
+  reportedUserIdBm: { type: Number }
 });
 
 // esquema para el reporte de errores en registros biológicos
@@ -24,8 +24,7 @@ const ReportedSchema = new Schema({
   inCaptivity_bm: { type: Boolean },
   otherIssues_bm: { type: Boolean },
   comments_bm: { type: String },
-  reportedDate: { type: Date, default: Date.now },
-  userId_bm: { type: Number }
+  reportedDate: { type: Date, default: Date.now }
 });
 
 // esquema para la creación de registros biológicos
@@ -37,8 +36,7 @@ const CreatedSchema = new Schema({
   source: { type: String },
   comments_bm: { type: String },
   citation_bm: { type: String },
-  createdDate: { type: Date, default: Date.now },
-  userId_bm: { type: Number }
+  createdDate: { type: Date, default: Date.now }
 });
 
 const RecordSchema = new Schema(
@@ -101,7 +99,8 @@ const RecordSchema = new Schema(
     privateData: { type: Number, in: [0, 1, 2], default: 0 },
     use: { type: Boolean, default: true },
     visualizationPrivileges: { type: Number, in: [0, 1, 2], default: 0 },
-    collectionCode: { type: String, default: null }
+    collectionCode: { type: String, default: null },
+    reportedUserIdBm: { type: Number }
   },
   { collection: 'records' }
 );

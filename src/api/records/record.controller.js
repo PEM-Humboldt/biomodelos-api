@@ -108,7 +108,8 @@ export async function update(req, res) {
       updated.year = record.year;
       record.year = req.body.year;
     }
-
+    updated.reportedUserIdBm = record.reportedUserIdBm;
+    record.reportedUserIdBm = req.body.reportedUserIdBm;
     if (
       req.body.verbatimLocality ||
       req.body.decimalLatitude ||
@@ -120,7 +121,6 @@ export async function update(req, res) {
       req.body.year
     ) {
       updated.updatedDate = Date.now;
-      updated.userId_bm = req.body.userId_bm;
     }
 
     if (!record.updated) {
@@ -178,7 +178,7 @@ export async function create(req, res) {
   try {
     const record = await Record.findById(req.params.record_id);
     let reported = new Reported();
-    reported.userId_bm = req.body.userId_bm;
+    reported.reportedUserIdBm = req.body.reportedUserIdBm;
     if (!req.body.isOutlier_bm) {
       !reported.isOutlier_bm;
     } else {
@@ -225,7 +225,7 @@ export async function create(req, res) {
     ) {
       reported = [];
     } else {
-      reported.userId_bm = req.body.userId_bm;
+      reported.reportedUserIdBm = req.body.reportedUserIdBm;
       reported.reportedDate = Date.now;
       if (!record.reported) {
         record.reported = [];
@@ -353,7 +353,7 @@ export async function createWithoutId(req, res) {
   } else {
     created.comments_bm = req.body.comments_bm;
   }
-  created.userId_bm = req.body.userId_bm;
+  record.reportedUserIdBm = req.body.reportedUserIdBm;
   record.source = 'BioModelos';
   created.createdDate = Date.now;
   if (!req.body.citation_bm || req.body.citation_bm === '') {
@@ -577,8 +577,8 @@ export async function collaboratorsOfSpecie(req, res) {
         { $match: { taxID: +req.params.taxID } },
         {
           $group: {
-            _id: '$reported.userId_bm',
-            userId_bm: { $first: '$reported.userId_bm' }
+            _id: '$reportedUserIdBm',
+            userId_bm: { $first: '$reportedUserIdBm' }
           }
         },
         { $project: { userId_bm: '$_id', _id: 0 } },
@@ -599,8 +599,8 @@ export async function collaboratorsOfSpecie(req, res) {
           { $match: { taxID: +req.params.taxID } },
           {
             $group: {
-              _id: '$created.userId_bm',
-              userId_bm: { $first: '$created.userId_bm' }
+              _id: '$updated.reportedUserIdBm',
+              userId_bm: { $first: '$updated.reportedUserIdBm' }
             }
           },
           { $project: { userId_bm: '$_id', _id: 0 } },
@@ -616,39 +616,14 @@ export async function collaboratorsOfSpecie(req, res) {
         for (let i = 0; i < doc.length; i++) {
           temp.push(doc[i].userId_bm);
         }
-        try {
-          doc = await Record.aggregate([
-            { $match: { taxID: +req.params.taxID } },
-            {
-              $group: {
-                _id: '$updated.userId_bm',
-                userId_bm: { $first: '$updated.userId_bm' }
-              }
-            },
-            { $project: { userId_bm: '$_id', _id: 0 } },
-            { $unwind: '$userId_bm' },
-            {
-              $group: {
-                _id: '$userId_bm',
-                userId_bm: { $first: '$userId_bm' }
-              }
-            },
-            { $project: { userId_bm: '$userId_bm', _id: 0 } }
-          ]);
-          for (let i = 0; i < doc.length; i++) {
-            temp.push(doc[i].userId_bm);
-          }
-          const uniqueArray = temp.filter(
-            (elem, pos) =>
-              //removing duplicates in Temp
-              temp.indexOf(elem) == pos
-          );
-          const arrayJSON = {};
-          arrayJSON.collaborators = uniqueArray;
-          res.json(arrayJSON);
-        } catch (err) {
-          res.json(err);
-        }
+        const uniqueArray = temp.filter(
+          (elem, pos) =>
+            //removing duplicates in Temp
+            temp.indexOf(elem) == pos
+        );
+        const arrayJSON = {};
+        arrayJSON.collaborators = uniqueArray;
+        res.json(arrayJSON);
       } catch (err) {
         res.json(err);
       }
