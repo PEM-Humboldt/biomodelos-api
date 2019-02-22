@@ -11,12 +11,11 @@ const UpdatedSchema = new Schema({
   month: { type: Number, min: 1, max: 12, default: null },
   year: { type: Number, min: 1800, max: 2100, default: null },
   updatedDate: { type: Date, default: Date.now },
-  updatedUserIdBm: { type: Number }
+  userIdBm: { type: Number }
 });
 
 // esquema para la creación de registros biológicos
 const CreatedSchema = new Schema({
-  _id: { type: Schema.ObjectId },
   taxID: { type: Number },
   acceptedNameUsage: String,
   basisOfRecord: { type: String },
@@ -28,7 +27,8 @@ const CreatedSchema = new Schema({
 
 const RecordSchema = new Schema(
   {
-    occurrenceID: { type: String, default: null },
+    _id: { type: Schema.ObjectId, required: true },
+    occurrenceID: { type: String, required: true },
     taxID: { type: Number, required: true },
     acceptedNameUsage: { type: String, required: true },
     species: { type: String, default: null },
@@ -86,7 +86,7 @@ const RecordSchema = new Schema(
     use: { type: Boolean, default: true },
     visualizationPrivileges: { type: Number, in: [0, 1, 2], default: 0 },
     collectionCode: { type: String, default: null },
-    createdUserIdBm: { type: Number },
+    userIdBm: { type: Number },
     // Reported fields
     reportedUserIdBm: { type: Number },
     reportedOriginVagrant: { type: Boolean },

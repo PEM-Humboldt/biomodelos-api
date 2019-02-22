@@ -108,13 +108,11 @@ export async function update(req, res) {
       updated.year = record.year;
       record.year = req.body.year;
     }
-    if (
-      req.body.updatedUserIdBm &&
-      req.body.updatedUserIdBm !== record.createdUserIdBm
-    ) {
-      updated.updatedUserIdBm = record.createdUserIdBm;
-      record.createdUserIdBm = req.body.updatedUserIdBm;
+    if (req.body.userIdBm && req.body.userIdBm !== record.userIdBm) {
+      updated.userIdBm = record.userIdBm;
+      record.userIdBm = req.body.userIdBm;
     }
+
     if (
       req.body.verbatimLocality ||
       req.body.decimalLatitude ||
@@ -124,7 +122,7 @@ export async function update(req, res) {
       req.body.day ||
       req.body.month ||
       req.body.year ||
-      req.body.updatedUserIdBm
+      req.body.userIdBm
     ) {
       updated.updatedDate = Date.now;
     }
@@ -340,10 +338,10 @@ export async function createWithoutId(req, res) {
   } else {
     created.comments_bm = req.body.comments_bm;
   }
-  if (!req.body.createdUserIdBm || req.body.createdUserIdBm === '') {
-    record.createdUserIdBm = null;
+  if (!req.body.userIdBm || req.body.userIdBm === '') {
+    record.userIdBm = null;
   } else {
-    record.createdUserIdBm = req.body.createdUserIdBm;
+    record.userIdBm = req.body.userIdBm;
   }
   record.reportedUserIdBm = null;
   record.source = 'BioModelos';
@@ -568,8 +566,8 @@ export async function collaboratorsOfSpecie(req, res) {
         { $match: { taxID: +req.params.taxID } },
         {
           $group: {
-            _id: '$createdUserIdBm',
-            userId_bm: { $first: '$createdUserIdBm' }
+            _id: '$userIdBm',
+            userId_bm: { $first: '$userIdBm' }
           }
         },
         { $project: { userId_bm: '$_id', _id: 0 } },
@@ -612,8 +610,8 @@ export async function collaboratorsOfSpecie(req, res) {
             { $match: { taxID: +req.params.taxID } },
             {
               $group: {
-                _id: '$updated.updatedUserIdBm',
-                userId_bm: { $first: '$updated.updatedUserIdBm' }
+                _id: '$updated.userIdBm',
+                userId_bm: { $first: '$updated.userIdBm' }
               }
             },
             { $project: { userId_bm: '$_id', _id: 0 } },
