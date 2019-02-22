@@ -11,20 +11,7 @@ const UpdatedSchema = new Schema({
   month: { type: Number, min: 1, max: 12, default: null },
   year: { type: Number, min: 1800, max: 2100, default: null },
   updatedDate: { type: Date, default: Date.now },
-  reportedUserIdBm: { type: Number }
-});
-
-// esquema para el reporte de errores en registros biológicos
-const ReportedSchema = new Schema({
-  // id: Schema.ObjectId,
-  isOutlier_bm: { type: Boolean },
-  geoIssue_bm: { type: Boolean },
-  idIssue_bm: { type: Boolean },
-  oldTaxonomy_bm: { type: Boolean },
-  inCaptivity_bm: { type: Boolean },
-  otherIssues_bm: { type: Boolean },
-  comments_bm: { type: String },
-  reportedDate: { type: Date, default: Date.now }
+  updatedUserIdBm: { type: Number }
 });
 
 // esquema para la creación de registros biológicos
@@ -87,7 +74,6 @@ const RecordSchema = new Schema(
     dist2KnowRange: { type: Number, default: null },
     dbDuplicate: { type: Boolean, default: false },
     spatialDuplicated: { type: Boolean, default: false },
-    reported: [ReportedSchema],
     updated: [UpdatedSchema],
     created: [CreatedSchema],
     downloadDate: { type: String, default: null },
@@ -100,12 +86,21 @@ const RecordSchema = new Schema(
     use: { type: Boolean, default: true },
     visualizationPrivileges: { type: Number, in: [0, 1, 2], default: 0 },
     collectionCode: { type: String, default: null },
-    reportedUserIdBm: { type: Number }
+    createdUserIdBm: { type: Number },
+    // Reported fields
+    reportedUserIdBm: { type: Number },
+    reportedOriginVagrant: { type: Boolean },
+    reportedOldTaxonomyBm: { type: Boolean },
+    reportedOriginIntroduced: { type: Boolean },
+    reportedOtherIssuesBm: { type: Boolean },
+    reportedCommentsBm: { type: String },
+    reportedDate: { type: Date, default: Date.now },
+    reportedGeoIssueBm: { type: Boolean },
+    reportedIdIssueBm: { type: Boolean }
   },
   { collection: 'records' }
 );
 
 export const Record = mongoose.model('Record', RecordSchema, 'records');
-export const Reported = mongoose.model('ReportedSchema', ReportedSchema);
 export const Updated = mongoose.model('UpdatedSchema', UpdatedSchema);
 export const Created = mongoose.model('CreatedSchema', CreatedSchema);

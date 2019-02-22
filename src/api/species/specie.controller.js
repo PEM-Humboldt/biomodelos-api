@@ -97,10 +97,8 @@ export async function read(req, res) {
           $project: {
             reported: {
               $cond: {
-                if: {
-                  $and: [{ $isArray: '$reported' }, { $ne: ['$reported', []] }]
-                },
-                then: { $isArray: '$reported' },
+                if: { $ne: ['$reportedDate', null] },
+                then: true,
                 else: false
               }
             },
@@ -165,10 +163,8 @@ export async function readValidForGroup(req, res) {
           $project: {
             reported: {
               $cond: {
-                if: {
-                  $and: [{ $isArray: '$reported' }, { $ne: ['$reported', []] }]
-                },
-                then: { $isArray: '$reported' },
+                if: { $ne: ['$reportedDate', null] },
+                then: true,
                 else: false
               }
             },

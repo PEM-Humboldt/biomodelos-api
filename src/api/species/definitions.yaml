@@ -159,7 +159,6 @@ definitions:
       - taxID
       - url
       - environmentalOutlier
-      - reported
       - updated
     properties:
       _id:
@@ -199,8 +198,6 @@ definitions:
       url:
         type: string
       environmentalOutlier:
-        type: string
-      reported:
         type: string
       updated:
         type: string

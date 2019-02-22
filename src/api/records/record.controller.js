@@ -1,4 +1,4 @@
-import { Record, Updated, Reported, Created } from '../../models/record.model';
+import { Record, Updated, Created } from '../../models/record.model';
 
 export async function read(req, res) {
   if(req.params.record_id){
@@ -108,8 +108,13 @@ export async function update(req, res) {
       updated.year = record.year;
       record.year = req.body.year;
     }
-    updated.reportedUserIdBm = record.reportedUserIdBm;
-    record.reportedUserIdBm = req.body.reportedUserIdBm;
+    if (
+      req.body.updatedUserIdBm &&
+      req.body.updatedUserIdBm !== record.createdUserIdBm
+    ) {
+      updated.updatedUserIdBm = record.createdUserIdBm;
+      record.createdUserIdBm = req.body.updatedUserIdBm;
+    }
     if (
       req.body.verbatimLocality ||
       req.body.decimalLatitude ||
@@ -118,7 +123,8 @@ export async function update(req, res) {
       req.body.decimalLongitude ||
       req.body.day ||
       req.body.month ||
-      req.body.year
+      req.body.year ||
+      req.body.updatedUserIdBm
     ) {
       updated.updatedDate = Date.now;
     }
@@ -177,60 +183,41 @@ export async function update(req, res) {
 export async function create(req, res) {
   try {
     const record = await Record.findById(req.params.record_id);
-    let reported = new Reported();
-    reported.reportedUserIdBm = req.body.reportedUserIdBm;
-    if (!req.body.isOutlier_bm) {
-      !reported.isOutlier_bm;
-    } else {
-      reported.isOutlier_bm = req.body.isOutlier_bm;
+    if (req.body.reportedUserIdBm) {
+      record.reportedUserIdBm = req.body.reportedUserIdBm;
     }
-    if (!req.body.geoIssue_bm) {
-      !reported.geoIssue_bm;
-    } else {
-      reported.geoIssue_bm = req.body.geoIssue_bm;
+    if (req.body.reportedOriginVagrant) {
+      record.reportedOriginVagrant = req.body.reportedOriginVagrant;
     }
-    if (!req.body.idIssue_bm) {
-      !reported.idIssue_bm;
-    } else {
-      reported.idIssue_bm = req.body.idIssue_bm;
+    if (req.body.reportedGeoIssueBm) {
+      record.reportedGeoIssueBm = req.body.reportedGeoIssueBm;
     }
-    if (!req.body.oldTaxonomy_bm) {
-      !reported.oldTaxonomy_bm;
-    } else {
-      reported.oldTaxonomy_bm = req.body.oldTaxonomy_bm;
+    if (req.body.reportedIdIssueBm) {
+      record.reportedIdIssueBm = req.body.reportedIdIssueBm;
     }
-    if (!req.body.inCaptivity_bm) {
-      !reported.inCaptivity_bm;
-    } else {
-      reported.inCaptivity_bm = req.body.inCaptivity_bm;
+    if (req.body.reportedOldTaxonomyBm) {
+      record.reportedOldTaxonomyBm = req.body.reportedOldTaxonomyBm;
     }
-    if (!req.body.otherIssues_bm) {
-      !reported.otherIssues_bm;
-    } else {
-      reported.otherIssues_bm = req.body.otherIssues_bm;
+    if (req.body.reportedOriginIntroduced) {
+      record.reportedOriginIntroduced = req.body.reportedOriginIntroduced;
     }
-    if (!req.body.comments_bm) {
-      !reported.comments_bm;
-    } else {
-      reported.comments_bm = req.body.comments_bm;
+    if (req.body.reportedOtherIssuesBm) {
+      record.reportedOtherIssuesBm = req.body.reportedOtherIssuesBm;
+    }
+    if (req.body.reportedCommentsBm) {
+      record.reportedCommentsBm = req.body.reportedCommentsBm;
     }
     if (
-      !req.body.isOutlier_bm &&
-      !req.body.geoIssue_bm &&
-      !req.body.idIssue_bm &&
-      !req.body.oldTaxonomy_bm &&
-      !req.body.inCaptivity_bm &&
-      !req.body.otherIssues_bm &&
-      !req.body.comments_bm
+      req.body.reportedUserIdBm ||
+      req.body.reportedOriginVagrant ||
+      req.body.reportedOldTaxonomyBm ||
+      req.body.reportedOriginIntroduced ||
+      req.body.reportedOtherIssuesBm ||
+      req.body.reportedCommentsBm ||
+      req.body.reportedGeoIssueBm ||
+      req.body.reportedIdIssueBm
     ) {
-      reported = [];
-    } else {
-      reported.reportedUserIdBm = req.body.reportedUserIdBm;
-      reported.reportedDate = Date.now;
-      if (!record.reported) {
-        record.reported = [];
-      }
-      record.reported.push(reported);
+      record.reportedDate = Date.now;
     }
     try {
       await record.save();
@@ -353,7 +340,12 @@ export async function createWithoutId(req, res) {
   } else {
     created.comments_bm = req.body.comments_bm;
   }
-  record.reportedUserIdBm = req.body.reportedUserIdBm;
+  if (!req.body.createdUserIdBm || req.body.createdUserIdBm === '') {
+    record.createdUserIdBm = null;
+  } else {
+    record.createdUserIdBm = req.body.createdUserIdBm;
+  }
+  record.reportedUserIdBm = null;
   record.source = 'BioModelos';
   created.createdDate = Date.now;
   if (!req.body.citation_bm || req.body.citation_bm === '') {
@@ -363,7 +355,6 @@ export async function createWithoutId(req, res) {
   }
   record.contributedRecord = true;
   record.updated = [];
-  record.reported = [];
   record.created = [];
   record.created.push(created);
   try {
@@ -577,8 +568,8 @@ export async function collaboratorsOfSpecie(req, res) {
         { $match: { taxID: +req.params.taxID } },
         {
           $group: {
-            _id: '$reportedUserIdBm',
-            userId_bm: { $first: '$reportedUserIdBm' }
+            _id: '$createdUserIdBm',
+            userId_bm: { $first: '$createdUserIdBm' }
           }
         },
         { $project: { userId_bm: '$_id', _id: 0 } },
@@ -595,12 +586,12 @@ export async function collaboratorsOfSpecie(req, res) {
         temp.push(doc[i].userId_bm);
       }
       try {
-        doc = await Record.aggregate([
+        let doc = await Record.aggregate([
           { $match: { taxID: +req.params.taxID } },
           {
             $group: {
-              _id: '$updated.reportedUserIdBm',
-              userId_bm: { $first: '$updated.reportedUserIdBm' }
+              _id: '$reportedUserIdBm',
+              userId_bm: { $first: '$reportedUserIdBm' }
             }
           },
           { $project: { userId_bm: '$_id', _id: 0 } },
@@ -616,14 +607,39 @@ export async function collaboratorsOfSpecie(req, res) {
         for (let i = 0; i < doc.length; i++) {
           temp.push(doc[i].userId_bm);
         }
-        const uniqueArray = temp.filter(
-          (elem, pos) =>
-            //removing duplicates in Temp
-            temp.indexOf(elem) == pos
-        );
-        const arrayJSON = {};
-        arrayJSON.collaborators = uniqueArray;
-        res.json(arrayJSON);
+        try {
+          doc = await Record.aggregate([
+            { $match: { taxID: +req.params.taxID } },
+            {
+              $group: {
+                _id: '$updated.updatedUserIdBm',
+                userId_bm: { $first: '$updated.updatedUserIdBm' }
+              }
+            },
+            { $project: { userId_bm: '$_id', _id: 0 } },
+            { $unwind: '$userId_bm' },
+            {
+              $group: {
+                _id: '$userId_bm',
+                userId_bm: { $first: '$userId_bm' }
+              }
+            },
+            { $project: { userId_bm: '$userId_bm', _id: 0 } }
+          ]);
+          for (let i = 0; i < doc.length; i++) {
+            temp.push(doc[i].userId_bm);
+          }
+          const uniqueArray = temp.filter(
+            (elem, pos) =>
+              //removing duplicates in Temp
+              temp.indexOf(elem) == pos
+          );
+          const arrayJSON = {};
+          arrayJSON.collaborators = uniqueArray;
+          res.json(arrayJSON);
+        } catch (err) {
+          res.json(err);
+        }
       } catch (err) {
         res.json(err);
       }
@@ -674,9 +690,9 @@ export async function latestChange(req, res) {
         { $match: { taxID: +req.params.taxID } },
         {
           $group: {
-            _id: '$reported.reportedDate',
+            _id: '$reportedDate',
             reportedDate: {
-              $max: '$reported.reportedDate'
+              $max: '$reportedDate'
             }
           }
         },
