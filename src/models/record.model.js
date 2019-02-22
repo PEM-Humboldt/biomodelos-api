@@ -14,17 +14,6 @@ const UpdatedSchema = new Schema({
   userIdBm: { type: Number }
 });
 
-// esquema para la creación de registros biológicos
-const CreatedSchema = new Schema({
-  taxID: { type: Number },
-  acceptedNameUsage: String,
-  basisOfRecord: { type: String },
-  source: { type: String },
-  comments_bm: { type: String },
-  citation_bm: { type: String },
-  createdDate: { type: Date, default: Date.now }
-});
-
 const RecordSchema = new Schema(
   {
     _id: { type: Schema.ObjectId, required: true },
@@ -75,7 +64,6 @@ const RecordSchema = new Schema(
     dbDuplicate: { type: Boolean, default: false },
     spatialDuplicated: { type: Boolean, default: false },
     updated: [UpdatedSchema],
-    created: [CreatedSchema],
     downloadDate: { type: String, default: null },
     resourceFolder: { type: String, default: null, required: true },
     resourceIncorporationDate: { type: String, default: null, required: true },
@@ -87,6 +75,29 @@ const RecordSchema = new Schema(
     visualizationPrivileges: { type: Number, in: [0, 1, 2], default: 0 },
     collectionCode: { type: String, default: null },
     userIdBm: { type: Number },
+    maximumElevationInMeters: { type: Number, default: null },
+    minimumElevationInMeters: { type: Number, default: null },
+    origin: {
+      type: String,
+      default: 'native',
+      in: ['native', 'introduced', 'vagrant']
+    },
+    presence: {
+      type: String,
+      default: 'extant',
+      in: ['extant', 'probablyExtant', 'possiblyExtinct', 'extinct']
+    },
+    recordStatus: { type: Boolean, default: null },
+    season: {
+      type: String,
+      default: 'resident',
+      in: ['resident', 'breeding season', 'non-breeding season', 'passage']
+    },
+    // Created fields
+    externallyCreated: { type: Boolean, default: false },
+    createdCommentsBm: { type: String },
+    createdCitationBm: { type: String },
+    createdDate: { type: Date, default: Date.now },
     // Reported fields
     reportedUserIdBm: { type: Number },
     reportedOriginVagrant: { type: Boolean },
@@ -103,4 +114,3 @@ const RecordSchema = new Schema(
 
 export const Record = mongoose.model('Record', RecordSchema, 'records');
 export const Updated = mongoose.model('UpdatedSchema', UpdatedSchema);
-export const Created = mongoose.model('CreatedSchema', CreatedSchema);

@@ -1,4 +1,4 @@
-import { Record, Updated, Created } from '../../models/record.model';
+import { Record, Updated } from '../../models/record.model';
 
 export async function read(req, res) {
   if(req.params.record_id){
@@ -60,9 +60,7 @@ export async function update(req, res) {
   try {
     const record = await Record.findById(req.params.record_id);
     let updated = new Updated();
-    if (!req.body.taxID || req.body.taxID === record.taxID) {
-      !updated.taxID;
-    } else {
+    if (req.body.taxID && req.body.taxID !== record.taxID) {
       updated.taxID = record.taxID;
       record.taxID = req.body.taxID;
     }
@@ -331,10 +329,10 @@ export async function createWithoutId(req, res) {
   } else {
     record.year = +req.body.year;
   }
-  if (!req.body.comments_bm || req.body.comments_bm === '') {
-    created.comments_bm = null;
+  if (!req.body.createdCommentsBm || req.body.createdCommentsBm === '') {
+    record.createdCommentsBm = null;
   } else {
-    created.comments_bm = req.body.comments_bm;
+    record.createdCommentsBm = req.body.createdCommentsBm;
   }
   if (!req.body.userIdBm || req.body.userIdBm === '') {
     record.userIdBm = null;
@@ -343,16 +341,14 @@ export async function createWithoutId(req, res) {
   }
   record.reportedUserIdBm = null;
   record.source = 'BioModelos';
-  created.createdDate = Date.now;
-  if (!req.body.citation_bm || req.body.citation_bm === '') {
-    created.citation_bm = null;
+  record.createdDate = Date.now;
+  if (!req.body.createdCitationBm || req.body.createdCitationBm === '') {
+    record.createdCitationBm = null;
   } else {
-    created.citation_bm = req.body.citation_bm;
+    record.createdCitationBm = req.body.createdCitationBm;
   }
   record.contributedRecord = true;
   record.updated = [];
-  record.created = [];
-  record.created.push(created);
   try {
     await record.save();
     res.json({ message: `Record created! ${record._id}` });
@@ -715,9 +711,9 @@ export async function latestChange(req, res) {
           { $match: { taxID: +req.params.taxID } },
           {
             $group: {
-              _id: '$created.createdDate',
+              _id: '$createdDate',
               createdDate: {
-                $max: '$created.createdDate'
+                $max: '$createdDate'
               }
             }
           },
