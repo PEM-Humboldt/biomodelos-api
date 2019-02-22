@@ -67,11 +67,9 @@ export async function update(req, res) {
       record.taxID = req.body.taxID;
     }
     if (
-      !req.body.speciesOriginal ||
-      req.body.speciesOriginal === record.speciesOriginal
+      req.body.speciesOriginal &&
+      req.body.speciesOriginal !== record.speciesOriginal
     ) {
-      !updated.speciesOriginal;
-    } else {
       updated.speciesOriginal = record.speciesOriginal;
       record.speciesOriginal = req.body.speciesOriginal;
     }
