@@ -248,9 +248,10 @@ export async function readValidForGroup(req, res) {
  */
 export async function getAllSpecies(req, res) {
   const query = constructQuery(req);
-  if (req.query.modelStatus) {
-    try {
-      const docs = await Specie.aggregate([
+  try {
+    let docs = [];
+    if (req.query.modelStatus) {
+      docs = await Specie.aggregate([
         {
           $match: query
         },
@@ -273,21 +274,39 @@ export async function getAllSpecies(req, res) {
           }
         }
       ]).sort({ species: 1 });
-      res.json(docs);
-    } catch (err) {
-      res.json(err);
-    }
-  } else {
-    try {
-      const docs = await Specie.find(query, {
+    } else if (req.query.speciesIn) {
+      docs = await Specie.aggregate([
+        {
+          $match: {
+            taxID: {
+              $in: req.query.speciesIn.split(',').map(e => parseInt(e.trim()))
+            }
+          }
+        },
+        {
+          $group: {
+            _id: {
+              acceptedNameUsage: '$acceptedNameUsage',
+              taxID: '$taxID'
+            },
+            acceptedNameUsage: { $first: '$acceptedNameUsage' },
+            taxID: { $first: '$taxID' }
+          }
+        },
+        { $project: { _id: 0 } },
+        { $sort: { acceptedNameUsage: 1 } }
+      ]);
+    } else {
+      docs = await Specie.find(query, {
         species: 1,
         taxID: 1,
         _id: 0
       }).sort({ species: 1 });
-      res.json(docs);
-    } catch (err) {
-      res.json(err);
     }
+    res.json(docs);
+  } catch (err) {
+    console.error(err);
+    res.json(err);
   }
 }
 
