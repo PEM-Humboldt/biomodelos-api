@@ -52,7 +52,7 @@ function constructQuery(req) {
  * @swagger
  * /species/records/{taxID}:
  *   get:
- *     description: "All the records of an acceptedNameUsage (using internal taxID as key): query (use = true & visualizationPrivileges = 0)"
+ *     description: "Get all records of an species acceptedNameUsage."
  *     operationId: REC1
  *     parameters:
  *       - name: taxID
@@ -75,13 +75,13 @@ function constructQuery(req) {
  *             features:
  *               type: array
  *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *                 $ref: "#/definitions/FeatureSpeciesRecord"
  *     default:
  *       description: Error
  *       schema:
  *         $ref: "#/definitions/ErrorResponse"
  */
-export async function read(req, res) {
+export async function getSpeciesRecords(req, res) {
   if (req.params.taxID) {
     try {
       const docs = await Record.aggregate([
@@ -147,7 +147,40 @@ export async function read(req, res) {
   }
 }
 
-export async function readValidForGroup(req, res) {
+/**
+ * @swagger
+ * /species/records/group/{taxID}:
+ *   get:
+ *     description: "Get all records of an species acceptedNameUsage, with privileges for group."
+ *     operationId: REC1
+ *     parameters:
+ *       - name: taxID
+ *         in: path
+ *         description: The taxon ID of the specie
+ *         required: true
+ *         type: string
+ *     responses:
+ *       "200":
+ *         description: Success
+ *         schema:
+ *           type: object
+ *           required:
+ *             - type
+ *             - features
+ *           properties:
+ *             type:
+ *               type: string
+ *               default: "FeatureCollection"
+ *             features:
+ *               type: array
+ *               items:
+ *                 $ref: "#/definitions/FeatureSpeciesRecord"
+ *     default:
+ *       description: Error
+ *       schema:
+ *         $ref: "#/definitions/ErrorResponse"
+ */
+export async function getSpeciesRecordsWithPrivileges(req, res) {
   if (req.params.taxID) {
     try {
       const docs = await Record.aggregate([
@@ -220,27 +253,62 @@ export async function readValidForGroup(req, res) {
  *     description: "Get all the species in BioModelos"
  *     operationId: SPE1
  *     parameters:
- *       - name: taxID
- *         in: path
- *         description: The taxon ID of the specie
- *         required: true
+ *       - name: bmClass
+ *         in: query
+ *         description: // TODO Describe parameter
+ *         required: false
  *         type: string
+ *       - name: endangered
+ *         in: query
+ *         description: true to filter endangered species
+ *         required: false
+ *         type: boolean
+ *       - name: endemic
+ *         in: query
+ *         description: true to filter endemic species
+ *         required: false
+ *         type: boolean
+ *       - name: invasive
+ *         in: query
+ *         description: true to filter invasive species
+ *         required: false
+ *         type: boolean
+ *       - name: modelStatus
+ *         in: query
+ *         description: Filter species by model status
+ *         required: false
+ *         type: string
+ *       - name: speciesIn
+ *         in: query
+ *         description: Filter species by taxID
+ *         required: false
+ *         schema:
+ *           type: array
+ *           items:
+ *             type: number
  *     responses:
  *       "200":
  *         description: Success
  *         schema:
- *           type: object
- *           required:
- *             - type
- *             - features
- *           properties:
- *             type:
- *               type: string
- *               default: "FeatureCollection"
- *             features:
- *               type: array
- *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *           type: array
+ *           items:
+ *             type: object
+ *             required:
+ *               - taxID
+ *             properties:
+ *               species:
+ *                 type: string
+ *               taxID:
+ *                 type: number
+ *               acceptedNameUsage:
+ *                 type: string
+ *         examples:
+ *           AllSpecies:
+ *             taxID: 1
+ *             species: Abarema barbouriana
+ *           FilterSpecies:
+ *             taxID: 1
+ *             acceptedNameUsage: Abarema barbouriana
  *     default:
  *       description: Error
  *       schema:
@@ -295,7 +363,7 @@ export async function getAllSpecies(req, res) {
  * @swagger
  * /species/{taxID}:
  *   get:
- *     description: "Get superior taxonomy and the total of records of a species"
+ *     description: "Get superior taxonomy and the total records of a species"
  *     operationId: SPE2
  *     parameters:
  *       - name: taxID
@@ -308,23 +376,29 @@ export async function getAllSpecies(req, res) {
  *         description: Success
  *         schema:
  *           type: object
- *           required:
- *             - type
- *             - features
  *           properties:
- *             type:
+ *             species:
  *               type: string
- *               default: "FeatureCollection"
- *             features:
- *               type: array
- *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *             family:
+ *               type: string
+ *             order:
+ *               type: string
+ *             class:
+ *               type: string
+ *             phylum:
+ *               type: string
+ *             kingdom:
+ *               type: string
+ *             acceptedNameUsage:
+ *               type: string
+ *             totalRecords:
+ *               type: number
  *     default:
  *       description: Error
  *       schema:
  *         $ref: "#/definitions/ErrorResponse"
  */
-export async function getTaxonomyAndRecords(req, res) {
+export async function getTaxonomyAndTotalRecords(req, res) {
   if (req.params.taxID) {
     try {
       const doc = await Specie.find(
@@ -384,7 +458,7 @@ export async function getTaxonomyAndRecords(req, res) {
  * @swagger
  * /species/search/{species}:
  *   get:
- *     description: "Get general query to obtain species with some specific characteristics"
+ *     description: Search species by its attribute "species". If no species is passed, it behaves like /species endpoint
  *     operationId: SPE3
  *     parameters:
  *       - name: species
@@ -397,29 +471,32 @@ export async function getTaxonomyAndRecords(req, res) {
  *         description: Success
  *         schema:
  *           type: object
- *           required:
- *             - type
- *             - features
  *           properties:
- *             type:
+ *             species:
  *               type: string
- *               default: "FeatureCollection"
- *             features:
- *               type: array
- *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *             endemic:
+ *               type: boolean
+ *             invasive:
+ *               type: boolean
+ *             iucn:
+ *               type: string
+ *             taxonomicStatus:
+ *               type: string
+ *             bmClass:
+ *               type: string
+ *             taxID:
+ *               type: number
  *     default:
  *       description: Error
  *       schema:
  *         $ref: "#/definitions/ErrorResponse"
  */
-export async function searchSpecie(req, res) {
+export async function searchSpecies(req, res) {
   const query = constructQuery(req);
   if (req.params.species) {
     const regEx = new RegExp(req.params.species, 'ig');
     query.$and.push({ species: { $regex: regEx } });
   }
-  //TODO: let the projection and sort outside the if in vars
   if (req.query.modelStatus) {
     try {
       const docs = await Specie.aggregate([
