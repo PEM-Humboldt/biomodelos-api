@@ -1,20 +1,20 @@
 # complex objects have schema definitions
 definitions:
-  FeatureSpecieRecord:
+  FeatureSpeciesRecord:
     type: object
-    description: GeoJSON feoture for specie record
+    description: GeoJSON feature for specie record
     required:
       - type
       - geometry
-      - properties
+      - properties.
     properties:
       type:
         type: string
-        default: "feature"
+        default: "Feature"
       geometry:
         $ref: "#/definitions/Point"
-      properties:
-        $ref: "#/definitions/SpecieRecordProperties"
+      properties.:
+        $ref: "#/definitions/SpeciesRecordProperties"
   Geometry:
     type: object
     description: GeoJSon geometry
@@ -136,9 +136,9 @@ definitions:
   #         type: array
   #         items:
   #           $ref: '#/definitions/Geometry'
-  SpecieRecordProperties:
+  SpeciesRecordProperties:
     type: object
-    description: Group of properties about species
+    description: Group of properties about species (the attribute is "properties" -without the dot- It was neccesary to properly generate the documentation)
     required:
       - "_id"
       - species

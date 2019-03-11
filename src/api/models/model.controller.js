@@ -28,7 +28,7 @@ import Specie from '../../models/specie.model';
  *             features:
  *               type: array
  *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *                 $ref: "#/definitions/FeatureSpeciesRecord"
  *     default:
  *       description: Error
  *       schema:
@@ -132,7 +132,7 @@ export async function read(req, res) {
  *             features:
  *               type: array
  *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *                 $ref: "#/definitions/FeatureSpeciesRecord"
  *     default:
  *       description: Error
  *       schema:
@@ -196,7 +196,7 @@ export async function readModelMetadata(req, res) {
  *             features:
  *               type: array
  *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *                 $ref: "#/definitions/FeatureSpeciesRecord"
  *     default:
  *       description: Error
  *       schema:
@@ -251,7 +251,7 @@ export async function ocurrenceEooStatsModel(req, res) {
  *             features:
  *               type: array
  *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *                 $ref: "#/definitions/FeatureSpeciesRecord"
  *     default:
  *       description: Error
  *       schema:
@@ -306,7 +306,7 @@ export async function ocurrenceRepStatsModel(req, res) {
  *             features:
  *               type: array
  *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *                 $ref: "#/definitions/FeatureSpeciesRecord"
  *     default:
  *       description: Error
  *       schema:
@@ -365,7 +365,7 @@ export async function ocurrenceForestLossStatsModel(req, res) {
  *             features:
  *               type: array
  *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *                 $ref: "#/definitions/FeatureSpeciesRecord"
  *     default:
  *       description: Error
  *       schema:
@@ -470,7 +470,7 @@ export async function ocurrenceCoversStatsModel(req, res) {
  *             features:
  *               type: array
  *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *                 $ref: "#/definitions/FeatureSpeciesRecord"
  *     default:
  *       description: Error
  *       schema:

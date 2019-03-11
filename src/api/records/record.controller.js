@@ -50,7 +50,7 @@ export async function read(req, res) {
  *             features:
  *               type: array
  *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *                 $ref: "#/definitions/FeatureSpeciesRecord"
  *     default:
  *       description: Error
  *       schema:
@@ -168,7 +168,7 @@ export async function update(req, res) {
  *             features:
  *               type: array
  *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *                 $ref: "#/definitions/FeatureSpeciesRecord"
  *     default:
  *       description: Error
  *       schema:
@@ -253,7 +253,7 @@ export async function create(req, res) {
  *             features:
  *               type: array
  *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *                 $ref: "#/definitions/FeatureSpeciesRecord"
  *     default:
  *       description: Error
  *       schema:
@@ -384,7 +384,7 @@ export async function createWithoutId(req, res) {
  *             features:
  *               type: array
  *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *                 $ref: "#/definitions/FeatureSpeciesRecord"
  *     default:
  *       description: Error
  *       schema:
@@ -444,7 +444,7 @@ export async function uniqueValuesInstitutions(req, res) {
  *             features:
  *               type: array
  *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *                 $ref: "#/definitions/FeatureSpeciesRecord"
  *     default:
  *       description: Error
  *       schema:
@@ -496,7 +496,7 @@ export async function uniqueValuesCollectors(req, res) {
  *             features:
  *               type: array
  *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *                 $ref: "#/definitions/FeatureSpeciesRecord"
  *     default:
  *       description: Error
  *       schema:
@@ -546,7 +546,7 @@ export async function uniqueValuesSources(req, res) {
  *             features:
  *               type: array
  *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *                 $ref: "#/definitions/FeatureSpeciesRecord"
  *     default:
  *       description: Error
  *       schema:
@@ -668,7 +668,7 @@ export async function collaboratorsOfSpecie(req, res) {
  *             features:
  *               type: array
  *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *                 $ref: "#/definitions/FeatureSpeciesRecord"
  *     default:
  *       description: Error
  *       schema:
@@ -796,7 +796,7 @@ export async function latestChange(req, res) {
  *             features:
  *               type: array
  *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *                 $ref: "#/definitions/FeatureSpeciesRecord"
  *     default:
  *       description: Error
  *       schema:
