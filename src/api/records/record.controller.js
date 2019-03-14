@@ -1,21 +1,41 @@
 import { Record, Updated } from '../../models/record.model';
 
+/**
+ * @swagger
+ * /records/{record_id}:
+ *   get:
+ *     description: Get a record by its ID
+ *     operationId: REC2
+ *     parameters:
+ *       - name: record_id
+ *         in: path
+ *         description: The record ID
+ *         required: true
+ *         type: string
+ *     responses:
+ *       "200":
+ *         description: Success
+ *         schema:
+ *           $ref: "#/definitions/Record"
+ *     default:
+ *       description: Error
+ *       schema:
+ *         $ref: "#/definitions/ErrorResponse"
+ */
 export async function read(req, res) {
-  if(req.params.record_id){
+  if (req.params.record_id) {
     try {
-      const record = await Record.findById(req.params.record_id,
-        {
-          _id: 0,
-          cellID: 0,
-          dbDuplicate: 0,
-          downloadDate: 0,
-          resourceFolder: 0,
-          resourceIncorporationDate: 0,
-          resourceName: 0,
-          sourceLayer: 0,
-          spatialDuplicate: 0
-        }
-      );
+      const record = await Record.findById(req.params.record_id, {
+        _id: 0,
+        cellID: 0,
+        dbDuplicate: 0,
+        downloadDate: 0,
+        resourceFolder: 0,
+        resourceIncorporationDate: 0,
+        resourceName: 0,
+        sourceLayer: 0,
+        spatialDuplicate: 0
+      });
       res.json(record);
     } catch (e) {
       res.json(e);
@@ -27,12 +47,22 @@ export async function read(req, res) {
  * @swagger
  * /records/{record_id}:
  *   put:
- *     description: "Updating main keys of a record of a species"
+ *     description: Update main attributes of a record
  *     operationId: REC2
  *     parameters:
- *       - name: taxID
+ *       - name: record_id
  *         in: path
- *         description: The taxon ID of the specie
+ *         description: The record ID
+ *         required: true
+ *         type: string
+ *       - name: decimalLongitude
+ *         in: body
+ *         description: the decimal longitude of the record
+ *         required: true
+ *         type: string
+ *       - name: decimalLatitude
+ *         in: body
+ *         description: the decimal latitude of the record
  *         required: true
  *         type: string
  *     responses:
@@ -40,17 +70,10 @@ export async function read(req, res) {
  *         description: Success
  *         schema:
  *           type: object
- *           required:
- *             - type
- *             - features
  *           properties:
- *             type:
+ *             message:
  *               type: string
- *               default: "FeatureCollection"
- *             features:
- *               type: array
- *               items:
- *                 $ref: "#/definitions/FeatureSpeciesRecord"
+ *               default: "The record {record_id} was successfully updated!"
  *     default:
  *       description: Error
  *       schema:
@@ -145,12 +168,12 @@ export async function update(req, res) {
  * @swagger
  * /records/{record_id}:
  *   post:
- *     description: "Reporting probable errors of a record"
+ *     description: Report a record with probable errors
  *     operationId: REC3
  *     parameters:
- *       - name: taxID
+ *       - name: record_id
  *         in: path
- *         description: The taxon ID of the specie
+ *         description: The record Id to report
  *         required: true
  *         type: string
  *     responses:
@@ -158,23 +181,16 @@ export async function update(req, res) {
  *         description: Success
  *         schema:
  *           type: object
- *           required:
- *             - type
- *             - features
  *           properties:
- *             type:
+ *             message:
  *               type: string
- *               default: "FeatureCollection"
- *             features:
- *               type: array
- *               items:
- *                 $ref: "#/definitions/FeatureSpeciesRecord"
+ *               default: "The record {record_id} was reported!"
  *     default:
  *       description: Error
  *       schema:
  *         $ref: "#/definitions/ErrorResponse"
  */
-export async function create(req, res) {
+export async function report(req, res) {
   try {
     const record = await Record.findById(req.params.record_id);
     if (req.body.reportedUserIdBm) {
@@ -212,14 +228,18 @@ export async function create(req, res) {
       req.body.reportedIdIssueBm
     ) {
       record.reportedDate = Date.now;
-    }
-    try {
-      await record.save();
+      try {
+        await record.save();
+        res.json({
+          message: `The record ${record._id} was reported!`
+        });
+      } catch (err) {
+        res.send(err);
+      }
+    } else {
       res.json({
-        message: `The record ${record._id} was reported!`
+        message: 'There is nothing to report'
       });
-    } catch (err) {
-      res.send(err);
     }
   } catch (err) {
     res.send(err);
@@ -230,30 +250,17 @@ export async function create(req, res) {
  * @swagger
  * /records:
  *   post:
- *     description: "Inserting a new (and just one) record that belongs to a specific species"
+ *     description: Insert a new (and just one) record that belongs to a specific species
  *     operationId: REC4
- *     parameters:
- *       - name: taxID
- *         in: path
- *         description: The taxon ID of the specie
- *         required: true
- *         type: string
  *     responses:
  *       "200":
  *         description: Success
  *         schema:
  *           type: object
- *           required:
- *             - type
- *             - features
  *           properties:
- *             type:
+ *             message:
  *               type: string
- *               default: "FeatureCollection"
- *             features:
- *               type: array
- *               items:
- *                 $ref: "#/definitions/FeatureSpeciesRecord"
+ *               default: "Record created! {record_id}"
  *     default:
  *       description: Error
  *       schema:
@@ -361,7 +368,7 @@ export async function createWithoutId(req, res) {
  * @swagger
  * /records/metadata/institutions/{taxID}:
  *   get:
- *     description: "Obtener los unique values de instituciones que corresponde al taxID ingresado"
+ *     description: Get unique values for institutions that belong to the given taxID
  *     operationId: STA2
  *     parameters:
  *       - name: taxID
@@ -373,18 +380,14 @@ export async function createWithoutId(req, res) {
  *       "200":
  *         description: Success
  *         schema:
- *           type: object
- *           required:
- *             - type
- *             - features
- *           properties:
- *             type:
- *               type: string
- *               default: "FeatureCollection"
- *             features:
- *               type: array
- *               items:
- *                 $ref: "#/definitions/FeatureSpeciesRecord"
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               institution:
+ *                 type: array
+ *                 items:
+ *                   type: string
  *     default:
  *       description: Error
  *       schema:
@@ -421,7 +424,7 @@ export async function uniqueValuesInstitutions(req, res) {
  * @swagger
  * /records/metadata/collectors/{taxID}:
  *   get:
- *     description: "Obtener los unique values de colectores que corresponde al taxID ingresado"
+ *     description: Get unique values for collectors that belong to the given taxID
  *     operationId: STA3
  *     parameters:
  *       - name: taxID
@@ -433,18 +436,14 @@ export async function uniqueValuesInstitutions(req, res) {
  *       "200":
  *         description: Success
  *         schema:
- *           type: object
- *           required:
- *             - type
- *             - features
- *           properties:
- *             type:
- *               type: string
- *               default: "FeatureCollection"
- *             features:
- *               type: array
- *               items:
- *                 $ref: "#/definitions/FeatureSpeciesRecord"
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               collector:
+ *                 type: array
+ *                 items:
+ *                   type: string
  *     default:
  *       description: Error
  *       schema:
@@ -473,7 +472,7 @@ export async function uniqueValuesCollectors(req, res) {
  * @swagger
  * /records/metadata/sources/{taxID}:
  *   get:
- *     description: "Obtener los unique values del campo source que corresponde al taxID ingresado"
+ *     description: Get unique values for sources that belong to the given taxID
  *     operationId: STA4
  *     parameters:
  *       - name: taxID
@@ -485,18 +484,14 @@ export async function uniqueValuesCollectors(req, res) {
  *       "200":
  *         description: Success
  *         schema:
- *           type: object
- *           required:
- *             - type
- *             - features
- *           properties:
- *             type:
- *               type: string
- *               default: "FeatureCollection"
- *             features:
- *               type: array
- *               items:
- *                 $ref: "#/definitions/FeatureSpeciesRecord"
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               source:
+ *                 type: array
+ *                 items:
+ *                   type: string
  *     default:
  *       description: Error
  *       schema:
@@ -523,7 +518,7 @@ export async function uniqueValuesSources(req, res) {
  * @swagger
  * /records/metadata/collaborators/{taxID}:
  *   get:
- *     description: "Retorna el identifcador de los colaboradores que han reportado creado o actualizado los registros de la especie consultada"
+ *     description: Get the users than have created, reported or updated records on the given taxID
  *     operationId: STA5
  *     parameters:
  *       - name: taxID
@@ -535,18 +530,14 @@ export async function uniqueValuesSources(req, res) {
  *       "200":
  *         description: Success
  *         schema:
- *           type: object
- *           required:
- *             - type
- *             - features
- *           properties:
- *             type:
- *               type: string
- *               default: "FeatureCollection"
- *             features:
- *               type: array
- *               items:
- *                 $ref: "#/definitions/FeatureSpeciesRecord"
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               userId_bm:
+ *                 type: array
+ *                 items:
+ *                   type: number
  *     default:
  *       description: Error
  *       schema:
@@ -645,7 +636,7 @@ export async function collaboratorsOfSpecie(req, res) {
  * @swagger
  * /records/metadata/latest_date/{taxID}:
  *   get:
- *     description: "Retorna la ultima fecha de modificación (reported, created, updated)"
+ *     description: Returns last modified date (can be created, reported or updated date)
  *     operationId: STA6
  *     parameters:
  *       - name: taxID
@@ -658,17 +649,9 @@ export async function collaboratorsOfSpecie(req, res) {
  *         description: Success
  *         schema:
  *           type: object
- *           required:
- *             - type
- *             - features
  *           properties:
- *             type:
+ *             maxDate:
  *               type: string
- *               default: "FeatureCollection"
- *             features:
- *               type: array
- *               items:
- *                 $ref: "#/definitions/FeatureSpeciesRecord"
  *     default:
  *       description: Error
  *       schema:
@@ -773,7 +756,7 @@ export async function latestChange(req, res) {
  * @swagger
  * /records/metadata/collection/{taxID}:
  *   get:
- *     description: "Obtener los unique values del campo collection que corresponde al taxID ingresado"
+ *     description: Get unique values for attribute collection that belongs to the given taxID
  *     operationId: STA7
  *     parameters:
  *       - name: taxID
@@ -786,17 +769,9 @@ export async function latestChange(req, res) {
  *         description: Success
  *         schema:
  *           type: object
- *           required:
- *             - type
- *             - features
  *           properties:
- *             type:
+ *             collection_code:
  *               type: string
- *               default: "FeatureCollection"
- *             features:
- *               type: array
- *               items:
- *                 $ref: "#/definitions/FeatureSpeciesRecord"
  *     default:
  *       description: Error
  *       schema:

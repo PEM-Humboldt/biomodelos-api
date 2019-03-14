@@ -1,0 +1,136 @@
+# complex objects have schema definitions
+definitions:
+  Record:
+    type: object
+    description: a Record
+    properties:
+      species:
+        type: string
+      speciesOriginal:
+        type: string
+      continent:
+        type: string
+      country:
+        type: string
+      stateProvince:
+        type: string
+        default: null
+      county:
+        type: string
+        default: null
+      verbatimLocality:
+        type: string
+        default: null
+      verbatimElevation:
+        type: string
+        default: null
+      demAltitude:
+        type: number
+      interpretedElevation:
+        type: string
+        default: null
+      basisOfRecord:
+        type: string
+        default: null
+      catalogNumber:
+        type: string
+      colection:
+        type: string
+        default: null
+      recordedBy:
+        type: string
+        default: null
+      institutionCode:
+        type: string
+        default: null
+      url:
+        type: string
+        default: null
+      earliestDateCollected:
+        type: string
+        default: null
+      day:
+        type: string
+        default: null
+      month:
+        type: string
+        default: null
+      year:
+        type: string
+        default: null
+      correctCountry:
+        type: boolean
+      correctStateProvince:
+        type: boolean
+      correctCounty:
+        type: boolean
+      hasLocality:
+        type: boolean
+      inUrbanArea:
+        type: boolean
+      suggestedCountry:
+        type: string
+      suggestedCounty:
+        type: string
+      suggestedStateProvince:
+        type: string
+      coordinateUncertaintyInMeters:
+        type: number
+      lowUncertainty:
+        type: boolean
+      altitudinalOutlier:
+        type: boolean
+      consistentAltitude:
+        type: boolean
+      diferenceInAltitude:
+        type: number
+      environmentalOutlier:
+        type: boolean
+      insideKnownDistribution:
+        type: boolean
+      dist2KnowRange:
+        type: number
+      spatialDuplicated:
+        type: boolean
+      source:
+        type: string
+      contributedRecord:
+        type: string
+      privateData:
+        type: number
+      use:
+        type: boolean
+      visualizationPrivileges:
+        type: number
+      collectionCode:
+        type: string
+      maximumElevationInMeters:
+        type: number
+      minimumElevationInMeters:
+        type: number
+      origin:
+        type: string
+      presence:
+        type: string
+      recordStatus:
+        type: boolean
+      season:
+        type: string
+      externallyCreated:
+        type: boolean
+      acceptedNameUsage:
+        type: string
+      occurrenceID:
+        type: string
+      decimalLatitude:
+        type: number
+      decimalLongitude:
+        type: number
+      taxID:
+        type: number
+      updated:
+        type: array
+      createdDate:
+        type: string
+      reportedDate:
+        type: string
