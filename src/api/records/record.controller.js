@@ -80,85 +80,93 @@ export async function read(req, res) {
  *         $ref: "#/definitions/ErrorResponse"
  */
 export async function update(req, res) {
+  let record = null;
   try {
-    const record = await Record.findById(req.params.record_id);
-    let updated = new Updated();
-    if (req.body.taxID && req.body.taxID !== record.taxID) {
-      updated.taxID = record.taxID;
-      record.taxID = req.body.taxID;
-    }
-    if (
-      req.body.speciesOriginal &&
-      req.body.speciesOriginal !== record.speciesOriginal
-    ) {
-      updated.speciesOriginal = record.speciesOriginal;
-      record.speciesOriginal = req.body.speciesOriginal;
-    }
-    if (
-      req.body.verbatimLocality &&
-      req.body.verbatimLocality !== record.verbatimLocality
-    ) {
-      updated.verbatimLocality = record.verbatimLocality;
-      record.verbatimLocality = req.body.verbatimLocality;
-    }
-    if (
-      req.body.decimalLatitude &&
-      req.body.decimalLatitude !== record.decimalLatitude
-    ) {
-      updated.decimalLatitude = record.decimalLatitude;
-      record.decimalLatitude = req.body.decimalLatitude;
-    }
-    if (
-      req.body.decimalLongitude &&
-      req.body.decimalLongitude !== record.decimalLongitude
-    ) {
-      updated.decimalLongitude = record.decimalLongitude;
-      record.decimalLongitude = req.body.decimalLongitude;
-    }
-    if (req.body.day && req.body.day !== record.day) {
-      updated.day = record.day;
-      record.day = req.body.day;
-    }
-    if (req.body.month && req.body.month !== record.month) {
-      updated.month = record.month;
-      record.month = req.body.month;
-    }
-    if (req.body.year && req.body.year !== record.year) {
-      updated.year = record.year;
-      record.year = req.body.year;
-    }
-    if (req.body.userIdBm && req.body.userIdBm !== record.userIdBm) {
-      updated.userIdBm = record.userIdBm;
-      record.userIdBm = req.body.userIdBm;
-    }
+    record = await Record.findById(req.params.record_id);
+    if (!record) throw new Error("Record doesn't exist");
+  } catch (err) {
+    res.send(400, err.toString());
+    return;
+  }
 
-    if (
-      req.body.verbatimLocality ||
-      req.body.decimalLatitude ||
-      req.body.decimalLongitude ||
-      req.body.decimalLatitude ||
-      req.body.decimalLongitude ||
-      req.body.day ||
-      req.body.month ||
-      req.body.year ||
-      req.body.userIdBm
-    ) {
-      updated.updatedDate = Date.now;
-    }
+  let updated = new Updated();
+  let wereChanges = false;
+  if (req.body.taxID && req.body.taxID !== record.taxID) {
+    updated.taxID = record.taxID;
+    record.taxID = req.body.taxID;
+    wereChanges = true;
+  }
+  if (
+    req.body.speciesOriginal &&
+    req.body.speciesOriginal !== record.speciesOriginal
+  ) {
+    updated.speciesOriginal = record.speciesOriginal;
+    record.speciesOriginal = req.body.speciesOriginal;
+    wereChanges = true;
+  }
+  if (
+    req.body.verbatimLocality &&
+    req.body.verbatimLocality !== record.verbatimLocality
+  ) {
+    updated.verbatimLocality = record.verbatimLocality;
+    record.verbatimLocality = req.body.verbatimLocality;
+    wereChanges = true;
+  }
+  if (
+    req.body.decimalLatitude &&
+    req.body.decimalLatitude !== record.decimalLatitude
+  ) {
+    updated.decimalLatitude = record.decimalLatitude;
+    record.decimalLatitude = req.body.decimalLatitude;
+    wereChanges = true;
+  }
+  if (
+    req.body.decimalLongitude &&
+    req.body.decimalLongitude !== record.decimalLongitude
+  ) {
+    updated.decimalLongitude = record.decimalLongitude;
+    record.decimalLongitude = req.body.decimalLongitude;
+    wereChanges = true;
+  }
+  if (req.body.day && req.body.day !== record.day) {
+    updated.day = record.day;
+    record.day = req.body.day;
+    wereChanges = true;
+  }
+  if (req.body.month && req.body.month !== record.month) {
+    updated.month = record.month;
+    record.month = req.body.month;
+    wereChanges = true;
+  }
+  if (req.body.year && req.body.year !== record.year) {
+    updated.year = record.year;
+    record.year = req.body.year;
+    wereChanges = true;
+  }
+  if (req.body.userIdBm && req.body.userIdBm !== record.userIdBm) {
+    updated.userIdBm = record.userIdBm;
+    record.userIdBm = req.body.userIdBm;
+    wereChanges = true;
+  }
 
-    if (!record.updated) {
-      record.updated = [];
-    }
-    record.updated.push(updated);
+  if (!wereChanges) {
+    res.json({
+      message: `The record ${record._id} didn't have any changes!`
+    });
+    return;
+  }
 
-    try {
-      await record.save();
-      res.json({
-        message: `The record ${record._id} was successfully updated!`
-      });
-    } catch (err) {
-      res.send(err);
-    }
+  updated.updatedDate = Date.now;
+  if (!record.updated) {
+    record.updated = [];
+  }
+  record.updated.push(updated);
+
+  try {
+    await record.save();
+    res.json({
+      message: `The record ${record._id} was successfully updated!`
+    });
   } catch (err) {
     res.send(err);
   }
