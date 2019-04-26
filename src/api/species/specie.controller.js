@@ -52,7 +52,7 @@ function constructQuery(req) {
  * @swagger
  * /species/records/{taxID}:
  *   get:
- *     description: "All the records of an acceptedNameUsage (using internal taxID as key): query (use = true & visualizationPrivileges = 0)"
+ *     description: "Get all records of an species acceptedNameUsage."
  *     operationId: REC1
  *     parameters:
  *       - name: taxID
@@ -75,13 +75,13 @@ function constructQuery(req) {
  *             features:
  *               type: array
  *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *                 $ref: "#/definitions/FeatureSpeciesRecord"
  *     default:
  *       description: Error
  *       schema:
  *         $ref: "#/definitions/ErrorResponse"
  */
-export async function read(req, res) {
+export async function getSpeciesRecords(req, res) {
   if (req.params.taxID) {
     try {
       const docs = await Record.aggregate([
@@ -97,10 +97,8 @@ export async function read(req, res) {
           $project: {
             reported: {
               $cond: {
-                if: {
-                  $and: [{ $isArray: '$reported' }, { $ne: ['$reported', []] }]
-                },
-                then: { $isArray: '$reported' },
+                if: { $ne: ['$reportedDate', null] },
+                then: true,
                 else: false
               }
             },
@@ -118,95 +116,31 @@ export async function read(req, res) {
             acceptedNameUsage: 1,
             species: 1,
             speciesOriginal: 1,
-            locality: 1,
-            lat: 1,
-            lon: 1,
-            alt: 1,
+            verbatimLocality: 1,
+            decimalLatitude: 1,
+            decimalLongitude: 1,
+            verbatimElevation: 1,
             basisOfRecord: 1,
             catalogNumber: 1,
-            collection_code: 1,
-            collector: 1,
-            institution: 1,
+            collectionCode: 1,
+            recordedBy: 1,
+            institutionCode: 1,
             url: 1,
-            dd: 1,
-            mm: 1,
-            yyyy: 1,
+            day: 1,
+            month: 1,
+            year: 1,
             suggestedStateProvince: 1,
             suggestedCounty: 1,
             environmentalOutlier: 1,
             source: 1,
-            adm1: 1,
-            adm2: 1
+            stateProvince: 1,
+            county: 1
           }
         }
       ]);
-      res.send(GeoJSON.parse(docs, { Point: ['lat', 'lon'] }));
-    } catch (err) {
-      res.send(err);
-    }
-  }
-}
-
-export async function readValidForGroup(req, res) {
-  if (req.params.taxID) {
-    try {
-      const docs = await Record.aggregate([
-        {
-          $match: {
-            taxID: +req.params.taxID,
-            use: true,
-            visualizationPrivileges: { $in: [1, 0] },
-            spatialDuplicated: false
-          }
-        },
-        {
-          $project: {
-            reported: {
-              $cond: {
-                if: {
-                  $and: [{ $isArray: '$reported' }, { $ne: ['$reported', []] }]
-                },
-                then: { $isArray: '$reported' },
-                else: false
-              }
-            },
-            updated: {
-              $cond: {
-                if: {
-                  $and: [{ $isArray: '$updated' }, { $ne: ['$updated', []] }]
-                },
-                then: { $isArray: '$updated' },
-                else: false
-              }
-            },
-            _id: 1,
-            taxID: 1,
-            acceptedNameUsage: 1,
-            species: 1,
-            speciesOriginal: 1,
-            locality: 1,
-            lat: 1,
-            lon: 1,
-            alt: 1,
-            basisOfRecord: 1,
-            catalogNumber: 1,
-            collection_code: 1,
-            collector: 1,
-            institution: 1,
-            url: 1,
-            dd: 1,
-            mm: 1,
-            yyyy: 1,
-            suggestedStateProvince: 1,
-            suggestedCounty: 1,
-            environmentalOutlier: 1,
-            source: 1,
-            adm1: 1,
-            adm2: 1
-          }
-        }
-      ]);
-      res.send(GeoJSON.parse(docs, { Point: ['lat', 'lon'] }));
+      res.send(
+        GeoJSON.parse(docs, { Point: ['decimalLatitude', 'decimalLongitude'] })
+      );
     } catch (err) {
       res.send(err);
     }
@@ -215,10 +149,10 @@ export async function readValidForGroup(req, res) {
 
 /**
  * @swagger
- * /species:
+ * /species/records/group/{taxID}:
  *   get:
- *     description: "Get all the species in BioModelos"
- *     operationId: SPE1
+ *     description: "Get all records of an species acceptedNameUsage, with privileges for group."
+ *     operationId: REC1
  *     parameters:
  *       - name: taxID
  *         in: path
@@ -240,7 +174,141 @@ export async function readValidForGroup(req, res) {
  *             features:
  *               type: array
  *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *                 $ref: "#/definitions/FeatureSpeciesRecord"
+ *     default:
+ *       description: Error
+ *       schema:
+ *         $ref: "#/definitions/ErrorResponse"
+ */
+export async function getSpeciesRecordsWithPrivileges(req, res) {
+  if (req.params.taxID) {
+    try {
+      const docs = await Record.aggregate([
+        {
+          $match: {
+            taxID: +req.params.taxID,
+            use: true,
+            visualizationPrivileges: { $in: [1, 0] },
+            spatialDuplicated: false
+          }
+        },
+        {
+          $project: {
+            reported: {
+              $cond: {
+                if: { $ne: ['$reportedDate', null] },
+                then: true,
+                else: false
+              }
+            },
+            updated: {
+              $cond: {
+                if: {
+                  $and: [{ $isArray: '$updated' }, { $ne: ['$updated', []] }]
+                },
+                then: { $isArray: '$updated' },
+                else: false
+              }
+            },
+            _id: 1,
+            taxID: 1,
+            acceptedNameUsage: 1,
+            species: 1,
+            speciesOriginal: 1,
+            verbatimLocality: 1,
+            decimalLatitude: 1,
+            decimalLongitude: 1,
+            verbatimElevation: 1,
+            basisOfRecord: 1,
+            catalogNumber: 1,
+            collectionCode: 1,
+            recordedBy: 1,
+            institutionCode: 1,
+            url: 1,
+            day: 1,
+            month: 1,
+            year: 1,
+            suggestedStateProvince: 1,
+            suggestedCounty: 1,
+            environmentalOutlier: 1,
+            source: 1,
+            stateProvince: 1,
+            county: 1
+          }
+        }
+      ]);
+      res.send(
+        GeoJSON.parse(docs, { Point: ['decimalLatitude', 'decimalLongitude'] })
+      );
+    } catch (err) {
+      res.send(err);
+    }
+  }
+}
+
+/**
+ * @swagger
+ * /species:
+ *   get:
+ *     description: "Get all the species in BioModelos"
+ *     operationId: SPE1
+ *     parameters:
+ *       - name: bmClass
+ *         in: query
+ *         description: // TODO Describe parameter
+ *         required: false
+ *         type: string
+ *       - name: endangered
+ *         in: query
+ *         description: true to filter endangered species
+ *         required: false
+ *         type: boolean
+ *       - name: endemic
+ *         in: query
+ *         description: true to filter endemic species
+ *         required: false
+ *         type: boolean
+ *       - name: invasive
+ *         in: query
+ *         description: true to filter invasive species
+ *         required: false
+ *         type: boolean
+ *       - name: modelStatus
+ *         in: query
+ *         description: Filter species by model status
+ *         required: false
+ *         type: string
+ *       - name: speciesIn
+ *         in: query
+ *         description: Filter species by taxID
+ *         required: false
+ *         schema:
+ *           type: array
+ *           items:
+ *             type: number
+ *     responses:
+ *       "200":
+ *         description: Success
+ *         schema:
+ *           type: array
+ *           items:
+ *             type: object
+ *             required:
+ *               - taxID
+ *             properties:
+ *               species:
+ *                 type: string
+ *               taxID:
+ *                 type: number
+ *               acceptedNameUsage:
+ *                 type: string
+ *         examples:
+ *           AllSpecies:
+ *             taxID: 1
+ *             species: Abarema barbouriana
+ *           FilterSpecies:
+ *             taxID: 1
+ *             acceptedNameUsage: Abarema barbouriana
  *     default:
  *       description: Error
  *       schema:
@@ -314,7 +382,7 @@ export async function getAllSpecies(req, res) {
  * @swagger
  * /species/{taxID}:
  *   get:
- *     description: "Get superior taxonomy and the total of records of a species"
+ *     description: "Get superior taxonomy and the total records of a species"
  *     operationId: SPE2
  *     parameters:
  *       - name: taxID
@@ -327,23 +395,29 @@ export async function getAllSpecies(req, res) {
  *         description: Success
  *         schema:
  *           type: object
- *           required:
- *             - type
- *             - features
  *           properties:
- *             type:
+ *             species:
  *               type: string
- *               default: "FeatureCollection"
- *             features:
- *               type: array
- *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *             family:
+ *               type: string
+ *             order:
+ *               type: string
+ *             class:
+ *               type: string
+ *             phylum:
+ *               type: string
+ *             kingdom:
+ *               type: string
+ *             acceptedNameUsage:
+ *               type: string
+ *             totalRecords:
+ *               type: number
  *     default:
  *       description: Error
  *       schema:
  *         $ref: "#/definitions/ErrorResponse"
  */
-export async function getTaxonomyAndRecords(req, res) {
+export async function getTaxonomyAndTotalRecords(req, res) {
   if (req.params.taxID) {
     try {
       const doc = await Specie.find(
@@ -403,7 +477,7 @@ export async function getTaxonomyAndRecords(req, res) {
  * @swagger
  * /species/search/{species}:
  *   get:
- *     description: "Get general query to obtain species with some specific characteristics"
+ *     description: Search species by its attribute "species". If no species is passed, it behaves like /species endpoint
  *     operationId: SPE3
  *     parameters:
  *       - name: species
@@ -416,29 +490,32 @@ export async function getTaxonomyAndRecords(req, res) {
  *         description: Success
  *         schema:
  *           type: object
- *           required:
- *             - type
- *             - features
  *           properties:
- *             type:
+ *             species:
  *               type: string
- *               default: "FeatureCollection"
- *             features:
- *               type: array
- *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *             endemic:
+ *               type: boolean
+ *             invasive:
+ *               type: boolean
+ *             iucn:
+ *               type: string
+ *             taxonomicStatus:
+ *               type: string
+ *             bmClass:
+ *               type: string
+ *             taxID:
+ *               type: number
  *     default:
  *       description: Error
  *       schema:
  *         $ref: "#/definitions/ErrorResponse"
  */
-export async function searchSpecie(req, res) {
+export async function searchSpecies(req, res) {
   const query = constructQuery(req);
   if (req.params.species) {
     const regEx = new RegExp(req.params.species, 'ig');
     query.$and.push({ species: { $regex: regEx } });
   }
-  //TODO: let the projection and sort outside the if in vars
   if (req.query.modelStatus) {
     try {
       const docs = await Specie.aggregate([

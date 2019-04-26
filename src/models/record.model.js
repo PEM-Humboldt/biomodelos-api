@@ -3,78 +3,46 @@ const Schema = mongoose.Schema;
 
 // esquema para la corrección de registros biológicos
 const UpdatedSchema = new Schema({
+  verbatimLocality: { type: String, default: null },
+  decimalLatitude: { type: Number, min: -90, max: 90 },
+  decimalLongitude: { type: Number, min: -180, max: 180 },
   speciesOriginal: { type: String },
-  locality: { type: String },
-  lat: { type: Number },
-  lon: { type: Number },
-  dd: { type: Number },
-  mm: { type: Number },
-  yyyy: { type: Number },
+  day: { type: Number, min: 1, max: 31, default: null },
+  month: { type: Number, min: 1, max: 12, default: null },
+  year: { type: Number, min: 1800, max: 2100, default: null },
   updatedDate: { type: Date, default: Date.now },
-  userId_bm: { type: Number }
-});
-
-// esquema para el reporte de errores en registros biológicos
-const ReportedSchema = new Schema({
-  // id: Schema.ObjectId,
-  isOutlier_bm: { type: Boolean },
-  geoIssue_bm: { type: Boolean },
-  idIssue_bm: { type: Boolean },
-  oldTaxonomy_bm: { type: Boolean },
-  inCaptivity_bm: { type: Boolean },
-  otherIssues_bm: { type: Boolean },
-  comments_bm: { type: String },
-  reportedDate: { type: Date, default: Date.now },
-  userId_bm: { type: Number }
-});
-
-// esquema para la creación de registros biológicos
-const CreatedSchema = new Schema({
-  _id: { type: Schema.ObjectId },
-  taxID: { type: Number },
-  acceptedNameUsage: String,
-  locality: { type: String },
-  lat: { type: Number },
-  lon: { type: Number },
-  alt: { type: String },
-  basisOfRecord: { type: String },
-  collector: { type: String },
-  source: { type: String },
-  comments_bm: { type: String },
-  citation_bm: { type: String },
-  createdDate: { type: Date, default: Date.now },
-  userId_bm: { type: Number }
+  userIdBm: { type: Number }
 });
 
 const RecordSchema = new Schema(
   {
-    occurrenceID: { type: String, default: null },
+    _id: { type: Schema.ObjectId, required: true },
+    occurrenceID: { type: String, required: true },
     taxID: { type: Number, required: true },
     acceptedNameUsage: { type: String, required: true },
     species: { type: String, default: null },
     speciesOriginal: { type: String, default: null },
     continent: { type: String, default: null },
     country: { type: String, default: null },
-    adm1: { type: String, default: null },
-    adm2: { type: String, default: null },
-    locality: { type: String, default: null },
-    lat: { type: Number, min: -90, max: 90 },
-    lon: { type: Number, min: -180, max: 180 },
-    alt: { type: String, default: null },
+    stateProvince: { type: String, default: null },
+    county: { type: String, default: null },
+    verbatimLocality: { type: String, default: null },
+    decimalLatitude: { type: Number, required: true, min: -90, max: 90 },
+    decimalLongitude: { type: Number, required: true, min: -180, max: 180 },
+    verbatimElevation: { type: String, default: null },
     demAltitude: { type: Number, min: 0, max: 8000, default: null },
     interpretedElevation: { type: Number, min: 0, max: 8000, default: null },
     cellID: { type: Number, min: 0, default: null },
     basisOfRecord: { type: String, default: null },
     catalogNumber: { type: String, default: null },
     colection: { type: String, default: null },
-    collector: { type: String, default: null },
-    institution: { type: String, default: null },
+    recordedBy: { type: String, default: null },
+    institutionCode: { type: String, default: null },
     url: { type: String, default: null },
     earliestDateCollected: { type: String, default: null },
-    latestDateCollected: { type: String, default: null },
-    dd: { type: Number, min: 1, max: 31, default: null },
-    mm: { type: Number, min: 1, max: 12, default: null },
-    yyyy: { type: Number, min: 1800, max: 2100, default: null },
+    day: { type: Number, min: 1, max: 31, default: null },
+    month: { type: Number, min: 1, max: 12, default: null },
+    year: { type: Number, min: 1800, max: 2100, default: null },
     correctCountry: { type: Boolean, default: null },
     correctStateProvince: { type: Boolean, default: null },
     correctCounty: { type: Boolean, default: null },
@@ -85,7 +53,7 @@ const RecordSchema = new Schema(
     suggestedMunicipality: { type: String, default: null },
     suggestedStateProvince: { type: String, default: null },
     sourceLayer: { type: String, default: null },
-    coordUncertaintyM: { type: Number, default: null },
+    coordinateUncertaintyInMeters: { type: Number, default: null },
     lowUncertainty: { type: Boolean, default: null },
     altitudinalOutlier: { type: Boolean, default: null },
     consistentAltitude: { type: Boolean, default: null },
@@ -95,24 +63,54 @@ const RecordSchema = new Schema(
     dist2KnowRange: { type: Number, default: null },
     dbDuplicate: { type: Boolean, default: false },
     spatialDuplicated: { type: Boolean, default: false },
-    reported: [ReportedSchema],
     updated: [UpdatedSchema],
-    created: [CreatedSchema],
     downloadDate: { type: String, default: null },
-    resourceFolder: { type: String, default: null },
-    resourceIncorporationDate: { type: String, default: null },
-    resourceName: { type: String, default: null },
+    resourceFolder: { type: String, default: null, required: true },
+    resourceIncorporationDate: { type: String, default: null, required: true },
+    resourceName: { type: String, default: null, required: true },
     source: { type: String, default: null },
     contributedRecord: { type: String, default: null },
-    override: { type: Boolean, default: false },
     privateData: { type: Number, in: [0, 1, 2], default: 0 },
     use: { type: Boolean, default: true },
-    visualizationPrivileges: { type: Number, in: [0, 1, 2], default: 0 }
+    visualizationPrivileges: { type: Number, in: [0, 1, 2], default: 0 },
+    collectionCode: { type: String, default: null },
+    userIdBm: { type: Number },
+    maximumElevationInMeters: { type: Number, default: null },
+    minimumElevationInMeters: { type: Number, default: null },
+    origin: {
+      type: String,
+      default: 'native',
+      in: ['native', 'introduced', 'vagrant']
+    },
+    presence: {
+      type: String,
+      default: 'extant',
+      in: ['extant', 'probablyExtant', 'possiblyExtinct', 'extinct']
+    },
+    recordStatus: { type: Boolean, default: null },
+    season: {
+      type: String,
+      default: 'resident',
+      in: ['resident', 'breeding season', 'non-breeding season', 'passage']
+    },
+    // Created fields
+    externallyCreated: { type: Boolean, default: false },
+    createdCommentsBm: { type: String },
+    createdCitationBm: { type: String },
+    createdDate: { type: Date, default: Date.now },
+    // Reported fields
+    reportedUserIdBm: { type: Number },
+    reportedOriginVagrant: { type: Boolean },
+    reportedOldTaxonomyBm: { type: Boolean },
+    reportedOriginIntroduced: { type: Boolean },
+    reportedOtherIssuesBm: { type: Boolean },
+    reportedCommentsBm: { type: String },
+    reportedDate: { type: Date, default: Date.now },
+    reportedGeoIssueBm: { type: Boolean },
+    reportedIdIssueBm: { type: Boolean }
   },
   { collection: 'records' }
 );
 
 export const Record = mongoose.model('Record', RecordSchema, 'records');
-export const Reported = mongoose.model('ReportedSchema', ReportedSchema);
 export const Updated = mongoose.model('UpdatedSchema', UpdatedSchema);
-export const Created = mongoose.model('CreatedSchema', CreatedSchema);

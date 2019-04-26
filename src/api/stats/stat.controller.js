@@ -27,7 +27,7 @@ import Specie from '../../models/specie.model';
  *             features:
  *               type: array
  *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *                 $ref: "#/definitions/FeatureSpeciesRecord"
  *     default:
  *       description: Error
  *       schema:
