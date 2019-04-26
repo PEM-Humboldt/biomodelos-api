@@ -199,58 +199,63 @@ export async function update(req, res) {
  *         $ref: "#/definitions/ErrorResponse"
  */
 export async function report(req, res) {
+  let record = null;
   try {
-    const record = await Record.findById(req.params.record_id);
-    if (req.body.reportedUserIdBm) {
-      record.reportedUserIdBm = req.body.reportedUserIdBm;
-    }
-    if (req.body.reportedOriginVagrant) {
-      record.reportedOriginVagrant = req.body.reportedOriginVagrant;
-    }
-    if (req.body.reportedGeoIssueBm) {
-      record.reportedGeoIssueBm = req.body.reportedGeoIssueBm;
-    }
-    if (req.body.reportedIdIssueBm) {
-      record.reportedIdIssueBm = req.body.reportedIdIssueBm;
-    }
-    if (req.body.reportedOldTaxonomyBm) {
-      record.reportedOldTaxonomyBm = req.body.reportedOldTaxonomyBm;
-    }
-    if (req.body.reportedOriginIntroduced) {
-      record.reportedOriginIntroduced = req.body.reportedOriginIntroduced;
-    }
-    if (req.body.reportedOtherIssuesBm) {
-      record.reportedOtherIssuesBm = req.body.reportedOtherIssuesBm;
-    }
-    if (req.body.reportedCommentsBm) {
-      record.reportedCommentsBm = req.body.reportedCommentsBm;
-    }
-    if (
-      req.body.reportedUserIdBm ||
-      req.body.reportedOriginVagrant ||
+    record = await Record.findById(req.params.record_id);
+    if (!record) throw new Error("Record doesn't exist");
+  } catch (err) {
+    res.send(400, err.toString());
+    return;
+  }
+
+  if (req.body.reportedUserIdBm) {
+    record.reportedUserIdBm = req.body.reportedUserIdBm;
+  }
+  if (req.body.reportedOriginVagrant) {
+    record.reportedOriginVagrant = req.body.reportedOriginVagrant;
+  }
+  if (req.body.reportedGeoIssueBm) {
+    record.reportedGeoIssueBm = req.body.reportedGeoIssueBm;
+  }
+  if (req.body.reportedIdIssueBm) {
+    record.reportedIdIssueBm = req.body.reportedIdIssueBm;
+  }
+  if (req.body.reportedOldTaxonomyBm) {
+    record.reportedOldTaxonomyBm = req.body.reportedOldTaxonomyBm;
+  }
+  if (req.body.reportedOriginIntroduced) {
+    record.reportedOriginIntroduced = req.body.reportedOriginIntroduced;
+  }
+  if (req.body.reportedOtherIssuesBm) {
+    record.reportedOtherIssuesBm = req.body.reportedOtherIssuesBm;
+  }
+  if (req.body.reportedCommentsBm) {
+    record.reportedCommentsBm = req.body.reportedCommentsBm;
+  }
+
+  if (
+    req.body.reportedUserIdBm &&
+    (req.body.reportedOriginVagrant ||
       req.body.reportedOldTaxonomyBm ||
       req.body.reportedOriginIntroduced ||
       req.body.reportedOtherIssuesBm ||
       req.body.reportedCommentsBm ||
       req.body.reportedGeoIssueBm ||
-      req.body.reportedIdIssueBm
-    ) {
-      record.reportedDate = Date.now;
-      try {
-        await record.save();
-        res.json({
-          message: `The record ${record._id} was reported!`
-        });
-      } catch (err) {
-        res.send(err);
-      }
-    } else {
+      req.body.reportedIdIssueBm)
+  ) {
+    record.reportedDate = Date.now();
+    try {
+      await record.save();
       res.json({
-        message: 'There is nothing to report'
+        message: `The record ${record._id} was reported!`
       });
+    } catch (err) {
+      res.send(err.toString());
     }
-  } catch (err) {
-    res.send(err);
+  } else {
+    res.json({
+      message: 'There is nothing to report'
+    });
   }
 }
 
