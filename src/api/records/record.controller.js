@@ -281,7 +281,6 @@ export async function report(req, res) {
  */
 export async function createWithoutId(req, res) {
   const record = new Record();
-  const created = new Created();
   record.taxID = +req.body.taxID;
   record.acceptedNameUsage = req.body.acceptedNameUsage;
   record.collectionCode =
@@ -361,7 +360,7 @@ export async function createWithoutId(req, res) {
   }
   record.reportedUserIdBm = null;
   record.source = 'BioModelos';
-  record.createdDate = Date.now;
+  record.createdDate = Date.now();
   if (!req.body.createdCitationBm || req.body.createdCitationBm === '') {
     record.createdCitationBm = null;
   } else {

@@ -16,8 +16,7 @@ const UpdatedSchema = new Schema({
 
 const RecordSchema = new Schema(
   {
-    _id: { type: Schema.ObjectId, required: true },
-    occurrenceID: { type: String, required: true },
+    occurrenceID: { type: String }, // TODO: Is mandatory according to calc file
     taxID: { type: Number, required: true },
     acceptedNameUsage: { type: String, required: true },
     species: { type: String, default: null },
@@ -65,9 +64,13 @@ const RecordSchema = new Schema(
     spatialDuplicated: { type: Boolean, default: false },
     updated: [UpdatedSchema],
     downloadDate: { type: String, default: null },
-    resourceFolder: { type: String, default: null, required: true },
-    resourceIncorporationDate: { type: String, default: null, required: true },
-    resourceName: { type: String, default: null, required: true },
+    resourceFolder: { type: String, default: 'Biomodelos', required: true },
+    resourceIncorporationDate: {
+      type: String,
+      default: Date.now(),
+      required: true
+    },
+    resourceName: { type: String, default: 'Biomodelos', required: true },
     source: { type: String, default: null },
     contributedRecord: { type: String, default: null },
     privateData: { type: Number, in: [0, 1, 2], default: 0 },
