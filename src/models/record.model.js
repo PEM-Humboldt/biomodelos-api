@@ -64,13 +64,12 @@ const RecordSchema = new Schema(
     spatialDuplicated: { type: Boolean, default: false },
     updated: [UpdatedSchema],
     downloadDate: { type: String, default: null },
-    resourceFolder: { type: String, default: 'Biomodelos', required: true },
+    resourceFolder: { type: String, default: 'Biomodelos' }, // TODO: Is mandatory according to calc file
     resourceIncorporationDate: {
       type: String,
-      default: Date.now(),
-      required: true
-    },
-    resourceName: { type: String, default: 'Biomodelos', required: true },
+      default: Date.now()
+    }, // TODO: Is mandatory according to calc file
+    resourceName: { type: String, default: 'Biomodelos' }, // TODO: Is mandatory according to calc file
     source: { type: String, default: null },
     contributedRecord: { type: String, default: null },
     privateData: { type: Number, in: [0, 1, 2], default: 0 },
