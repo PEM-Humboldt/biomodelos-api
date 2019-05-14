@@ -1,22 +1,41 @@
-import { Record, Updated, Reported, Created } from '../../models/record.model';
+import { Record, Updated } from '../../models/record.model';
 
+/**
+ * @swagger
+ * /records/{record_id}:
+ *   get:
+ *     description: Get a record by its ID
+ *     operationId: REC2
+ *     parameters:
+ *       - name: record_id
+ *         in: path
+ *         description: The record ID
+ *         required: true
+ *         type: string
+ *     responses:
+ *       "200":
+ *         description: Success
+ *         schema:
+ *           $ref: "#/definitions/Record"
+ *     default:
+ *       description: Error
+ *       schema:
+ *         $ref: "#/definitions/ErrorResponse"
+ */
 export async function read(req, res) {
-  if(req.params.record_id){
+  if (req.params.record_id) {
     try {
-      const record = await Record.findById(req.params.record_id,
-        {
-          _id: 0,
-          cellID: 0,
-          dbDuplicate: 0,
-          downloadDate: 0,
-          override: 0,
-          resourceFolder: 0,
-          resourceIncorporationDate: 0,
-          resourceName: 0,
-          sourceLayer: 0,
-          spatialDuplicate: 0
-        }
-      );
+      const record = await Record.findById(req.params.record_id, {
+        _id: 0,
+        cellID: 0,
+        dbDuplicate: 0,
+        downloadDate: 0,
+        resourceFolder: 0,
+        resourceIncorporationDate: 0,
+        resourceName: 0,
+        sourceLayer: 0,
+        spatialDuplicate: 0
+      });
       res.json(record);
     } catch (e) {
       res.json(e);
@@ -28,12 +47,22 @@ export async function read(req, res) {
  * @swagger
  * /records/{record_id}:
  *   put:
- *     description: "Updating main keys of a record of a species"
+ *     description: Update main attributes of a record
  *     operationId: REC2
  *     parameters:
- *       - name: taxID
+ *       - name: record_id
  *         in: path
- *         description: The taxon ID of the specie
+ *         description: The record ID
+ *         required: true
+ *         type: string
+ *       - name: decimalLongitude
+ *         in: body
+ *         description: the decimal longitude of the record
+ *         required: true
+ *         type: string
+ *       - name: decimalLatitude
+ *         in: body
+ *         description: the decimal latitude of the record
  *         required: true
  *         type: string
  *     responses:
@@ -41,104 +70,103 @@ export async function read(req, res) {
  *         description: Success
  *         schema:
  *           type: object
- *           required:
- *             - type
- *             - features
  *           properties:
- *             type:
+ *             message:
  *               type: string
- *               default: "FeatureCollection"
- *             features:
- *               type: array
- *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *               default: "The record {record_id} was successfully updated!"
  *     default:
  *       description: Error
  *       schema:
  *         $ref: "#/definitions/ErrorResponse"
  */
 export async function update(req, res) {
+  let record = null;
   try {
-    const record = await Record.findById(req.params.record_id);
-    let updated = new Updated();
-    if (!req.body.taxID || req.body.taxID === record.taxID) {
-      !updated.taxID;
-    } else {
-      updated.taxID = record.taxID;
-      record.taxID = req.body.taxID;
-    }
-    if (
-      !req.body.speciesOriginal ||
-      req.body.speciesOriginal === record.speciesOriginal
-    ) {
-      !updated.speciesOriginal;
-    } else {
-      updated.speciesOriginal = record.speciesOriginal;
-      record.speciesOriginal = req.body.speciesOriginal;
-    }
-    if (!req.body.locality || req.body.locality === record.locality) {
-      !updated.locality;
-    } else {
-      updated.locality = record.locality;
-      record.locality = req.body.locality;
-    }
-    if (!req.body.lat || req.body.lat === record.lat) {
-      !updated.lat;
-    } else {
-      updated.lat = record.lat;
-      record.lat = req.body.lat;
-    }
-    if (!req.body.lon || req.body.lon === record.lon) {
-      !updated.lon;
-    } else {
-      updated.lon = record.lon;
-      record.lon = req.body.lon;
-    }
-    if (!req.body.dd || req.body.dd === record.dd) {
-      !updated.dd;
-    } else {
-      updated.dd = record.dd;
-      record.dd = req.body.dd;
-    }
-    if (!req.body.mm || req.body.mm === record.mm) {
-      !updated.mm;
-    } else {
-      updated.mm = record.mm;
-      record.mm = req.body.mm;
-    }
-    if (!req.body.yyyy || req.body.yyyy === record.yyyy) {
-      !updated.yyyy;
-    } else {
-      updated.yyyy = record.yyyy;
-      record.yyyy = req.body.yyyy;
-    }
-    if (
-      !req.body.taxID &&
-      !req.body.speciesOriginal &&
-      !req.body.locality &&
-      !req.body.lat &&
-      !req.body.lon &&
-      !req.body.dd &&
-      !req.body.mm &&
-      !req.body.yyyy
-    ) {
-      updated = [];
-    } else {
-      updated.userId_bm = req.body.userId_bm;
-      updated.updatedDate = Date.now;
-      if (!record.updated) {
-        record.updated = [];
-      }
-      record.updated.push(updated);
-    }
-    try {
-      await record.save();
-      res.json({
-        message: `The record ${record._id} was successfully updated!`
-      });
-    } catch (err) {
-      res.send(err);
-    }
+    record = await Record.findById(req.params.record_id);
+    if (!record) throw new Error("Record doesn't exist");
+  } catch (err) {
+    res.send(400, err.toString());
+    return;
+  }
+
+  let updated = new Updated();
+  let wereChanges = false;
+  if (req.body.taxID && req.body.taxID !== record.taxID) {
+    updated.taxID = record.taxID;
+    record.taxID = req.body.taxID;
+    wereChanges = true;
+  }
+  if (
+    req.body.speciesOriginal &&
+    req.body.speciesOriginal !== record.speciesOriginal
+  ) {
+    updated.speciesOriginal = record.speciesOriginal;
+    record.speciesOriginal = req.body.speciesOriginal;
+    wereChanges = true;
+  }
+  if (
+    req.body.verbatimLocality &&
+    req.body.verbatimLocality !== record.verbatimLocality
+  ) {
+    updated.verbatimLocality = record.verbatimLocality;
+    record.verbatimLocality = req.body.verbatimLocality;
+    wereChanges = true;
+  }
+  if (
+    req.body.decimalLatitude &&
+    req.body.decimalLatitude !== record.decimalLatitude
+  ) {
+    updated.decimalLatitude = record.decimalLatitude;
+    record.decimalLatitude = req.body.decimalLatitude;
+    wereChanges = true;
+  }
+  if (
+    req.body.decimalLongitude &&
+    req.body.decimalLongitude !== record.decimalLongitude
+  ) {
+    updated.decimalLongitude = record.decimalLongitude;
+    record.decimalLongitude = req.body.decimalLongitude;
+    wereChanges = true;
+  }
+  if (req.body.day && req.body.day !== record.day) {
+    updated.day = record.day;
+    record.day = req.body.day;
+    wereChanges = true;
+  }
+  if (req.body.month && req.body.month !== record.month) {
+    updated.month = record.month;
+    record.month = req.body.month;
+    wereChanges = true;
+  }
+  if (req.body.year && req.body.year !== record.year) {
+    updated.year = record.year;
+    record.year = req.body.year;
+    wereChanges = true;
+  }
+  if (req.body.userIdBm && req.body.userIdBm !== record.userIdBm) {
+    updated.userIdBm = record.userIdBm;
+    record.userIdBm = req.body.userIdBm;
+    wereChanges = true;
+  }
+
+  if (!wereChanges) {
+    res.json({
+      message: `The record ${record._id} didn't have any changes!`
+    });
+    return;
+  }
+
+  updated.updatedDate = Date.now;
+  if (!record.updated) {
+    record.updated = [];
+  }
+  record.updated.push(updated);
+
+  try {
+    await record.save();
+    res.json({
+      message: `The record ${record._id} was successfully updated!`
+    });
   } catch (err) {
     res.send(err);
   }
@@ -148,12 +176,12 @@ export async function update(req, res) {
  * @swagger
  * /records/{record_id}:
  *   post:
- *     description: "Reporting probable errors of a record"
+ *     description: Report a record with probable errors
  *     operationId: REC3
  *     parameters:
- *       - name: taxID
+ *       - name: record_id
  *         in: path
- *         description: The taxon ID of the specie
+ *         description: The record Id to report
  *         required: true
  *         type: string
  *     responses:
@@ -161,90 +189,73 @@ export async function update(req, res) {
  *         description: Success
  *         schema:
  *           type: object
- *           required:
- *             - type
- *             - features
  *           properties:
- *             type:
+ *             message:
  *               type: string
- *               default: "FeatureCollection"
- *             features:
- *               type: array
- *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *               default: "The record {record_id} was reported!"
  *     default:
  *       description: Error
  *       schema:
  *         $ref: "#/definitions/ErrorResponse"
  */
-export async function create(req, res) {
+export async function report(req, res) {
+  let record = null;
   try {
-    const record = await Record.findById(req.params.record_id);
-    let reported = new Reported();
-    reported.userId_bm = req.body.userId_bm;
-    if (!req.body.isOutlier_bm) {
-      !reported.isOutlier_bm;
-    } else {
-      reported.isOutlier_bm = req.body.isOutlier_bm;
-    }
-    if (!req.body.geoIssue_bm) {
-      !reported.geoIssue_bm;
-    } else {
-      reported.geoIssue_bm = req.body.geoIssue_bm;
-    }
-    if (!req.body.idIssue_bm) {
-      !reported.idIssue_bm;
-    } else {
-      reported.idIssue_bm = req.body.idIssue_bm;
-    }
-    if (!req.body.oldTaxonomy_bm) {
-      !reported.oldTaxonomy_bm;
-    } else {
-      reported.oldTaxonomy_bm = req.body.oldTaxonomy_bm;
-    }
-    if (!req.body.inCaptivity_bm) {
-      !reported.inCaptivity_bm;
-    } else {
-      reported.inCaptivity_bm = req.body.inCaptivity_bm;
-    }
-    if (!req.body.otherIssues_bm) {
-      !reported.otherIssues_bm;
-    } else {
-      reported.otherIssues_bm = req.body.otherIssues_bm;
-    }
-    if (!req.body.comments_bm) {
-      !reported.comments_bm;
-    } else {
-      reported.comments_bm = req.body.comments_bm;
-    }
-    if (
-      !req.body.isOutlier_bm &&
-      !req.body.geoIssue_bm &&
-      !req.body.idIssue_bm &&
-      !req.body.oldTaxonomy_bm &&
-      !req.body.inCaptivity_bm &&
-      !req.body.otherIssues_bm &&
-      !req.body.comments_bm
-    ) {
-      reported = [];
-    } else {
-      reported.userId_bm = req.body.userId_bm;
-      reported.reportedDate = Date.now;
-      if (!record.reported) {
-        record.reported = [];
-      }
-      record.reported.push(reported);
-    }
+    record = await Record.findById(req.params.record_id);
+    if (!record) throw new Error("Record doesn't exist");
+  } catch (err) {
+    res.send(400, err.toString());
+    return;
+  }
+
+  if (req.body.reportedUserIdBm) {
+    record.reportedUserIdBm = req.body.reportedUserIdBm;
+  }
+  if (req.body.reportedOriginVagrant) {
+    record.reportedOriginVagrant = req.body.reportedOriginVagrant;
+  }
+  if (req.body.reportedGeoIssueBm) {
+    record.reportedGeoIssueBm = req.body.reportedGeoIssueBm;
+  }
+  if (req.body.reportedIdIssueBm) {
+    record.reportedIdIssueBm = req.body.reportedIdIssueBm;
+  }
+  if (req.body.reportedOldTaxonomyBm) {
+    record.reportedOldTaxonomyBm = req.body.reportedOldTaxonomyBm;
+  }
+  if (req.body.reportedOriginIntroduced) {
+    record.reportedOriginIntroduced = req.body.reportedOriginIntroduced;
+  }
+  if (req.body.reportedOtherIssuesBm) {
+    record.reportedOtherIssuesBm = req.body.reportedOtherIssuesBm;
+  }
+  if (req.body.reportedCommentsBm) {
+    record.reportedCommentsBm = req.body.reportedCommentsBm;
+  }
+
+  if (
+    req.body.reportedUserIdBm &&
+    (req.body.reportedOriginVagrant ||
+      req.body.reportedOldTaxonomyBm ||
+      req.body.reportedOriginIntroduced ||
+      req.body.reportedOtherIssuesBm ||
+      req.body.reportedCommentsBm ||
+      req.body.reportedGeoIssueBm ||
+      req.body.reportedIdIssueBm)
+  ) {
+    record.reportedDate = Date.now();
     try {
       await record.save();
       res.json({
         message: `The record ${record._id} was reported!`
       });
     } catch (err) {
-      res.send(err);
+      res.send(err.toString());
     }
-  } catch (err) {
-    res.send(err);
+  } else {
+    res.json({
+      message: 'There is nothing to report'
+    });
   }
 }
 
@@ -252,30 +263,17 @@ export async function create(req, res) {
  * @swagger
  * /records:
  *   post:
- *     description: "Inserting a new (and just one) record that belongs to a specific species"
+ *     description: Insert a new (and just one) record that belongs to a specific species
  *     operationId: REC4
- *     parameters:
- *       - name: taxID
- *         in: path
- *         description: The taxon ID of the specie
- *         required: true
- *         type: string
  *     responses:
  *       "200":
  *         description: Success
  *         schema:
  *           type: object
- *           required:
- *             - type
- *             - features
  *           properties:
- *             type:
+ *             message:
  *               type: string
- *               default: "FeatureCollection"
- *             features:
- *               type: array
- *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *               default: "Record created! {record_id}"
  *     default:
  *       description: Error
  *       schema:
@@ -283,92 +281,93 @@ export async function create(req, res) {
  */
 export async function createWithoutId(req, res) {
   const record = new Record();
-  const created = new Created();
   record.taxID = +req.body.taxID;
   record.acceptedNameUsage = req.body.acceptedNameUsage;
-  record.collection_code =
-    !req.body.collection_code || req.body.collection_code === ''
+  record.collectionCode =
+    !req.body.collectionCode || req.body.collectionCode === ''
       ? null
-      : req.body.collection_code;
+      : req.body.collectionCode;
   record.catalogNumber =
     !req.body.catalogNumber || req.body.catalogNumber === ''
       ? null
       : req.body.catalogNumber;
-  record.institution =
-    !req.body.institution || req.body.institution === ''
+  record.institutionCode =
+    !req.body.institutionCode || req.body.institutionCode === ''
       ? null
-      : req.body.institution;
-  if (!req.body.adm1 || req.body.adm1 === '') {
-    record.adm1 = null;
+      : req.body.institutionCode;
+  if (!req.body.stateProvince || req.body.stateProvince === '') {
+    record.stateProvince = null;
   } else {
-    record.adm1 = req.body.adm1;
+    record.stateProvince = req.body.stateProvince;
   }
-  if (!req.body.adm2 || req.body.adm2 === '') {
-    record.adm2 = null;
+  if (!req.body.county || req.body.county === '') {
+    record.county = null;
   } else {
-    record.adm2 = req.body.adm2;
+    record.county = req.body.county;
   }
 
-  if (!req.body.locality || req.body.locality === '') {
-    record.locality = null;
+  if (!req.body.verbatimLocality || req.body.verbatimLocality === '') {
+    record.verbatimLocality = null;
   } else {
-    record.locality = req.body.locality;
+    record.verbatimLocality = req.body.verbatimLocality;
   }
-  record.lat = +req.body.lat;
-  record.lon = +req.body.lon;
-  if (!req.body.alt || req.body.alt === '') {
-    record.alt = null;
+  record.decimalLatitude = +req.body.decimalLatitude;
+  record.decimalLongitude = +req.body.decimalLongitude;
+  if (!req.body.verbatimElevation || req.body.verbatimElevation === '') {
+    record.verbatimElevation = null;
   } else {
-    record.alt = +req.body.alt;
+    record.verbatimElevation = +req.body.verbatimElevation;
   }
   if (!req.body.basisOfRecord || req.body.basisOfRecord === '') {
     record.basisOfRecord = null;
   } else {
     record.basisOfRecord = req.body.basisOfRecord;
   }
-  if (!req.body.collector || req.body.collector === '') {
-    record.collector = null;
+  if (!req.body.recordedBy || req.body.recordedBy === '') {
+    record.recordedBy = null;
   } else {
-    record.collector = req.body.collector;
+    record.recordedBy = req.body.recordedBy;
   }
   if (!req.body.source || req.body.source === '') {
     record.source = null;
   } else {
     record.source = req.body.source;
   }
-  if (!req.body.mm || req.body.mm === '') {
-    record.mm = null;
+  if (!req.body.month || req.body.month === '') {
+    record.month = null;
   } else {
-    record.mm = +req.body.mm;
+    record.month = +req.body.month;
   }
-  if (!req.body.dd || req.body.dd === '') {
-    record.dd = null;
+  if (!req.body.day || req.body.day === '') {
+    record.day = null;
   } else {
-    record.dd = +req.body.dd;
+    record.day = +req.body.day;
   }
-  if (!req.body.yyyy || req.body.yyyy === '') {
-    record.yyyy = null;
+  if (!req.body.year || req.body.year === '') {
+    record.year = null;
   } else {
-    record.yyyy = +req.body.yyyy;
+    record.year = +req.body.year;
   }
-  if (!req.body.comments_bm || req.body.comments_bm === '') {
-    created.comments_bm = null;
+  if (!req.body.createdCommentsBm || req.body.createdCommentsBm === '') {
+    record.createdCommentsBm = null;
   } else {
-    created.comments_bm = req.body.comments_bm;
+    record.createdCommentsBm = req.body.createdCommentsBm;
   }
-  created.userId_bm = req.body.userId_bm;
+  if (!req.body.userIdBm || req.body.userIdBm === '') {
+    record.userIdBm = null;
+  } else {
+    record.userIdBm = req.body.userIdBm;
+  }
+  record.reportedUserIdBm = null;
   record.source = 'BioModelos';
-  created.createdDate = Date.now;
-  if (!req.body.citation_bm || req.body.citation_bm === '') {
-    created.citation_bm = null;
+  record.createdDate = Date.now();
+  if (!req.body.createdCitationBm || req.body.createdCitationBm === '') {
+    record.createdCitationBm = null;
   } else {
-    created.citation_bm = req.body.citation_bm;
+    record.createdCitationBm = req.body.createdCitationBm;
   }
   record.contributedRecord = true;
   record.updated = [];
-  record.reported = [];
-  record.created = [];
-  record.created.push(created);
   try {
     await record.save();
     res.json({ message: `Record created! ${record._id}` });
@@ -381,7 +380,7 @@ export async function createWithoutId(req, res) {
  * @swagger
  * /records/metadata/institutions/{taxID}:
  *   get:
- *     description: "Obtener los unique values de instituciones que corresponde al taxID ingresado"
+ *     description: Get unique values for institutions that belong to the given taxID
  *     operationId: STA2
  *     parameters:
  *       - name: taxID
@@ -393,18 +392,14 @@ export async function createWithoutId(req, res) {
  *       "200":
  *         description: Success
  *         schema:
- *           type: object
- *           required:
- *             - type
- *             - features
- *           properties:
- *             type:
- *               type: string
- *               default: "FeatureCollection"
- *             features:
- *               type: array
- *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               institution:
+ *                 type: array
+ *                 items:
+ *                   type: string
  *     default:
  *       description: Error
  *       schema:
@@ -417,8 +412,8 @@ export async function uniqueValuesInstitutions(req, res) {
         { $match: { taxID: +req.params.taxID } },
         {
           $group: {
-            _id: '$institution',
-            institution: { $first: '$institution' }
+            _id: '$institutionCode',
+            institution: { $first: '$institutionCode' }
           }
         },
         { $project: { institution: '$_id', _id: 0 } },
@@ -441,7 +436,7 @@ export async function uniqueValuesInstitutions(req, res) {
  * @swagger
  * /records/metadata/collectors/{taxID}:
  *   get:
- *     description: "Obtener los unique values de colectores que corresponde al taxID ingresado"
+ *     description: Get unique values for collectors that belong to the given taxID
  *     operationId: STA3
  *     parameters:
  *       - name: taxID
@@ -453,18 +448,14 @@ export async function uniqueValuesInstitutions(req, res) {
  *       "200":
  *         description: Success
  *         schema:
- *           type: object
- *           required:
- *             - type
- *             - features
- *           properties:
- *             type:
- *               type: string
- *               default: "FeatureCollection"
- *             features:
- *               type: array
- *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               collector:
+ *                 type: array
+ *                 items:
+ *                   type: string
  *     default:
  *       description: Error
  *       schema:
@@ -475,7 +466,9 @@ export async function uniqueValuesCollectors(req, res) {
     try {
       const doc = await Record.aggregate([
         { $match: { taxID: +req.params.taxID } },
-        { $group: { _id: '$collector', collector: { $first: '$collector' } } },
+        {
+          $group: { _id: '$recordedBy', collector: { $first: '$recordedBy' } }
+        },
         { $project: { collector: '$_id', _id: 0 } },
         { $group: { _id: null, collector: { $push: '$collector' } } },
         { $project: { collector: '$collector', _id: 0 } }
@@ -491,7 +484,7 @@ export async function uniqueValuesCollectors(req, res) {
  * @swagger
  * /records/metadata/sources/{taxID}:
  *   get:
- *     description: "Obtener los unique values del campo source que corresponde al taxID ingresado"
+ *     description: Get unique values for sources that belong to the given taxID
  *     operationId: STA4
  *     parameters:
  *       - name: taxID
@@ -503,18 +496,14 @@ export async function uniqueValuesCollectors(req, res) {
  *       "200":
  *         description: Success
  *         schema:
- *           type: object
- *           required:
- *             - type
- *             - features
- *           properties:
- *             type:
- *               type: string
- *               default: "FeatureCollection"
- *             features:
- *               type: array
- *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               source:
+ *                 type: array
+ *                 items:
+ *                   type: string
  *     default:
  *       description: Error
  *       schema:
@@ -541,7 +530,7 @@ export async function uniqueValuesSources(req, res) {
  * @swagger
  * /records/metadata/collaborators/{taxID}:
  *   get:
- *     description: "Retorna el identifcador de los colaboradores que han reportado creado o actualizado los registros de la especie consultada"
+ *     description: Get the users than have created, reported or updated records on the given taxID
  *     operationId: STA5
  *     parameters:
  *       - name: taxID
@@ -553,18 +542,14 @@ export async function uniqueValuesSources(req, res) {
  *       "200":
  *         description: Success
  *         schema:
- *           type: object
- *           required:
- *             - type
- *             - features
- *           properties:
- *             type:
- *               type: string
- *               default: "FeatureCollection"
- *             features:
- *               type: array
- *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               userId_bm:
+ *                 type: array
+ *                 items:
+ *                   type: number
  *     default:
  *       description: Error
  *       schema:
@@ -578,8 +563,8 @@ export async function collaboratorsOfSpecie(req, res) {
         { $match: { taxID: +req.params.taxID } },
         {
           $group: {
-            _id: '$reported.userId_bm',
-            userId_bm: { $first: '$reported.userId_bm' }
+            _id: '$userIdBm',
+            userId_bm: { $first: '$userIdBm' }
           }
         },
         { $project: { userId_bm: '$_id', _id: 0 } },
@@ -596,12 +581,12 @@ export async function collaboratorsOfSpecie(req, res) {
         temp.push(doc[i].userId_bm);
       }
       try {
-        doc = await Record.aggregate([
+        let doc = await Record.aggregate([
           { $match: { taxID: +req.params.taxID } },
           {
             $group: {
-              _id: '$created.userId_bm',
-              userId_bm: { $first: '$created.userId_bm' }
+              _id: '$reportedUserIdBm',
+              userId_bm: { $first: '$reportedUserIdBm' }
             }
           },
           { $project: { userId_bm: '$_id', _id: 0 } },
@@ -622,8 +607,8 @@ export async function collaboratorsOfSpecie(req, res) {
             { $match: { taxID: +req.params.taxID } },
             {
               $group: {
-                _id: '$updated.userId_bm',
-                userId_bm: { $first: '$updated.userId_bm' }
+                _id: '$updated.userIdBm',
+                userId_bm: { $first: '$updated.userIdBm' }
               }
             },
             { $project: { userId_bm: '$_id', _id: 0 } },
@@ -663,7 +648,7 @@ export async function collaboratorsOfSpecie(req, res) {
  * @swagger
  * /records/metadata/latest_date/{taxID}:
  *   get:
- *     description: "Retorna la ultima fecha de modificación (reported, created, updated)"
+ *     description: Returns last modified date (can be created, reported or updated date)
  *     operationId: STA6
  *     parameters:
  *       - name: taxID
@@ -676,17 +661,9 @@ export async function collaboratorsOfSpecie(req, res) {
  *         description: Success
  *         schema:
  *           type: object
- *           required:
- *             - type
- *             - features
  *           properties:
- *             type:
+ *             maxDate:
  *               type: string
- *               default: "FeatureCollection"
- *             features:
- *               type: array
- *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
  *     default:
  *       description: Error
  *       schema:
@@ -700,9 +677,9 @@ export async function latestChange(req, res) {
         { $match: { taxID: +req.params.taxID } },
         {
           $group: {
-            _id: '$reported.reportedDate',
+            _id: '$reportedDate',
             reportedDate: {
-              $max: '$reported.reportedDate'
+              $max: '$reportedDate'
             }
           }
         },
@@ -729,9 +706,9 @@ export async function latestChange(req, res) {
           { $match: { taxID: +req.params.taxID } },
           {
             $group: {
-              _id: '$created.createdDate',
+              _id: '$createdDate',
               createdDate: {
-                $max: '$created.createdDate'
+                $max: '$createdDate'
               }
             }
           },
@@ -791,7 +768,7 @@ export async function latestChange(req, res) {
  * @swagger
  * /records/metadata/collection/{taxID}:
  *   get:
- *     description: "Obtener los unique values del campo collection que corresponde al taxID ingresado"
+ *     description: Get unique values for attribute collection that belongs to the given taxID
  *     operationId: STA7
  *     parameters:
  *       - name: taxID
@@ -804,17 +781,9 @@ export async function latestChange(req, res) {
  *         description: Success
  *         schema:
  *           type: object
- *           required:
- *             - type
- *             - features
  *           properties:
- *             type:
+ *             collection_code:
  *               type: string
- *               default: "FeatureCollection"
- *             features:
- *               type: array
- *               items:
- *                 $ref: "#/definitions/FeatureSpecieRecord"
  *     default:
  *       description: Error
  *       schema:
@@ -827,8 +796,8 @@ export async function uniqueValuesCollection(req, res) {
         { $match: { taxID: +req.params.taxID } },
         {
           $group: {
-            _id: '$collection_code',
-            collection_code: { $first: '$collection_code' }
+            _id: '$collectionCode',
+            collection_code: { $first: '$collectionCode' }
           }
         },
         { $project: { collection_code: '$_id', _id: 0 } },

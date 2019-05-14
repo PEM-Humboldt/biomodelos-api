@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/:record_id', controller.read); // REC1
 router.put('/:record_id', controller.update); // REC2
-router.post('/:record_id', controller.create); // REC3
+router.post('/:record_id', controller.report); // REC3
 router.post('/', controller.createWithoutId); // REC4
 router.get(
   '/metadata/institutions/:taxID',

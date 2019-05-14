@@ -269,13 +269,12 @@ definitions:
       - collector
       - suggestedStateProvince
       - suggestedCounty
-      - yyyy
-      - mm
-      - dd
+      - year
+      - month
+      - day
       - taxID
       - url
       - environmentalOutlier
-      - reported
       - updated
     properties:
       _id:
@@ -304,19 +303,17 @@ definitions:
         type: string
       suggestedCounty:
         type: string
-      yyyy:
+      year:
         type: integer
-      mm:
+      month:
         type: integer
-      dd:
+      day:
         type: integer
       taxID:
         type: integer
       url:
         type: string
       environmentalOutlier:
-        type: string
-      reported:
         type: string
       updated:
         type: string

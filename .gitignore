@@ -3,6 +3,7 @@ coverage/
 logs/
 .log
 src/config/config.json
+src/config/config_container.json
 .vscode
 **/.DS_Store
 dist
