@@ -1,6 +1,6 @@
 {
   "name": "BioModelos_mongoDB_API",
-  "version": "2.1.0",
+  "version": "1.1.1",
   "description": "RESTful server API for Biomodels.",
   "main": "index.js",
   "author": "Valentina Grajales Olarte - https://github.com/valegrajales",
@@ -15,10 +15,7 @@
     "dev": "nodemon src/app.js --exec babel-node -e js,yaml",
     "test": "mocha -R spec src/**/*.spec.js",
     "coverage": "istanbul cover _mocha $(find ./src -name \"*.spec.js\" -not -path \"./node_modules/*\") ",
-    "metric": "nodejs-dashboard -- node -r nodejs-dashboard src/app.js",
-    "swaggerEdit": "swagger_swagger_fileName=src/swagger/swagger.yaml swagger project edit",
-    "swaggerRun": "swagger_swagger_fileName=src/swagger/swagger.yaml swagger project start",
-    "swaggerRunMockup": "swagger_swagger_fileName=src/swagger/swagger.yaml swagger project start -m"
+    "metric": "nodejs-dashboard -- node -r nodejs-dashboard src/app.js"
   },
   "dependencies": {
     "body-parser": "1.18.2",
@@ -35,7 +32,6 @@
     "mongoose": "^5.1.0",
     "morgan": "^1.9.0",
     "serve-favicon": "^2.4.5",
-    "swagger-express-mw": "^0.7.0",
     "swagger-jsdoc": "^1.9.7",
     "swagger-tools": "^0.10.3",
     "swagger-ui-express": "^2.0.14",
@@ -69,8 +65,6 @@
     "nodemon": "^1.17.1",
     "prettier": "^1.10.2",
     "should": "^13.2.1",
-    "supertest": "^3.0.0",
-    "swagger": "^0.7.5",
-    "swagger-editor": "^3.2.4"
+    "supertest": "^3.0.0"
   }
 }
