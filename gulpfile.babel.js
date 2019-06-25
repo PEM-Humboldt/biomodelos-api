@@ -3,15 +3,21 @@ import clean from 'gulp-clean';
 import babel from 'gulp-babel';
 import minify from 'gulp-minifier';
 import jsonModify from 'gulp-json-modify';
+import fs from 'fs';
 
 const src = './src';
 const dist_folder = './dist';
+const logs_folder = './logs';
 const dist_folder_server = `${dist_folder}/server`;
-const dist_folder_swagger_documentation = `${dist_folder}/api-docs`;
 
 gulp.task('clean', () => {
+  fs.access(logs_folder, err => {
+    if (err) {
+      fs.mkdir(logs_folder);
+    }
+  });
   return gulp
-    .src([`${dist_folder}/*`], { read: false })
+    .src([`${dist_folder}/*`, `${logs_folder}/*`], { read: false })
     .pipe(clean({ force: true }));
 });
 
@@ -40,9 +46,9 @@ gulp.task('static', () => {
       })
     )
     .pipe(gulp.dest(`${dist_folder_server}/views`));
-  gulp
+  return gulp
     .src(['src/views/**/*.*', '!src/views/**/*.{html,css}'])
     .pipe(gulp.dest(`${dist_folder_server}/views`));
 });
 
-gulp.task('build', ['clean', 'build-babel', 'static']);
+gulp.task('build', gulp.series('clean', 'build-babel', 'static'));
