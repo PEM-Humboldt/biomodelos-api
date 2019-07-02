@@ -1,4 +1,4 @@
-import { Record, Updated } from '../../models/record.model';
+import { Record, Updated, ObjectId } from '../../models/record.model';
 
 /**
  * @swagger
@@ -25,18 +25,41 @@ import { Record, Updated } from '../../models/record.model';
 export async function read(req, res) {
   if (req.params.record_id) {
     try {
-      const record = await Record.findById(req.params.record_id, {
-        _id: 0,
-        cellID: 0,
-        dbDuplicate: 0,
-        downloadDate: 0,
-        resourceFolder: 0,
-        resourceIncorporationDate: 0,
-        resourceName: 0,
-        sourceLayer: 0,
-        spatialDuplicate: 0
-      });
-      res.json(record);
+      const record = await Record.aggregate([
+        { $match: { _id: ObjectId(req.params.record_id) } },
+        {
+          $lookup: {
+            from: 'species',
+            let: { recordTax: '$taxID' },
+            pipeline: [
+              { $match: { $expr: { $eq: ['$$recordTax', '$taxID'] } } },
+              {
+                $project: {
+                  family: 1,
+                  order: 1,
+                  class: 1,
+                  kingdom: 1
+                }
+              }
+            ],
+            as: 'speciesInfo'
+          }
+        },
+        {
+          $project: {
+            _id: 0,
+            cellID: 0,
+            dbDuplicate: 0,
+            downloadDate: 0,
+            resourceFolder: 0,
+            resourceIncorporationDate: 0,
+            resourceName: 0,
+            sourceLayer: 0,
+            spatialDuplicate: 0
+          }
+        }
+      ]);
+      res.json(record[0]);
     } catch (e) {
       res.json(e);
     }
