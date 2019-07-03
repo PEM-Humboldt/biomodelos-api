@@ -78,16 +78,41 @@ export async function read(req, res) {
  *         description: The record ID
  *         required: true
  *         type: string
+ *       - name: acceptedNameUsage
+ *         in: body
+ *         description: the accepted name for the species
+ *         required: false
+ *         type: string
+ *       - name: verbatimLocality
+ *         in: body
+ *         description: the original textual description of the place
+ *         required: false
+ *         type: string
  *       - name: decimalLongitude
  *         in: body
  *         description: the decimal longitude of the record
- *         required: true
- *         type: string
+ *         required: false
+ *         type: number
  *       - name: decimalLatitude
  *         in: body
  *         description: the decimal latitude of the record
- *         required: true
- *         type: string
+ *         required: false
+ *         type: number
+ *       - name: day
+ *         in: body
+ *         description: the integer day of the month on which the Event occurred
+ *         required: false
+ *         type: number
+ *       - name: month
+ *         in: body
+ *         description: the ordinal month in which the Event occurred
+ *         required: false
+ *         type: number
+ *       - name: year
+ *         in: body
+ *         description: the four-digit year in which the Event occurred
+ *         required: false
+ *         type: number
  *     responses:
  *       "200":
  *         description: Success
@@ -120,11 +145,11 @@ export async function update(req, res) {
     wereChanges = true;
   }
   if (
-    req.body.speciesOriginal &&
-    req.body.speciesOriginal !== record.speciesOriginal
+    req.body.acceptedNameUsage &&
+    req.body.acceptedNameUsage !== record.acceptedNameUsage
   ) {
-    updated.speciesOriginal = record.speciesOriginal;
-    record.speciesOriginal = req.body.speciesOriginal;
+    updated.acceptedNameUsage = record.acceptedNameUsage;
+    record.acceptedNameUsage = req.body.acceptedNameUsage;
     wereChanges = true;
   }
   if (
