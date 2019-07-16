@@ -1,4 +1,7 @@
 import { Record, Updated, ObjectId } from '../../models/record.model';
+import fs from 'fs';
+import path from 'path';
+import os from 'os';
 
 /**
  * @swagger
@@ -832,4 +835,50 @@ export async function uniqueValuesCollection(req, res) {
       res.json(err);
     }
   }
+}
+
+export async function validate(req, res) {
+  const records = await Record.find({
+    // resourceName: {
+    //   $in: [
+    //     'tortugas_upload.csv',
+    //     'tortugas_upload2.csv',
+    //     'tortugas_experts18062019.csv'
+    //   ]
+    // }
+  }).sort({ id: 1 });
+
+  console.log(`Registros encontrados: ${records.length}`);
+  const data = [['_id', 'Error message']];
+  for (const record of records) {
+    try {
+      await record.validate();
+    } catch (err) {
+      data.push([record._id, err.message]);
+    }
+  }
+  if (data.length === 1) {
+    res.send('No se encontraron errores');
+  } else {
+    fs.writeFile(
+      path.join(__dirname, 'validation_errors.csv'),
+      data.join(os.EOL),
+      err => {
+        if (err) {
+          console.log('Error:', err);
+          res.send('Error writing file');
+        } else {
+          res.send('Archivo con errores escrito.');
+        }
+      }
+    );
+  }
+  // const record = await Record.findById(req.params.record_id);
+  // record.validate(err => {
+  //   if (err) {
+  //     res.send(err);
+  //   } else {
+  //     res.send('ok');
+  //   }
+  // });
 }
