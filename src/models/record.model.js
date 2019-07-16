@@ -2,17 +2,20 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 // esquema para la corrección de registros biológicos
-const UpdatedSchema = new Schema({
-  verbatimLocality: { type: String, default: null },
-  decimalLatitude: { type: Number, min: -90, max: 90 },
-  decimalLongitude: { type: Number, min: -180, max: 180 },
-  speciesOriginal: { type: String },
-  day: { type: Number, min: 1, max: 31, default: null },
-  month: { type: Number, min: 1, max: 12, default: null },
-  year: { type: Number, min: 1800, max: 2100, default: null },
-  updatedDate: { type: Date, default: Date.now },
-  userIdBm: { type: Number }
-});
+const UpdatedSchema = new Schema(
+  {
+    verbatimLocality: { type: String, default: null },
+    decimalLatitude: { type: Number, min: -90, max: 90 },
+    decimalLongitude: { type: Number, min: -180, max: 180 },
+    speciesOriginal: { type: String },
+    day: { type: Number, min: 1, max: 31, default: null },
+    month: { type: Number, min: 1, max: 12, default: null },
+    year: { type: Number, min: 1800, max: 2100, default: null },
+    updatedDate: { type: Date, default: Date.now },
+    userIdBm: { type: Number }
+  },
+  { versionKey: false }
+);
 
 const RecordSchema = new Schema(
   {
@@ -111,7 +114,10 @@ const RecordSchema = new Schema(
     reportedGeoIssueBm: { type: Boolean },
     reportedIdIssueBm: { type: Boolean }
   },
-  { collection: 'records' }
+  {
+    collection: 'records',
+    versionKey: false
+  }
 );
 
 export const Record = mongoose.model('Record', RecordSchema, 'records');
