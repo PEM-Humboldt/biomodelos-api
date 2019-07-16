@@ -1,4 +1,4 @@
-import { Record, Updated } from '../../models/record.model';
+import { Record, Updated, ObjectId } from '../../models/record.model';
 
 /**
  * @swagger
@@ -25,18 +25,41 @@ import { Record, Updated } from '../../models/record.model';
 export async function read(req, res) {
   if (req.params.record_id) {
     try {
-      const record = await Record.findById(req.params.record_id, {
-        _id: 0,
-        cellID: 0,
-        dbDuplicate: 0,
-        downloadDate: 0,
-        resourceFolder: 0,
-        resourceIncorporationDate: 0,
-        resourceName: 0,
-        sourceLayer: 0,
-        spatialDuplicate: 0
-      });
-      res.json(record);
+      const record = await Record.aggregate([
+        { $match: { _id: ObjectId(req.params.record_id) } },
+        {
+          $lookup: {
+            from: 'species',
+            let: { recordTax: '$taxID' },
+            pipeline: [
+              { $match: { $expr: { $eq: ['$$recordTax', '$taxID'] } } },
+              {
+                $project: {
+                  family: 1,
+                  order: 1,
+                  class: 1,
+                  kingdom: 1
+                }
+              }
+            ],
+            as: 'speciesInfo'
+          }
+        },
+        {
+          $project: {
+            _id: 0,
+            cellID: 0,
+            dbDuplicate: 0,
+            downloadDate: 0,
+            resourceFolder: 0,
+            resourceIncorporationDate: 0,
+            resourceName: 0,
+            sourceLayer: 0,
+            spatialDuplicate: 0
+          }
+        }
+      ]);
+      res.json(record[0]);
     } catch (e) {
       res.json(e);
     }
@@ -283,87 +306,60 @@ export async function createWithoutId(req, res) {
   const record = new Record();
   record.taxID = +req.body.taxID;
   record.acceptedNameUsage = req.body.acceptedNameUsage;
-  record.collectionCode =
-    !req.body.collectionCode || req.body.collectionCode === ''
-      ? null
-      : req.body.collectionCode;
-  record.catalogNumber =
-    !req.body.catalogNumber || req.body.catalogNumber === ''
-      ? null
-      : req.body.catalogNumber;
-  record.institutionCode =
-    !req.body.institutionCode || req.body.institutionCode === ''
-      ? null
-      : req.body.institutionCode;
-  if (!req.body.stateProvince || req.body.stateProvince === '') {
-    record.stateProvince = null;
-  } else {
+  if (req.body.collectionCode) {
+    record.collectionCode = req.body.collectionCode;
+  }
+  if (req.body.catalogNumber) {
+    record.catalogNumber = req.body.catalogNumber;
+  }
+  if (req.body.institutionCode) {
+    record.institutionCode = req.body.institutionCode;
+  }
+  if (req.body.stateProvince) {
     record.stateProvince = req.body.stateProvince;
   }
-  if (!req.body.county || req.body.county === '') {
-    record.county = null;
-  } else {
+  if (req.body.county) {
     record.county = req.body.county;
   }
-
-  if (!req.body.verbatimLocality || req.body.verbatimLocality === '') {
-    record.verbatimLocality = null;
-  } else {
+  if (req.body.verbatimLocality) {
     record.verbatimLocality = req.body.verbatimLocality;
   }
   record.decimalLatitude = +req.body.decimalLatitude;
   record.decimalLongitude = +req.body.decimalLongitude;
-  if (!req.body.verbatimElevation || req.body.verbatimElevation === '') {
-    record.verbatimElevation = null;
-  } else {
+  if (req.body.verbatimElevation) {
     record.verbatimElevation = +req.body.verbatimElevation;
   }
-  if (!req.body.basisOfRecord || req.body.basisOfRecord === '') {
-    record.basisOfRecord = null;
-  } else {
+  if (req.body.basisOfRecord) {
     record.basisOfRecord = req.body.basisOfRecord;
   }
-  if (!req.body.recordedBy || req.body.recordedBy === '') {
-    record.recordedBy = null;
-  } else {
+  if (req.body.recordedBy ) {
     record.recordedBy = req.body.recordedBy;
   }
-  if (!req.body.source || req.body.source === '') {
-    record.source = null;
-  } else {
+  if (req.body.source) {
     record.source = req.body.source;
   }
-  if (!req.body.month || req.body.month === '') {
-    record.month = null;
-  } else {
+  if (req.body.month ) {
     record.month = +req.body.month;
   }
-  if (!req.body.day || req.body.day === '') {
-    record.day = null;
-  } else {
+  if (req.body.day) {
     record.day = +req.body.day;
   }
-  if (!req.body.year || req.body.year === '') {
-    record.year = null;
-  } else {
+  if (req.body.year) {
     record.year = +req.body.year;
   }
-  if (!req.body.createdCommentsBm || req.body.createdCommentsBm === '') {
-    record.createdCommentsBm = null;
-  } else {
+  if (req.body.createdCommentsBm) {
     record.createdCommentsBm = req.body.createdCommentsBm;
   }
-  if (!req.body.userIdBm || req.body.userIdBm === '') {
-    record.userIdBm = null;
-  } else {
+  if (req.body.userIdBm) {
     record.userIdBm = req.body.userIdBm;
+  }
+  if (req.body.occurrenceID) {
+    record.occurrenceID = req.body.occurrenceID;
   }
   record.reportedUserIdBm = null;
   record.source = 'BioModelos';
   record.createdDate = Date.now();
-  if (!req.body.createdCitationBm || req.body.createdCitationBm === '') {
-    record.createdCitationBm = null;
-  } else {
+  if (req.body.createdCitationBm) {
     record.createdCitationBm = req.body.createdCitationBm;
   }
   record.contributedRecord = true;
