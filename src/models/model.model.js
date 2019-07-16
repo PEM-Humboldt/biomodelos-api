@@ -192,7 +192,10 @@ const ModelSchema = new Schema(
       in: ['present', 'past', 'future']
     }
   },
-  { collection: 'models' }
+  {
+    collection: 'models',
+    versionKey: false
+  }
 );
 
 export default mongoose.model('Model', ModelSchema, 'models');

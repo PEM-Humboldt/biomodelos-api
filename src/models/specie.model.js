@@ -109,7 +109,10 @@ const SpecieSchema = new Schema(
     uploadUser: { type: String, required: true, default: null },
     uploadDate: { type: Date, required: true, default: null }
   },
-  { collection: 'species' }
+  {
+    collection: 'species',
+    versionKey: false
+  }
 );
 
 export default mongoose.model('Specie', SpecieSchema, 'species');
