@@ -16,15 +16,15 @@ const UpdatedSchema = new Schema({
 
 const RecordSchema = new Schema(
   {
-    occurrenceID: { type: String }, // TODO: Is mandatory according to calc file
+    occurrenceID: { type: String, default: `Biomodelos-${Date.now()}` }, // TODO: Is mandatory according to calc file
     taxID: { type: Number, required: true },
     acceptedNameUsage: { type: String, required: true },
-    species: { type: String, default: null },
-    speciesOriginal: { type: String, default: null },
-    continent: { type: String, default: null },
-    country: { type: String, default: null },
-    stateProvince: { type: String, default: null },
-    county: { type: String, default: null },
+    species: { type: String, default: '' },
+    speciesOriginal: { type: String, default: '' },
+    continent: { type: String, default: '' },
+    country: { type: String, default: '' },
+    stateProvince: { type: String, default: '' },
+    county: { type: String, default: '' },
     verbatimLocality: { type: String, default: null },
     decimalLatitude: { type: Number, required: true, min: -90, max: 90 },
     decimalLongitude: { type: Number, required: true, min: -180, max: 180 },
