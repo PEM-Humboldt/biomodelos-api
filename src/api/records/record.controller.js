@@ -838,47 +838,40 @@ export async function uniqueValuesCollection(req, res) {
 }
 
 export async function validate(req, res) {
-  const records = await Record.find({
-    // resourceName: {
-    //   $in: [
-    //     'tortugas_upload.csv',
-    //     'tortugas_upload2.csv',
-    //     'tortugas_experts18062019.csv'
-    //   ]
-    // }
-  }).sort({ id: 1 });
+  const records = await Record.find({})
+    // .limit(200000)
+    .cursor();
 
-  console.log(`Registros encontrados: ${records.length}`);
-  const data = [['_id', 'Error message']];
-  for (const record of records) {
-    try {
-      await record.validate();
-    } catch (err) {
-      data.push([record._id, err.message]);
-    }
-  }
-  if (data.length === 1) {
-    res.send('No se encontraron errores');
-  } else {
-    fs.writeFile(
+  let amount = 0;
+  let errors = 0;
+  try {
+    fs.writeFileSync(
       path.join(__dirname, 'validation_errors.csv'),
-      data.join(os.EOL),
-      err => {
-        if (err) {
-          console.log('Error:', err);
+      `${['_id', 'Error message'].join(',')}${os.EOL}`
+    );
+  } catch (err) {
+    res.send('Error writing file');
+  }
+
+  return records
+    .on('data', async function(record) {
+      amount++;
+      try {
+        await record.validate();
+      } catch (err) {
+        errors++;
+        try {
+          fs.appendFileSync(
+            path.join(__dirname, 'validation_errors.csv'),
+            `${[record._id, err.message].join(',')}${os.EOL}`
+          );
+        } catch (err2) {
           res.send('Error writing file');
-        } else {
-          res.send('Archivo con errores escrito.');
         }
       }
-    );
-  }
-  // const record = await Record.findById(req.params.record_id);
-  // record.validate(err => {
-  //   if (err) {
-  //     res.send(err);
-  //   } else {
-  //     res.send('ok');
-  //   }
-  // });
+    })
+    .on('end', function() {
+      console.log(`Registros encontrados: ${amount}`);
+      res.send(`Errores encontrados: ${errors}`);
+    });
 }
