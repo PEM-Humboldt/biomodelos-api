@@ -32,7 +32,7 @@ const RecordSchema = new Schema(
     decimalLatitude: { type: Number, required: true, min: -90, max: 90 },
     decimalLongitude: { type: Number, required: true, min: -180, max: 180 },
     verbatimElevation: { type: String, default: null },
-    demAltitude: { type: Number, min: 0, max: 8000, default: null },
+    demAltitude: { type: Number, min: -1000, max: 8000, default: null },
     interpretedElevation: { type: Number, min: 0, max: 8000, default: null },
     cellID: { type: Number, min: 0, default: null },
     basisOfRecord: { type: String, default: null },
