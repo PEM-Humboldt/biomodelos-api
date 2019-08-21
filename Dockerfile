@@ -12,4 +12,5 @@ RUN npm install && npm cache clean --force
 RUN npm run build
 
 EXPOSE 3000
+USER node
 CMD [ "npm", "start" ]
