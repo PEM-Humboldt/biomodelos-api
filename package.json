@@ -14,7 +14,8 @@
     "build": "gulp build",
     "dev": "nodemon src/app.js --exec babel-node -e js,yaml",
     "test": "mocha -R spec src/**/*.spec.js",
-    "coverage": "istanbul cover _mocha $(find ./src -name \"*.spec.js\" -not -path \"./node_modules/*\") "
+    "coverage": "istanbul cover _mocha $(find ./src -name \"*.spec.js\" -not -path \"./node_modules/*\") ",
+    "lint": "./node_modules/eslint/bin/eslint.js src"
   },
   "dependencies": {
     "body-parser": "1.18.2",
