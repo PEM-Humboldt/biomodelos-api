@@ -357,13 +357,13 @@ export async function createWithoutId(req, res) {
   if (req.body.basisOfRecord) {
     record.basisOfRecord = req.body.basisOfRecord;
   }
-  if (req.body.recordedBy ) {
+  if (req.body.recordedBy) {
     record.recordedBy = req.body.recordedBy;
   }
   if (req.body.source) {
     record.source = req.body.source;
   }
-  if (req.body.month ) {
+  if (req.body.month) {
     record.month = +req.body.month;
   }
   if (req.body.day) {
