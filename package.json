@@ -52,6 +52,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-prettier": "^2.5.0",
     "eslint-plugin-react": "^7.5.1",
+    "eslint-plugin-security": "^1.4.0",
     "flow": "^0.2.3",
     "gulp": "^4.0.2",
     "gulp-babel": "^7.0.0",
