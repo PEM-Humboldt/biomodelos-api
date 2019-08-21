@@ -1,28 +1,28 @@
 {
-    "parser": "babel-eslint",
-    "parserOptions": {
-        "ecmaVersion": 7,
-        "sourceType": "module"
-    },
-    "env": {
-        "node": true
-    },
-    "plugins": ["jsx-a11y", "prettier", "security"],
-    "extends": [
-        "plugin:security/recommended"
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 7,
+    "sourceType": "module"
+  },
+  "env": {
+    "node": true
+  },
+  "plugins": ["jsx-a11y", "prettier", "security"],
+  "extends": [
+    "plugin:security/recommended"
+  ],
+  "rules": {
+    "comma-dangle": ["error", "never"],
+    "space-before-function-paren": "off",
+    "arrow-parens": ["error", "as-needed"],
+    "jsx-a11y/img-has-alt": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "trailingComma": "none",
+        "singleQuote": true
+      }
     ],
-    "rules": {
-        "comma-dangle": ["error", "never"],
-        "space-before-function-paren": "off",
-        "arrow-parens": ["error", "as-needed"],
-        "jsx-a11y/img-has-alt": "off",
-        "prettier/prettier": [
-            "error",
-            {
-                "trailingComma": "none",
-                "singleQuote": true
-            }
-        ],
-        "no-multi-str": "off"
-    }
+    "no-multi-str": "off"
+  }
 }
