@@ -761,17 +761,20 @@ export async function generalModelStats(req, res) {
       }
     ]);
     docs.map(elem => {
-      let obj = totalStats.find(x => x.taxonomicGroup === elem._id);
-      let index = totalStats.indexOf((obj: any));
+      const obj = totalStats.find(x => x.taxonomicGroup === elem._id);
+      const index = totalStats.indexOf(obj);
       elem.modelStatus.map(elem => {
         switch (elem.status) {
           case 'Developing':
+            // eslint-disable-next-line security/detect-object-injection
             totalStats[index].developingModels = elem.count;
             break;
           case 'Valid':
+            // eslint-disable-next-line security/detect-object-injection
             totalStats[index].validModels = elem.count;
             break;
           case 'pendingValidation':
+            // eslint-disable-next-line security/detect-object-injection
             totalStats[index].pendingValidation = elem.count;
             break;
         }
