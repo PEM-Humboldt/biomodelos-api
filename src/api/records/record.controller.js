@@ -598,9 +598,9 @@ export async function collaboratorsOfSpecie(req, res) {
         },
         { $project: { userId_bm: '$userId_bm', _id: 0 } }
       ]);
-      for (let i = 0; i < doc.length; i++) {
-        temp.push(doc[i].userId_bm);
-      }
+      doc.forEach(elem => {
+        temp.push(elem.userId_bm);
+      });
       try {
         let doc = await Record.aggregate([
           { $match: { taxID: +req.params.taxID } },
@@ -620,9 +620,9 @@ export async function collaboratorsOfSpecie(req, res) {
           },
           { $project: { userId_bm: '$userId_bm', _id: 0 } }
         ]);
-        for (let i = 0; i < doc.length; i++) {
-          temp.push(doc[i].userId_bm);
-        }
+        doc.forEach(elem => {
+          temp.push(elem.userId_bm);
+        });
         try {
           doc = await Record.aggregate([
             { $match: { taxID: +req.params.taxID } },
@@ -642,9 +642,9 @@ export async function collaboratorsOfSpecie(req, res) {
             },
             { $project: { userId_bm: '$userId_bm', _id: 0 } }
           ]);
-          for (let i = 0; i < doc.length; i++) {
-            temp.push(doc[i].userId_bm);
-          }
+          doc.forEach(elem => {
+            temp.push(elem.userId_bm);
+          });
           const uniqueArray = temp.filter(
             (elem, pos) =>
               //removing duplicates in Temp
@@ -719,9 +719,9 @@ export async function latestChange(req, res) {
           }
         }
       ]);
-      for (let i = 0; i < doc.length; i++) {
-        if (doc[i].DateMax > maxdate) maxdate = doc[i].DateMax;
-      }
+      doc.forEach(elem => {
+        if (elem.DateMax > maxdate) maxdate = elem.DateMax;
+      });
       try {
         doc = await Record.aggregate([
           { $match: { taxID: +req.params.taxID } },
@@ -743,9 +743,9 @@ export async function latestChange(req, res) {
           },
           { $project: { DateMax: '$createdDateMax', _id: 0 } }
         ]);
-        for (let i = 0; i < doc.length; i++) {
-          if (doc[i].DateMax > maxdate) maxdate = doc[i].DateMax;
-        }
+        doc.forEach(elem => {
+          if (elem.DateMax > maxdate) maxdate = elem.DateMax;
+        });
         try {
           doc = await Record.aggregate([
             { $match: { taxID: +req.params.taxID } },
@@ -767,9 +767,9 @@ export async function latestChange(req, res) {
             },
             { $project: { DateMax: '$updatedDateMax', _id: 0 } }
           ]);
-          for (let i = 0; i < doc.length; i++) {
-            if (doc[i].DateMax > maxdate) maxdate = doc[i].DateMax;
-          }
+          doc.forEach(elem => {
+            if (elem.DateMax > maxdate) maxdate = elem.DateMax;
+          });
           const arrayJSON = {};
           arrayJSON.maxDate = maxdate;
           res.json(arrayJSON);
