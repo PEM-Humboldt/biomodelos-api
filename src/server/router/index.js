@@ -5,10 +5,15 @@ import path from 'path';
 import { config } from '../../config/application-config';
 
 export default app => {
+  // eslint-disable-next-line security/detect-non-literal-fs-filename
   fs.readdirSync(`${config.get('appSrc')}/api`).forEach(route => {
     if (!config.get('router.ignore').includes(route))
       if (route.charAt(0) !== '_' && route.charAt(0) !== '.') {
-        app.use(`/v2/${route}`, require(`../../api/${route}`).default);
+        app.use(
+          `/v2/${route}`,
+          // eslint-disable-next-line security/detect-non-literal-require
+          require(`${config.get('appSrc')}/api/${route}`).default
+        );
       }
   });
 
