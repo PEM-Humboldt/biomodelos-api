@@ -513,7 +513,11 @@ export async function getTaxonomyAndTotalRecords(req, res) {
 export async function searchSpecies(req, res) {
   const query = constructQuery(req);
   if (req.params.species) {
-    const regEx = new RegExp(req.params.species, 'ig');
+    // eslint-disable-next-line security/detect-non-literal-regexp
+    const regEx = new RegExp(
+      req.params.species.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&'),
+      'ig'
+    );
     query.$and.push({ species: { $regex: regEx } });
   }
   if (req.query.modelStatus) {
