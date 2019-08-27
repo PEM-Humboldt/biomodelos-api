@@ -59,7 +59,7 @@
     "gulp-clean": "^0.4.0",
     "gulp-cli": "^2.0.0",
     "gulp-json-modify": "^1.0.2",
-    "gulp-minifier": "^1.1.0",
+    "gulp-minifier": "^2.0.0",
     "jshint": "^2.9.5",
     "mocha": "^4.1.0",
     "nodemon": "^1.17.1",
