@@ -1,5 +1,6 @@
 import Model from '../../models/model.model';
 import Specie from '../../models/specie.model';
+const log = require('../../config/log').logger();
 
 /**
  * @swagger
@@ -133,7 +134,8 @@ export async function read(req, res) {
       });
       res.json(docs);
     } catch (err) {
-      res.json(err);
+      log.error(err);
+      res.send('There was an error getting the models');
     }
   }
 }
@@ -219,7 +221,8 @@ export async function readModelMetadata(req, res) {
       );
       res.json(docs);
     } catch (err) {
-      res.json(err);
+      log.error(err);
+      res.send('There was an error getting the metadata');
     }
   }
 }
@@ -278,7 +281,8 @@ export async function occurrenceEooStatsModel(req, res) {
       );
       res.json(docs);
     } catch (err) {
-      res.json(err);
+      log.error(err);
+      res.send('There was an error getting the statistics');
     }
   }
 }
@@ -337,7 +341,8 @@ export async function occurrenceRepStatsModel(req, res) {
       );
       res.json(docs);
     } catch (err) {
-      res.json(err);
+      log.error(err);
+      res.send('There was an error getting the statistics');
     }
   }
 }
@@ -408,7 +413,8 @@ export async function occurrenceForestLossStatsModel(req, res) {
       );
       res.json(docs);
     } catch (err) {
-      res.json(err);
+      log.error(err);
+      res.send('There was an error getting the statistics');
     }
   }
 }
@@ -617,7 +623,8 @@ export async function occurrenceCoversStatsModel(req, res) {
       );
       res.json(docs);
     } catch (err) {
-      res.json(err);
+      log.error(err);
+      res.send('There was an error getting the statistics');
     }
   }
 }
@@ -782,6 +789,7 @@ export async function generalModelStats(req, res) {
     });
     res.json(totalStats);
   } catch (err) {
-    res.json(err);
+    log.error(err);
+    res.send('There was an error getting the statistics');
   }
 }
