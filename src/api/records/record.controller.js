@@ -1,4 +1,5 @@
 import { Record, Updated, ObjectId } from '../../models/record.model';
+const log = require('../../config/log').logger();
 
 /**
  * @swagger
@@ -60,8 +61,9 @@ export async function read(req, res) {
         }
       ]);
       res.json(record[0]);
-    } catch (e) {
-      res.json(e);
+    } catch (error) {
+      log.error(error);
+      res.json('There was an error getting the record');
     }
   }
 }
@@ -216,7 +218,8 @@ export async function update(req, res) {
       message: `The record ${record._id} was successfully updated!`
     });
   } catch (err) {
-    res.send(err);
+    log.error(err);
+    res.send('There was an error updating the record');
   }
 }
 
@@ -298,7 +301,8 @@ export async function report(req, res) {
         message: `The record ${record._id} was reported!`
       });
     } catch (err) {
-      res.send(err.toString());
+      log.error(err);
+      res.send('There was an error reporting the record');
     }
   } else {
     res.json({
@@ -393,7 +397,8 @@ export async function createWithoutId(req, res) {
     await record.save();
     res.json({ message: `Record created! ${record._id}` });
   } catch (err) {
-    res.send(err);
+    log.error(err);
+    res.send('There was an error creating the record');
   }
 }
 
@@ -448,7 +453,8 @@ export async function uniqueValuesInstitutions(req, res) {
       ]);
       res.send(doc);
     } catch (err) {
-      res.json(err);
+      log.error(err);
+      res.send('There was an error getting the institutions');
     }
   }
 }
@@ -496,7 +502,8 @@ export async function uniqueValuesCollectors(req, res) {
       ]);
       res.send(doc);
     } catch (err) {
-      res.json(err);
+      log.error(err);
+      res.send('There was an error getting the collectors');
     }
   }
 }
@@ -542,7 +549,8 @@ export async function uniqueValuesSources(req, res) {
       ]);
       res.send(doc);
     } catch (err) {
-      res.json(err);
+      log.error(err);
+      res.send('There was an error getting the sources');
     }
   }
 }
@@ -654,13 +662,16 @@ export async function collaboratorsOfSpecie(req, res) {
           arrayJSON.collaborators = uniqueArray;
           res.json(arrayJSON);
         } catch (err) {
-          res.json(err);
+          log.error(err);
+          res.send('There was an error getting updates collaborators');
         }
       } catch (err) {
-        res.json(err);
+        log.error(err);
+        res.send('There was an error getting reports collaborators');
       }
     } catch (err) {
-      res.json(err);
+      log.error(err);
+      res.send('There was an error getting creations collaborators');
     }
   }
 }
@@ -774,13 +785,16 @@ export async function latestChange(req, res) {
           arrayJSON.maxDate = maxdate;
           res.json(arrayJSON);
         } catch (err) {
-          res.json(err);
+          log.error(err);
+          res.send('There was an error getting the last updated date');
         }
       } catch (err) {
-        res.json(err);
+        log.error(err);
+        res.send('There was an error getting the last created date');
       }
     } catch (err) {
-      res.json(err);
+      log.error(err);
+      res.send('There was an error getting the last reported date');
     }
   }
 }
@@ -829,7 +843,8 @@ export async function uniqueValuesCollection(req, res) {
       ]);
       res.send(doc);
     } catch (err) {
-      res.json(err);
+      log.error(err);
+      res.send('There was an error getting the collection codes');
     }
   }
 }

@@ -1,6 +1,7 @@
 import GeoJSON from 'geojson';
 import { Record } from '../../models/record.model';
 import Specie from '../../models/specie.model';
+const log = require('../../config/log').logger();
 
 function constructQuery(req) {
   const bmClass = {
@@ -142,7 +143,8 @@ export async function getSpeciesRecords(req, res) {
         GeoJSON.parse(docs, { Point: ['decimalLatitude', 'decimalLongitude'] })
       );
     } catch (err) {
-      res.send(err);
+      log.error(err);
+      res.send('There was an error getting the records');
     }
   }
 }
@@ -241,7 +243,8 @@ export async function getSpeciesRecordsWithPrivileges(req, res) {
         GeoJSON.parse(docs, { Point: ['decimalLatitude', 'decimalLongitude'] })
       );
     } catch (err) {
-      res.send(err);
+      log.error(err);
+      res.send('There was an error getting the records');
     }
   }
 }
@@ -373,8 +376,8 @@ export async function getAllSpecies(req, res) {
     }
     res.json(docs);
   } catch (err) {
-    console.error(err);
-    res.json(err);
+    log.error(err);
+    res.send('There was an error getting the species');
   }
 }
 
@@ -465,10 +468,12 @@ export async function getTaxonomyAndTotalRecords(req, res) {
         }
         res.json(doc);
       } catch (err) {
-        res.json(err);
+        log.error(err);
+        res.send('There was an error getting the total records');
       }
     } catch (err) {
-      res.json(err);
+      log.error(err);
+      res.send('There was an error getting the species information');
     }
   }
 }
@@ -552,7 +557,8 @@ export async function searchSpecies(req, res) {
       ]).sort({ species: 1 });
       res.json(docs);
     } catch (err) {
-      res.json(err);
+      log.error(err);
+      res.send('There was an error getting the species');
     }
   } else {
     try {
@@ -568,7 +574,8 @@ export async function searchSpecies(req, res) {
       }).sort({ species: 1 });
       res.json(docs);
     } catch (err) {
-      res.json(err);
+      log.error(err);
+      res.send('There was an error getting the species');
     }
   }
 }
