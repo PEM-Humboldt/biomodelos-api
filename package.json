@@ -1,6 +1,6 @@
 {
   "name": "BioModelos_mongoDB_API",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "RESTful server API for Biomodels.",
   "main": "index.js",
   "author": "Valentina Grajales Olarte - https://github.com/valegrajales",
