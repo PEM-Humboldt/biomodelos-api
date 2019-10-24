@@ -211,7 +211,7 @@ export async function readModelMetadata(req, res) {
           validationType: 1,
           thresholdType: 1,
           modelAuthors: 1,
-          customCitation: 1,
+          citation: 1,
           dd: 1,
           mm: 1,
           yyyy: 1,
