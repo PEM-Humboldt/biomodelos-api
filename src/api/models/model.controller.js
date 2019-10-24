@@ -1,5 +1,6 @@
 import Model from '../../models/model.model';
 import Specie from '../../models/specie.model';
+const log = require('../../config/log').logger();
 
 /**
  * @swagger
@@ -129,7 +130,8 @@ export async function read(req, res) {
       });
       res.json(docs);
     } catch (err) {
-      res.json(err);
+      log.error(err);
+      res.send('There was an error getting the models');
     }
   }
 }
@@ -205,6 +207,7 @@ export async function readModelMetadata(req, res) {
           validationType: 1,
           thresholdType: 1,
           modelAuthors: 1,
+          citation: 1,
           dd: 1,
           mm: 1,
           yyyy: 1,
@@ -215,7 +218,8 @@ export async function readModelMetadata(req, res) {
       );
       res.json(docs);
     } catch (err) {
-      res.json(err);
+      log.error(err);
+      res.send('There was an error getting the metadata');
     }
   }
 }
@@ -274,7 +278,8 @@ export async function occurrenceEooStatsModel(req, res) {
       );
       res.json(docs);
     } catch (err) {
-      res.json(err);
+      log.error(err);
+      res.send('There was an error getting the statistics');
     }
   }
 }
@@ -333,7 +338,8 @@ export async function occurrenceRepStatsModel(req, res) {
       );
       res.json(docs);
     } catch (err) {
-      res.json(err);
+      log.error(err);
+      res.send('There was an error getting the statistics');
     }
   }
 }
@@ -404,7 +410,8 @@ export async function occurrenceForestLossStatsModel(req, res) {
       );
       res.json(docs);
     } catch (err) {
-      res.json(err);
+      log.error(err);
+      res.send('There was an error getting the statistics');
     }
   }
 }
@@ -613,7 +620,8 @@ export async function occurrenceCoversStatsModel(req, res) {
       );
       res.json(docs);
     } catch (err) {
-      res.json(err);
+      log.error(err);
+      res.send('There was an error getting the statistics');
     }
   }
 }
@@ -757,17 +765,20 @@ export async function generalModelStats(req, res) {
       }
     ]);
     docs.map(elem => {
-      let obj = totalStats.find(x => x.taxonomicGroup === elem._id);
-      let index = totalStats.indexOf((obj: any));
+      const obj = totalStats.find(x => x.taxonomicGroup === elem._id);
+      const index = totalStats.indexOf(obj);
       elem.modelStatus.map(elem => {
         switch (elem.status) {
           case 'Developing':
+            // eslint-disable-next-line security/detect-object-injection
             totalStats[index].developingModels = elem.count;
             break;
           case 'Valid':
+            // eslint-disable-next-line security/detect-object-injection
             totalStats[index].validModels = elem.count;
             break;
           case 'pendingValidation':
+            // eslint-disable-next-line security/detect-object-injection
             totalStats[index].pendingValidation = elem.count;
             break;
         }
@@ -775,6 +786,7 @@ export async function generalModelStats(req, res) {
     });
     res.json(totalStats);
   } catch (err) {
-    res.json(err);
+    log.error(err);
+    res.send('There was an error getting the statistics');
   }
 }
