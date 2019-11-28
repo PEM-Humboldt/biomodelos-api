@@ -198,7 +198,7 @@ export async function getSpeciesRecordsWithPrivileges(req, res) {
           $project: {
             reported: {
               $cond: {
-                if: { $ne: ['$reportedDate', null] },
+                if: { $ifNull: ['$reportedDate', false] },
                 then: true,
                 else: false
               }
