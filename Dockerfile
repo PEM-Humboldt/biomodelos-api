@@ -13,6 +13,7 @@ COPY --chown=node:node . /home/node/app
 
 RUN npm install && npm cache clean --force
 RUN npm run build
+RUN echo "{}" > dist/server/config/config.json
 
 EXPOSE 3000
 CMD [ "npm", "start" ]
