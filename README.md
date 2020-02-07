@@ -1,7 +1,7 @@
 # BioModelos
 
 ## Prerequisites
-You'll need nodejs v8.12+ and npm v6.4+ to run the project.
+You'll need nodejs v9.4+ and npm v6.4+ to run the project.
 
 ## DEV
 
