@@ -1,7 +1,14 @@
 # BioModelos
 
-## Prerequisites
-You'll need nodejs v9.4+ and npm v6.4+ to run the project.
+The API handles all operations related with models, species and records of the BioModelos platform.
+
+## Requirements
+* Nodejs v9.4+
+* npm v6.4+
+* MongoDB database running v3.6
+
+### For deployment
+* Docker v18+
 
 ## DEV
 
