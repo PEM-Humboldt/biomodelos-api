@@ -516,6 +516,26 @@ export async function getTaxonomyAndTotalRecords(req, res) {
  *         $ref: "#/definitions/ErrorResponse"
  */
 export async function searchSpecies(req, res) {
+  const { consumerscopes: scopesStr } = req.headers;
+  let fullAccess = true;
+  if (scopesStr) {
+    const scopes = scopesStr.split(',').map(scope => scope.trim());
+    fullAccess = scopes.includes('all');
+  }
+
+  let project = { _id: 0, species: 1, taxID: 1 }
+  if (fullAccess) {
+    project = {
+      _id: 0,
+      species: 1,
+      taxID: 1,
+      taxonomicStatus: 1,
+      iucn: 1,
+      bmClass: 1,
+      endemic: 1,
+      invasive: 1
+    };
+  }
   const query = constructQuery(req);
   if (req.params.species) {
     // eslint-disable-next-line security/detect-non-literal-regexp
@@ -543,16 +563,7 @@ export async function searchSpecies(req, res) {
           $match: { 'models.modelStatus': req.query.modelStatus }
         },
         {
-          $project: {
-            _id: 0,
-            species: 1,
-            taxID: 1,
-            taxonomicStatus: 1,
-            iucn: 1,
-            bmClass: 1,
-            endemic: 1,
-            invasive: 1
-          }
+          $project: project
         }
       ]).sort({ species: 1 });
       res.json(docs);
@@ -562,16 +573,7 @@ export async function searchSpecies(req, res) {
     }
   } else {
     try {
-      const docs = await Specie.find(query, {
-        _id: 0,
-        species: 1,
-        taxID: 1,
-        taxonomicStatus: 1,
-        iucn: 1,
-        bmClass: 1,
-        endemic: 1,
-        invasive: 1
-      }).sort({ species: 1 });
+      const docs = await Specie.find(query, project).sort({ species: 1 });
       res.json(docs);
     } catch (err) {
       log.error(err);
