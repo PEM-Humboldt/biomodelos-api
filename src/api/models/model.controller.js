@@ -130,7 +130,8 @@ export async function read(req, res) {
         png: 1,
         methodFile: 1,
         customCitation: 1,
-        license: 1
+        license: 1,
+        geoTIFF: 1
       });
       res.json(docs);
     } catch (err) {
