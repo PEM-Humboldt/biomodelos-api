@@ -1,0 +1,14 @@
+FROM node:9.4.0
+MAINTAINER Valentina Grajales Olarte (lgrajales@humboldt.org.co)
+
+USER node
+WORKDIR /home/node/
+
+RUN mkdir -p /home/node/app
+WORKDIR /home/node/app
+
+COPY --chown=node:node . /home/node/app
+RUN npm install
+
+EXPOSE 3000
+CMD [ "npm", "run", "dev" ]
