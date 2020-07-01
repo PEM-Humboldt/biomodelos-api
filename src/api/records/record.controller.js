@@ -1,11 +1,5 @@
 import { Record, Updated, ObjectId } from '../../models/record.model';
-<<<<<<< HEAD
-import fs from 'fs';
-import path from 'path';
-import os from 'os';
-=======
 const log = require('../../config/log').logger();
->>>>>>> develop
 
 /**
  * @swagger
@@ -856,7 +850,7 @@ export async function uniqueValuesCollection(req, res) {
 }
 
 export async function validate(req, res) {
-  const records = await Record.find({})
+  const records = await Record.find({ taxID: +req.params.taxID })
     // .limit(200000)
     .cursor();
 

@@ -17,6 +17,6 @@ router.get('/metadata/collaborators/:taxID', controller.collaboratorsOfSpecie); 
 router.get('/metadata/latest_date/:taxID', controller.latestChange); // STA6
 router.get('/metadata/collection/:taxID', controller.uniqueValuesCollection); // STA7
 
-router.get('/validate/:record_id', controller.validate);
+router.get('/validate/:taxID', controller.validate);
 
 export default router;
