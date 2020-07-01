@@ -1,6 +1,7 @@
 import GeoJSON from 'geojson';
 import { Record } from '../../models/record.model';
 import Specie from '../../models/specie.model';
+const log = require('../../config/log').logger();
 
 function constructQuery(req) {
   const bmClass = {
@@ -142,7 +143,8 @@ export async function getSpeciesRecords(req, res) {
         GeoJSON.parse(docs, { Point: ['decimalLatitude', 'decimalLongitude'] })
       );
     } catch (err) {
-      res.send(err);
+      log.error(err);
+      res.send('There was an error getting the records');
     }
   }
 }
@@ -196,7 +198,7 @@ export async function getSpeciesRecordsWithPrivileges(req, res) {
           $project: {
             reported: {
               $cond: {
-                if: { $ne: ['$reportedDate', null] },
+                if: { $ifNull: ['$reportedDate', false] },
                 then: true,
                 else: false
               }
@@ -241,7 +243,8 @@ export async function getSpeciesRecordsWithPrivileges(req, res) {
         GeoJSON.parse(docs, { Point: ['decimalLatitude', 'decimalLongitude'] })
       );
     } catch (err) {
-      res.send(err);
+      log.error(err);
+      res.send('There was an error getting the records');
     }
   }
 }
@@ -373,8 +376,8 @@ export async function getAllSpecies(req, res) {
     }
     res.json(docs);
   } catch (err) {
-    console.error(err);
-    res.json(err);
+    log.error(err);
+    res.send('There was an error getting the species');
   }
 }
 
@@ -465,10 +468,12 @@ export async function getTaxonomyAndTotalRecords(req, res) {
         }
         res.json(doc);
       } catch (err) {
-        res.json(err);
+        log.error(err);
+        res.send('There was an error getting the total records');
       }
     } catch (err) {
-      res.json(err);
+      log.error(err);
+      res.send('There was an error getting the species information');
     }
   }
 }
@@ -511,9 +516,33 @@ export async function getTaxonomyAndTotalRecords(req, res) {
  *         $ref: "#/definitions/ErrorResponse"
  */
 export async function searchSpecies(req, res) {
+  const { consumerscopes: scopesStr } = req.headers;
+  let fullAccess = true;
+  if (scopesStr) {
+    const scopes = scopesStr.split(',').map(scope => scope.trim());
+    fullAccess = scopes.includes('all');
+  }
+
+  let project = { _id: 0, species: 1, taxID: 1 }
+  if (fullAccess) {
+    project = {
+      _id: 0,
+      species: 1,
+      taxID: 1,
+      taxonomicStatus: 1,
+      iucn: 1,
+      bmClass: 1,
+      endemic: 1,
+      invasive: 1
+    };
+  }
   const query = constructQuery(req);
   if (req.params.species) {
-    const regEx = new RegExp(req.params.species, 'ig');
+    // eslint-disable-next-line security/detect-non-literal-regexp
+    const regEx = new RegExp(
+      req.params.species.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&'),
+      'ig'
+    );
     query.$and.push({ species: { $regex: regEx } });
   }
   if (req.query.modelStatus) {
@@ -534,37 +563,21 @@ export async function searchSpecies(req, res) {
           $match: { 'models.modelStatus': req.query.modelStatus }
         },
         {
-          $project: {
-            _id: 0,
-            species: 1,
-            taxID: 1,
-            taxonomicStatus: 1,
-            iucn: 1,
-            bmClass: 1,
-            endemic: 1,
-            invasive: 1
-          }
+          $project: project
         }
       ]).sort({ species: 1 });
       res.json(docs);
     } catch (err) {
-      res.json(err);
+      log.error(err);
+      res.send('There was an error getting the species');
     }
   } else {
     try {
-      const docs = await Specie.find(query, {
-        _id: 0,
-        species: 1,
-        taxID: 1,
-        taxonomicStatus: 1,
-        iucn: 1,
-        bmClass: 1,
-        endemic: 1,
-        invasive: 1
-      }).sort({ species: 1 });
+      const docs = await Specie.find(query, project).sort({ species: 1 });
       res.json(docs);
     } catch (err) {
-      res.json(err);
+      log.error(err);
+      res.send('There was an error getting the species');
     }
   }
 }
