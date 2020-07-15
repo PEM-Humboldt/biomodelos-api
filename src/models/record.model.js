@@ -28,7 +28,7 @@ const RecordSchema = new Schema(
     country: { type: String, default: '' },
     stateProvince: { type: String, default: '' },
     county: { type: String, default: '' },
-    verbatimLocality: { type: String, default: null },
+    verbatimLocality: { type: String, default: null }, // TODO in the database rules this field can't be null
     decimalLatitude: { type: Number, required: true, min: -90, max: 90 },
     decimalLongitude: { type: Number, required: true, min: -180, max: 180 },
     verbatimElevation: { type: String, default: null },

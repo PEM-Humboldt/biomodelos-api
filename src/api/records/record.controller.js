@@ -1,3 +1,7 @@
+import fs from 'fs';
+import path from 'path';
+import os from 'os';
+
 import { Record, Updated, ObjectId } from '../../models/record.model';
 const log = require('../../config/log').logger();
 
@@ -863,6 +867,7 @@ export async function validate(req, res) {
     );
   } catch (err) {
     res.send('Error writing file');
+    return;
   }
 
   return records
