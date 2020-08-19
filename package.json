@@ -62,7 +62,7 @@
     "gulp-minifier": "^2.0.0",
     "jshint": "^2.9.5",
     "mocha": "^4.1.0",
-    "nodemon": "^1.17.1",
+    "nodemon": "2.0.0",
     "prettier": "^1.10.2",
     "should": "^13.2.1",
     "supertest": "^3.0.0"
