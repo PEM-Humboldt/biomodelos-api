@@ -13,7 +13,7 @@ const dist_folder_server = `${dist_folder}/server`;
 gulp.task('clean', () => {
   fs.access(logs_folder, err => {
     if (err) {
-      fs.mkdir(logs_folder);
+      fs.mkdir(logs_folder, () => {});
     }
   });
   return gulp
