@@ -110,7 +110,7 @@ const RecordSchema = new Schema(
     reportedOriginIntroduced: { type: Boolean },
     reportedOtherIssuesBm: { type: Boolean },
     reportedCommentsBm: { type: String },
-    reportedDate: { type: Date, default: Date.now },
+    reportedDate: { type: Date },
     reportedGeoIssueBm: { type: Boolean },
     reportedIdIssueBm: { type: Boolean }
   },

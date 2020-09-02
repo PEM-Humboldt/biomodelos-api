@@ -1,5 +1,4 @@
-FROM node:9.4.0
-MAINTAINER Valentina Grajales Olarte (lgrajales@humboldt.org.co)
+FROM node:12.18
 
 USER node
 WORKDIR /home/node/
@@ -8,7 +7,8 @@ RUN mkdir -p /home/node/app
 WORKDIR /home/node/app
 
 COPY --chown=node:node . /home/node/app
-RUN npm install
+COPY --chown=node:node ./entrypoint.dev.sh .
+RUN chmod +x entrypoint.dev.sh
 
 EXPOSE 3000
-CMD [ "npm", "run", "dev" ]
+ENTRYPOINT ["sh", "/home/node/app/entrypoint.dev.sh"]
