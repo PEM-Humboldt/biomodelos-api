@@ -854,7 +854,9 @@ export async function uniqueValuesCollection(req, res) {
 }
 
 export async function validate(req, res) {
-  const records = await Record.find({ taxID: +req.params.taxID })
+  let query = {};
+  if (req.params.taxID !== 'all') query = { taxID: +req.params.taxID };
+  const records = await Record.find(query)
     // .limit(200000)
     .cursor();
 
