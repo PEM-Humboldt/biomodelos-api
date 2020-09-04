@@ -891,6 +891,7 @@ export async function validate(req, res) {
     })
     .on('end', function() {
       console.log(`Registros encontrados: ${amount}`);
+      console.log(`Errores encontrados: ${errors}`);
       res.send(`Errores encontrados: ${errors}`);
     });
 }
