@@ -261,7 +261,13 @@ export async function report(req, res) {
 
   if (req.body.reportedUserIdBm) {
     record.reportedUserIdBm = req.body.reportedUserIdBm;
+  } else {
+    res.json({
+      message: 'UserIdBm is required'
+    });
+    return;
   }
+
   if (req.body.reportedOriginVagrant) {
     record.reportedOriginVagrant = req.body.reportedOriginVagrant;
   }
@@ -285,15 +291,25 @@ export async function report(req, res) {
   }
 
   if (
-    req.body.reportedUserIdBm &&
-    (req.body.reportedOriginVagrant ||
-      req.body.reportedOldTaxonomyBm ||
-      req.body.reportedOriginIntroduced ||
-      req.body.reportedOtherIssuesBm ||
-      req.body.reportedCommentsBm ||
-      req.body.reportedGeoIssueBm ||
-      req.body.reportedIdIssueBm)
+    req.body.reportedOriginVagrant ||
+    req.body.reportedOldTaxonomyBm ||
+    req.body.reportedOriginIntroduced ||
+    req.body.reportedOtherIssuesBm ||
+    req.body.reportedGeoIssueBm ||
+    req.body.reportedIdIssueBm
   ) {
+    if (
+      req.body.reportedOtherIssuesBm &&
+      (req.body.reportedCommentsBm === undefined ||
+        req.body.reportedCommentsBm === '')
+    ) {
+      res.json({
+        message:
+          'reportedCommentsBm is required when reportedOtherIssuesBm is true'
+      });
+      return;
+    }
+
     record.reportedDate = Date.now();
     try {
       await record.save();
