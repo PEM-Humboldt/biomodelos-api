@@ -102,7 +102,7 @@ const RecordSchema = new Schema(
     externallyCreated: { type: Boolean, default: false },
     createdCommentsBm: { type: String },
     createdCitationBm: { type: String },
-    createdDate: { type: Date, default: Date.now },
+    createdDate: { type: Date },
     // Reported fields
     reportedUserIdBm: { type: Number },
     reportedOriginVagrant: { type: Boolean },
@@ -110,7 +110,7 @@ const RecordSchema = new Schema(
     reportedOriginIntroduced: { type: Boolean },
     reportedOtherIssuesBm: { type: Boolean },
     reportedCommentsBm: { type: String },
-    reportedDate: { type: Date, default: Date.now },
+    reportedDate: { type: Date },
     reportedGeoIssueBm: { type: Boolean },
     reportedIdIssueBm: { type: Boolean }
   },

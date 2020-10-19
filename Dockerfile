@@ -1,5 +1,4 @@
-FROM node:9.4.0
-MAINTAINER Valentina Grajales Olarte (lgrajales@humboldt.org.co)
+FROM node:12.18
 
 USER node
 WORKDIR /home/node/
