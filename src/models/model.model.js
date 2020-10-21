@@ -190,7 +190,8 @@ const ModelSchema = new Schema(
       type: String,
       default: 'present',
       in: ['present', 'past', 'future']
-    }
+    },
+    geoTiff: { type: String }
   },
   {
     collection: 'models',

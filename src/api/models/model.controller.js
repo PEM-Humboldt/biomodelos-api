@@ -131,7 +131,7 @@ export async function read(req, res) {
         methodFile: 1,
         customCitation: 1,
         license: 1,
-        geoTIFF: 1
+        geoTiff: 1
       });
       res.json(docs);
     } catch (err) {
