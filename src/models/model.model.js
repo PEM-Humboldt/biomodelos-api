@@ -190,7 +190,8 @@ const ModelSchema = new Schema(
       type: String,
       default: 'present',
       in: ['present', 'past', 'future']
-    }
+    },
+    gsLayer: { type: String }
   },
   {
     collection: 'models',
