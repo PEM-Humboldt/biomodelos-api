@@ -1,5 +1,5 @@
 {
-  "name": "BioModelos_mongoDB_API",
+  "name": "biomodelos-api",
   "version": "1.6.0",
   "description": "RESTful server API for Biomodels.",
   "main": "index.js",
@@ -12,7 +12,7 @@
   "scripts": {
     "start": "node dist/server/app.js",
     "build": "gulp build",
-    "dev": "nodemon src/app.js --exec babel-node -e js,yaml",
+    "dev": "nodemon --trace-warnings src/app.js --exec babel-node -e js,yaml",
     "lint": "./node_modules/eslint/bin/eslint.js src"
   },
   "dependencies": {
@@ -26,14 +26,14 @@
     "geojson": "*",
     "helmet": "^4.4.1",
     "method-override": "^2.3.10",
-    "mongodb": "^3.0.1",
-    "mongoose": "^5.1.0",
+    "mongodb": "^3.5.0",
+    "mongoose": "^5.9.0",
     "morgan": "^1.9.0",
     "serve-favicon": "^2.4.5",
     "swagger-jsdoc": "^1.9.7",
     "swagger-tools": "^0.10.3",
     "swagger-ui-express": "^2.0.14",
-    "winston": "^2.4.0"
+    "winston": "^2.4.5"
   },
   "devDependencies": {
     "assert": "*",

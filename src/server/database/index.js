@@ -7,16 +7,12 @@ let connectionDB;
 let connectionDBNative;
 
 const getMongoURL = config => {
-  const url = config
-    .get('database.mongodb.servers')
-    .reduce(
-      (prev, cur) => `${prev}${cur},`,
-      `mongodb://${encodeURIComponent(
-        config.get('database.mongodb.user')
-      )}:${encodeURIComponent(config.get('database.mongodb.pass'))}@`
-    );
+  const servers = config.get('database.mongodb.servers').join(',');
+  const url = `mongodb://${encodeURIComponent(
+    config.get('database.mongodb.user')
+  )}:${encodeURIComponent(config.get('database.mongodb.pass'))}@${servers}`;
 
-  return `${url.substr(0, url.length - 1)}/${config.get(
+  return `${url}/${config.get(
     'database.mongodb.db'
   )}?authMechanism=${config.get('database.mongodb.authMechanism')}`;
 };
@@ -46,7 +42,10 @@ export const connect = async (config, dboptions) => {
     mongoose.Promise = global.Promise;
 
     try {
-      connectionDB = await mongoose.connect(getMongoURL(config));
+      connectionDB = await mongoose.connect(getMongoURL(config), {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+      });
       log.info('Successful connection with MongoDB Database');
       connectionDB = true;
     } catch (error) {
