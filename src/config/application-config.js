@@ -1,5 +1,7 @@
 // App configuration
 import convict from 'convict';
+import convict_format_with_validator from 'convict-format-with-validator';
+import json5 from 'json5';
 import util from 'util';
 import path from 'path';
 
@@ -91,6 +93,9 @@ export const dbSettings = {
     }
   })
 };
+
+convict.addFormats(convict_format_with_validator);
+convict.addParser({ extension: 'json', parse: json5.parse });
 
 export const config = convict({
   appRoot: {
