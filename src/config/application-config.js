@@ -9,17 +9,16 @@ export const apiDefinition = {
   swagger: '2.0',
   info: {
     // API informations (required)
-    title: "Biomodel's API", // Title (required)
-    version: '2.0.0', // Version (required)
-    description: "Biomodel's API", // Description (optional)
+    title: 'Biomodelos API', // Title (required)
+    version: '1.6.0', // Version (required)
+    description: "Biomodelos API", // Description (optional)
     termsOfService: 'http://betabiomodelos.humboldt.org.co/home/terms',
     license: {
-      name: 'Attribution-ShareAlike 4.0 International',
-      url: 'https://creativecommons.org/licenses/by-sa/4.0/'
+      name: 'MIT'
     },
     contact: {
-      name: 'Jorge Velasquez',
-      url: 'http://betabiomodelos.humboldt.org.co/home/contact_us',
+      name: 'Equipo Biomodelos',
+      url: 'http://biomodelos.humboldt.org.co/home/contact_us',
       email: 'biomodelos@humboldt.org.co'
     }
   },
@@ -27,8 +26,6 @@ export const apiDefinition = {
   consumes: ['application/json'],
   // format of the responses to the client (Accepts)
   produces: ['application/json'],
-  host: 'localhost:3000', // Host (optional)
-  basePath: '/v2', // Base path (optional)
   schemes: ['http', 'https'],
   securityDefinitions: {
     api_key: {
