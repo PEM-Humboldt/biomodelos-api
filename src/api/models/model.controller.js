@@ -397,22 +397,26 @@ export async function occurrenceRepStatsModel(req, res) {
 export async function occurrenceForestLossStatsModel(req, res) {
   if (req.params.taxID) {
     try {
-      const docs = await Model.find(
-        { taxID: +req.params.taxID, modelStatus: 'Valid', isActive: true },
-        {
-          _id: 0,
-          modelID: 1,
-          modelLevel: 1,
-          statForestLoss90: 1,
-          statForestLoss00: 1,
-          statForestLoss05: 1,
-          statForestLoss10: 1,
-          statForestLoss12: 1,
-          statFutureForest30h: 1,
-          statFutureForest30d: 1,
-          statFutureForest30c: 1
-        }
-      );
+      const docs = (await Model.find({
+        taxID: +req.params.taxID,
+        modelStatus: 'Valid',
+        isActive: true
+      })).map(doc => {
+        const keys = Object.keys(doc.toObject()).filter(key =>
+          /statForestLoss[0-9]+/.test(key)
+        );
+        const newDoc = {
+          modelID: doc.modelID,
+          modelLevel: doc.modelLevel,
+          statFutureForest30h: doc.statFutureForest30h,
+          statFutureForest30d: doc.statFutureForest30d,
+          statFutureForest30c: doc.statFutureForest30c
+        };
+        keys.forEach(key => {
+          newDoc[key] = doc[key];
+        });
+        return newDoc;
+      });
       res.json(docs);
     } catch (err) {
       log.error(err);
