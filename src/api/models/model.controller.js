@@ -403,7 +403,7 @@ export async function occurrenceForestLossStatsModel(req, res) {
         isActive: true
       })).map(doc => {
         const keys = Object.keys(doc.toObject()).filter(key =>
-          /statForestLoss[0-9]+/.test(key)
+          /statForestLoss[0-9]+$/.test(key)
         );
         const newDoc = {
           modelID: doc.modelID,
@@ -413,7 +413,9 @@ export async function occurrenceForestLossStatsModel(req, res) {
           statFutureForest30c: doc.statFutureForest30c
         };
         keys.forEach(key => {
-          newDoc[key] = doc[key];
+          if (doc[key] !== null) {
+            newDoc[key] = doc[key];
+          }
         });
         return newDoc;
       });
