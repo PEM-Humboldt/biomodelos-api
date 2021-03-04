@@ -25,7 +25,11 @@ const ModelSchema = new Schema(
       ]
     },
     modelLevel: { type: Number, in: [0, 1, 2, 3, 4] },
-    modelStatus: { type: String, in: ['Developing', 'Consensus', 'Valid'] },
+    modelStatus: {
+      type: String,
+      in: ['Developing', 'pendingValidation', 'Valid'],
+      required: true
+    },
     published: { type: Boolean, default: false },
     customCitation: { type: String, default: null },
     isActive: { type: Boolean, default: true },
