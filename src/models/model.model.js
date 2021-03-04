@@ -33,7 +33,7 @@ const ModelSchema = new Schema(
     published: { type: Boolean, default: false },
     customCitation: { type: String, default: null },
     isActive: { type: Boolean, default: true },
-    modelID: { type: String, default: null },
+    modelID: { type: String, default: null, required: true },
     recsUsed: { type: Number },
     perfStatType: { type: String },
     perfStatValue: { type: Number },
