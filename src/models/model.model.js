@@ -38,7 +38,13 @@ const ModelSchema = new Schema(
     perfStatType: { type: String },
     perfStatValue: { type: Number },
     validationType: { type: String },
-    thresholdType: { type: String, in: [0, 10, 20, 30, 'Continuous'] },
+    thresholdType: {
+      type: String,
+      in: [0, 10, 20, 30, 'Continuous'],
+      required: function() {
+        return this.modelStatus === 'Developing';
+      }
+    },
     modelAuthors: { type: String },
     dd: { type: Number, min: 1, max: 31 },
     mm: { type: Number, min: 1, max: 12 },
