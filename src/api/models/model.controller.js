@@ -383,6 +383,10 @@ export async function occurrenceRepStatsModel(req, res) {
  *                 type: number
  *               statForestLoss12:
  *                 type: number
+ *               statForestLoss14:
+ *                 type: number
+ *               statForestLoss16:
+ *                 type: number
  *               statFutureForest30c:
  *                 type: number
  *               statFutureForest30d:

@@ -410,11 +410,15 @@ export async function createWithoutId(req, res) {
   record.contributedRecord = true;
   record.updated = [];
   try {
+    if (!record.userIdBm) {
+      throw { code: 400, message: 'userIdBm required' };
+    }
     await record.save();
     res.json({ message: `Record created! ${record._id}` });
   } catch (err) {
     log.error(err);
-    res.send('There was an error creating the record');
+    if (err.code === 400) res.send(err.message);
+    else res.send('There was an error creating the record');
   }
 }
 
