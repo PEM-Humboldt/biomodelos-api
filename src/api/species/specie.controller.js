@@ -98,7 +98,7 @@ export async function getSpeciesRecords(req, res) {
           $project: {
             reported: {
               $cond: {
-                if: { $ne: ['$reportedDate', null] },
+                if: { $ifNull: ['$reportedDate', false] },
                 then: true,
                 else: false
               }
