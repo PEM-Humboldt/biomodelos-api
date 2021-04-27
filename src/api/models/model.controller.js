@@ -805,3 +805,48 @@ export async function generalModelStats(req, res) {
     res.send('There was an error getting the statistics');
   }
 }
+
+/**
+ * @swagger
+ * /tools/models/{modelID}/layer:
+ *   put:
+ *     description: Update the layer name for an specific model
+ *     parameters:
+ *       - name: modelID
+ *         in: path
+ *         description: The model id to update
+ *         required: true
+ *         type: string
+ *       - name: layer_name
+ *         in: body
+ *         description: the layer name to associate to the model
+ *         required: true
+ *         type: string
+ *     responses:
+ *       "204":
+ *         description: Successful update
+ *     default:
+ *       description: Error
+ *       schema:
+ *         $ref: "#/definitions/ErrorResponse"
+ */
+export async function updateModelLayer(req, res) {
+  if (!req.params.modelID || !req.body.layer_name) {
+    res.send(400, 'modelID and layer_name are required');
+  }
+
+  try {
+    const update = await Model.updateOne(
+      { modelID: req.params.modelID },
+      {
+        $set: {
+          gsLayer: req.body.layer_name
+        }
+      }
+    );
+    res.send({ message: 'Model updated successfully' });
+  } catch (err) {
+    log.error(err);
+    res.json({ message: 'Error updating the model' });
+  }
+}
