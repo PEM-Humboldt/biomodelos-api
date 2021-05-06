@@ -7,7 +7,6 @@ const SpecieSchema = new Schema(
     taxID: { type: Number, required: true },
     acceptedNameUsage: { type: String, required: true },
     species: { type: String, default: null, required: true },
-    genus: { type: String, default: null, required: true },
     family: { type: String, default: null, required: true },
     order: { type: String, default: null, required: true },
     class: { type: String, default: null, required: true },
@@ -26,39 +25,8 @@ const SpecieSchema = new Schema(
       ],
       required: true
     },
-    cites: {
-      type: String,
-      in: [
-        'I',
-        'II',
-        'III',
-        'NC',
-        'III/NC',
-        'I/NC',
-        'I/II',
-        'I/III',
-        'II/NC',
-        'I/II/III/NC',
-        'I/II/NC'
-      ],
-      default: '',
-      required: true
-    },
     endemic: { type: Boolean, default: false, required: true },
     invasive: { type: Boolean, default: false, required: true },
-    migratoryType: {
-      type: String,
-      in: [
-        'Boreal',
-        'Austral',
-        'Intratropical',
-        'Latitudinal Transnacional',
-        'Boreal e Intratropical',
-        'Boreal y Austral',
-        ''
-      ],
-      default: ''
-    },
     iucn: {
       type: String,
       required: true,
@@ -66,14 +34,6 @@ const SpecieSchema = new Schema(
       default: 'NE',
       required: true
     },
-    taxVerifSource: {
-      type: String,
-      in: ['Catalogue of life 2015 ', 'Record autor', ''],
-      default: ''
-    },
-    nameAccordingTo: { type: String, default: '' },
-    scientificNameAuthorship: { type: String, default: '' },
-    specificEpithet: { type: String, default: null, required: true },
     taxonomicStatus: {
       type: String,
       in: [
@@ -90,24 +50,12 @@ const SpecieSchema = new Schema(
       ],
       default: ''
     },
-    validName: { type: Boolean, default: true, required: true },
-    speciesInCountry: { type: Boolean, default: null, required: true },
-    sppInCol: { type: Boolean, default: true, required: true },
-    iucnSpeciesID: { type: Number, default: 0 },
     amenazaNacional: {
       type: String,
       in: ['EX', 'EW', 'CR', 'EN', 'VU', 'NT', 'LC', 'DD', 'NE'],
       required: true,
       default: 'NE'
-    },
-    recordsVisualizationPrivileges: {
-      type: Number,
-      in: [0, 1, 2],
-      required: true,
-      default: 0
-    },
-    uploadUser: { type: String, required: true, default: null },
-    uploadDate: { type: Date, required: true, default: null }
+    }
   },
   {
     collection: 'species',
