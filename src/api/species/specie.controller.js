@@ -351,7 +351,6 @@ export async function getAllSpecies(req, res) {
           { modelStatus: req.query.modelStatus },
           { taxID: 1, _id: 0 }
         );
-        console.log(taxIds.map(e => e.taxID));
         modelsFilter = {
           taxID: {
             $in: taxIds.map(e => e.taxID)
