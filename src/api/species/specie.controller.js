@@ -348,7 +348,7 @@ export async function getAllSpecies(req, res) {
       let modelsFilter = {};
       if (req.query.modelStatus) {
         const taxIds = await Model.find(
-          { modelStatus: req.query.modelStatus },
+          { modelStatus: req.query.modelStatus, isActive: true },
           { taxID: 1, _id: 0 }
         );
         modelsFilter = {
@@ -357,7 +357,7 @@ export async function getAllSpecies(req, res) {
           }
         };
       } else if (!!req.query.withModel) {
-        const taxIds = await Model.distinct('taxID');
+        const taxIds = await Model.distinct('taxID', { isActive: true });
         modelsFilter = {
           taxID: {
             $in: taxIds
@@ -519,7 +519,7 @@ export async function searchSpecies(req, res) {
     fullAccess = scopes.includes('all');
   }
 
-  let project = { _id: 0, species: 1, taxID: 1 }
+  let project = { _id: 0, species: 1, taxID: 1 };
   if (fullAccess) {
     project = {
       _id: 0,
