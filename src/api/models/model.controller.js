@@ -104,8 +104,15 @@ export async function read(req, res) {
         'Published',
         {
           taxID: req.params.taxID,
-          isActive: true,
           published: true,
+          isActive: true
+        }
+      ],
+      [
+        'Statistic',
+        {
+          taxID: req.params.taxID,
+          modelStatus: { $in: ['Statistic'] },
           isActive: true
         }
       ]
