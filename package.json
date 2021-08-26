@@ -1,6 +1,6 @@
 {
   "name": "biomodelos-api",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "RESTful server API for Biomodels.",
   "main": "index.js",
   "author": "Valentina Grajales Olarte - https://github.com/valegrajales",

@@ -104,8 +104,15 @@ export async function read(req, res) {
         'Published',
         {
           taxID: req.params.taxID,
-          isActive: true,
           published: true,
+          isActive: true
+        }
+      ],
+      [
+        'Statistic',
+        {
+          taxID: req.params.taxID,
+          modelStatus: { $in: ['Statistic'] },
           isActive: true
         }
       ]
@@ -664,9 +671,11 @@ export async function occurrenceCoversStatsModel(req, res) {
  *                 type: number
  *               validModels:
  *                 type: number
+ *               publishedModels:
+ *                 type: number
  *               developingModels:
  *                 type: number
- *               pendingValidation:
+ *               statisticModels:
  *                 type: number
  *             features:
  *               type: array
@@ -678,132 +687,125 @@ export async function occurrenceCoversStatsModel(req, res) {
  *         $ref: "#/definitions/ErrorResponse"
  */
 export async function generalModelStats(req, res) {
-  const totalStats: Array<{
-    taxonomicGroup: string,
-    totalSpecies: number,
-    developingModels?: number,
-    validModels?: number,
-    pendingValidation?: number
-  }> = [
-    {
-      taxonomicGroup: 'mamiferos',
-      totalSpecies: 492
-    },
-    { taxonomicGroup: 'aves', totalSpecies: 1921 },
-    { taxonomicGroup: 'reptiles', totalSpecies: 537 },
-    { taxonomicGroup: 'anfibios', totalSpecies: 803 },
-    { taxonomicGroup: 'peces', totalSpecies: 1435 },
-    { taxonomicGroup: 'invertebrados', totalSpecies: 19312 },
-    { taxonomicGroup: 'plantas', totalSpecies: 22840 }
-  ];
+  let groups = [];
   try {
-    const docs = await Specie.aggregate([
-      {
-        $match: {
-          $and: [
-            {
-              $or: [
-                {
-                  bmClass: {
-                    $in: [
-                      'mamiferos',
-                      'aves',
-                      'reptiles',
-                      'anfibios',
-                      'peces',
-                      'invertebrados',
-                      'plantas'
-                    ]
-                  }
-                }
-              ]
-            }
-          ]
-        }
-      },
-      {
-        $lookup: {
-          localField: 'taxID',
-          from: 'models',
-          foreignField: 'taxID',
-          as: 'models'
-        }
-      },
-      { $unwind: '$models' },
-      {
-        $match: {
-          $and: [
-            { 'models.isActive': { $in: [true] } },
-            { 'models.modelLevel': { $in: [1] } }
-          ]
-        }
-      },
+    groups = await Specie.aggregate([
       {
         $group: {
           _id: {
-            taxonomyClass: '$bmClass',
-            modelStatus: '$models.modelStatus',
-            taxID: '$taxID'
+            taxonomyClass: '$bmClass'
           },
-          count: { $sum: 1 }
-        }
-      },
-      {
-        $group: {
-          _id: { taxonomyClass: '$_id.taxonomyClass', taxID: '$_id.taxID' },
-          modelStatus: {
-            $push: { status: '$_id.modelStatus', count: '$count' }
-          }
-        }
-      },
-      { $unwind: '$modelStatus' },
-      {
-        $sort: { 'modelStatus.status': -1 }
-      },
-      { $group: { _id: '$_id', modelStatus: { $first: '$modelStatus' } } },
-      {
-        $group: {
-          _id: {
-            taxonomyClass: '$_id.taxonomyClass',
-            modelStatus: '$modelStatus.status'
-          },
-          count: { $sum: 1 }
-        }
-      },
-      {
-        $group: {
-          _id: '$_id.taxonomyClass',
-          modelStatus: {
-            $push: { status: '$_id.modelStatus', count: '$count' }
-          }
+          taxes: { $push: '$taxID' },
+          total: { $sum: 1 }
         }
       }
     ]);
-    docs.map(elem => {
-      const obj = totalStats.find(x => x.taxonomicGroup === elem._id);
-      const index = totalStats.indexOf(obj);
-      elem.modelStatus.map(elem => {
-        switch (elem.status) {
-          case 'Developing':
-            // eslint-disable-next-line security/detect-object-injection
-            totalStats[index].developingModels = elem.count;
-            break;
-          case 'Valid':
-            // eslint-disable-next-line security/detect-object-injection
-            totalStats[index].validModels = elem.count;
-            break;
-          case 'pendingValidation':
-            // eslint-disable-next-line security/detect-object-injection
-            totalStats[index].pendingValidation = elem.count;
-            break;
-        }
-      });
-    });
-    res.json(totalStats);
   } catch (err) {
     log.error(err);
     res.send('There was an error getting the statistics');
   }
+
+  const stats = groups.map(group =>
+    Model.aggregate([
+      {
+        $match: {
+          taxID: { $in: group.taxes },
+          isActive: true,
+          modelLevel: 1
+        }
+      },
+      {
+        $project: {
+          taxID: 1,
+          status: {
+            $switch: {
+              branches: [
+                {
+                  case: { $eq: ['$modelStatus', 'Valid'] },
+                  then: '0-Valid'
+                },
+                {
+                  case: {
+                    $and: [
+                      { $eq: ['$modelStatus', 'pendingValidation'] },
+                      { $eq: ['$published', true] }
+                    ]
+                  },
+                  then: '1-Published'
+                },
+                {
+                  case: { $eq: ['$modelStatus', 'pendingValidation'] },
+                  then: '2-Developing'
+                },
+                {
+                  case: { $eq: ['$modelStatus', 'Statistic'] },
+                  then: '3-Statistic'
+                }
+              ],
+              default: '4-no-model'
+            }
+          }
+        }
+      },
+      { $sort: { status: 1 } },
+      {
+        $group: {
+          _id: {
+            taxID: '$taxID'
+          },
+          modelStatus: { $first: '$status' }
+        }
+      },
+      {
+        $group: {
+          _id: {
+            modelStatus: '$modelStatus'
+          },
+          count: { $sum: 1 }
+        }
+      },
+      {
+        $project: {
+          modelStatus: '$_id.modelStatus',
+          count: 1,
+          _id: 0
+        }
+      }
+    ])
+  );
+
+  return Promise.all(stats)
+    .then(response => {
+      const result = groups.map((group, index) => {
+        /* eslint-disable security/detect-object-injection */
+        const validModels = response[index].find(
+          e => e.modelStatus === '0-Valid'
+        );
+        const publishedModels = response[index].find(
+          e => e.modelStatus === '1-Published'
+        );
+        const developingModels = response[index].find(
+          e => e.modelStatus === '2-Developing'
+        );
+        const statisticModels = response[index].find(
+          e => e.modelStatus === '3-Statistic'
+        );
+        /* eslint-enable security/detect-object-injection */
+        return {
+          taxonomicGroup: group._id.taxonomyClass,
+          totalSpecies: group.total,
+          validModels: validModels ? validModels.count : 0,
+          publishedModels: publishedModels ? publishedModels.count : 0,
+          developingModels: developingModels ? developingModels.count : 0,
+          statisticModels: statisticModels ? statisticModels.count : 0
+        };
+      });
+      res.json(result);
+    })
+    .catch(err => {
+      log.error(err);
+      res.send('There was an error getting the statistics');
+    });
 }
 
 /**

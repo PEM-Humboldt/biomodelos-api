@@ -1,5 +1,6 @@
 import GeoJSON from 'geojson';
 import { Record } from '../../models/record.model';
+import Model from '../../models/model.model';
 import Specie from '../../models/specie.model';
 const log = require('../../config/log').logger();
 
@@ -321,31 +322,7 @@ export async function getAllSpecies(req, res) {
   const query = constructQuery(req);
   try {
     let docs = [];
-    if (req.query.modelStatus) {
-      docs = await Specie.aggregate([
-        {
-          $match: query
-        },
-        {
-          $lookup: {
-            localField: 'taxID',
-            from: 'models',
-            foreignField: 'taxID',
-            as: 'models'
-          }
-        },
-        {
-          $match: { 'models.modelStatus': req.query.modelStatus }
-        },
-        {
-          $project: {
-            species: 1,
-            taxID: 1,
-            _id: 0
-          }
-        }
-      ]).sort({ species: 1 });
-    } else if (req.query.speciesIn) {
+    if (req.query.speciesIn) {
       docs = await Specie.aggregate([
         {
           $match: {
@@ -368,7 +345,26 @@ export async function getAllSpecies(req, res) {
         { $sort: { acceptedNameUsage: 1 } }
       ]);
     } else {
-      docs = await Specie.find(query, {
+      let modelsFilter = {};
+      if (req.query.modelStatus) {
+        const taxIds = await Model.find(
+          { modelStatus: req.query.modelStatus, isActive: true },
+          { taxID: 1, _id: 0 }
+        );
+        modelsFilter = {
+          taxID: {
+            $in: taxIds.map(e => e.taxID)
+          }
+        };
+      } else if (!!req.query.withModel) {
+        const taxIds = await Model.distinct('taxID', { isActive: true });
+        modelsFilter = {
+          taxID: {
+            $in: taxIds
+          }
+        };
+      }
+      docs = await Specie.find(Object.assign(query, modelsFilter), {
         species: 1,
         taxID: 1,
         _id: 0
@@ -523,7 +519,7 @@ export async function searchSpecies(req, res) {
     fullAccess = scopes.includes('all');
   }
 
-  let project = { _id: 0, species: 1, taxID: 1 }
+  let project = { _id: 0, species: 1, taxID: 1 };
   if (fullAccess) {
     project = {
       _id: 0,
