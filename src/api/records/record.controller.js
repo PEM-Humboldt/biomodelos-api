@@ -855,10 +855,13 @@ export async function uniqueValuesCollection(req, res) {
 
 export async function validate(req, res) {
   let query = {};
-  if (req.params.taxID !== 'all') query = { taxID: +req.params.taxID };
-  const records = await Record.find(query)
-    // .limit(200000)
-    .cursor();
+
+  if (req.params.taxID !== 'all') {
+    const taxID = req.params.taxID.split(',');
+    query = { taxID };
+  }
+
+  const records = await Record.find(query).cursor();
 
   let amount = 0;
   let errors = 0;
@@ -889,9 +892,9 @@ export async function validate(req, res) {
         }
       }
     })
-    .on('end', function() {
-      console.log(`Registros encontrados: ${amount}`);
-      console.log(`Errores encontrados: ${errors}`);
-      res.send(`Errores encontrados: ${errors}`);
+    .on('end', async function() {
+      await console.log(`Registros encontrados: ${amount}`);
+      await console.log(`Errores encontrados: ${errors}`);
+      await res.send(`Errores encontrados: ${errors}`);
     });
 }
