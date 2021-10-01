@@ -855,10 +855,13 @@ export async function uniqueValuesCollection(req, res) {
 
 export async function validate(req, res) {
   let query = {};
-  if (req.params.taxID !== 'all') query = { taxID: +req.params.taxID };
-  const records = await Record.find(query)
-    // .limit(200000)
-    .cursor();
+
+  if (req.params.taxID !== 'all') {
+    const taxID = req.params.taxID.split(',');
+    query = { taxID };
+  }
+
+  const records = await Record.find(query).cursor();
 
   let amount = 0;
   let errors = 0;
@@ -872,6 +875,9 @@ export async function validate(req, res) {
     return;
   }
 
+  /*TODO: Revisar el on('end') ya que no se está ejecutando correctamente. Si el callback se vuelve 
+  asincrono y se pone await a los console y res.send funciona pero se recomienda revisar otras
+  alternativas.*/
   return records
     .on('data', async function(record) {
       amount++;
