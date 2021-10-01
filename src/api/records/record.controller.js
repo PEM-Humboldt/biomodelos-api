@@ -875,6 +875,9 @@ export async function validate(req, res) {
     return;
   }
 
+  /*TODO: Revisar el on('end') ya que no se está ejecutando correctamente. Si el callback se vuelve 
+  asincrono y se pone await a los console y res.send funciona pero se recomienda revisar otras
+  alternativas.*/
   return records
     .on('data', async function(record) {
       amount++;
@@ -892,9 +895,9 @@ export async function validate(req, res) {
         }
       }
     })
-    .on('end', async function() {
-      await console.log(`Registros encontrados: ${amount}`);
-      await console.log(`Errores encontrados: ${errors}`);
-      await res.send(`Errores encontrados: ${errors}`);
+    .on('end', function() {
+      console.log(`Registros encontrados: ${amount}`);
+      console.log(`Errores encontrados: ${errors}`);
+      res.send(`Errores encontrados: ${errors}`);
     });
 }
