@@ -710,8 +710,7 @@ export async function generalModelStats(req, res) {
       {
         $match: {
           taxID: { $in: group.taxes },
-          isActive: true,
-          modelLevel: 1
+          isActive: true
         }
       },
       {
