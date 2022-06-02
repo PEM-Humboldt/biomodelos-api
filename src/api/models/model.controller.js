@@ -424,8 +424,8 @@ export async function occurrenceForestLossStatsModel(req, res) {
           statFutureForest30c: doc.statFutureForest30c
         };
         keys.forEach(key => {
-          if (doc[key] !== null) {
-            newDoc[key] = doc[key];
+          if (doc[`${key}`] !== null) {
+            newDoc[`${key}`] = doc[`${key}`];
           }
         });
         return newDoc;
