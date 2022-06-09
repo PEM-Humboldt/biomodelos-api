@@ -49,13 +49,7 @@ const RecordSchema = new Schema(
     updated: [UpdatedSchema],
     downloadDate: {
       type: String,
-      default: () => {
-        const today = new Date();
-        return `
-          ${today.getDate()}/
-          ${today.getMonth() + 1}/
-          ${today.getFullYear()}`;
-      }
+      default: new Date().toISOString().slice(0, 10)
     },
     resourceFolder: { type: String, default: 'Biomodelos' }, // TODO: Is mandatory according to calc file
     resourceIncorporationDate: {
