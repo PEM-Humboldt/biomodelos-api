@@ -13,7 +13,7 @@ export const apiDefinition = {
     // API informations (required)
     title: 'Biomodelos API', // Title (required)
     version: '1.6.0', // Version (required)
-    description: "Biomodelos API", // Description (optional)
+    description: 'Biomodelos API', // Description (optional)
     termsOfService: 'http://betabiomodelos.humboldt.org.co/home/terms',
     license: {
       name: 'MIT'

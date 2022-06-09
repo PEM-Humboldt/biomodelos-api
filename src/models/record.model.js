@@ -47,7 +47,10 @@ const RecordSchema = new Schema(
     dbDuplicate: { type: Boolean, default: false },
     spatialDuplicated: { type: Boolean, default: false },
     updated: [UpdatedSchema],
-    downloadDate: { type: String, default: null },
+    downloadDate: {
+      type: String,
+      default: new Date().toISOString().slice(0, 10)
+    },
     resourceFolder: { type: String, default: 'Biomodelos' }, // TODO: Is mandatory according to calc file
     resourceIncorporationDate: {
       type: String,
