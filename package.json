@@ -1,6 +1,6 @@
 {
   "name": "biomodelos-api",
-  "version": "1.9.0",
+  "version": "1.9.2",
   "description": "RESTful server API for Biomodels.",
   "main": "index.js",
   "author": "Valentina Grajales Olarte - https://github.com/valegrajales",
@@ -18,8 +18,8 @@
   "dependencies": {
     "body-parser": "1.18.2",
     "compression": "^1.7.1",
-    "convict": "^6.0.0",
-    "convict-format-with-validator": "^6.0.0",
+    "convict": "^6.2.3",
+    "convict-format-with-validator": "^6.2.0",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
     "debug": "^3.1.0",
@@ -59,7 +59,7 @@
     "gulp-cli": "^2.0.0",
     "gulp-json-modify": "^1.0.2",
     "gulp-minifier": "^2.0.0",
-    "jshint": "^2.9.5",
+    "jshint": "^2.13.4",
     "nodemon": "2.0.2",
     "prettier": "^1.10.2"
   }
