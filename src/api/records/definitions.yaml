@@ -8,10 +8,6 @@ definitions:
         type: string
       speciesOriginal:
         type: string
-      continent:
-        type: string
-      country:
-        type: string
       stateProvince:
         type: string
         default: null
@@ -24,8 +20,6 @@ definitions:
       verbatimElevation:
         type: string
         default: null
-      demAltitude:
-        type: number
       interpretedElevation:
         type: string
         default: null
@@ -33,8 +27,6 @@ definitions:
         type: string
         default: null
       catalogNumber:
-        type: string
-      colection:
         type: string
         default: null
       recordedBy:
@@ -46,9 +38,6 @@ definitions:
       url:
         type: string
         default: null
-      earliestDateCollected:
-        type: string
-        default: null
       day:
         type: string
         default: null
@@ -58,66 +47,26 @@ definitions:
       year:
         type: string
         default: null
-      correctCountry:
-        type: boolean
-      correctStateProvince:
-        type: boolean
-      correctCounty:
-        type: boolean
-      hasLocality:
-        type: boolean
       inUrbanArea:
         type: boolean
-      suggestedCountry:
-        type: string
       suggestedCounty:
         type: string
       suggestedStateProvince:
         type: string
-      coordinateUncertaintyInMeters:
-        type: number
-      lowUncertainty:
-        type: boolean
-      altitudinalOutlier:
-        type: boolean
-      consistentAltitude:
-        type: boolean
-      diferenceInAltitude:
-        type: number
       environmentalOutlier:
         type: boolean
-      insideKnownDistribution:
-        type: boolean
-      dist2KnowRange:
-        type: number
       spatialDuplicated:
         type: boolean
       source:
         type: string
       contributedRecord:
         type: string
-      privateData:
-        type: number
       use:
         type: boolean
       visualizationPrivileges:
         type: number
       collectionCode:
         type: string
-      maximumElevationInMeters:
-        type: number
-      minimumElevationInMeters:
-        type: number
-      origin:
-        type: string
-      presence:
-        type: string
-      recordStatus:
-        type: boolean
-      season:
-        type: string
-      externallyCreated:
-        type: boolean
       acceptedNameUsage:
         type: string
       occurrenceID:

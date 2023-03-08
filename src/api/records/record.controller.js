@@ -55,7 +55,6 @@ export async function read(req, res) {
             _id: 0,
             cellID: 0,
             dbDuplicate: 0,
-            downloadDate: 0,
             resourceFolder: 0,
             resourceIncorporationDate: 0,
             resourceName: 0,
@@ -265,7 +264,13 @@ export async function report(req, res) {
 
   if (req.body.reportedUserIdBm) {
     record.reportedUserIdBm = req.body.reportedUserIdBm;
+  } else {
+    res.json({
+      message: 'UserIdBm is required'
+    });
+    return;
   }
+
   if (req.body.reportedOriginVagrant) {
     record.reportedOriginVagrant = req.body.reportedOriginVagrant;
   }
@@ -289,15 +294,25 @@ export async function report(req, res) {
   }
 
   if (
-    req.body.reportedUserIdBm &&
-    (req.body.reportedOriginVagrant ||
-      req.body.reportedOldTaxonomyBm ||
-      req.body.reportedOriginIntroduced ||
-      req.body.reportedOtherIssuesBm ||
-      req.body.reportedCommentsBm ||
-      req.body.reportedGeoIssueBm ||
-      req.body.reportedIdIssueBm)
+    req.body.reportedOriginVagrant ||
+    req.body.reportedOldTaxonomyBm ||
+    req.body.reportedOriginIntroduced ||
+    req.body.reportedOtherIssuesBm ||
+    req.body.reportedGeoIssueBm ||
+    req.body.reportedIdIssueBm
   ) {
+    if (
+      req.body.reportedOtherIssuesBm &&
+      (req.body.reportedCommentsBm === undefined ||
+        req.body.reportedCommentsBm === '')
+    ) {
+      res.json({
+        message:
+          'reportedCommentsBm is required when reportedOtherIssuesBm is true'
+      });
+      return;
+    }
+
     record.reportedDate = Date.now();
     try {
       await record.save();
@@ -398,11 +413,15 @@ export async function createWithoutId(req, res) {
   record.contributedRecord = true;
   record.updated = [];
   try {
+    if (!record.userIdBm) {
+      throw { code: 400, message: 'userIdBm required' };
+    }
     await record.save();
     res.json({ message: `Record created! ${record._id}` });
   } catch (err) {
     log.error(err);
-    res.send('There was an error creating the record');
+    if (err.code === 400) res.send(err.message);
+    else res.send('There was an error creating the record');
   }
 }
 

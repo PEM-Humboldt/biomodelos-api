@@ -104,8 +104,15 @@ export async function read(req, res) {
         'Published',
         {
           taxID: req.params.taxID,
-          isActive: true,
           published: true,
+          isActive: true
+        }
+      ],
+      [
+        'Statistic',
+        {
+          taxID: req.params.taxID,
+          modelStatus: { $in: ['Statistic'] },
           isActive: true
         }
       ]
@@ -131,7 +138,7 @@ export async function read(req, res) {
         methodFile: 1,
         customCitation: 1,
         license: 1,
-        geoTIFF: 1
+        gsLayer: 1
       });
       res.json(docs);
     } catch (err) {
@@ -383,6 +390,10 @@ export async function occurrenceRepStatsModel(req, res) {
  *                 type: number
  *               statForestLoss12:
  *                 type: number
+ *               statForestLoss14:
+ *                 type: number
+ *               statForestLoss16:
+ *                 type: number
  *               statFutureForest30c:
  *                 type: number
  *               statFutureForest30d:
@@ -397,22 +408,28 @@ export async function occurrenceRepStatsModel(req, res) {
 export async function occurrenceForestLossStatsModel(req, res) {
   if (req.params.taxID) {
     try {
-      const docs = await Model.find(
-        { taxID: +req.params.taxID, modelStatus: 'Valid', isActive: true },
-        {
-          _id: 0,
-          modelID: 1,
-          modelLevel: 1,
-          statForestLoss90: 1,
-          statForestLoss00: 1,
-          statForestLoss05: 1,
-          statForestLoss10: 1,
-          statForestLoss12: 1,
-          statFutureForest30h: 1,
-          statFutureForest30d: 1,
-          statFutureForest30c: 1
-        }
-      );
+      const docs = (await Model.find({
+        taxID: +req.params.taxID,
+        modelStatus: 'Valid',
+        isActive: true
+      })).map(doc => {
+        const keys = Object.keys(doc.toObject()).filter(key =>
+          /statForestLoss[0-9]+$/.test(key)
+        );
+        const newDoc = {
+          modelID: doc.modelID,
+          modelLevel: doc.modelLevel,
+          statFutureForest30h: doc.statFutureForest30h,
+          statFutureForest30d: doc.statFutureForest30d,
+          statFutureForest30c: doc.statFutureForest30c
+        };
+        keys.forEach(key => {
+          if (doc[`${key}`] !== null) {
+            newDoc[`${key}`] = doc[`${key}`];
+          }
+        });
+        return newDoc;
+      });
       res.json(docs);
     } catch (err) {
       log.error(err);
@@ -654,9 +671,11 @@ export async function occurrenceCoversStatsModel(req, res) {
  *                 type: number
  *               validModels:
  *                 type: number
+ *               publishedModels:
+ *                 type: number
  *               developingModels:
  *                 type: number
- *               pendingValidation:
+ *               statisticModels:
  *                 type: number
  *             features:
  *               type: array
@@ -668,130 +687,167 @@ export async function occurrenceCoversStatsModel(req, res) {
  *         $ref: "#/definitions/ErrorResponse"
  */
 export async function generalModelStats(req, res) {
-  const totalStats: Array<{
-    taxonomicGroup: string,
-    totalSpecies: number,
-    developingModels?: number,
-    validModels?: number,
-    pendingValidation?: number
-  }> = [
-    {
-      taxonomicGroup: 'mamiferos',
-      totalSpecies: 492
-    },
-    { taxonomicGroup: 'aves', totalSpecies: 1921 },
-    { taxonomicGroup: 'reptiles', totalSpecies: 537 },
-    { taxonomicGroup: 'anfibios', totalSpecies: 803 },
-    { taxonomicGroup: 'peces', totalSpecies: 1435 },
-    { taxonomicGroup: 'invertebrados', totalSpecies: 19312 },
-    { taxonomicGroup: 'plantas', totalSpecies: 22840 }
-  ];
+  let groups = [];
   try {
-    const docs = await Specie.aggregate([
-      {
-        $match: {
-          $and: [
-            {
-              $or: [
-                {
-                  bmClass: {
-                    $in: [
-                      'mamiferos',
-                      'aves',
-                      'reptiles',
-                      'anfibios',
-                      'peces',
-                      'invertebrados',
-                      'plantas'
-                    ]
-                  }
-                }
-              ]
-            }
-          ]
-        }
-      },
-      {
-        $lookup: {
-          localField: 'taxID',
-          from: 'models',
-          foreignField: 'taxID',
-          as: 'models'
-        }
-      },
-      { $unwind: '$models' },
-      {
-        $match: {
-          $and: [
-            { 'models.isActive': { $in: [true] } },
-            { 'models.modelLevel': { $in: [1] } }
-          ]
-        }
-      },
+    groups = await Specie.aggregate([
       {
         $group: {
           _id: {
-            taxonomyClass: '$bmClass',
-            modelStatus: '$models.modelStatus',
-            taxID: '$taxID'
+            taxonomyClass: '$bmClass'
           },
-          count: { $sum: 1 }
-        }
-      },
-      {
-        $group: {
-          _id: { taxonomyClass: '$_id.taxonomyClass', taxID: '$_id.taxID' },
-          modelStatus: {
-            $push: { status: '$_id.modelStatus', count: '$count' }
-          }
-        }
-      },
-      { $unwind: '$modelStatus' },
-      {
-        $sort: { 'modelStatus.status': -1 }
-      },
-      { $group: { _id: '$_id', modelStatus: { $first: '$modelStatus' } } },
-      {
-        $group: {
-          _id: {
-            taxonomyClass: '$_id.taxonomyClass',
-            modelStatus: '$modelStatus.status'
-          },
-          count: { $sum: 1 }
-        }
-      },
-      {
-        $group: {
-          _id: '$_id.taxonomyClass',
-          modelStatus: {
-            $push: { status: '$_id.modelStatus', count: '$count' }
-          }
+          taxes: { $push: '$taxID' },
+          total: { $sum: 1 }
         }
       }
     ]);
-    docs.map(elem => {
-      const obj = totalStats.find(x => x.taxonomicGroup === elem._id);
-      const index = totalStats.indexOf(obj);
-      elem.modelStatus.map(elem => {
-        switch (elem.status) {
-          case 'Developing':
-            // eslint-disable-next-line security/detect-object-injection
-            totalStats[index].developingModels = elem.count;
-            break;
-          case 'Valid':
-            // eslint-disable-next-line security/detect-object-injection
-            totalStats[index].validModels = elem.count;
-            break;
-          case 'pendingValidation':
-            // eslint-disable-next-line security/detect-object-injection
-            totalStats[index].pendingValidation = elem.count;
-            break;
-        }
-      });
-    });
-    res.json(totalStats);
   } catch (err) {
     log.error(err);
     res.send('There was an error getting the statistics');
+  }
+
+  const stats = groups.map(group =>
+    Model.aggregate([
+      {
+        $match: {
+          taxID: { $in: group.taxes },
+          isActive: true
+        }
+      },
+      {
+        $project: {
+          taxID: 1,
+          status: {
+            $switch: {
+              branches: [
+                {
+                  case: { $eq: ['$modelStatus', 'Valid'] },
+                  then: '0-Valid'
+                },
+                {
+                  case: {
+                    $and: [
+                      { $eq: ['$modelStatus', 'pendingValidation'] },
+                      { $eq: ['$published', true] }
+                    ]
+                  },
+                  then: '1-Published'
+                },
+                {
+                  case: { $eq: ['$modelStatus', 'pendingValidation'] },
+                  then: '2-Developing'
+                },
+                {
+                  case: { $eq: ['$modelStatus', 'Statistic'] },
+                  then: '3-Statistic'
+                }
+              ],
+              default: '4-no-model'
+            }
+          }
+        }
+      },
+      { $sort: { status: 1 } },
+      {
+        $group: {
+          _id: {
+            taxID: '$taxID'
+          },
+          modelStatus: { $first: '$status' }
+        }
+      },
+      {
+        $group: {
+          _id: {
+            modelStatus: '$modelStatus'
+          },
+          count: { $sum: 1 }
+        }
+      },
+      {
+        $project: {
+          modelStatus: '$_id.modelStatus',
+          count: 1,
+          _id: 0
+        }
+      }
+    ])
+  );
+
+  return Promise.all(stats)
+    .then(response => {
+      const result = groups.map((group, index) => {
+        /* eslint-disable security/detect-object-injection */
+        const validModels = response[index].find(
+          e => e.modelStatus === '0-Valid'
+        );
+        const publishedModels = response[index].find(
+          e => e.modelStatus === '1-Published'
+        );
+        const developingModels = response[index].find(
+          e => e.modelStatus === '2-Developing'
+        );
+        const statisticModels = response[index].find(
+          e => e.modelStatus === '3-Statistic'
+        );
+        /* eslint-enable security/detect-object-injection */
+        return {
+          taxonomicGroup: group._id.taxonomyClass,
+          totalSpecies: group.total,
+          validModels: validModels ? validModels.count : 0,
+          publishedModels: publishedModels ? publishedModels.count : 0,
+          developingModels: developingModels ? developingModels.count : 0,
+          statisticModels: statisticModels ? statisticModels.count : 0
+        };
+      });
+      res.json(result);
+    })
+    .catch(err => {
+      log.error(err);
+      res.send('There was an error getting the statistics');
+    });
+}
+
+/**
+ * @swagger
+ * /tools/models/{modelID}/layer:
+ *   put:
+ *     description: Update the layer name for an specific model
+ *     parameters:
+ *       - name: modelID
+ *         in: path
+ *         description: The model id to update
+ *         required: true
+ *         type: string
+ *       - name: layer_name
+ *         in: body
+ *         description: the layer name to associate to the model
+ *         required: true
+ *         type: string
+ *     responses:
+ *       "204":
+ *         description: Successful update
+ *     default:
+ *       description: Error
+ *       schema:
+ *         $ref: "#/definitions/ErrorResponse"
+ */
+export async function updateModelLayer(req, res) {
+  if (!req.params.modelID || !req.body.layer_name) {
+    res.send(400, 'modelID and layer_name are required');
+  }
+
+  try {
+    const update = await Model.updateOne(
+      { modelID: req.params.modelID },
+      {
+        $set: {
+          gsLayer: req.body.layer_name
+        }
+      }
+    );
+    res.send({ message: 'Model updated successfully' });
+  } catch (err) {
+    log.error(err);
+    res.json({ message: 'Error updating the model' });
   }
 }

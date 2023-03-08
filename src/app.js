@@ -29,7 +29,7 @@ process.on('uncaughtRejection', error => {
   process.exit(1);
 });
 
-log.info('Starting --- BIOMODEL API - SERVICE ---');
+log.info('Starting --- BIOMODELOS API - SERVICE ---');
 const app = express();
 
 // Load all middleware
@@ -46,7 +46,7 @@ const server = http.createServer(app);
 
 (async () => {
   try {
-    log.info('Connecting with Biomodel Database');
+    log.info('Connecting with Biomodelos Database');
     await dbConnect(config, dbSettings);
     // Start https server in listening mode
     server.listen(
@@ -92,6 +92,6 @@ const server = http.createServer(app);
       }
     );
   } catch (error) {
-    log.error('Error initializing Biomodel API');
+    log.error('Error initializing Biomodelos API');
   }
 })();
