@@ -8,9 +8,36 @@ const UpdatedSchema = new Schema(
     decimalLatitude: { type: Number, min: -90, max: 90 },
     decimalLongitude: { type: Number, min: -180, max: 180 },
     speciesOriginal: { type: String },
-    day: { type: Number, min: 1, max: 31, default: null },
-    month: { type: Number, min: 1, max: 12, default: null },
-    year: { type: Number, min: 1800, max: 2100, default: null },
+    day: {
+      type: Number,
+      min: 1,
+      max: 31,
+      default: null,
+      validate: {
+        validator: Number.isInteger,
+        message: '{VALUE} is not an integer value'
+      }
+    },
+    month: {
+      type: Number,
+      min: 1,
+      max: 12,
+      default: null,
+      validate: {
+        validator: Number.isInteger,
+        message: '{VALUE} is not an integer value'
+      }
+    },
+    year: {
+      type: Number,
+      min: 1800,
+      max: 2100,
+      default: null,
+      validate: {
+        validator: Number.isInteger,
+        message: '{VALUE} is not an integer value'
+      }
+    },
     updatedDate: { type: Date, default: Date.now },
     userIdBm: { type: Number }
   },
@@ -155,9 +182,36 @@ const RecordSchema = new Schema(
         message: 'validation of `{PATH}` failed with value "{VALUE}" (string)'
       }
     },
-    day: { type: Number, min: 1, max: 31, default: null },
-    month: { type: Number, min: 1, max: 12, default: null },
-    year: { type: Number, min: 1800, max: 2100, default: null },
+    day: {
+      type: Number,
+      min: 1,
+      max: 31,
+      default: null,
+      validate: {
+        validator: Number.isInteger,
+        message: '{VALUE} is not an integer value'
+      }
+    },
+    month: {
+      type: Number,
+      min: 1,
+      max: 12,
+      default: null,
+      validate: {
+        validator: Number.isInteger,
+        message: '{VALUE} is not an integer value'
+      }
+    },
+    year: {
+      type: Number,
+      min: 1800,
+      max: 2100,
+      default: null,
+      validate: {
+        validator: Number.isInteger,
+        message: '{VALUE} is not an integer value'
+      }
+    },
     inUrbanArea: { type: Boolean, default: null },
     suggestedCounty: {
       type: String,
