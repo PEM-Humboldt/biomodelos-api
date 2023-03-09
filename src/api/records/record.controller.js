@@ -879,6 +879,7 @@ export async function validate(req, res) {
     const taxID = req.params.taxID.split(',');
     query = { taxID };
   }
+  const isNew = req.query.isnew === 'true';
 
   const records = await Record.find(query).cursor();
 
@@ -894,7 +895,7 @@ export async function validate(req, res) {
     return;
   }
 
-  /*TODO: Revisar el on('end') ya que no se está ejecutando correctamente. Si el callback se vuelve 
+  /*TODO: Revisar el on('end') ya que no se está ejecutando correctamente. Si el callback se vuelve
   asincrono y se pone await a los console y res.send funciona pero se recomienda revisar otras
   alternativas.*/
   return records
@@ -902,6 +903,31 @@ export async function validate(req, res) {
       amount++;
       try {
         await record.validate();
+
+        // old records can't be changed, so these will be applied only when are new species
+        if (isNew) {
+          if (record.eventDate !== null) {
+            if (
+              record.day === null ||
+              record.month === null ||
+              record.year === null
+            ) {
+              throw new Error(
+                "day, month or year can't be null if eventDate has a valid date"
+              );
+            }
+            const eD = new Date(record.eventDate);
+            if (
+              eD.getDate() != record.day ||
+              eD.getMonth() + 1 != record.month ||
+              eD.getFullYear() != record.year
+            ) {
+              throw new Error(
+                'day, month or year differ from eventDate values, check the date format is yyyy-mm-dd'
+              );
+            }
+          }
+        }
       } catch (err) {
         errors++;
         try {
