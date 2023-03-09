@@ -1,42 +1,57 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
+const stringValidateObj = {
+  validator: val => {
+    if (val === null) return true;
+    if (val.toLowerCase().trim() == 'null') return false;
+  },
+  message: 'validation of `{PATH}` failed with value "{VALUE}" (string)'
+};
+
+const integerValidateObj = {
+  validator: val => {
+    if (val === null) return true;
+    return Number.isInteger(val);
+  },
+  message: '{VALUE} is not an integer value'
+};
+
 // esquema para la corrección de registros biológicos
 const UpdatedSchema = new Schema(
   {
-    verbatimLocality: { type: String, default: null },
+    verbatimLocality: {
+      type: String,
+      default: null,
+      validate: stringValidateObj
+    },
     decimalLatitude: { type: Number, min: -90, max: 90 },
     decimalLongitude: { type: Number, min: -180, max: 180 },
-    speciesOriginal: { type: String },
+    speciesOriginal: {
+      type: String,
+      default: null,
+      validate: stringValidateObj
+    },
     day: {
       type: Number,
       min: 1,
       max: 31,
       default: null,
-      validate: {
-        validator: Number.isInteger,
-        message: '{VALUE} is not an integer value'
-      }
+      validate: integerValidateObj
     },
     month: {
       type: Number,
       min: 1,
       max: 12,
       default: null,
-      validate: {
-        validator: Number.isInteger,
-        message: '{VALUE} is not an integer value'
-      }
+      validate: integerValidateObj
     },
     year: {
       type: Number,
       min: 1800,
       max: 2100,
       default: null,
-      validate: {
-        validator: Number.isInteger,
-        message: '{VALUE} is not an integer value'
-      }
+      validate: integerValidateObj
     },
     updatedDate: { type: Date, default: Date.now },
     userIdBm: { type: Number }
@@ -51,197 +66,113 @@ const RecordSchema = new Schema(
     acceptedNameUsage: { type: String, required: true },
     species: {
       type: String,
-      default: null,
-      validate: {
-        validator: val => {
-          if (val.toLowerCase().trim() == 'null') return false;
-        },
-        message: 'validation of `{PATH}` failed with value "{VALUE}" (string)'
-      }
+      default: '',
+      validate: stringValidateObj
     },
     speciesOriginal: {
       type: String,
-      default: null,
-      validate: {
-        validator: val => {
-          if (val.toLowerCase().trim() == 'null') return false;
-        },
-        message: 'validation of `{PATH}` failed with value "{VALUE}" (string)'
-      }
+      default: '',
+      validate: stringValidateObj
     },
     stateProvince: {
       type: String,
-      default: null,
-      validate: {
-        validator: val => {
-          if (val.toLowerCase().trim() == 'null') return false;
-        },
-        message: 'validation of `{PATH}` failed with value "{VALUE}" (string)'
-      }
+      default: '',
+      validate: stringValidateObj
+    },
+    continent: {
+      type: String,
+      default: '',
+      validate: stringValidateObj
     },
     country: {
       type: String,
-      default: null,
-      validate: {
-        validator: val => {
-          if (val.toLowerCase().trim() == 'null') return false;
-        },
-        message: 'validation of `{PATH}` failed with value "{VALUE}" (string)'
-      }
+      default: '',
+      validate: stringValidateObj
     },
     county: {
       type: String,
       default: null,
-      validate: {
-        validator: val => {
-          if (val.toLowerCase().trim() == 'null') return false;
-        },
-        message: 'validation of `{PATH}` failed with value "{VALUE}" (string)'
-      }
+      validate: stringValidateObj
     },
     eventDate: {
       type: String,
       default: new Date().toISOString().slice(0, 10),
-      validate: {
-        validator: val => {
-          if (val.toLowerCase().trim() == 'null') return false;
-        },
-        message: 'validation of `{PATH}` failed with value "{VALUE}" (string)'
-      }
+      validate: stringValidateObj
     },
     verbatimLocality: {
       type: String,
       default: null,
-      validate: {
-        validator: val => {
-          if (val.toLowerCase().trim() == 'null') return false;
-        },
-        message: 'validation of `{PATH}` failed with value "{VALUE}" (string)'
-      }
+      validate: stringValidateObj
     },
     decimalLatitude: { type: Number, required: true, min: -90, max: 90 },
     decimalLongitude: { type: Number, required: true, min: -180, max: 180 },
     verbatimElevation: {
       type: String,
       default: null,
-      validate: {
-        validator: val => {
-          if (val.toLowerCase().trim() == 'null') return false;
-        },
-        message: 'validation of `{PATH}` failed with value "{VALUE}" (string)'
-      }
+      validate: stringValidateObj
     },
     cellID: { type: Number, min: 0, default: null },
     basisOfRecord: {
       type: String,
       default: null,
-      validate: {
-        validator: val => {
-          if (val.toLowerCase().trim() == 'null') return false;
-        },
-        message: 'validation of `{PATH}` failed with value "{VALUE}" (string)'
-      }
+      validate: stringValidateObj
     },
     catalogNumber: {
       type: String,
       default: null,
-      validate: {
-        validator: val => {
-          if (val.toLowerCase().trim() == 'null') return false;
-        },
-        message: 'validation of `{PATH}` failed with value "{VALUE}" (string)'
-      }
+      validate: stringValidateObj
     },
     recordedBy: {
       type: String,
       default: null,
-      validate: {
-        validator: val => {
-          if (val.toLowerCase().trim() == 'null') return false;
-        },
-        message: 'validation of `{PATH}` failed with value "{VALUE}" (string)'
-      }
+      validate: stringValidateObj
     },
     institutionCode: {
       type: String,
       default: null,
-      validate: {
-        validator: val => {
-          if (val.toLowerCase().trim() == 'null') return false;
-        },
-        message: 'validation of `{PATH}` failed with value "{VALUE}" (string)'
-      }
+      validate: stringValidateObj
     },
     url: {
       type: String,
       default: null,
-      validate: {
-        validator: val => {
-          if (val.toLowerCase().trim() == 'null') return false;
-        },
-        message: 'validation of `{PATH}` failed with value "{VALUE}" (string)'
-      }
+      validate: stringValidateObj
     },
     day: {
       type: Number,
       min: 1,
       max: 31,
       default: null,
-      validate: {
-        validator: Number.isInteger,
-        message: '{VALUE} is not an integer value'
-      }
+      validate: integerValidateObj
     },
     month: {
       type: Number,
       min: 1,
       max: 12,
       default: null,
-      validate: {
-        validator: Number.isInteger,
-        message: '{VALUE} is not an integer value'
-      }
+      validate: integerValidateObj
     },
     year: {
       type: Number,
       min: 1800,
       max: 2100,
       default: null,
-      validate: {
-        validator: Number.isInteger,
-        message: '{VALUE} is not an integer value'
-      }
+      validate: integerValidateObj
     },
     inUrbanArea: { type: Boolean, default: null },
     suggestedCounty: {
       type: String,
       default: null,
-      validate: {
-        validator: val => {
-          if (val.toLowerCase().trim() == 'null') return false;
-        },
-        message: 'validation of `{PATH}` failed with value "{VALUE}" (string)'
-      }
+      validate: stringValidateObj
     },
     suggestedStateProvince: {
       type: String,
       default: null,
-      validate: {
-        validator: val => {
-          if (val.toLowerCase().trim() == 'null') return false;
-        },
-        message: 'validation of `{PATH}` failed with value "{VALUE}" (string)'
-      }
+      validate: stringValidateObj
     },
     sourceLayer: {
       type: String,
       default: null,
-      validate: {
-        validator: val => {
-          if (val.toLowerCase().trim() == 'null') return false;
-        },
-        message: 'validation of `{PATH}` failed with value "{VALUE}" (string)'
-      }
+      validate: stringValidateObj
     },
     environmentalOutlier: { type: Boolean, default: null },
     dbDuplicate: { type: Boolean, default: false },
@@ -250,62 +181,32 @@ const RecordSchema = new Schema(
     downloadDate: {
       type: String,
       default: new Date().toISOString().slice(0, 10),
-      validate: {
-        validator: val => {
-          if (val.toLowerCase().trim() == 'null') return false;
-        },
-        message: 'validation of `{PATH}` failed with value "{VALUE}" (string)'
-      }
+      validate: stringValidateObj
     },
     resourceFolder: {
       type: String,
       default: 'Biomodelos',
-      validate: {
-        validator: val => {
-          if (val.toLowerCase().trim() == 'null') return false;
-        },
-        message: 'validation of `{PATH}` failed with value "{VALUE}" (string)'
-      }
+      validate: stringValidateObj
     },
     resourceIncorporationDate: {
       type: String,
       default: Date.now(),
-      validate: {
-        validator: val => {
-          if (val.toLowerCase().trim() == 'null') return false;
-        },
-        message: 'validation of `{PATH}` failed with value "{VALUE}" (string)'
-      }
+      validate: stringValidateObj
     },
     resourceName: {
       type: String,
       default: 'Biomodelos',
-      validate: {
-        validator: val => {
-          if (val.toLowerCase().trim() == 'null') return false;
-        },
-        message: 'validation of `{PATH}` failed with value "{VALUE}" (string)'
-      }
+      validate: stringValidateObj
     },
     source: {
       type: String,
       default: null,
-      validate: {
-        validator: val => {
-          if (val.toLowerCase().trim() == 'null') return false;
-        },
-        message: 'validation of `{PATH}` failed with value "{VALUE}" (string)'
-      }
+      validate: stringValidateObj
     },
     contributedRecord: {
       type: String,
       default: null,
-      validate: {
-        validator: val => {
-          if (val.toLowerCase().trim() == 'null') return false;
-        },
-        message: 'validation of `{PATH}` failed with value "{VALUE}" (string)'
-      }
+      validate: stringValidateObj
     },
     privateData: { type: Number, required: true, in: [0, 1, 2], default: 0 },
     use: { type: Boolean, default: true },
@@ -318,12 +219,7 @@ const RecordSchema = new Schema(
     collectionCode: {
       type: String,
       default: null,
-      validate: {
-        validator: val => {
-          if (val.toLowerCase().trim() == 'null') return false;
-        },
-        message: 'validation of `{PATH}` failed with value "{VALUE}" (string)'
-      }
+      validate: stringValidateObj
     },
     userIdBm: { type: Number },
     // Created fields
