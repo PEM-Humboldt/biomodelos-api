@@ -19,7 +19,11 @@ const UpdatedSchema = new Schema(
 
 const RecordSchema = new Schema(
   {
-    occurrenceID: { type: String, default: `Biomodelos-${Date.now()}` }, // TODO: Is mandatory according to calc file
+    occurrenceID: {
+      type: String,
+      required: true,
+      default: `Biomodelos-${Date.now()}`
+    },
     taxID: { type: Number, required: true },
     acceptedNameUsage: { type: String, required: true },
     species: { type: String, default: '' },
@@ -59,8 +63,14 @@ const RecordSchema = new Schema(
     resourceName: { type: String, default: 'Biomodelos' }, // TODO: Is mandatory according to calc file
     source: { type: String, default: null },
     contributedRecord: { type: String, default: null },
+    privateData: { type: Number, required: true, in: [0, 1, 2], default: 0 },
     use: { type: Boolean, default: true },
-    visualizationPrivileges: { type: Number, in: [0, 1, 2], default: 0 },
+    visualizationPrivileges: {
+      type: Number,
+      required: true,
+      in: [0, 1, 2],
+      default: 0
+    },
     collectionCode: { type: String, default: null },
     userIdBm: { type: Number },
     // Created fields
