@@ -161,7 +161,8 @@ const ModelSchema = new Schema(
       default: 'present',
       in: ['present', 'past', 'future']
     },
-    gsLayer: { type: String }
+    gsLayer: { type: String },
+    extentSize: { type: String, default: 'normal', in: ['normal', 'large'] }
   },
   {
     collection: 'models',
