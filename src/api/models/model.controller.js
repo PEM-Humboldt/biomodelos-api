@@ -138,7 +138,8 @@ export async function read(req, res) {
         methodFile: 1,
         customCitation: 1,
         license: 1,
-        gsLayer: 1
+        gsLayer: 1,
+        extentSize: 1
       });
       res.json(docs);
     } catch (err) {
