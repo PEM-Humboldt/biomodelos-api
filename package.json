@@ -30,7 +30,7 @@
     "method-override": "^2.3.10",
     "mongodb": "^3.5.0",
     "mongoose": "^5.9.0",
-    "morgan": "^1.9.0",
+    "morgan": "^1.10.0",
     "npm-check": "^6.0.1",
     "serve-favicon": "^2.4.5",
     "swagger-jsdoc": "^6.0.1",
