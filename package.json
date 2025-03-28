@@ -16,7 +16,7 @@
     "lint": "./node_modules/eslint/bin/eslint.js src"
   },
   "dependencies": {
-    "body-parser": "1.18.2",
+    "body-parser": "^2.2.0",
     "compression": "^1.8.0",
     "convict": "^6.2.4",
     "convict-format-with-validator": "^6.2.0",
