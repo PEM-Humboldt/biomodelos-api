@@ -49,7 +49,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "connect-livereload": "^0.6.0",
     "eslint": "^4.15.0",
-    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-prettier": "^2.5.0",
     "eslint-plugin-react": "^7.5.1",
