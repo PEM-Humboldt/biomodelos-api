@@ -39,7 +39,7 @@
     "winston": "^2.4.5"
   },
   "devDependencies": {
-    "assert": "*",
+    "assert": "^2.1.0",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.1",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
