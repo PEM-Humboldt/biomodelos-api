@@ -61,7 +61,7 @@
     "gulp-json-modify": "^1.0.2",
     "gulp-minifier": "^2.0.0",
     "jshint": "^2.13.6",
-    "nodemon": "2.0.2",
+    "nodemon": "^3.1.9",
     "prettier": "^3.5.3"
   }
 }
