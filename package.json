@@ -40,12 +40,14 @@
     "winston": "^3.17.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.27.0",
+    "@babel/core": "^7.26.10",
+    "@babel/node": "^7.26.0",
+    "@babel/preset-env": "^7.26.9",
     "assert": "^2.1.0",
-    "babel-cli": "^6.26.0",
     "babel-eslint": "^10.1.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
-    "babel-preset-env": "^1.7.0",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-stage-2": "^6.24.1",
     "connect-livereload": "^0.6.1",
@@ -63,6 +65,6 @@
     "gulp-minifier": "^3.5.0",
     "jshint": "^2.13.6",
     "nodemon": "^3.1.9",
-    "prettier": "^3.5.3"    
+    "prettier": "^3.5.3"
   }
 }
