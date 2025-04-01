@@ -4,7 +4,7 @@ The API handles all operations related with models, species and records of the B
 
 ## Requirements
 * Nodejs v22.13.1
-* npm v10.9.2
+* npm v11.2.0
 * MongoDB database running v7.0
 
 ### For deployment
