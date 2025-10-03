@@ -734,7 +734,12 @@ export async function generalModelStats(req, res) {
                   then: '1-Published'
                 },
                 {
-                  case: { $eq: ['$modelStatus', 'pendingValidation'] },
+                  case: { 
+                    $and: [
+                      { $eq: ['$modelStatus', 'pendingValidation'] },
+                      { $eq: ['$published', false] }
+                    ] 
+                  },
                   then: '2-Developing'
                 },
                 {
