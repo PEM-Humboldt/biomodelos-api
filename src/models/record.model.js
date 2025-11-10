@@ -32,7 +32,7 @@ const RecordSchema = new Schema(
     verbatimLocality: { type: String, default: null },
     decimalLatitude: { type: Number, required: true, min: -90, max: 90 },
     decimalLongitude: { type: Number, required: true, min: -180, max: 180 },
-    verbatimElevation: { type: String, default: null },
+    minimumElevationInMeters: { type: String, default: null },
     cellID: { type: Number, min: 0, default: null },
     basisOfRecord: { type: String, default: null },
     catalogNumber: { type: String, default: null },

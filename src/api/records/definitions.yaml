@@ -15,7 +15,7 @@ definitions:
       verbatimLocality:
         type: string
         default: null
-      verbatimElevation:
+      minimumElevationInMeters:
         type: string
         default: null
       interpretedElevation:

@@ -370,8 +370,8 @@ export async function createWithoutId(req, res) {
   }
   record.decimalLatitude = +req.body.decimalLatitude;
   record.decimalLongitude = +req.body.decimalLongitude;
-  if (req.body.verbatimElevation) {
-    record.verbatimElevation = +req.body.verbatimElevation;
+  if (req.body.minimumElevationInMeters) {
+    record.minimumElevationInMeters = +req.body.minimumElevationInMeters;
   }
   if (req.body.basisOfRecord) {
     record.basisOfRecord = req.body.basisOfRecord;
