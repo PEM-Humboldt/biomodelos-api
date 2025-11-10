@@ -26,7 +26,6 @@ const RecordSchema = new Schema(
     },
     taxID: { type: Number, required: true },
     acceptedNameUsage: { type: String, required: true },
-    species: { type: String, default: '' },
     speciesOriginal: { type: String, default: '' },
     stateProvince: { type: String, default: '' },
     county: { type: String, default: '' },

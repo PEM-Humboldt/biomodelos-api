@@ -4,8 +4,6 @@ definitions:
     type: object
     description: a Record
     properties:
-      species:
-        type: string
       speciesOriginal:
         type: string
       stateProvince:
