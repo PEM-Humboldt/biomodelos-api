@@ -28,6 +28,7 @@ const RecordSchema = new Schema(
     acceptedNameUsage: { type: String, required: true },
     speciesOriginal: { type: String, default: '' },
     stateProvince: { type: String, default: '' },
+    country: { type: String, default: '' },
     county: { type: String, default: '' },
     verbatimLocality: { type: String, default: null },
     decimalLatitude: { type: Number, required: true, min: -90, max: 90 },
@@ -36,7 +37,7 @@ const RecordSchema = new Schema(
     cellID: { type: Number, min: 0, default: null },
     basisOfRecord: { type: String, default: '', Enumerator: ["FossilSpecimen", "HumanObservation", "MachineObservation", "MaterialSample", "PreservedSpecimen", "LivingSpecimen", "Occurrence", "StillImage", "MovingImage", "SoundRecording", "OtherSpecimen"] },
     catalogNumber: { type: String, default: '' },
-    recordedBy: { type: String, default: null },
+    recordedBy: { type: String, default: '' },
     institutionCode: { type: String, default: null },
     url: { type: String, default: null },
     day: { type: Number, min: 1, max: 31, default: null },
@@ -70,10 +71,10 @@ const RecordSchema = new Schema(
       in: [0, 1, 2],
       default: 0
     },
-    collectionCode: { type: String, default: null },
+    collectionCode: { type: String, default: '' },
     userIdBm: { type: Number },
     // Created fields
-    createdCommentsBm: { type: String },
+    createdCommentsBm: { type: String, default: '' },
     createdCitationBm: { type: String },
     createdDate: { type: Date },
     // Reported fields
@@ -82,7 +83,7 @@ const RecordSchema = new Schema(
     reportedOldTaxonomyBm: { type: Boolean },
     reportedOriginIntroduced: { type: Boolean },
     reportedOtherIssuesBm: { type: Boolean },
-    reportedCommentsBm: { type: String },
+    reportedCommentsBm: { type: String, default: '' },
     reportedDate: { type: Date },
     reportedGeoIssueBm: { type: Boolean },
     reportedIdIssueBm: { type: Boolean }
