@@ -9,9 +9,6 @@ definitions:
       stateProvince:
         type: string
         default: null
-      country:
-        type: string
-        default: null
       county:
         type: string
         default: null
