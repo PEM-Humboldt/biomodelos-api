@@ -135,6 +135,7 @@ export async function getSpeciesRecords(req, res) {
             environmentalOutlier: 1,
             source: 1,
             stateProvince: 1,
+            country: 1,
             county: 1
           }
         }
