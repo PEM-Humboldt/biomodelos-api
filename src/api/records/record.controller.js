@@ -84,7 +84,7 @@ export async function read(req, res) {
  *         description: the accepted name for the species
  *         required: false
  *         type: string
- *       - name: verbatimLocality
+ *       - name: locality
  *         in: body
  *         description: the original textual description of the place
  *         required: false
@@ -154,11 +154,11 @@ export async function update(req, res) {
     wereChanges = true;
   }
   if (
-    req.body.verbatimLocality &&
-    req.body.verbatimLocality !== record.verbatimLocality
+    req.body.locality &&
+    req.body.locality !== record.locality
   ) {
-    updated.verbatimLocality = record.verbatimLocality;
-    record.verbatimLocality = req.body.verbatimLocality;
+    updated.locality = record.locality;
+    record.locality = req.body.locality;
     wereChanges = true;
   }
   if (
@@ -368,8 +368,8 @@ export async function createWithoutId(req, res) {
   if (req.body.county) {
     record.county = req.body.county;
   }
-  if (req.body.verbatimLocality) {
-    record.verbatimLocality = req.body.verbatimLocality;
+  if (req.body.locality) {
+    record.locality = req.body.locality;
   }
   record.decimalLatitude = +req.body.decimalLatitude;
   record.decimalLongitude = +req.body.decimalLongitude;

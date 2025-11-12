@@ -15,7 +15,7 @@ definitions:
       county:
         type: string
         default: null
-      verbatimLocality:
+      locality:
         type: string
         default: null
       minimumElevationInMeters:

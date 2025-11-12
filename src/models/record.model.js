@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 // esquema para la corrección de registros biológicos
 const UpdatedSchema = new Schema(
   {
-    verbatimLocality: { type: String, default: null },
+    locality: { type: String, default: '' },
     decimalLatitude: { type: Number, min: -90, max: 90 },
     decimalLongitude: { type: Number, min: -180, max: 180 },
     speciesOriginal: { type: String },
@@ -30,7 +30,7 @@ const RecordSchema = new Schema(
     stateProvince: { type: String, default: '' },
     country: { type: String, default: '' },
     county: { type: String, default: '' },
-    verbatimLocality: { type: String, default: null },
+    locality: { type: String, default: null },
     decimalLatitude: { type: Number, required: true, min: -90, max: 90 },
     decimalLongitude: { type: Number, required: true, min: -180, max: 180 },
     minimumElevationInMeters: { type: String, default: null },
@@ -38,7 +38,7 @@ const RecordSchema = new Schema(
     basisOfRecord: { type: String, default: '', Enumerator: ["FossilSpecimen", "HumanObservation", "MachineObservation", "MaterialSample", "PreservedSpecimen", "LivingSpecimen", "Occurrence", "StillImage", "MovingImage", "SoundRecording", "OtherSpecimen"] },
     catalogNumber: { type: String, default: '' },
     recordedBy: { type: String, default: '' },
-    institutionCode: { type: String, default: null },
+    institutionCode: { type: String, default: '' },
     url: { type: String, default: null },
     day: { type: Number, min: 1, max: 31, default: null },
     month: { type: Number, min: 1, max: 12, default: null },
@@ -53,7 +53,7 @@ const RecordSchema = new Schema(
     updated: [UpdatedSchema],
     downloadDate: {
       type: String,
-      default: new Date().toISOString().slice(0, 10)
+      //default: new Date().toISOString().slice(0, 10)
     },
     resourceFolder: { type: String, default: 'Biomodelos' }, // TODO: Is mandatory according to calc file
     resourceIncorporationDate: {
