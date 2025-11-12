@@ -362,6 +362,9 @@ export async function createWithoutId(req, res) {
   if (req.body.stateProvince) {
     record.stateProvince = req.body.stateProvince;
   }
+  if (req.body.country) {
+    record.country = req.body.country;
+  }
   if (req.body.county) {
     record.county = req.body.county;
   }
