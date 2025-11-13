@@ -22,7 +22,6 @@ const RecordSchema = new Schema(
     occurrenceID: {
       type: String,
       required: true,
-      default: `Biomodelos-${Date.now()}`
     },
     taxID: { type: Number, required: true },
     acceptedNameUsage: { type: String, required: true },
@@ -93,6 +92,14 @@ const RecordSchema = new Schema(
     versionKey: false
   }
 );
+
+RecordSchema.pre("validate", function (next) {
+  if (!this.occurrenceID) {
+    const userIdPart = this.userIdBm ?? "notUser"; 
+    this.occurrenceID = `BioModelos-${userIdPart}-${Date.now()}`;
+  }
+  next();
+});
 
 export const Record = mongoose.model('Record', RecordSchema, 'records');
 export const Updated = mongoose.model('UpdatedSchema', UpdatedSchema);
