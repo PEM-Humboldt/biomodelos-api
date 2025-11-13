@@ -62,12 +62,11 @@ const RecordSchema = new Schema(
     resourceName: { type: String, default: 'Biomodelos' }, // TODO: Is mandatory according to calc file
     source: { type: String, default: null },
     contributedRecord: { type: String, default: null },
-    privateData: { type: Number, required: true, in: [0, 1, 2], default: 0 },
     use: { type: Boolean, default: true },
     visualizationPrivileges: {
       type: Number,
       required: true,
-      in: [0, 1, 2],
+      in: [0, 1],
       default: 0
     },
     collectionCode: { type: String, default: '' },
