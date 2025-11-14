@@ -90,7 +90,6 @@ export async function getSpeciesRecords(req, res) {
         {
           $match: {
             taxID: +req.params.taxID,
-            use: true,
             visualizationPrivileges: 0,
             spatialDuplicated: false
           }
@@ -130,8 +129,6 @@ export async function getSpeciesRecords(req, res) {
             day: 1,
             month: 1,
             year: 1,
-            suggestedStateProvince: 1,
-            suggestedCounty: 1,
             environmentalOutlier: 1,
             source: 1,
             stateProvince: 1,
@@ -189,7 +186,6 @@ export async function getSpeciesRecordsWithPrivileges(req, res) {
         {
           $match: {
             taxID: +req.params.taxID,
-            use: true,
             visualizationPrivileges: { $in: [1, 0] },
             spatialDuplicated: false
           }
@@ -229,8 +225,6 @@ export async function getSpeciesRecordsWithPrivileges(req, res) {
             day: 1,
             month: 1,
             year: 1,
-            suggestedStateProvince: 1,
-            suggestedCounty: 1,
             environmentalOutlier: 1,
             source: 1,
             stateProvince: 1,
@@ -435,7 +429,6 @@ export async function getTaxonomyAndTotalRecords(req, res) {
           {
             $match: {
               taxID: +req.params.taxID,
-              use: true,
               spatialDuplicated: false
             }
           },

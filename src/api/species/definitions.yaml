@@ -150,8 +150,6 @@ definitions:
       - catalogNumber
       - basisOfRecord
       - recordedBy
-      - suggestedStateProvince
-      - suggestedCounty
       - year
       - month
       - day
@@ -179,10 +177,6 @@ definitions:
       basisOfRecord:
         type: string
       recordedBy:
-        type: string
-      suggestedStateProvince:
-        type: string
-      suggestedCounty:
         type: string
       year:
         type: integer

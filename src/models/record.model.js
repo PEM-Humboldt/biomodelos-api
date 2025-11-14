@@ -43,26 +43,15 @@ const RecordSchema = new Schema(
     month: { type: Number, min: 1, max: 12, default: null },
     year: { type: Number, min: 1800, max: 2100, default: null },
     inUrbanArea: { type: Boolean, default: null },
-    suggestedCounty: { type: String, default: null },
-    suggestedStateProvince: { type: String, default: null },
     sourceLayer: { type: String, default: null },
     environmentalOutlier: { type: Boolean, default: null },
-    dbDuplicate: { type: Boolean, default: false },
     spatialDuplicated: { type: Boolean, default: false },
     updated: [UpdatedSchema],
     downloadDate: {
       type: String,
-      //default: new Date().toISOString().slice(0, 10)
     },
-    resourceFolder: { type: String, default: 'Biomodelos' }, // TODO: Is mandatory according to calc file
-    resourceIncorporationDate: {
-      type: String,
-      default: Date.now()
-    }, // TODO: Is mandatory according to calc file
-    resourceName: { type: String, default: 'Biomodelos' }, // TODO: Is mandatory according to calc file
     source: { type: String, default: null },
     contributedRecord: { type: String, default: null },
-    use: { type: Boolean, default: true },
     visualizationPrivileges: {
       type: Number,
       required: true,
@@ -74,7 +63,7 @@ const RecordSchema = new Schema(
     // Created fields
     createdCommentsBm: { type: String, default: '' },
     createdCitationBm: { type: String },
-    createdDate: { type: Date },
+    createdDate: { type: Date, default: Date.now },
     // Reported fields
     reportedUserIdBm: { type: Number },
     reportedOriginVagrant: { type: Boolean },

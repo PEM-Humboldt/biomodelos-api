@@ -50,10 +50,6 @@ definitions:
         default: null
       inUrbanArea:
         type: boolean
-      suggestedCounty:
-        type: string
-      suggestedStateProvince:
-        type: string
       environmentalOutlier:
         type: boolean
       spatialDuplicated:
