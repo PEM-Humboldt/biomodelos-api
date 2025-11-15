@@ -1,4 +1,4 @@
-import { Record, Updated, ObjectId } from '../../models/record.model';
+import { Record, Updated, Reported, ObjectId } from '../../models/record.model';
 const log = require('../../config/log').logger();
 
 /**
@@ -201,7 +201,7 @@ export async function update(req, res) {
     return;
   }
 
-  updated.updatedDate = Date.now;
+  updated.updatedDate = Date.now();
   if (!record.updated) {
     record.updated = [];
   }
@@ -254,72 +254,84 @@ export async function report(req, res) {
     return;
   }
 
-  if (req.body.reportedUserIdBm) {
-    record.reportedUserIdBm = req.body.reportedUserIdBm;
-  } else {
-    res.json({
-      message: 'UserIdBm is required'
-    });
-    return;
+  let reported = new Reported();
+
+  if (req.body.taxID && req.body.taxID !== record.taxID) {
+    reported.taxID = record.taxID;
+    record.taxID = req.body.taxID;
   }
+
+  if (req.body.userIdBm && req.body.userIdBm !== record.userIdBm) {
+    reported.userIdBm = record.userIdBm;
+    record.userIdBm = req.body.userIdBm;
+  } 
 
   if (req.body.reportedOriginVagrant) {
-    record.reportedOriginVagrant = req.body.reportedOriginVagrant;
-  }
-  if (req.body.reportedGeoIssueBm) {
-    record.reportedGeoIssueBm = req.body.reportedGeoIssueBm;
-  }
-  if (req.body.reportedIdIssueBm) {
-    record.reportedIdIssueBm = req.body.reportedIdIssueBm;
-  }
-  if (req.body.reportedOldTaxonomyBm) {
-    record.reportedOldTaxonomyBm = req.body.reportedOldTaxonomyBm;
-  }
-  if (req.body.reportedOriginIntroduced) {
-    record.reportedOriginIntroduced = req.body.reportedOriginIntroduced;
-  }
-  if (req.body.reportedOtherIssuesBm) {
-    record.reportedOtherIssuesBm = req.body.reportedOtherIssuesBm;
-  }
-  if (req.body.reportedCommentsBm) {
-    record.reportedCommentsBm = req.body.reportedCommentsBm;
+    reported.originVagrant = req.body.reportedOriginVagrant;
   }
 
-  if (
+  if (req.body.reportedGeoIssueBm) {
+    reported.geoIssueBm = req.body.reportedGeoIssueBm;
+  }
+
+  if (req.body.reportedIdIssueBm) {
+    reported.idIssueBm = req.body.reportedIdIssueBm;
+    
+  }
+  if (req.body.reportedOldTaxonomyBm) {
+    reported.oldTaxonomyBm = req.body.reportedOldTaxonomyBm;
+  }
+
+  if (req.body.reportedOriginIntroduced) {
+    reported.originIntroduced = req.body.reportedOriginIntroduced;
+  }
+  
+  if (req.body.reportedOtherIssuesBm) {
+    reported.otherIssuesBm = req.body.reportedOtherIssuesBm;
+  }
+  
+  if (req.body.reportedCommentsBm) {
+    reported.otherIssuesBm = req.body.reportedCommentsBm;
+    record.reportedCommentsBm = req.body.reportedCommentsBm;
+  }
+  
+  if(
     req.body.reportedOriginVagrant ||
     req.body.reportedOldTaxonomyBm ||
     req.body.reportedOriginIntroduced ||
     req.body.reportedOtherIssuesBm ||
     req.body.reportedGeoIssueBm ||
     req.body.reportedIdIssueBm
-  ) {
-    if (
-      req.body.reportedOtherIssuesBm &&
-      (req.body.reportedCommentsBm === undefined ||
-        req.body.reportedCommentsBm === '')
-    ) {
-      res.json({
-        message:
-          'reportedCommentsBm is required when reportedOtherIssuesBm is true'
-      });
-      return;
-    }
+    ){
+      if (req.body.reportedOtherIssuesBm && (req.body.reportedCommentsBm === undefined || req.body.reportedCommentsBm === '')){
+        res.json({
+          message:
+            'reportedCommentsBm is required when reportedOtherIssuesBm is true'
+        });
+        return;
+      }
 
-    record.reportedDate = Date.now();
-    try {
-      await record.save();
+      reported.reportedDate = Date.now();
+
+      if (!record.reported) {
+        record.reported = [];
+      }
+      record.reported.push(reported);
+
+      try {
+        await record.save();
+        res.json({
+          message: `The record ${record._id} was reported!`
+        });
+      } catch (err) {
+        log.error(err);
+        res.send('There was an error reporting the record');
+      }
+    } else {
       res.json({
-        message: `The record ${record._id} was reported!`
+        message: 'There is nothing to report'
       });
-    } catch (err) {
-      log.error(err);
-      res.send('There was an error reporting the record');
     }
-  } else {
-    res.json({
-      message: 'There is nothing to report'
-    });
-  }
 }
 
 /**

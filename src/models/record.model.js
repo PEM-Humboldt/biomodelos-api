@@ -17,6 +17,20 @@ const UpdatedSchema = new Schema(
   { versionKey: false }
 );
 
+const ReportedSchema = new Schema(
+    {
+    geoIssueBm: { type: Boolean, default: false },
+    originVagrant: { type: Boolean, default: false },
+    oldTaxonomyBm: { type: Boolean, default: false },
+    originIntroduced: { type: Boolean, default: false },
+    otherIssuesBm: { type: String, default: "" },
+    userIdBm: { type: Number, default: null },
+    idIssueBm: { type: Boolean, default: false },
+    reportedDate: { type: Date, default: Date.now},
+    },
+    { versionKey: false }
+);
+
 const RecordSchema = new Schema(
   {
     occurrenceID: {
@@ -65,15 +79,8 @@ const RecordSchema = new Schema(
     createdCitationBm: { type: String },
     createdDate: { type: Date, default: Date.now },
     // Reported fields
-    reportedUserIdBm: { type: Number },
-    reportedOriginVagrant: { type: Boolean },
-    reportedOldTaxonomyBm: { type: Boolean },
-    reportedOriginIntroduced: { type: Boolean },
-    reportedOtherIssuesBm: { type: Boolean },
-    reportedCommentsBm: { type: String, default: '' },
-    reportedDate: { type: Date },
-    reportedGeoIssueBm: { type: Boolean },
-    reportedIdIssueBm: { type: Boolean }
+    reported:[ReportedSchema],
+    reportedCommentsBm: {type: String}
   },
   {
     collection: 'records',
@@ -90,6 +97,7 @@ RecordSchema.pre("validate", function (next) {
 });
 
 export const Record = mongoose.model('Record', RecordSchema, 'records');
+export const Reported = mongoose.model('ReportedSchema', ReportedSchema);
 export const Updated = mongoose.model('UpdatedSchema', UpdatedSchema);
 export const ObjectId = (id) => new mongoose.Types.ObjectId(id);
 
