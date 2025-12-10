@@ -273,14 +273,8 @@ export async function report(req, res) {
 
   let reported = new Reported();
 
-  if (req.body.taxID && req.body.taxID !== record.taxID) {
-    reported.taxID = record.taxID;
-    record.taxID = req.body.taxID;
-  }
-
-  if (req.body.userIdBm && req.body.userIdBm !== record.userIdBm) {
-    reported.userIdBm = record.userIdBm;
-    record.userIdBm = req.body.userIdBm;
+  if (req.body.reportedUserIdBm) {
+    reported.userIdBm = req.body.reportedUserIdBm;
   } 
 
   if (req.body.reportedOriginVagrant) {
@@ -293,8 +287,8 @@ export async function report(req, res) {
 
   if (req.body.reportedIdIssueBm) {
     reported.idIssueBm = req.body.reportedIdIssueBm;
-    
   }
+  
   if (req.body.reportedOldTaxonomyBm) {
     reported.oldTaxonomyBm = req.body.reportedOldTaxonomyBm;
   }
@@ -308,8 +302,7 @@ export async function report(req, res) {
   }
   
   if (req.body.reportedCommentsBm) {
-    reported.otherIssuesBm = req.body.reportedCommentsBm;
-    record.reportedCommentsBm = req.body.reportedCommentsBm;
+    reported.commentsBm = req.body.reportedCommentsBm;
   }
   
   if(

@@ -24,7 +24,8 @@ const ReportedSchema = new Schema(
     originVagrant: { type: Boolean, default: false },
     oldTaxonomyBm: { type: Boolean, default: false },
     originIntroduced: { type: Boolean, default: false },
-    otherIssuesBm: { type: String, default: "" },
+    otherIssuesBm: { type: Boolean, default: false },
+    commentsBm: { type: String, default: "" },
     userIdBm: { type: Number, default: null },
     idIssueBm: { type: Boolean, default: false },
     reportedDate: { type: Date, default: Date.now},
@@ -81,7 +82,7 @@ const RecordSchema = new Schema(
     createdDate: { type: Date, default: Date.now },
     // Reported fields
     reported:[ReportedSchema],
-    reportedCommentsBm: {type: String}
+    //reportedCommentsBm: {type: String}
   },
   {
     collection: 'records',
