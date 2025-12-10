@@ -173,21 +173,38 @@ export async function update(req, res) {
     record.decimalLongitude = req.body.decimalLongitude;
     wereChanges = true;
   }
-  if (req.body.day && req.body.day !== record.day) {
-    updated.day = record.day;
-    record.day = req.body.day;
+  if (
+    req.body.country &&
+    req.body.country !== record.country
+  ) {
+    updated.country = record.country;
+    record.country = req.body.country;
     wereChanges = true;
   }
-  if (req.body.month && req.body.month !== record.month) {
-    updated.month = record.month;
-    record.month = req.body.month;
+  if (
+    req.body.stateProvince &&
+    req.body.stateProvince !== record.stateProvince
+  ) {
+    updated.stateProvince = record.stateProvince;
+    record.stateProvince = req.body.stateProvince;
     wereChanges = true;
   }
-  if (req.body.year && req.body.year !== record.year) {
-    updated.year = record.year;
-    record.year = req.body.year;
+  if (
+    req.body.county &&
+    req.body.county !== record.county
+  ) {
+    updated.county = record.county;
+    record.county = req.body.county;
     wereChanges = true;
   }
+  if (
+    req.body.minimumElevationInMeters &&
+    req.body.minimumElevationInMeters !== record.minimumElevationInMeters
+  ) {
+    updated.minimumElevationInMeters = record.minimumElevationInMeters;
+    record.minimumElevationInMeters = req.body.minimumElevationInMeters;
+    wereChanges = true;
+  }    
   if (req.body.userIdBm && req.body.userIdBm !== record.userIdBm) {
     updated.userIdBm = record.userIdBm;
     record.userIdBm = req.body.userIdBm;

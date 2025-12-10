@@ -5,12 +5,13 @@ const Schema = mongoose.Schema;
 const UpdatedSchema = new Schema(
   {
     locality: { type: String, default: '' },
+    acceptedNameUsage: { type: String },
+    stateProvince: { type: String, default: '' },
+    country: { type: String, default: '' },
+    county: { type: String, default: '' },
+    minimumElevationInMeters: { type: Number, min: 0, max: 8000 },
     decimalLatitude: { type: Number, min: -90, max: 90 },
     decimalLongitude: { type: Number, min: -180, max: 180 },
-    speciesOriginal: { type: String },
-    day: { type: Number, min: 1, max: 31, default: null },
-    month: { type: Number, min: 1, max: 12, default: null },
-    year: { type: Number, min: 1800, max: 2100, default: null },
     updatedDate: { type: Date, default: Date.now },
     userIdBm: { type: Number }
   },
@@ -46,7 +47,7 @@ const RecordSchema = new Schema(
     locality: { type: String, default: null },
     decimalLatitude: { type: Number, required: true, min: -90, max: 90 },
     decimalLongitude: { type: Number, required: true, min: -180, max: 180 },
-    minimumElevationInMeters: { type: String, default: null },
+    minimumElevationInMeters: { type: Number, default: 0, min: 0, max: 8000 },
     cellID: { type: Number, min: 0, default: null },
     basisOfRecord: { type: String, default: '', Enumerator: ["FossilSpecimen", "HumanObservation", "MachineObservation", "MaterialSample", "PreservedSpecimen", "LivingSpecimen", "Occurrence", "StillImage", "MovingImage", "SoundRecording", "OtherSpecimen"] },
     catalogNumber: { type: String, default: '' },
