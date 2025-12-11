@@ -421,7 +421,7 @@ export async function createWithoutId(req, res) {
   if (req.body.occurrenceID) {
     record.occurrenceID = req.body.occurrenceID;
   }
-  record.reportedUserIdBm = null;
+  record.reported = [];
   record.source = 'BioModelos';
   record.createdDate = Date.now();
   if (req.body.createdCitationBm) {

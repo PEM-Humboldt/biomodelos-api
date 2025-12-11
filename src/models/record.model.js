@@ -50,7 +50,7 @@ const RecordSchema = new Schema(
     decimalLongitude: { type: Number, required: true, min: -180, max: 180 },
     minimumElevationInMeters: { type: Number, default: 0, min: 0, max: 8000 },
     cellID: { type: Number, min: 0, default: null },
-    basisOfRecord: { type: String, default: '', Enumerator: ["FossilSpecimen", "HumanObservation", "MachineObservation", "MaterialSample", "PreservedSpecimen", "LivingSpecimen", "Occurrence", "StillImage", "MovingImage", "SoundRecording", "OtherSpecimen"] },
+    basisOfRecord: { type: String, default: '', Enumerator: ["FossilSpecimen", "HumanObservation", "MachineObservation", "MaterialSample", "PreservedSpecimen", "LivingSpecimen", "Occurrence", "StillImage", "MovingImage", "SoundRecording", "OtherSpecimen", "MaterialCitation", "Occurrence"] },
     catalogNumber: { type: String, default: '' },
     recordedBy: { type: String, default: '' },
     institutionCode: { type: String, default: '' },
