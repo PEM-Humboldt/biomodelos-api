@@ -67,7 +67,7 @@ const RecordSchema = new Schema(
       type: String,
     },
     source: { type: String, default: null },
-    contributedRecord: { type: String, default: null },
+    contributedRecord: { type: Boolean, default: null },
     visualizationPrivileges: {
       type: Number,
       required: true,
@@ -82,6 +82,7 @@ const RecordSchema = new Schema(
     createdDate: { type: Date, default: Date.now },
     // Reported fields
     reported:[ReportedSchema],
+    reportedDate: { type: Date },
     //reportedCommentsBm: {type: String}
   },
   {
