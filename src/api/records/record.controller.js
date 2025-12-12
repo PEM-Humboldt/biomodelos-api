@@ -272,7 +272,7 @@ export async function report(req, res) {
   }
 
   let reported = new Reported();
-
+  let reportedDate = null;
   if (req.body.reportedUserIdBm) {
     reported.userIdBm = req.body.reportedUserIdBm;
   } 
@@ -322,12 +322,13 @@ export async function report(req, res) {
       }
 
       reported.reportedDate = Date.now();
-
+      reportedDate = Date.now();
+      
       if (!record.reported) {
         record.reported = [];
       }
       record.reported.push(reported);
-
+      record.reportedDate = reportedDate;
       try {
         await record.save();
         res.json({
