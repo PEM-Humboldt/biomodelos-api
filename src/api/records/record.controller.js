@@ -50,7 +50,6 @@ export async function read(req, res) {
           $project: {
             _id: 0,
             cellID: 0,
-            sourceLayer: 0,
             spatialDuplicate: 0
           }
         }
@@ -369,6 +368,7 @@ export async function createWithoutId(req, res) {
   const record = new Record();
   record.taxID = +req.body.taxID;
   record.acceptedNameUsage = req.body.acceptedNameUsage;
+  record.speciesOriginal = req.body.acceptedNameUsage;
   if (req.body.collectionCode) {
     record.collectionCode = req.body.collectionCode;
   }

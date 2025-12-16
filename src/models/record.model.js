@@ -35,13 +35,11 @@ const ReportedSchema = new Schema(
 
 const RecordSchema = new Schema(
   {
-    occurrenceID: {
-      type: String,
-      required: true,
-    },
+    altitudinalOutlier: { type: Boolean, default: null },
+    occurrenceID: { type: String, required: true },
     taxID: { type: Number, required: true },
     acceptedNameUsage: { type: String, required: true },
-    speciesOriginal: { type: String, default: '' },
+    speciesOriginal: { type: String, required: true },
     stateProvince: { type: String, default: '' },
     country: { type: String, default: '' },
     county: { type: String, default: '' },
@@ -59,13 +57,10 @@ const RecordSchema = new Schema(
     month: { type: Number, min: 1, max: 12, default: null },
     year: { type: Number, min: 1800, max: 2100, default: null },
     inUrbanArea: { type: Boolean, default: null },
-    sourceLayer: { type: String, default: null },
     environmentalOutlier: { type: Boolean, default: null },
     spatialDuplicated: { type: Boolean, default: false },
     updated: [UpdatedSchema],
-    downloadDate: {
-      type: String,
-    },
+    downloadDate: { type: String },
     source: { type: String, default: null },
     contributedRecord: { type: Boolean, default: null },
     visualizationPrivileges: {
@@ -83,12 +78,40 @@ const RecordSchema = new Schema(
     // Reported fields
     reported:[ReportedSchema],
     reportedDate: { type: Date },
-    //reportedCommentsBm: {type: String}
+    
   },
   {
     collection: 'records',
-    versionKey: false
-  }
+    versionKey: false,
+    // Conditional validation for days in month
+    allOf: [
+        {
+        if: {
+            properties: { month: { const: 2 } },
+            required: ["month"]
+        },
+        then: {
+            properties: {
+            day: { maximum: 29 }
+            }
+        }
+        },
+        {
+        if: {
+            properties: { month: { enum: [4, 6, 9, 11] } },
+            required: ["month"]
+        },
+        then: {
+            properties: {
+            day: { maximum: 30 }
+            }
+        }
+        }
+    ],
+
+    additionalProperties: false
+  },
+ 
 );
 
 RecordSchema.pre("validate", function (next) {
