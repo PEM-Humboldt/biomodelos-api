@@ -172,38 +172,6 @@ export async function update(req, res) {
     record.decimalLongitude = req.body.decimalLongitude;
     wereChanges = true;
   }
-  if (
-    req.body.country &&
-    req.body.country !== record.country
-  ) {
-    updated.country = record.country;
-    record.country = req.body.country;
-    wereChanges = true;
-  }
-  if (
-    req.body.stateProvince &&
-    req.body.stateProvince !== record.stateProvince
-  ) {
-    updated.stateProvince = record.stateProvince;
-    record.stateProvince = req.body.stateProvince;
-    wereChanges = true;
-  }
-  if (
-    req.body.county &&
-    req.body.county !== record.county
-  ) {
-    updated.county = record.county;
-    record.county = req.body.county;
-    wereChanges = true;
-  }
-  if (
-    req.body.minimumElevationInMeters &&
-    req.body.minimumElevationInMeters !== record.minimumElevationInMeters
-  ) {
-    updated.minimumElevationInMeters = record.minimumElevationInMeters;
-    record.minimumElevationInMeters = req.body.minimumElevationInMeters;
-    wereChanges = true;
-  }    
   if (req.body.userIdBm && req.body.userIdBm !== record.userIdBm) {
     updated.userIdBm = record.userIdBm;
     record.userIdBm = req.body.userIdBm;
