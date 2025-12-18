@@ -49,7 +49,6 @@ export async function read(req, res) {
         {
           $project: {
             _id: 0,
-            cellID: 0,
             spatialDuplicate: 0
           }
         }
