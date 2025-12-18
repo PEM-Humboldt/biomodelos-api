@@ -6,10 +6,6 @@ const UpdatedSchema = new Schema(
   {
     locality: { type: String, default: '' },
     acceptedNameUsage: { type: String },
-    stateProvince: { type: String, default: '' },
-    country: { type: String, default: '' },
-    county: { type: String, default: '' },
-    minimumElevationInMeters: { type: Number, min: 0, max: 8000 },
     decimalLatitude: { type: Number, min: -90, max: 90 },
     decimalLongitude: { type: Number, min: -180, max: 180 },
     updatedDate: { type: Date, default: Date.now },
@@ -77,7 +73,9 @@ const RecordSchema = new Schema(
     // Reported fields
     reported:[ReportedSchema],
     reportedDate: { type: Date },
-    
+    // Identified By
+    identifiedBy: { type: String, default: '' },
+    dateIdentified: { type: Date },
   },
   {
     collection: 'records',
