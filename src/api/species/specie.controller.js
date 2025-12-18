@@ -132,7 +132,9 @@ export async function getSpeciesRecords(req, res) {
             environmentalOutlier: 1,
             source: 1,
             stateProvince: 1,
-            county: 1
+            county: 1,
+            identifiedBy: 1,
+            dateIdentified: 1
           }
         }
       ]);
@@ -228,7 +230,9 @@ export async function getSpeciesRecordsWithPrivileges(req, res) {
             environmentalOutlier: 1,
             source: 1,
             stateProvince: 1,
-            county: 1
+            county: 1,
+            identifiedBy: 1,
+            dateIdentified: 1
           }
         }
       ]);
