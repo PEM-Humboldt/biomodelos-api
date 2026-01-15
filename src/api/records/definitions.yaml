@@ -4,8 +4,32 @@ definitions:
     type: object
     description: a Record
     properties:
+      altitudinalOutlier:
+        type: boolean
+      createdCitationBm:
+        type: string
+        default: null
+      createdCommentsBm:
+        type: string
+        default: null
+      dateIdentified:
+        type: string 
+        default: null
+      downloadDate:
+        type: string
+        default: null
+      identifiedBy:
+        type: string
+        default: null
+      userIdBm:
+        type: number
+        default: null
+      verbatimElevation:
+        type: string
+        default: null 
       speciesOriginal:
         type: string
+        default: null
       stateProvince:
         type: string
         default: null
@@ -19,9 +43,6 @@ definitions:
         type: string
         default: null
       minimumElevationInMeters:
-        type: string
-        default: null
-      interpretedElevation:
         type: string
         default: null
       basisOfRecord:
@@ -58,8 +79,6 @@ definitions:
         type: string
       contributedRecord:
         type: string
-      use:
-        type: boolean
       visualizationPrivileges:
         type: number
       collectionCode:
@@ -80,3 +99,5 @@ definitions:
         type: string
       reportedDate:
         type: string
+      reported:
+        type: array
