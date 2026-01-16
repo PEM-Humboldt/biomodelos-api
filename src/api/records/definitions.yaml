@@ -8,67 +8,44 @@ definitions:
         type: boolean
       createdCitationBm:
         type: string
-        default: null
       createdCommentsBm:
         type: string
-        default: null
       dateIdentified:
         type: string 
-        default: null
       downloadDate:
         type: string
-        default: null
       identifiedBy:
         type: string
-        default: null
       userIdBm:
         type: number
-        default: null
-      verbatimElevation:
-        type: string
-        default: null 
       speciesOriginal:
         type: string
-        default: null
       stateProvince:
         type: string
-        default: null
       country:
         type: string
-        default: null
       county:
         type: string
-        default: null
       locality:
         type: string
-        default: null
       minimumElevationInMeters:
         type: string
-        default: null
       basisOfRecord:
         type: string
-        default: null
       catalogNumber:
         type: string
-        default: null
       recordedBy:
         type: string
-        default: null
       institutionCode:
         type: string
-        default: null
       url:
         type: string
-        default: null
       day:
         type: string
-        default: null
       month:
         type: string
-        default: null
       year:
         type: string
-        default: null
       inUrbanArea:
         type: boolean
       environmentalOutlier:
