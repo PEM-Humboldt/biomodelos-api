@@ -5,6 +5,11 @@ import path from 'path';
 import { config } from '../../config/application-config';
 
 export default app => {
+
+  app.get('/health', (req, res) => {
+    res.status(200).send('OK');
+  });
+
   // eslint-disable-next-line security/detect-non-literal-fs-filename
   fs.readdirSync(`${config.get('appSrc')}/api`).forEach(route => {
     if (!config.get('router.ignore').includes(route)) {
