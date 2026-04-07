@@ -6,15 +6,26 @@ const log = require('../../config/log').logger();
 let connectionDB;
 let connectionDBNative;
 
-const getMongoURL = config => {
-  const servers = config.get('database.mongodb.servers').join(',');
-  const url = `mongodb://${encodeURIComponent(
-    config.get('database.mongodb.user')
-  )}:${encodeURIComponent(config.get('database.mongodb.pass'))}@${servers}`;
+const getMongoConfig = config => ({
+  user: config.get('database.mongodb.user'),
+  pass: config.get('database.mongodb.pass'),
+  db: config.get('database.mongodb.db'),
+  servers: config.get('database.mongodb.servers'),
+  authMechanism: config.get('database.mongodb.authMechanism')
+})
 
-  return `${url}/${config.get(
-    'database.mongodb.db'
-  )}?authMechanism=${config.get('database.mongodb.authMechanism')}`;
+const mongoConnectionMessage = config => {
+  const mongo = getMongoConfig(config);
+  return `${mongo.db} with user ${mongo.user}`
+}
+
+const getMongoURL = config => {
+  const mongo = getMongoConfig(config);
+
+  const servers = mongo.servers.join(',');
+  const url = `mongodb://${encodeURIComponent(mongo.user)}:${encodeURIComponent(mongo.pass)}@${servers}`;
+
+  return `${url}/${mongo.db}?authMechanism=${mongo.authMechanism}`;
 };
 
 /**
@@ -26,7 +37,7 @@ export const connect = async (config, dboptions) => {
   if (!connectionDB) {
     // Successfully connected
     mongoose.connection.on('connected', err => {
-      log.info(`MongoDB connected on ${getMongoURL(config)}`);
+      log.info(`MongoDB connected to ${mongoConnectionMessage(config)}`);
     });
 
     // Connection throws an error
