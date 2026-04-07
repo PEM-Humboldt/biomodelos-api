@@ -16,7 +16,7 @@ const getMongoConfig = config => ({
 
 const mongoConnectionMessage = config => {
   const mongo = getMongoConfig(config);
-  return `${mongo.db} database with user ${mongo.user}`
+  return `${mongo.db} with user ${mongo.user}`
 }
 
 const getMongoURL = config => {
@@ -25,9 +25,7 @@ const getMongoURL = config => {
   const servers = mongo.servers.join(',');
   const url = `mongodb://${encodeURIComponent(mongo.user)}:${encodeURIComponent(mongo.pass)}@${servers}`;
 
-  return `${url}/${config.get(
-    'database.mongodb.db'
-  )}?authMechanism=${config.get('database.mongodb.authMechanism')}`;
+  return `${url}/${mongo.db}?authMechanism=${mongo.authMechanism}`;
 };
 
 /**
@@ -38,8 +36,8 @@ const getMongoURL = config => {
 export const connect = async (config) => {
   if (!connectionDB) {
     // Successfully connected
-    mongoose.connection.on('connected', () => {
-      log.info(`MongoDB connected on ${getMongoURL(config)}`);
+    mongoose.connection.on('connected', err => {
+      log.info(`MongoDB connected to ${mongoConnectionMessage(config)}`);
     });
 
     // Connection throws an error
