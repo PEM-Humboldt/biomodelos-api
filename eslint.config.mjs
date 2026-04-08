@@ -6,7 +6,6 @@ import security from "eslint-plugin-security";
 import babelParser from "@babel/eslint-parser";
 
 export default [
-  // Config base de ESLint
   js.configs.recommended,
 
   {
@@ -14,7 +13,7 @@ export default [
     
     languageOptions: {
       parser: babelParser,
-      ecmaVersion: "latest",
+      ecmaVersion: 7,
       sourceType: "module",
 
       globals: {
@@ -22,7 +21,7 @@ export default [
       },
 
       parserOptions: {
-        requireConfigFile: false, // 🔥 importante para que no exija babel.config.js
+        requireConfigFile: false,
       },
     },
 
@@ -33,15 +32,12 @@ export default [
     },
 
     rules: {
-      // estilo
       "comma-dangle": ["error", "never"],
       "arrow-parens": ["error", "as-needed"],
       "space-before-function-paren": "off",
 
-      // accesibilidad
       "jsx-a11y/img-has-alt": "off",
 
-      // prettier
       "prettier/prettier": [
         "error",
         {
@@ -50,11 +46,9 @@ export default [
         },
       ],
 
-      // legacy relax
       "no-multi-str": "off",
     },
   },
 
-  // reglas recomendadas de security
   security.configs.recommended,
 ];
