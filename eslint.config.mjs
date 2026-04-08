@@ -33,7 +33,7 @@ export default [
 
     rules: {
       "comma-dangle": ["error", "never"],
-      "arrow-parens": ["error", "as-needed"],
+      "arrow-parens": ["error", "always"],
       "space-before-function-paren": "off",
 
       "jsx-a11y/img-has-alt": "off",
