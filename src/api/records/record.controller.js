@@ -625,7 +625,7 @@ export async function collaboratorsOfSpecie(req, res) {
         },
         { $project: { userId_bm: '$userId_bm', _id: 0 } }
       ]);
-      doc.forEach(elem => {
+      doc.forEach((elem) => {
         temp.push(elem.userId_bm);
       });
       try {
@@ -647,7 +647,7 @@ export async function collaboratorsOfSpecie(req, res) {
           },
           { $project: { userId_bm: '$userId_bm', _id: 0 } }
         ]);
-        doc.forEach(elem => {
+        doc.forEach((elem) => {
           temp.push(elem.userId_bm);
         });
         try {
@@ -669,7 +669,7 @@ export async function collaboratorsOfSpecie(req, res) {
             },
             { $project: { userId_bm: '$userId_bm', _id: 0 } }
           ]);
-          doc.forEach(elem => {
+          doc.forEach((elem) => {
             temp.push(elem.userId_bm);
           });
           const uniqueArray = temp.filter(
@@ -749,7 +749,7 @@ export async function latestChange(req, res) {
           }
         }
       ]);
-      doc.forEach(elem => {
+      doc.forEach((elem) => {
         if (elem.DateMax > maxdate) maxdate = elem.DateMax;
       });
       try {
@@ -773,7 +773,7 @@ export async function latestChange(req, res) {
           },
           { $project: { DateMax: '$createdDateMax', _id: 0 } }
         ]);
-        doc.forEach(elem => {
+        doc.forEach((elem) => {
           if (elem.DateMax > maxdate) maxdate = elem.DateMax;
         });
         try {
@@ -797,7 +797,7 @@ export async function latestChange(req, res) {
             },
             { $project: { DateMax: '$updatedDateMax', _id: 0 } }
           ]);
-          doc.forEach(elem => {
+          doc.forEach((elem) => {
             if (elem.DateMax > maxdate) maxdate = elem.DateMax;
           });
           const arrayJSON = {};

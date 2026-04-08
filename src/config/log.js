@@ -23,9 +23,8 @@ export const logger = () => {
           winston.format.printf(({ timestamp, level, message }) => {
             return `${timestamp} ${level}: ${message}`;
           })
-        )   
+        )
       });
-      
     } else if (config.get('env') === 'production') {
       log = new winston.createLogger({
         transports: [
@@ -44,7 +43,7 @@ export const logger = () => {
           winston.format.printf(({ timestamp, level, message }) => {
             return `${timestamp} ${level}: ${message}`;
           })
-        )   
+        )
       });
     }
   }

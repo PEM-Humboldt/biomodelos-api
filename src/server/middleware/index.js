@@ -8,7 +8,7 @@ import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 const log = require('../../config/log').logger();
 
-export default app => {
+export default (app) => {
   log.info('Starting middleware...');
 
   app.use(bodyParser.urlencoded({ extended: false }));
@@ -39,7 +39,7 @@ export default app => {
 
   if (config.get('logs.http')) {
     log.stream = {
-      write: function(message, encoding) {
+      write: function (message, encoding) {
         log.info(message);
       }
     };

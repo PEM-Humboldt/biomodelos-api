@@ -41,7 +41,7 @@ const ModelSchema = new Schema(
     thresholdType: {
       type: String,
       in: [0, 10, 20, 30, 'Continuous'],
-      required: function() {
+      required: function () {
         return this.modelStatus === 'Developing';
       }
     },

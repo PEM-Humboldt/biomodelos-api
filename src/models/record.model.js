@@ -97,4 +97,3 @@ const RecordSchema = new Schema(
 export const Record = mongoose.model('Record', RecordSchema, 'records');
 export const Updated = mongoose.model('UpdatedSchema', UpdatedSchema);
 export const ObjectId = (id) => new mongoose.Types.ObjectId(id);
-
