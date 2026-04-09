@@ -37,7 +37,7 @@ export default (app) => {
   });
 
   // Handle 500
-  app.use(function (error, req, res, next) {
+  app.use(function (error, req, res) {
     res.send('500: Internal Server Error', 500);
   });
 };

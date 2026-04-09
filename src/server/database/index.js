@@ -33,11 +33,11 @@ const getMongoURL = config => {
  * the **same** promise, so it can be called any number of times without setting
  * up a new connection every time.
  */
-export const connect = async (config, dboptions) => {
+export const connect = async (config) => {
   if (!connectionDB) {
     // Successfully connected
-    mongoose.connection.on('connected', err => {
-      log.info(`MongoDB connected to ${mongoConnectionMessage(config)}`);
+    mongoose.connection.on('connected', () => {
+      log.info(`MongoDB connected on ${getMongoURL(config)}`);
     });
 
     // Connection throws an error
