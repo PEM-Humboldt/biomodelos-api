@@ -853,6 +853,9 @@ export async function updateModelLayer(req, res) {
         }
       }
     );
+    if (update.matchedCount === 0) {
+      return res.status(404).json({ message: 'Model not found' });
+    }
     res.send({ message: 'Model updated successfully' });
   } catch (err) {
     log.error(err);
