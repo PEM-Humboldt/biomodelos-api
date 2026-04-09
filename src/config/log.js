@@ -1,6 +1,5 @@
 import winston from 'winston';
 import { config } from './application-config';
-import { format } from 'morgan';
 
 let log = null;
 

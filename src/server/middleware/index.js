@@ -1,4 +1,3 @@
-import { Router as router } from 'express';
 import { config } from '../../config/application-config';
 import cors from 'cors';
 import bodyParser from 'body-parser';
@@ -39,7 +38,7 @@ export default (app) => {
 
   if (config.get('logs.http')) {
     log.stream = {
-      write: function (message, encoding) {
+      write: function (message) {
         log.info(message);
       }
     };
