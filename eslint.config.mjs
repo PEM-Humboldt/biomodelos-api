@@ -32,6 +32,15 @@ export default [
     },
 
     rules: {
+      "no-unused-vars": ["error", {
+            "vars": "all",
+            "args": "after-used",
+            "caughtErrorsIgnorePattern": "^err(or)?$",
+            "ignoreRestSiblings": false,
+            "ignoreUsingDeclarations": false,
+            "reportUsedIgnorePattern": false,
+            
+        }],
       "comma-dangle": ["error", "never"],
       "arrow-parens": ["error", "always"],
       "space-before-function-paren": "off",
