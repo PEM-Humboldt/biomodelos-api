@@ -16,7 +16,7 @@ const getMongoConfig = config => ({
 
 const mongoConnectionMessage = config => {
   const mongo = getMongoConfig(config);
-  return `${mongo.db} with user ${mongo.user}`
+  return `${mongo.db} database with user ${mongo.user}`
 }
 
 const getMongoURL = config => {
@@ -42,12 +42,12 @@ export const connect = async (config, dboptions) => {
 
     // Connection throws an error
     mongoose.connection.on('error', err => {
-      log.info(`MongoDB connection error: ${getMongoURL(config)}: ${err}`);
+      log.info(`MongoDB was not able to connect to ${mongoConnectionMessage(config)}`);
     });
 
     // Connection is disconnected
     mongoose.connection.on('disconnected', err => {
-      log.info(`MongoDB disconnected: ${getMongoURL(config)}`);
+      log.info(`MongoDB disconnected from: ${mongoConnectionMessage(config)}`);
     });
 
     mongoose.Promise = global.Promise;
