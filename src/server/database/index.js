@@ -16,7 +16,7 @@ const getMongoConfig = config => ({
 
 const mongoConnectionMessage = config => {
   const mongo = getMongoConfig(config);
-  return `${mongo.db} with user ${mongo.user}`
+  return `${mongo.db} database with user ${mongo.user}`
 }
 
 const getMongoURL = config => {
