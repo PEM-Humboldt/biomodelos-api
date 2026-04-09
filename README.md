@@ -38,10 +38,6 @@ npx eslint --fix src
 ```
 Note: Only formatting errors can be fixed automatically.
 
-
-
-
-
 # Deployment
 
 Deployment is made with docker, you'll need Docker v17.05.0+ and docker compose v1.17.1+
