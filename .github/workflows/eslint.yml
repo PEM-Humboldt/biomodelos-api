@@ -1,16 +1,11 @@
 name: Lint (ESLint)
 
 on:
-  push:
-    branches:
-      - main
-      - develop
-
   pull_request:
-    branches:
-      - main
-      - develop
-
+    branches: ['main', 'develop']
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      
 jobs:
   eslint:
     name: Run ESLint
@@ -23,8 +18,9 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: 24
+          node-version: 22
           cache: npm
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
         run: npm ci
