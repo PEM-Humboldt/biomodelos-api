@@ -6,20 +6,20 @@ const log = require('../../config/log').logger();
 let connectionDB;
 let connectionDBNative;
 
-const getMongoConfig = config => ({
+const getMongoConfig = (config) => ({
   user: config.get('database.mongodb.user'),
   pass: config.get('database.mongodb.pass'),
   db: config.get('database.mongodb.db'),
   servers: config.get('database.mongodb.servers'),
   authMechanism: config.get('database.mongodb.authMechanism')
-})
+});
 
-const mongoConnectionMessage = config => {
+const mongoConnectionMessage = (config) => {
   const mongo = getMongoConfig(config);
-  return `${mongo.db} database with user ${mongo.user}`
-}
+  return `${mongo.db} database with user ${mongo.user}`;
+};
 
-const getMongoURL = config => {
+const getMongoURL = (config) => {
   const mongo = getMongoConfig(config);
 
   const servers = mongo.servers.join(',');
@@ -36,17 +36,19 @@ const getMongoURL = config => {
 export const connect = async (config) => {
   if (!connectionDB) {
     // Successfully connected
-    mongoose.connection.on('connected', err => {
+    mongoose.connection.on('connected', () => {
       log.info(`MongoDB connected to ${mongoConnectionMessage(config)}`);
     });
 
     // Connection throws an error
-    mongoose.connection.on('error', err => {
-      log.info(`MongoDB was not able to connect to ${mongoConnectionMessage(config)}`);
+    mongoose.connection.on('error', () => {
+      log.info(
+        `MongoDB was not able to connect to ${mongoConnectionMessage(config)}`
+      );
     });
 
     // Connection is disconnected
-    mongoose.connection.on('disconnected', err => {
+    mongoose.connection.on('disconnected', () => {
       log.info(`MongoDB disconnected from: ${mongoConnectionMessage(config)}`);
     });
 
