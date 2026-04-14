@@ -25,7 +25,9 @@ const getMongoURL = config => {
   const servers = mongo.servers.join(',');
   const url = `mongodb://${encodeURIComponent(mongo.user)}:${encodeURIComponent(mongo.pass)}@${servers}`;
 
-  return `${url}/${mongo.db}?authMechanism=${mongo.authMechanism}`;
+  return `${url}/${config.get(
+    'database.mongodb.db'
+  )}?authMechanism=${config.get('database.mongodb.authMechanism')}`;
 };
 
 /**
