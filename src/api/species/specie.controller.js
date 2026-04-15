@@ -327,7 +327,7 @@ export async function getAllSpecies(req, res) {
         {
           $match: {
             taxID: {
-              $in: req.query.speciesIn.split(',').map(e => parseInt(e.trim()))
+              $in: req.query.speciesIn.split(',').map((e) => parseInt(e.trim()))
             }
           }
         },
@@ -353,10 +353,10 @@ export async function getAllSpecies(req, res) {
         );
         modelsFilter = {
           taxID: {
-            $in: taxIds.map(e => e.taxID)
+            $in: taxIds.map((e) => e.taxID)
           }
         };
-      } else if (!!req.query.withModel) {
+      } else if (req.query.withModel) {
         const taxIds = await Model.distinct('taxID', { isActive: true });
         modelsFilter = {
           taxID: {
@@ -515,7 +515,7 @@ export async function searchSpecies(req, res) {
   const { consumerscopes: scopesStr } = req.headers;
   let fullAccess = true;
   if (scopesStr) {
-    const scopes = scopesStr.split(',').map(scope => scope.trim());
+    const scopes = scopesStr.split(',').map((scope) => scope.trim());
     fullAccess = scopes.includes('all');
   }
 
