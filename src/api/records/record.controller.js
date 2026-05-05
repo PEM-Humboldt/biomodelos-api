@@ -333,6 +333,14 @@ export async function report(req, res) {
  */
 export async function createWithoutId(req, res) {
   const record = new Record();
+  
+  if (req.body.date) {
+    record.createdDate = req.body.date; 
+    if (record.createdDate > Date.now()) {
+      res.send('The date is not valid');
+      return;
+    }
+  }
   record.taxID = +req.body.taxID;
   record.acceptedNameUsage = req.body.acceptedNameUsage;
   record.speciesOriginal = req.body.acceptedNameUsage;
