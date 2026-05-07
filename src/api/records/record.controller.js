@@ -333,14 +333,22 @@ export async function report(req, res) {
  */
 export async function createWithoutId(req, res) {
   const record = new Record();
-  
-  if (req.body.date) {
-    record.createdDate = req.body.date; 
-    if (record.createdDate > Date.now()) {
-      res.send('The date is not valid');
-      return;
+
+  if (req.body.year && req.body.month && req.body.day) {
+    record.createdDate = new Date(req.body.year, req.body.month - 1, req.body.day);
+    try {
+        if (record.createdDate > Date.now() || isNaN(record.createdDate.getTime())) {
+          throw { code: 401, message: 'The date is not valid' };
+          res.send('The date is not valid');
+          return;
+        }
+    } catch (err) {
+        log.error(err);
+        res.send(err.message);
+        return;
     }
   }
+
   record.taxID = +req.body.taxID;
   record.acceptedNameUsage = req.body.acceptedNameUsage;
   record.speciesOriginal = req.body.acceptedNameUsage;
