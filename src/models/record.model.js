@@ -98,16 +98,16 @@ const RecordSchema = new Schema(
       {
         if: {
           properties: { month: { const: 2 } },
-          required: ["month"]
+          required: ['month']
         },
         then: {
           properties: {
-          day: { maximum: 29 }
+            day: { maximum: 29 }
           }
         }
       },
       {
-      if: {
+        if: {
           properties: { month: { enum: [4, 6, 9, 11] } },
           required: ['month']
         },
@@ -118,9 +118,8 @@ const RecordSchema = new Schema(
         }
       }
     ],
-
     additionalProperties: false
-  },
+  }
 );
 
 RecordSchema.pre('validate', function (next) {

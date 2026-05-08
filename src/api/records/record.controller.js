@@ -131,7 +131,6 @@ export async function update(req, res) {
     res.send(400, err.toString());
     return;
   }
-
   let updated = new Updated();
   let wereChanges = false;
   if (req.body.taxID && req.body.taxID !== record.taxID) {
@@ -147,8 +146,7 @@ export async function update(req, res) {
     record.acceptedNameUsage = req.body.acceptedNameUsage;
     wereChanges = true;
   }
-  if (req.body.locality && req.body.locality !== record.locality
-  ) {
+  if (req.body.locality && req.body.locality !== record.locality) {
     updated.locality = record.locality;
     record.locality = req.body.locality;
     wereChanges = true;
@@ -174,20 +172,17 @@ export async function update(req, res) {
     record.userIdBm = req.body.userIdBm;
     wereChanges = true;
   }
-
   if (!wereChanges) {
     res.json({
       message: `The record ${record._id} didn't have any changes!`
     });
     return;
   }
-
   updated.updatedDate = Date.now();
   if (!record.updated) {
     record.updated = [];
   }
   record.updated.push(updated);
-
   try {
     await record.save();
     res.json({
@@ -234,7 +229,6 @@ export async function report(req, res) {
     res.send(400, err.toString());
     return;
   }
-
   let reported = new Reported();
   let reportedDate = null;
   if (req.body.reportedUserIdBm) {
@@ -245,35 +239,27 @@ export async function report(req, res) {
     });
     return;
   }
-
   if (req.body.reportedOriginVagrant) {
     reported.originVagrant = req.body.reportedOriginVagrant;
   }
-
   if (req.body.reportedGeoIssueBm) {
     reported.geoIssueBm = req.body.reportedGeoIssueBm;
   }
-
   if (req.body.reportedIdIssueBm) {
     reported.idIssueBm = req.body.reportedIdIssueBm;
   }
-
   if (req.body.reportedOldTaxonomyBm) {
     reported.oldTaxonomyBm = req.body.reportedOldTaxonomyBm;
   }
-
   if (req.body.reportedOriginIntroduced) {
     reported.originIntroduced = req.body.reportedOriginIntroduced;
   }
-
   if (req.body.reportedOtherIssuesBm) {
     reported.otherIssuesBm = req.body.reportedOtherIssuesBm;
   }
-
   if (req.body.reportedCommentsBm) {
     reported.commentsBm = req.body.reportedCommentsBm;
   }
-
   if (
     req.body.reportedOriginVagrant ||
     req.body.reportedOldTaxonomyBm ||
@@ -281,7 +267,7 @@ export async function report(req, res) {
     req.body.reportedOtherIssuesBm ||
     req.body.reportedGeoIssueBm ||
     req.body.reportedIdIssueBm
-    ){
+   ) {
     if (
       req.body.reportedOtherIssuesBm &&
       (req.body.reportedCommentsBm === undefined ||
@@ -293,10 +279,8 @@ export async function report(req, res) {
       });
       return;
     }
-
     reported.reportedDate = Date.now();
     reportedDate = Date.now();
-
     if (!record.reported) {
       record.reported = [];
     }
