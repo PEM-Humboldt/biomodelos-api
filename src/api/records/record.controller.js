@@ -147,9 +147,7 @@ export async function update(req, res) {
     record.acceptedNameUsage = req.body.acceptedNameUsage;
     wereChanges = true;
   }
-  if (
-    req.body.locality &&
-    req.body.locality !== record.locality
+  if (req.body.locality && req.body.locality !== record.locality
   ) {
     updated.locality = record.locality;
     record.locality = req.body.locality;
@@ -246,7 +244,7 @@ export async function report(req, res) {
       message: 'UserIdBm is required'
     });
     return;
-  } 
+  }
 
   if (req.body.reportedOriginVagrant) {
     reported.originVagrant = req.body.reportedOriginVagrant;
@@ -259,7 +257,7 @@ export async function report(req, res) {
   if (req.body.reportedIdIssueBm) {
     reported.idIssueBm = req.body.reportedIdIssueBm;
   }
-  
+
   if (req.body.reportedOldTaxonomyBm) {
     reported.oldTaxonomyBm = req.body.reportedOldTaxonomyBm;
   }
@@ -267,16 +265,16 @@ export async function report(req, res) {
   if (req.body.reportedOriginIntroduced) {
     reported.originIntroduced = req.body.reportedOriginIntroduced;
   }
-  
+
   if (req.body.reportedOtherIssuesBm) {
     reported.otherIssuesBm = req.body.reportedOtherIssuesBm;
   }
-  
+
   if (req.body.reportedCommentsBm) {
     reported.commentsBm = req.body.reportedCommentsBm;
   }
-  
-  if(
+
+  if (
     req.body.reportedOriginVagrant ||
     req.body.reportedOldTaxonomyBm ||
     req.body.reportedOriginIntroduced ||
@@ -284,36 +282,40 @@ export async function report(req, res) {
     req.body.reportedGeoIssueBm ||
     req.body.reportedIdIssueBm
     ){
-      if (req.body.reportedOtherIssuesBm && (req.body.reportedCommentsBm === undefined || req.body.reportedCommentsBm === '')){
-        res.json({
-          message:
-            'reportedCommentsBm is required when reportedOtherIssuesBm is true'
-        });
-        return;
-      }
-
-      reported.reportedDate = Date.now();
-      reportedDate = Date.now();
-      
-      if (!record.reported) {
-        record.reported = [];
-      }
-      record.reported.push(reported);
-      record.reportedDate = reportedDate;
-      try {
-        await record.save();
-        res.json({
-          message: `The record ${record._id} was reported!`
-        });
-      } catch (err) {
-        log.error(err);
-        res.send('There was an error reporting the record');
-      }
-    } else {
+    if (
+      req.body.reportedOtherIssuesBm &&
+      (req.body.reportedCommentsBm === undefined ||
+        req.body.reportedCommentsBm === '')
+    ) {
       res.json({
-        message: 'There is nothing to report'
+        message:
+          'reportedCommentsBm is required when reportedOtherIssuesBm is true'
       });
+      return;
     }
+
+    reported.reportedDate = Date.now();
+    reportedDate = Date.now();
+
+    if (!record.reported) {
+      record.reported = [];
+    }
+    record.reported.push(reported);
+    record.reportedDate = reportedDate;
+    try {
+      await record.save();
+      res.json({
+        message: `The record ${record._id} was reported!`
+      });
+    } catch (err) {
+      log.error(err);
+      res.send('There was an error reporting the record');
+    }
+  } else {
+    res.json({
+      message: 'There is nothing to report'
+    });
+  }
 }
 
 /**

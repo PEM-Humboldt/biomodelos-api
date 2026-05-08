@@ -15,18 +15,18 @@ const UpdatedSchema = new Schema(
 );
 
 const ReportedSchema = new Schema(
-    {
+  {
     geoIssueBm: { type: Boolean, default: false },
     originVagrant: { type: Boolean, default: false },
     oldTaxonomyBm: { type: Boolean, default: false },
     originIntroduced: { type: Boolean, default: false },
     otherIssuesBm: { type: Boolean, default: false },
-    commentsBm: { type: String, default: "" },
+    commentsBm: { type: String, default: '' },
     userIdBm: { type: Number, default: null },
     idIssueBm: { type: Boolean, default: false },
-    reportedDate: { type: Date, default: Date.now},
-    },
-    { versionKey: false }
+    reportedDate: { type: Date, default: Date.now }
+  },
+  { versionKey: false }
 );
 
 const RecordSchema = new Schema(
@@ -43,7 +43,20 @@ const RecordSchema = new Schema(
     decimalLatitude: { type: Number, required: true, min: -90, max: 90 },
     decimalLongitude: { type: Number, required: true, min: -180, max: 180 },
     minimumElevationInMeters: { type: Number, default: 0, min: 0, max: 8000 },
-    basisOfRecord: { type: String, default: '', Enumerator: ["FossilSpecimen", "HumanObservation", "MachineObservation", "MaterialSample", "PreservedSpecimen", "LivingSpecimen", "Occurrence", "MaterialCitation"] },
+    basisOfRecord: {
+      type: String,
+      default: '',
+      Enumerator: [
+        'FossilSpecimen',
+        'HumanObservation',
+        'MachineObservation',
+        'MaterialSample',
+        'PreservedSpecimen',
+        'LivingSpecimen',
+        'Occurrence',
+        'MaterialCitation'
+      ]
+    },
     catalogNumber: { type: String, default: '' },
     recordedBy: { type: String, default: '' },
     institutionCode: { type: String, default: '' },
@@ -71,49 +84,48 @@ const RecordSchema = new Schema(
     createdCitationBm: { type: String },
     createdDate: { type: Date, default: Date.now },
     // Reported fields
-    reported:[ReportedSchema],
+    reported: [ReportedSchema],
     reportedDate: { type: Date },
     // Identified By
     identifiedBy: { type: String, default: '' },
-    dateIdentified: { type: Date },
+    dateIdentified: { type: Date }
   },
   {
     collection: 'records',
     versionKey: false,
     // Conditional validation for days in month
     allOf: [
-        {
+      {
         if: {
-            properties: { month: { const: 2 } },
-            required: ["month"]
+          properties: { month: { const: 2 } },
+          required: ["month"]
         },
         then: {
-            properties: {
-            day: { maximum: 29 }
-            }
+          properties: {
+          day: { maximum: 29 }
+          }
         }
-        },
-        {
-        if: {
-            properties: { month: { enum: [4, 6, 9, 11] } },
-            required: ["month"]
+      },
+      {
+      if: {
+          properties: { month: { enum: [4, 6, 9, 11] } },
+          required: ['month']
         },
         then: {
-            properties: {
+          properties: {
             day: { maximum: 30 }
-            }
+          }
         }
-        }
+      }
     ],
 
     additionalProperties: false
   },
- 
 );
 
-RecordSchema.pre("validate", function (next) {
+RecordSchema.pre('validate', function (next) {
   if (!this.occurrenceID) {
-    const userIdPart = this.userIdBm ?? "notUser"; 
+    const userIdPart = this.userIdBm ?? 'notUser';
     this.occurrenceID = `BioModelos-${userIdPart}-${Date.now()}`;
   }
   next();
@@ -123,4 +135,3 @@ export const Record = mongoose.model('Record', RecordSchema, 'records');
 export const Reported = mongoose.model('ReportedSchema', ReportedSchema);
 export const Updated = mongoose.model('UpdatedSchema', UpdatedSchema);
 export const ObjectId = (id) => new mongoose.Types.ObjectId(id);
-
