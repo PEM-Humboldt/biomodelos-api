@@ -241,6 +241,11 @@ export async function report(req, res) {
   let reportedDate = null;
   if (req.body.reportedUserIdBm) {
     reported.userIdBm = req.body.reportedUserIdBm;
+  } else {
+    res.json({
+      message: 'UserIdBm is required'
+    });
+    return;
   } 
 
   if (req.body.reportedOriginVagrant) {
