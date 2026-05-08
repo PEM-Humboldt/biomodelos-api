@@ -267,7 +267,7 @@ export async function report(req, res) {
     req.body.reportedOtherIssuesBm ||
     req.body.reportedGeoIssueBm ||
     req.body.reportedIdIssueBm
-   ) {
+  ) {
     if (
       req.body.reportedOtherIssuesBm &&
       (req.body.reportedCommentsBm === undefined ||
