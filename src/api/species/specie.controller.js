@@ -90,7 +90,6 @@ export async function getSpeciesRecords(req, res) {
         {
           $match: {
             taxID: +req.params.taxID,
-            use: true,
             visualizationPrivileges: 0,
             spatialDuplicated: false
           }
@@ -116,12 +115,11 @@ export async function getSpeciesRecords(req, res) {
             _id: 1,
             taxID: 1,
             acceptedNameUsage: 1,
-            species: 1,
             speciesOriginal: 1,
-            verbatimLocality: 1,
+            locality: 1,
             decimalLatitude: 1,
             decimalLongitude: 1,
-            verbatimElevation: 1,
+            minimumElevationInMeters: 1,
             basisOfRecord: 1,
             catalogNumber: 1,
             collectionCode: 1,
@@ -131,12 +129,12 @@ export async function getSpeciesRecords(req, res) {
             day: 1,
             month: 1,
             year: 1,
-            suggestedStateProvince: 1,
-            suggestedCounty: 1,
             environmentalOutlier: 1,
             source: 1,
             stateProvince: 1,
-            county: 1
+            county: 1,
+            identifiedBy: 1,
+            dateIdentified: 1
           }
         }
       ]);
@@ -190,7 +188,6 @@ export async function getSpeciesRecordsWithPrivileges(req, res) {
         {
           $match: {
             taxID: +req.params.taxID,
-            use: true,
             visualizationPrivileges: { $in: [1, 0] },
             spatialDuplicated: false
           }
@@ -216,12 +213,11 @@ export async function getSpeciesRecordsWithPrivileges(req, res) {
             _id: 1,
             taxID: 1,
             acceptedNameUsage: 1,
-            species: 1,
             speciesOriginal: 1,
-            verbatimLocality: 1,
+            locality: 1,
             decimalLatitude: 1,
             decimalLongitude: 1,
-            verbatimElevation: 1,
+            minimumElevationInMeters: 1,
             basisOfRecord: 1,
             catalogNumber: 1,
             collectionCode: 1,
@@ -231,12 +227,12 @@ export async function getSpeciesRecordsWithPrivileges(req, res) {
             day: 1,
             month: 1,
             year: 1,
-            suggestedStateProvince: 1,
-            suggestedCounty: 1,
             environmentalOutlier: 1,
             source: 1,
             stateProvince: 1,
-            county: 1
+            county: 1,
+            identifiedBy: 1,
+            dateIdentified: 1
           }
         }
       ]);
@@ -437,7 +433,6 @@ export async function getTaxonomyAndTotalRecords(req, res) {
           {
             $match: {
               taxID: +req.params.taxID,
-              use: true,
               spatialDuplicated: false
             }
           },
