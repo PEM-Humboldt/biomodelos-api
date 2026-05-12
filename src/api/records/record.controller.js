@@ -324,6 +324,19 @@ export async function report(req, res) {
  */
 export async function createWithoutId(req, res) {
   const record = new Record();
+
+  if (req.body.year && req.body.month && req.body.day) {
+    record.createdDate = new Date(req.body.year, req.body.month - 1, req.body.day);
+    try {
+      if (record.createdDate.getTime() > Date.now() || isNaN(record.createdDate.getTime())) {
+        throw new Error('The date is not valid');
+      }
+    } catch (err) {
+        log.error(err);
+        return res.status(400).send(err.message);
+    }
+  }
+
   record.taxID = +req.body.taxID;
   record.acceptedNameUsage = req.body.acceptedNameUsage;
   record.speciesOriginal = req.body.acceptedNameUsage;
@@ -390,14 +403,14 @@ export async function createWithoutId(req, res) {
   record.updated = [];
   try {
     if (!record.userIdBm) {
-      throw { code: 400, message: 'userIdBm required' };
+      throw new Error('userIdBm required');
     }
     await record.save();
     res.json({ message: `Record created! ${record._id}` });
   } catch (err) {
     log.error(err);
-    if (err.code === 400) res.send(err.message);
-    else res.send('There was an error creating the record');
+    if (err.code === 400) res.status(400).send(err.message);
+    else res.status(500).send('There was an error creating the record');
   }
 }
 
