@@ -3,7 +3,7 @@
 The API handles all operations related with models, species and records of the BioModelos platform.
 
 ## Requirements
-* Nodejs v22.13.1
+* Nodejs v24.15.0
 * npm v11.2.0
 * MongoDB database running v7.0
 
