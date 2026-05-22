@@ -326,14 +326,21 @@ export async function createWithoutId(req, res) {
   const record = new Record();
 
   if (req.body.year && req.body.month && req.body.day) {
-    record.createdDate = new Date(req.body.year, req.body.month - 1, req.body.day);
+    record.createdDate = new Date(
+      req.body.year,
+      req.body.month - 1,
+      req.body.day
+    );
     try {
-      if (record.createdDate.getTime() > Date.now() || isNaN(record.createdDate.getTime())) {
+      if (
+        record.createdDate.getTime() > Date.now() ||
+        isNaN(record.createdDate.getTime())
+      ) {
         throw new Error('The date is not valid');
       }
     } catch (err) {
-        log.error(err);
-        return res.status(400).send(err.message);
+      log.error(err);
+      return res.status(400).send(err.message);
     }
   }
 
