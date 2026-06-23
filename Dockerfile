@@ -1,4 +1,4 @@
-FROM node:24.15.0-alpine
+FROM public.ecr.aws/docker/library/node:24.15.0-alpine3.22
 
 USER node
 WORKDIR /home/node/
@@ -14,6 +14,8 @@ RUN npm install && npm cache clean --force
 RUN mkdir -p dist logs
 RUN npm run build
 RUN echo "{}" > dist/server/config/config.json
+
+COPY src/config/config.json /home/node/app/dist/server/config/config.json
 
 EXPOSE 3000
 CMD [ "npm", "start" ]
