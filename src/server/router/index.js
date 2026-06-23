@@ -11,7 +11,7 @@ export default app => {
   });
 
   // eslint-disable-next-line security/detect-non-literal-fs-filename
-  fs.readdirSync(`${config.get('appSrc')}/api`).forEach(route => {
+  fs.readdirSync(`${config.get('appSrc')}/api`).forEach((route) => {
     if (!config.get('router.ignore').includes(route)) {
       if (route === 'tools') {
         app.use(
@@ -37,12 +37,12 @@ export default app => {
     app.use('/api-doc', express.static(`${config.get('appRoot')}/api-doc`));
 
   // Handle 404
-  app.use(function(req, res) {
+  app.use(function (req, res) {
     res.status(404).sendFile(`${config.get('appSrc')}/views/404.html`);
   });
 
   // Handle 500
-  app.use(function(error, req, res, next) {
+  app.use(function (error, req, res) {
     res.send('500: Internal Server Error', 500);
   });
 };

@@ -3,9 +3,9 @@
 The API handles all operations related with models, species and records of the BioModelos platform.
 
 ## Requirements
-* Nodejs v14.15
-* npm v6.14+
-* MongoDB database running v3.6
+* Nodejs v24.15.0
+* npm v11.12.1
+* MongoDB database running v7.0
 
 ### For deployment
 * Docker v18+
@@ -20,6 +20,23 @@ Copy [config_template.json](src/config/config_template.json) file in the same lo
 
 ### Run
 Run `npm run dev` to start the server, this will launch nodemon, ready to watch your changes.
+
+### ESLint
+The project uses [ESLint v9.x](https://eslint.org/docs/v9.x/), a tool for identifying and reporting patterns in ECMAScript/JavaScript code, with the goal of achieving greater consistency and preventing errors.
+
+Currently, this project uses ECMAScript version 7.
+
+The project includes a script defined in the package.json file. You can use it with these instructions to fix errors one by one:
+
+```
+ npm run lint
+```
+Then, you can use these instructions to automatically fix some errors:
+
+```
+npx eslint --fix src
+```
+Note: Only formatting errors can be fixed automatically.
 
 # Deployment
 

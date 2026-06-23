@@ -90,7 +90,6 @@ export async function getSpeciesRecords(req, res) {
         {
           $match: {
             taxID: +req.params.taxID,
-            use: true,
             visualizationPrivileges: 0,
             spatialDuplicated: false
           }
@@ -116,12 +115,11 @@ export async function getSpeciesRecords(req, res) {
             _id: 1,
             taxID: 1,
             acceptedNameUsage: 1,
-            species: 1,
             speciesOriginal: 1,
-            verbatimLocality: 1,
+            locality: 1,
             decimalLatitude: 1,
             decimalLongitude: 1,
-            verbatimElevation: 1,
+            minimumElevationInMeters: 1,
             basisOfRecord: 1,
             catalogNumber: 1,
             collectionCode: 1,
@@ -131,12 +129,12 @@ export async function getSpeciesRecords(req, res) {
             day: 1,
             month: 1,
             year: 1,
-            suggestedStateProvince: 1,
-            suggestedCounty: 1,
             environmentalOutlier: 1,
             source: 1,
             stateProvince: 1,
-            county: 1
+            county: 1,
+            identifiedBy: 1,
+            dateIdentified: 1
           }
         }
       ]);
@@ -190,7 +188,6 @@ export async function getSpeciesRecordsWithPrivileges(req, res) {
         {
           $match: {
             taxID: +req.params.taxID,
-            use: true,
             visualizationPrivileges: { $in: [1, 0] },
             spatialDuplicated: false
           }
@@ -216,12 +213,11 @@ export async function getSpeciesRecordsWithPrivileges(req, res) {
             _id: 1,
             taxID: 1,
             acceptedNameUsage: 1,
-            species: 1,
             speciesOriginal: 1,
-            verbatimLocality: 1,
+            locality: 1,
             decimalLatitude: 1,
             decimalLongitude: 1,
-            verbatimElevation: 1,
+            minimumElevationInMeters: 1,
             basisOfRecord: 1,
             catalogNumber: 1,
             collectionCode: 1,
@@ -231,12 +227,12 @@ export async function getSpeciesRecordsWithPrivileges(req, res) {
             day: 1,
             month: 1,
             year: 1,
-            suggestedStateProvince: 1,
-            suggestedCounty: 1,
             environmentalOutlier: 1,
             source: 1,
             stateProvince: 1,
-            county: 1
+            county: 1,
+            identifiedBy: 1,
+            dateIdentified: 1
           }
         }
       ]);
@@ -327,7 +323,7 @@ export async function getAllSpecies(req, res) {
         {
           $match: {
             taxID: {
-              $in: req.query.speciesIn.split(',').map(e => parseInt(e.trim()))
+              $in: req.query.speciesIn.split(',').map((e) => parseInt(e.trim()))
             }
           }
         },
@@ -353,10 +349,10 @@ export async function getAllSpecies(req, res) {
         );
         modelsFilter = {
           taxID: {
-            $in: taxIds.map(e => e.taxID)
+            $in: taxIds.map((e) => e.taxID)
           }
         };
-      } else if (!!req.query.withModel) {
+      } else if (req.query.withModel) {
         const taxIds = await Model.distinct('taxID', { isActive: true });
         modelsFilter = {
           taxID: {
@@ -437,7 +433,6 @@ export async function getTaxonomyAndTotalRecords(req, res) {
           {
             $match: {
               taxID: +req.params.taxID,
-              use: true,
               spatialDuplicated: false
             }
           },
@@ -515,7 +510,7 @@ export async function searchSpecies(req, res) {
   const { consumerscopes: scopesStr } = req.headers;
   let fullAccess = true;
   if (scopesStr) {
-    const scopes = scopesStr.split(',').map(scope => scope.trim());
+    const scopes = scopesStr.split(',').map((scope) => scope.trim());
     fullAccess = scopes.includes('all');
   }
 

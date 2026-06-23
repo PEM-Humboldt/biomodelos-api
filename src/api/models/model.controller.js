@@ -409,12 +409,14 @@ export async function occurrenceRepStatsModel(req, res) {
 export async function occurrenceForestLossStatsModel(req, res) {
   if (req.params.taxID) {
     try {
-      const docs = (await Model.find({
-        taxID: +req.params.taxID,
-        modelStatus: 'Valid',
-        isActive: true
-      })).map(doc => {
-        const keys = Object.keys(doc.toObject()).filter(key =>
+      const docs = (
+        await Model.find({
+          taxID: +req.params.taxID,
+          modelStatus: 'Valid',
+          isActive: true
+        })
+      ).map((doc) => {
+        const keys = Object.keys(doc.toObject()).filter((key) =>
           /statForestLoss[0-9]+$/.test(key)
         );
         const newDoc = {
@@ -424,7 +426,7 @@ export async function occurrenceForestLossStatsModel(req, res) {
           statFutureForest30d: doc.statFutureForest30d,
           statFutureForest30c: doc.statFutureForest30c
         };
-        keys.forEach(key => {
+        keys.forEach((key) => {
           if (doc[`${key}`] !== null) {
             newDoc[`${key}`] = doc[`${key}`];
           }
@@ -706,7 +708,7 @@ export async function generalModelStats(req, res) {
     res.send('There was an error getting the statistics');
   }
 
-  const stats = groups.map(group =>
+  const stats = groups.map((group) =>
     Model.aggregate([
       {
         $match: {
@@ -734,7 +736,12 @@ export async function generalModelStats(req, res) {
                   then: '1-Published'
                 },
                 {
-                  case: { $eq: ['$modelStatus', 'pendingValidation'] },
+                  case: {
+                    $and: [
+                      { $eq: ['$modelStatus', 'pendingValidation'] },
+                      { $eq: ['$published', false] }
+                    ]
+                  },
                   then: '2-Developing'
                 },
                 {
@@ -775,20 +782,20 @@ export async function generalModelStats(req, res) {
   );
 
   return Promise.all(stats)
-    .then(response => {
+    .then((response) => {
       const result = groups.map((group, index) => {
         /* eslint-disable security/detect-object-injection */
         const validModels = response[index].find(
-          e => e.modelStatus === '0-Valid'
+          (e) => e.modelStatus === '0-Valid'
         );
         const publishedModels = response[index].find(
-          e => e.modelStatus === '1-Published'
+          (e) => e.modelStatus === '1-Published'
         );
         const developingModels = response[index].find(
-          e => e.modelStatus === '2-Developing'
+          (e) => e.modelStatus === '2-Developing'
         );
         const statisticModels = response[index].find(
-          e => e.modelStatus === '3-Statistic'
+          (e) => e.modelStatus === '3-Statistic'
         );
         /* eslint-enable security/detect-object-injection */
         return {
@@ -802,7 +809,7 @@ export async function generalModelStats(req, res) {
       });
       res.json(result);
     })
-    .catch(err => {
+    .catch((err) => {
       log.error(err);
       res.send('There was an error getting the statistics');
     });
@@ -846,6 +853,9 @@ export async function updateModelLayer(req, res) {
         }
       }
     );
+    if (update.matchedCount === 0) {
+      return res.status(404).json({ message: 'Model not found' });
+    }
     res.send({ message: 'Model updated successfully' });
   } catch (err) {
     log.error(err);

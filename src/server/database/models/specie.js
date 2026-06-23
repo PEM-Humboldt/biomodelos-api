@@ -33,7 +33,7 @@ const SpecieSchema = new mongoose.Schema(
       in: ['EX', 'EW', 'CR', 'EN', 'VU', 'NT', 'LC', 'DD', 'NE'],
       default: null
     },
-    taxonomicStatus: { type: String, default: null },
+    taxonomicStatus: { type: String, default: null }
   },
   { collection: 'species' }
 );
