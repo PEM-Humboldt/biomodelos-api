@@ -9,7 +9,7 @@ const debug = require('debug')('biomodel-api-server:initialization');
 const log = require('./config/log').logger();
 
 // catch all error without handler
-process.on('uncaughtException', error => {
+process.on('uncaughtException', (error) => {
   log.error(
     `Caught exception without specific handler: ${util.inspect(error)}`
   );
@@ -19,7 +19,7 @@ process.on('uncaughtException', error => {
   process.exit(1);
 });
 
-process.on('uncaughtRejection', error => {
+process.on('uncaughtRejection', (error) => {
   log.error(
     `Caught rejection without specific handler: ${util.inspect(error)}`
   );
@@ -76,7 +76,6 @@ const server = http.createServer(app);
 @L:,,:::::::::::::::::::::,::,,::11G@@0:;LLfit8G:f8;i8@0:1@1i8t;Lit8ii@1:0@8i;0;i8@L:CG:iLL118f:GG:f@@L,LCi1fC8@@\n\
 @t,,,,,::::::::::::::::::::::::::;t0@@0:;GGCi;8G,f81;G0L:f@ii88f;f8@ii@f:L0G;10i;G0t,C0;iCGCG@f:G0;100t:G0CC1:G@@\n\
 @t,::::::::::,,,::::::::::::::::iL@@@@8fffffC0@0fG@8CfffG@@LL@@@8@@@LL@@GfffC8@0ffLCf0@0LffLG@Gf0@0LffL0@0LLLC8@@\n\
-@0i::::::::,,::::,,,,::::::::;1L8@@@@@8888888888888888888888888888888888888888888888888888888888888888888888888@@\n\
 @@L::::::,,,::::::::::;i::;1fG8@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\
 @@8Ci::::,,::;;i1tLCGGCt1L08@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\
 @@@@GL1iitfCG0088@@8CttC8@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\

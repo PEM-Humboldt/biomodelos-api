@@ -7,7 +7,7 @@ export const logger = () => {
   if (!log) {
     // logger dev and production config
     if (config.get('env') === 'development') {
-      log = new winston.Logger({
+      log = new winston.createLogger({
         transports: [
           new winston.transports.Console({
             prettyPrint: true,
@@ -15,10 +15,17 @@ export const logger = () => {
             silent: false,
             timestamp: true
           })
-        ]
+        ],
+        format: winston.format.combine(
+          winston.format.colorize(),
+          winston.format.timestamp(),
+          winston.format.printf(({ timestamp, level, message }) => {
+            return `${timestamp} ${level}: ${message}`;
+          })
+        )
       });
     } else if (config.get('env') === 'production') {
-      log = new winston.Logger({
+      log = new winston.createLogger({
         transports: [
           new winston.transports.Console({
             level: config.get('logs.level'),
@@ -28,7 +35,14 @@ export const logger = () => {
             filename: config.get('logs.location'),
             timestamp: true
           })
-        ]
+        ],
+        format: winston.format.combine(
+          winston.format.colorize(),
+          winston.format.timestamp(),
+          winston.format.printf(({ timestamp, level, message }) => {
+            return `${timestamp} ${level}: ${message}`;
+          })
+        )
       });
     }
   }

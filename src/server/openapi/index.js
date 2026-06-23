@@ -18,7 +18,7 @@ export default (app, swaggerConfig) => {
     let swaggerSpec = swaggerJSDoc(options);
 
     // serve swagger
-    app.get('/swagger.json', function(req, res) {
+    app.get('/swagger.json', function (req, res) {
       res.setHeader('Content-Type', 'application/json');
       res.json(swaggerSpec);
     });

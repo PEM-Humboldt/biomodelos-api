@@ -6,15 +6,26 @@ const log = require('../../config/log').logger();
 let connectionDB;
 let connectionDBNative;
 
-const getMongoURL = config => {
-  const servers = config.get('database.mongodb.servers').join(',');
-  const url = `mongodb://${encodeURIComponent(
-    config.get('database.mongodb.user')
-  )}:${encodeURIComponent(config.get('database.mongodb.pass'))}@${servers}`;
+const getMongoConfig = (config) => ({
+  user: config.get('database.mongodb.user'),
+  pass: config.get('database.mongodb.pass'),
+  db: config.get('database.mongodb.db'),
+  servers: config.get('database.mongodb.servers'),
+  authMechanism: config.get('database.mongodb.authMechanism')
+});
 
-  return `${url}/${config.get(
-    'database.mongodb.db'
-  )}?authMechanism=${config.get('database.mongodb.authMechanism')}`;
+const mongoConnectionMessage = (config) => {
+  const mongo = getMongoConfig(config);
+  return `${mongo.db} database with user ${mongo.user}`;
+};
+
+const getMongoURL = (config) => {
+  const mongo = getMongoConfig(config);
+
+  const servers = mongo.servers.join(',');
+  const url = `mongodb://${encodeURIComponent(mongo.user)}:${encodeURIComponent(mongo.pass)}@${servers}`;
+
+  return `${url}/${mongo.db}?authMechanism=${mongo.authMechanism}`;
 };
 
 /**
@@ -22,30 +33,29 @@ const getMongoURL = config => {
  * the **same** promise, so it can be called any number of times without setting
  * up a new connection every time.
  */
-export const connect = async (config, dboptions) => {
+export const connect = async (config) => {
   if (!connectionDB) {
     // Successfully connected
-    mongoose.connection.on('connected', err => {
-      log.info(`MongoDB connected on ${getMongoURL(config)}`);
+    mongoose.connection.on('connected', () => {
+      log.info(`MongoDB connected to ${mongoConnectionMessage(config)}`);
     });
 
     // Connection throws an error
-    mongoose.connection.on('error', err => {
-      log.info(`MongoDB connection error: ${getMongoURL(config)}: ${err}`);
+    mongoose.connection.on('error', () => {
+      log.info(
+        `MongoDB was not able to connect to ${mongoConnectionMessage(config)}`
+      );
     });
 
     // Connection is disconnected
-    mongoose.connection.on('disconnected', err => {
-      log.info(`MongoDB disconnected: ${getMongoURL(config)}`);
+    mongoose.connection.on('disconnected', () => {
+      log.info(`MongoDB disconnected from: ${mongoConnectionMessage(config)}`);
     });
 
     mongoose.Promise = global.Promise;
 
     try {
-      connectionDB = await mongoose.connect(getMongoURL(config), {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-      });
+      connectionDB = await mongoose.connect(getMongoURL(config));
       log.info('Successful connection with MongoDB Database');
       connectionDB = true;
     } catch (error) {
