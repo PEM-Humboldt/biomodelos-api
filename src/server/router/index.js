@@ -4,8 +4,7 @@ import favicon from 'serve-favicon';
 import path from 'path';
 import { config } from '../../config/application-config';
 
-export default app => {
-
+export default (app) => {
   app.get('/health', (req, res) => {
     res.status(200).send('OK');
   });
