@@ -16,10 +16,15 @@ The API handles all operations related with models, species and records of the B
 After cloning the project, install its dependencies running: `npm i`
 
 ### Setup
-Copy [config_template.json](src/config/config_template.json) file in the same location and set up database credentials and server configuration values. Name this file `config.json`.
+The file [config.json](src/config/config.json) has the environmetal variables for setup the database configuration.
 
 ### Run
-Run `npm run dev` to start the server, this will launch nodemon, ready to watch your changes.
+
+Use this command to start the server on port 3000:
+```bash
+BIOMODELS_DB=<database> BIOMODELS_DB_SERVERS=<'["host:port"]'> BIOMODELS_DB_USER=<database_user> BIOMODELS_DB_PASS=<database_password> npm run dev
+```
+this will launch nodemon, ready to watch your changes.
 
 ### ESLint
 The project uses [ESLint v9.x](https://eslint.org/docs/v9.x/), a tool for identifying and reporting patterns in ECMAScript/JavaScript code, with the goal of achieving greater consistency and preventing errors.
@@ -53,6 +58,14 @@ It is recommended to use the [current release](https://github.com/LBAB-Humboldt/
 > If you set the `NODE_ENV` var to "production" in the container it will create the folder `/home/node/app/logs` to store the logs. Its recommended to link the logs folder inside the container to a folder in the  host machine.
 
 To deploy the container in port 3000 run:
-```
-docker run --name biomodelos_api -p 3000:3000 -v ./src/config/config.json:/home/node/app/dist/server/config/config.json -v ./logs:/home/node/app/logs -e NODE_ENV=production -d biomodelos_api:<version>
+```bash
+docker run --name biomodelos_api -p port:3000 \
+-v ./src/config/config.json:/home/node/app/dist/server/config/config.json \
+-v ./logs:/home/node/app/logs \
+-e NODE_ENV=production \
+-e BIOMODELS_DB=<database> \
+-e BIOMODELS_DB_SERVERS=<'['host:port']'> \
+-e BIOMODELS_DB_USER=<database_user> \
+-e BIOMODELS_DB_PASS=<database_password> \
+-d biomodelos_api:<version>
 ```
