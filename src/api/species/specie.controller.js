@@ -572,3 +572,58 @@ export async function searchSpecies(req, res) {
     }
   }
 }
+/**
+ * @swagger
+ * /species/validate_species_name/{species}:
+ *   get:
+ *     description: Search if any specie exists.
+ *     operationId: SPE4
+ *     parameters:
+ *       - name: species
+ *         in: path
+ *         description: The scientific name for match.
+ *         required: true
+ *         type: string
+ *     responses:
+ *       "200":
+ *         description: Success
+ *         schema:
+ *           type: object
+ *          properties:
+ *            valid:
+ *             type: boolean
+ *           species
+ *            type: string
+ *     default:
+ *       description: Error
+ *       schema:
+ *         $ref: "#/definitions/ErrorResponse"
+ */
+export async function validateSpecies(req, res) {
+  try {
+    const doc = await Specie.findOne(
+      { species: req.params.species },
+      {
+        _id: 0,
+        species: 1,
+      }
+    ).collation({
+      locale: "en",
+      strength: 2
+    });
+    if (!doc) {
+      return res.status(404).json({
+        valid: false
+      });
+    }
+    return res.status(200).json({
+      valid: true,
+      species: doc.species,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      valid: false,
+      error: "Internal server error"
+    });
+  }
+}
