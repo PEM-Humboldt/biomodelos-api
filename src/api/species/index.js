@@ -8,5 +8,5 @@ router.get('/records/group/:taxID', controller.getSpeciesRecordsWithPrivileges);
 router.get('/', controller.getAllSpecies); // SPE1
 router.get('/:taxID', controller.getTaxonomyAndTotalRecords); // SPE2
 router.get('/search/:species', controller.searchSpecies); // SPE3
-
+router.get('/validate_species_name/:species', controller.validateSpecies); // SPE4
 export default router;
