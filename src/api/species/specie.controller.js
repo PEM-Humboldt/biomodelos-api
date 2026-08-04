@@ -605,10 +605,10 @@ export async function validateSpecies(req, res) {
       { species: req.params.species },
       {
         _id: 0,
-        species: 1,
+        species: 1
       }
     ).collation({
-      locale: "en",
+      locale: 'en',
       strength: 2
     });
     if (!doc) {
@@ -618,12 +618,12 @@ export async function validateSpecies(req, res) {
     }
     return res.status(200).json({
       valid: true,
-      species: doc.species,
+      species: doc.species
     });
   } catch (err) {
     return res.status(500).json({
       valid: false,
-      error: "Internal server error"
+      error: 'Internal server error'
     });
   }
 }
