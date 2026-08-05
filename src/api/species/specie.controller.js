@@ -574,9 +574,9 @@ export async function searchSpecies(req, res) {
 }
 /**
  * @swagger
- * /species/validate_species_name/{species}:
+ * /species/validate_name/{species}:
  *   get:
- *     description: Search if any specie exists.
+ *     description: Validates if the given species exists.
  *     operationId: SPE4
  *     parameters:
  *       - name: species
