@@ -143,12 +143,14 @@ const ModelSchema = new Schema(
     modelOrigin: {
       type: String,
       default: 'native',
-      in: ['native', 
+      in: [
+        'native', 
         'reintroduced', 
         'introduced', 
         'vagrant', 
         'origin uncertain', 
-        'assisted colonisation']
+        'assisted colonisation'
+      ]
     },
     modelGeoExtent: {
       type: String,
