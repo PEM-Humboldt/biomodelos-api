@@ -5,5 +5,4 @@ logs/
 .vscode
 **/.DS_Store
 dist
-src/config/config*
 !src/config/config_template.json

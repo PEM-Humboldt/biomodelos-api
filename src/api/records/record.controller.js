@@ -1,4 +1,4 @@
-import { Record, Updated, ObjectId } from '../../models/record.model';
+import { Record, Updated, Reported, ObjectId } from '../../models/record.model';
 const log = require('../../config/log').logger();
 
 /**
@@ -49,12 +49,6 @@ export async function read(req, res) {
         {
           $project: {
             _id: 0,
-            cellID: 0,
-            dbDuplicate: 0,
-            resourceFolder: 0,
-            resourceIncorporationDate: 0,
-            resourceName: 0,
-            sourceLayer: 0,
             spatialDuplicate: 0
           }
         }
@@ -84,7 +78,7 @@ export async function read(req, res) {
  *         description: the accepted name for the species
  *         required: false
  *         type: string
- *       - name: verbatimLocality
+ *       - name: locality
  *         in: body
  *         description: the original textual description of the place
  *         required: false
@@ -137,7 +131,6 @@ export async function update(req, res) {
     res.send(400, err.toString());
     return;
   }
-
   let updated = new Updated();
   let wereChanges = false;
   if (req.body.taxID && req.body.taxID !== record.taxID) {
@@ -153,12 +146,9 @@ export async function update(req, res) {
     record.acceptedNameUsage = req.body.acceptedNameUsage;
     wereChanges = true;
   }
-  if (
-    req.body.verbatimLocality &&
-    req.body.verbatimLocality !== record.verbatimLocality
-  ) {
-    updated.verbatimLocality = record.verbatimLocality;
-    record.verbatimLocality = req.body.verbatimLocality;
+  if (req.body.locality && req.body.locality !== record.locality) {
+    updated.locality = record.locality;
+    record.locality = req.body.locality;
     wereChanges = true;
   }
   if (
@@ -177,40 +167,22 @@ export async function update(req, res) {
     record.decimalLongitude = req.body.decimalLongitude;
     wereChanges = true;
   }
-  if (req.body.day && req.body.day !== record.day) {
-    updated.day = record.day;
-    record.day = req.body.day;
-    wereChanges = true;
-  }
-  if (req.body.month && req.body.month !== record.month) {
-    updated.month = record.month;
-    record.month = req.body.month;
-    wereChanges = true;
-  }
-  if (req.body.year && req.body.year !== record.year) {
-    updated.year = record.year;
-    record.year = req.body.year;
-    wereChanges = true;
-  }
   if (req.body.userIdBm && req.body.userIdBm !== record.userIdBm) {
     updated.userIdBm = record.userIdBm;
     record.userIdBm = req.body.userIdBm;
     wereChanges = true;
   }
-
   if (!wereChanges) {
     res.json({
       message: `The record ${record._id} didn't have any changes!`
     });
     return;
   }
-
-  updated.updatedDate = Date.now;
+  updated.updatedDate = Date.now();
   if (!record.updated) {
     record.updated = [];
   }
   record.updated.push(updated);
-
   try {
     await record.save();
     res.json({
@@ -257,38 +229,37 @@ export async function report(req, res) {
     res.send(400, err.toString());
     return;
   }
-
+  let reported = new Reported();
+  let reportedDate = null;
   if (req.body.reportedUserIdBm) {
-    record.reportedUserIdBm = req.body.reportedUserIdBm;
+    reported.userIdBm = req.body.reportedUserIdBm;
   } else {
     res.json({
       message: 'UserIdBm is required'
     });
     return;
   }
-
   if (req.body.reportedOriginVagrant) {
-    record.reportedOriginVagrant = req.body.reportedOriginVagrant;
+    reported.originVagrant = req.body.reportedOriginVagrant;
   }
   if (req.body.reportedGeoIssueBm) {
-    record.reportedGeoIssueBm = req.body.reportedGeoIssueBm;
+    reported.geoIssueBm = req.body.reportedGeoIssueBm;
   }
   if (req.body.reportedIdIssueBm) {
-    record.reportedIdIssueBm = req.body.reportedIdIssueBm;
+    reported.idIssueBm = req.body.reportedIdIssueBm;
   }
   if (req.body.reportedOldTaxonomyBm) {
-    record.reportedOldTaxonomyBm = req.body.reportedOldTaxonomyBm;
+    reported.oldTaxonomyBm = req.body.reportedOldTaxonomyBm;
   }
   if (req.body.reportedOriginIntroduced) {
-    record.reportedOriginIntroduced = req.body.reportedOriginIntroduced;
+    reported.originIntroduced = req.body.reportedOriginIntroduced;
   }
   if (req.body.reportedOtherIssuesBm) {
-    record.reportedOtherIssuesBm = req.body.reportedOtherIssuesBm;
+    reported.otherIssuesBm = req.body.reportedOtherIssuesBm;
   }
   if (req.body.reportedCommentsBm) {
-    record.reportedCommentsBm = req.body.reportedCommentsBm;
+    reported.commentsBm = req.body.reportedCommentsBm;
   }
-
   if (
     req.body.reportedOriginVagrant ||
     req.body.reportedOldTaxonomyBm ||
@@ -308,8 +279,13 @@ export async function report(req, res) {
       });
       return;
     }
-
-    record.reportedDate = Date.now();
+    reported.reportedDate = Date.now();
+    reportedDate = Date.now();
+    if (!record.reported) {
+      record.reported = [];
+    }
+    record.reported.push(reported);
+    record.reportedDate = reportedDate;
     try {
       await record.save();
       res.json({
@@ -348,8 +324,29 @@ export async function report(req, res) {
  */
 export async function createWithoutId(req, res) {
   const record = new Record();
+
+  if (req.body.year && req.body.month && req.body.day) {
+    record.createdDate = new Date(
+      req.body.year,
+      req.body.month - 1,
+      req.body.day
+    );
+    try {
+      if (
+        record.createdDate.getTime() > Date.now() ||
+        isNaN(record.createdDate.getTime())
+      ) {
+        throw new Error('The date is not valid');
+      }
+    } catch (err) {
+      log.error(err);
+      return res.status(400).send(err.message);
+    }
+  }
+
   record.taxID = +req.body.taxID;
   record.acceptedNameUsage = req.body.acceptedNameUsage;
+  record.speciesOriginal = req.body.acceptedNameUsage;
   if (req.body.collectionCode) {
     record.collectionCode = req.body.collectionCode;
   }
@@ -362,16 +359,19 @@ export async function createWithoutId(req, res) {
   if (req.body.stateProvince) {
     record.stateProvince = req.body.stateProvince;
   }
+  if (req.body.country) {
+    record.country = req.body.country;
+  }
   if (req.body.county) {
     record.county = req.body.county;
   }
-  if (req.body.verbatimLocality) {
-    record.verbatimLocality = req.body.verbatimLocality;
+  if (req.body.locality) {
+    record.locality = req.body.locality;
   }
   record.decimalLatitude = +req.body.decimalLatitude;
   record.decimalLongitude = +req.body.decimalLongitude;
-  if (req.body.verbatimElevation) {
-    record.verbatimElevation = +req.body.verbatimElevation;
+  if (req.body.minimumElevationInMeters) {
+    record.minimumElevationInMeters = +req.body.minimumElevationInMeters;
   }
   if (req.body.basisOfRecord) {
     record.basisOfRecord = req.body.basisOfRecord;
@@ -400,7 +400,7 @@ export async function createWithoutId(req, res) {
   if (req.body.occurrenceID) {
     record.occurrenceID = req.body.occurrenceID;
   }
-  record.reportedUserIdBm = null;
+  record.reported = [];
   record.source = 'BioModelos';
   record.createdDate = Date.now();
   if (req.body.createdCitationBm) {
@@ -410,14 +410,14 @@ export async function createWithoutId(req, res) {
   record.updated = [];
   try {
     if (!record.userIdBm) {
-      throw { code: 400, message: 'userIdBm required' };
+      throw new Error('userIdBm required');
     }
     await record.save();
     res.json({ message: `Record created! ${record._id}` });
   } catch (err) {
     log.error(err);
-    if (err.code === 400) res.send(err.message);
-    else res.send('There was an error creating the record');
+    if (err.code === 400) res.status(400).send(err.message);
+    else res.status(500).send('There was an error creating the record');
   }
 }
 
@@ -625,7 +625,7 @@ export async function collaboratorsOfSpecie(req, res) {
         },
         { $project: { userId_bm: '$userId_bm', _id: 0 } }
       ]);
-      doc.forEach(elem => {
+      doc.forEach((elem) => {
         temp.push(elem.userId_bm);
       });
       try {
@@ -647,7 +647,7 @@ export async function collaboratorsOfSpecie(req, res) {
           },
           { $project: { userId_bm: '$userId_bm', _id: 0 } }
         ]);
-        doc.forEach(elem => {
+        doc.forEach((elem) => {
           temp.push(elem.userId_bm);
         });
         try {
@@ -669,7 +669,7 @@ export async function collaboratorsOfSpecie(req, res) {
             },
             { $project: { userId_bm: '$userId_bm', _id: 0 } }
           ]);
-          doc.forEach(elem => {
+          doc.forEach((elem) => {
             temp.push(elem.userId_bm);
           });
           const uniqueArray = temp.filter(
@@ -749,7 +749,7 @@ export async function latestChange(req, res) {
           }
         }
       ]);
-      doc.forEach(elem => {
+      doc.forEach((elem) => {
         if (elem.DateMax > maxdate) maxdate = elem.DateMax;
       });
       try {
@@ -773,7 +773,7 @@ export async function latestChange(req, res) {
           },
           { $project: { DateMax: '$createdDateMax', _id: 0 } }
         ]);
-        doc.forEach(elem => {
+        doc.forEach((elem) => {
           if (elem.DateMax > maxdate) maxdate = elem.DateMax;
         });
         try {
@@ -797,7 +797,7 @@ export async function latestChange(req, res) {
             },
             { $project: { DateMax: '$updatedDateMax', _id: 0 } }
           ]);
-          doc.forEach(elem => {
+          doc.forEach((elem) => {
             if (elem.DateMax > maxdate) maxdate = elem.DateMax;
           });
           const arrayJSON = {};

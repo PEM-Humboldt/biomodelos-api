@@ -2,7 +2,6 @@ import gulp from 'gulp';
 import clean from 'gulp-clean';
 import babel from 'gulp-babel';
 import minify from 'gulp-minifier';
-import jsonModify from 'gulp-json-modify';
 import fs from 'fs';
 
 const src = './src';
@@ -11,7 +10,7 @@ const logs_folder = './logs';
 const dist_folder_server = `${dist_folder}/server`;
 
 gulp.task('clean', () => {
-  fs.access(logs_folder, err => {
+  fs.access(logs_folder, (err) => {
     if (err) {
       fs.mkdir(logs_folder, () => {});
     }
@@ -30,10 +29,12 @@ gulp.task('build-babel', () => {
 
 gulp.task('static', () => {
   gulp.src(['src/**/*.yaml']).pipe(gulp.dest(dist_folder_server));
-  gulp
-    .src('package.json')
-    .pipe(jsonModify({ key: 'devDependencies', value: {} }))
-    .pipe(gulp.dest(dist_folder));
+
+  const pkg = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+  delete pkg.devDependencies;
+  fs.mkdirSync(dist_folder, { recursive: true });
+  fs.writeFileSync(`${dist_folder}/package.json`, JSON.stringify(pkg, null, 2));
+
   gulp
     .src(['src/views/**/*.{html,css}'])
     .pipe(
@@ -46,6 +47,7 @@ gulp.task('static', () => {
       })
     )
     .pipe(gulp.dest(`${dist_folder_server}/views`));
+
   return gulp
     .src(['src/views/**/*.*', '!src/views/**/*.{html,css}'])
     .pipe(gulp.dest(`${dist_folder_server}/views`));

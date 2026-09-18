@@ -4,55 +4,50 @@ definitions:
     type: object
     description: a Record
     properties:
-      species:
+      altitudinalOutlier:
+        type: boolean
+      createdCitationBm:
         type: string
+      createdCommentsBm:
+        type: string
+      dateIdentified:
+        type: string 
+      downloadDate:
+        type: string
+      identifiedBy:
+        type: string
+      userIdBm:
+        type: number
       speciesOriginal:
         type: string
       stateProvince:
         type: string
-        default: null
+      country:
+        type: string
       county:
         type: string
-        default: null
-      verbatimLocality:
+      locality:
         type: string
-        default: null
-      verbatimElevation:
+      minimumElevationInMeters:
         type: string
-        default: null
-      interpretedElevation:
-        type: string
-        default: null
       basisOfRecord:
         type: string
-        default: null
       catalogNumber:
         type: string
-        default: null
       recordedBy:
         type: string
-        default: null
       institutionCode:
         type: string
-        default: null
       url:
         type: string
-        default: null
       day:
         type: string
-        default: null
       month:
         type: string
-        default: null
       year:
         type: string
-        default: null
       inUrbanArea:
         type: boolean
-      suggestedCounty:
-        type: string
-      suggestedStateProvince:
-        type: string
       environmentalOutlier:
         type: boolean
       spatialDuplicated:
@@ -61,8 +56,6 @@ definitions:
         type: string
       contributedRecord:
         type: string
-      use:
-        type: boolean
       visualizationPrivileges:
         type: number
       collectionCode:
@@ -83,3 +76,5 @@ definitions:
         type: string
       reportedDate:
         type: string
+      reported:
+        type: array

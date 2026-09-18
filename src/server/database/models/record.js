@@ -52,7 +52,6 @@ const RecordSchema = new mongoose.Schema(
     occurrenceID: { type: String, default: null },
     taxID: { type: Number, required: true },
     acceptedNameUsage: { type: String, required: true },
-    species: { type: String, default: null },
     speciesOriginal: { type: String, default: null },
     adm1: { type: String, default: null },
     adm2: { type: String, default: null },

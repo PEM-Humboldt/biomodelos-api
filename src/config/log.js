@@ -1,6 +1,5 @@
 import winston from 'winston';
 import { config } from './application-config';
-import { format } from 'morgan';
 
 let log = null;
 
@@ -23,9 +22,8 @@ export const logger = () => {
           winston.format.printf(({ timestamp, level, message }) => {
             return `${timestamp} ${level}: ${message}`;
           })
-        )   
+        )
       });
-      
     } else if (config.get('env') === 'production') {
       log = new winston.createLogger({
         transports: [
@@ -44,7 +42,7 @@ export const logger = () => {
           winston.format.printf(({ timestamp, level, message }) => {
             return `${timestamp} ${level}: ${message}`;
           })
-        )   
+        )
       });
     }
   }

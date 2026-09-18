@@ -29,7 +29,6 @@ const SpecieSchema = new Schema(
     invasive: { type: Boolean, default: false, required: true },
     iucn: {
       type: String,
-      required: true,
       in: ['EX', 'EW', 'CR', 'EN', 'VU', 'NT', 'LC', 'DD', 'NE'],
       default: 'NE',
       required: true

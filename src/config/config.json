@@ -1,0 +1,18 @@
+{
+  "server": {
+    "port": 3000,
+    "hostname": "0.0.0.0"
+  },
+  "database": {
+    "mongodb": {
+      "db": "${BIOMODELS_DB}",
+      "servers": ["${BIOMODELS_DB_SERVERS}"],
+      "user": "${BIOMODELS_DB_USER}",
+      "pass": "${BIOMODELS_DB_PASS}",
+      "authMechanism": "SCRAM-SHA-1"
+    }
+  },
+  "livereload": {
+    "enabled": true
+  }
+}

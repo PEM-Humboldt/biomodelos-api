@@ -90,7 +90,6 @@ export async function getSpeciesRecords(req, res) {
         {
           $match: {
             taxID: +req.params.taxID,
-            use: true,
             visualizationPrivileges: 0,
             spatialDuplicated: false
           }
@@ -116,12 +115,11 @@ export async function getSpeciesRecords(req, res) {
             _id: 1,
             taxID: 1,
             acceptedNameUsage: 1,
-            species: 1,
             speciesOriginal: 1,
-            verbatimLocality: 1,
+            locality: 1,
             decimalLatitude: 1,
             decimalLongitude: 1,
-            verbatimElevation: 1,
+            minimumElevationInMeters: 1,
             basisOfRecord: 1,
             catalogNumber: 1,
             collectionCode: 1,
@@ -131,12 +129,12 @@ export async function getSpeciesRecords(req, res) {
             day: 1,
             month: 1,
             year: 1,
-            suggestedStateProvince: 1,
-            suggestedCounty: 1,
             environmentalOutlier: 1,
             source: 1,
             stateProvince: 1,
-            county: 1
+            county: 1,
+            identifiedBy: 1,
+            dateIdentified: 1
           }
         }
       ]);
@@ -190,7 +188,6 @@ export async function getSpeciesRecordsWithPrivileges(req, res) {
         {
           $match: {
             taxID: +req.params.taxID,
-            use: true,
             visualizationPrivileges: { $in: [1, 0] },
             spatialDuplicated: false
           }
@@ -216,12 +213,11 @@ export async function getSpeciesRecordsWithPrivileges(req, res) {
             _id: 1,
             taxID: 1,
             acceptedNameUsage: 1,
-            species: 1,
             speciesOriginal: 1,
-            verbatimLocality: 1,
+            locality: 1,
             decimalLatitude: 1,
             decimalLongitude: 1,
-            verbatimElevation: 1,
+            minimumElevationInMeters: 1,
             basisOfRecord: 1,
             catalogNumber: 1,
             collectionCode: 1,
@@ -231,12 +227,12 @@ export async function getSpeciesRecordsWithPrivileges(req, res) {
             day: 1,
             month: 1,
             year: 1,
-            suggestedStateProvince: 1,
-            suggestedCounty: 1,
             environmentalOutlier: 1,
             source: 1,
             stateProvince: 1,
-            county: 1
+            county: 1,
+            identifiedBy: 1,
+            dateIdentified: 1
           }
         }
       ]);
@@ -327,7 +323,7 @@ export async function getAllSpecies(req, res) {
         {
           $match: {
             taxID: {
-              $in: req.query.speciesIn.split(',').map(e => parseInt(e.trim()))
+              $in: req.query.speciesIn.split(',').map((e) => parseInt(e.trim()))
             }
           }
         },
@@ -353,10 +349,10 @@ export async function getAllSpecies(req, res) {
         );
         modelsFilter = {
           taxID: {
-            $in: taxIds.map(e => e.taxID)
+            $in: taxIds.map((e) => e.taxID)
           }
         };
-      } else if (!!req.query.withModel) {
+      } else if (req.query.withModel) {
         const taxIds = await Model.distinct('taxID', { isActive: true });
         modelsFilter = {
           taxID: {
@@ -437,7 +433,6 @@ export async function getTaxonomyAndTotalRecords(req, res) {
           {
             $match: {
               taxID: +req.params.taxID,
-              use: true,
               spatialDuplicated: false
             }
           },
@@ -515,7 +510,7 @@ export async function searchSpecies(req, res) {
   const { consumerscopes: scopesStr } = req.headers;
   let fullAccess = true;
   if (scopesStr) {
-    const scopes = scopesStr.split(',').map(scope => scope.trim());
+    const scopes = scopesStr.split(',').map((scope) => scope.trim());
     fullAccess = scopes.includes('all');
   }
 
@@ -575,5 +570,60 @@ export async function searchSpecies(req, res) {
       log.error(err);
       res.send('There was an error getting the species');
     }
+  }
+}
+/**
+ * @swagger
+ * /species/validate_name/{species}:
+ *   get:
+ *     description: Validates if the given species exists.
+ *     operationId: SPE4
+ *     parameters:
+ *       - name: species
+ *         in: path
+ *         description: The scientific name for match.
+ *         required: true
+ *         type: string
+ *     responses:
+ *       "200":
+ *         description: Success
+ *         schema:
+ *           type: object
+ *          properties:
+ *            valid:
+ *             type: boolean
+ *           species
+ *            type: string
+ *     default:
+ *       description: Error
+ *       schema:
+ *         $ref: "#/definitions/ErrorResponse"
+ */
+export async function validateSpecies(req, res) {
+  try {
+    const doc = await Specie.findOne(
+      { species: req.params.species },
+      {
+        _id: 0,
+        species: 1
+      }
+    ).collation({
+      locale: 'en',
+      strength: 2
+    });
+    if (!doc) {
+      return res.status(404).json({
+        valid: false
+      });
+    }
+    return res.status(200).json({
+      valid: true,
+      species: doc.species
+    });
+  } catch (err) {
+    return res.status(500).json({
+      valid: false,
+      error: 'Internal server error'
+    });
   }
 }

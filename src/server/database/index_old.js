@@ -16,7 +16,7 @@ const Model = mongoose.model('Model', ModelSchema, 'models'); // general schemaM
 let connectionDB;
 let connectionDBNative;
 
-const getMongoURL = config => {
+const getMongoURL = (config) => {
   const url = config
     .get('database.mongodb.servers')
     .reduce(
