@@ -144,11 +144,11 @@ const ModelSchema = new Schema(
       type: String,
       default: 'native',
       in: [
-        'native', 
-        'reintroduced', 
-        'introduced', 
-        'vagrant', 
-        'origin uncertain', 
+        'native',
+        'reintroduced',
+        'introduced',
+        'vagrant',
+        'origin uncertain',
         'assisted colonisation'
       ]
     },
