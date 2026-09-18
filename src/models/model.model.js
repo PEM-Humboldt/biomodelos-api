@@ -144,11 +144,12 @@ const ModelSchema = new Schema(
       type: String,
       default: 'native',
       in: [
-        'resident',
-        'breeding season',
-        'non-breeding season',
-        'passage',
-        'seasonal occurrence uncertain'
+        'native',
+        'reintroduced',
+        'introduced',
+        'vagrant',
+        'origin uncertain',
+        'assisted colonisation'
       ]
     },
     modelGeoExtent: {
